@@ -6,6 +6,8 @@ refactor: — for code changes that don’t fix bugs or add features
 test: — for adding or updating tests
 style: — for formatting, missing semicolons, etc.
 
+misc:
+
 
 In more detail
 
