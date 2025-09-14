@@ -24,7 +24,7 @@ if not files:
 print("Processing noisy speech with wiener_as...")
 for i, infile in enumerate(files, start=1):
     filename = os.path.basename(infile)
-    outfile = os.path.join(output_folder, f"wiener_as_{filename}")
+    outfile = os.path.join(output_folder, f"python_wiener_as_{filename}")
     
     wiener_as(infile, outfile)
     
