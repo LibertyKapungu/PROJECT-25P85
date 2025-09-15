@@ -40,7 +40,7 @@ end
 
 
 
-[in,fs]=audioread(infile);
+[in,fs]=wavread(infile);
 
 
 frmelen=floor(FRMSZ*fs/1000);           % Frame size in samples 
@@ -240,10 +240,7 @@ for i=2:nframes
 end
 out=y1;
 
-%audiowrite(out(1:length(x)),fs,16,outfile);
-audiowrite(outfile, out(1:length(x)), fs, 'BitsPerSample', 16);
-
-
+wavwrite(out(1:length(x)),fs,16,outfile);
 
 
 
@@ -254,7 +251,7 @@ function a=berouti(SNR)
 [nbands,nframes]=size(SNR);
 for i=1:nbands
     for j=1:nframes
-        if SNR(i,j)>=-5.0 && SNR(i,j)<=20
+        if SNR(i,j)>=-5.0 & SNR(i,j)<=20
             a(i,j)=4-SNR(i,j)*3/20; 
         elseif SNR(i,j)<-5.0
             a(i,j)=4.75;

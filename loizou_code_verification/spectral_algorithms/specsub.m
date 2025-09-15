@@ -27,7 +27,7 @@ if nargin<2
    return;
 end
 
-[x,Srate]=audioread(filename);
+[x,Srate,nbits]=wavread(filename);
 
 
 % =============== Initialize variables ===============
@@ -125,17 +125,14 @@ end
 %========================================================================================
 
 
-%audiowrite(winGain*xfinal,Srate,16,outfile);
-
-audiowrite(outfile, winGain * xfinal, Srate, 'BitsPerSample', 16);
-
+wavwrite(winGain*xfinal,Srate,16,outfile);
 
 
 %--------------------------------------------------------------------------
 
 function a=berouti1(SNR)
 
-if SNR>=-5.0 && SNR<=20
+if SNR>=-5.0 & SNR<=20
    a=3-SNR*2/20;
 else
    
@@ -151,7 +148,7 @@ end
 
 function a=berouti(SNR)
 
-if SNR>=-5.0 && SNR<=20
+if SNR>=-5.0 & SNR<=20
    a=4-SNR*3/20; 
 else
    
