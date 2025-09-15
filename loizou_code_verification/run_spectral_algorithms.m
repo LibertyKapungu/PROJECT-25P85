@@ -33,15 +33,15 @@ if isempty(files)
     error('No .wav files found in input directory "%s".', inputFolder);
 end
 
-% --- Process each file using wiener_as ---
-fprintf('Processing noisy speech with wiener_as...\n');
+% --- Process each file using specsub ---
+fprintf('Processing noisy speech with specsub...\n');
 for i = 1:numel(files)
     infile = fullfile(inputFolder, files(i).name);
-    outfile = fullfile(outdirectory, ['wiener_as_' files(i).name]);
-    spec_alg_name(infile, outfile);
-    fprintf('Processed %d/%d: wiener_as_%s\n', i, numel(files), files(i).name);
+    outfile = fullfile(outdirectory, ['specsub_' files(i).name]);
+    specsub(infile, outfile);
+    fprintf('Processed %d/%d: specsub %s\n', i, numel(files), files(i).name);
 end
-fprintf('wiener_as processing complete\n\n');
+fprintf('specsub processing complete\n\n');
 
 fprintf('=== All Spectral processing complete ===\n');
 fprintf('Total files processed: %d\n', numel(files));
