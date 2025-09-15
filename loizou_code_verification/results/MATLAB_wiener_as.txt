@@ -1,0 +1,473 @@
+Processing noisy speech with wiener_as...
+Processed 1/4: wiener_as_sp21_station_sn0.wav
+Processed 2/4: wiener_as_sp21_station_sn10.wav
+Processed 3/4: wiener_as_sp21_station_sn15.wav
+Processed 4/4: wiener_as_sp21_station_sn5.wav
+wiener_as processing complete
+
+=== All Wiener processing complete ===
+Total files processed: 4
+Output directory: wiener_processed_output/
+>> 
+=== SCENARIO 1: Evaluating Wiener-processed files ===
+
+ ========== Obtaining Metrics for 1/4: wiener_as_sp21_station_sn0.wav ========== 
+
+snr_mean =
+
+   -8.3840
+
+
+segsnr_mean =
+
+   -8.2372
+
+
+wss_mean =
+
+   71.1825
+
+
+llr_mean =
+
+    0.9144
+
+
+is_mean =
+
+    4.4291
+
+
+cep_mean =
+
+    5.3724
+
+
+fwSNRseg =
+
+    6.8400
+
+
+SIGv =
+
+    2.7499
+
+
+BAKv =
+
+    1.9673
+
+
+OVLv =
+
+    2.1037
+
+
+SIGm =
+
+    2.5617
+
+
+BAKm =
+
+    2.0727
+
+
+OVLm =
+
+    2.3796
+
+
+pesq_val =
+
+    2.3488    1.9607
+
+
+ LLR=0.958739   SNRseg=-8.237184   WSS=71.182506   PESQ=2.348842
+
+Csig =
+
+    2.8822
+
+
+Cbak =
+
+    1.7395
+
+
+Covl =
+
+    2.4957
+
+
+NCM_val =
+
+    0.5477
+
+
+CSh =
+
+    0.6407
+
+
+CSm =
+
+    0.3768
+
+
+CSl =
+
+    0.0478
+
+
+SII_val =
+
+    0.2357
+
+Processed Wiener 1/4: wiener_as_sp21_station_sn0.wav
+
+ ========== Obtaining Metrics for 2/4: wiener_as_sp21_station_sn10.wav ========== 
+
+snr_mean =
+
+   -4.1261
+
+
+segsnr_mean =
+
+   -6.4121
+
+
+wss_mean =
+
+   59.3960
+
+
+llr_mean =
+
+    0.5766
+
+
+is_mean =
+
+    2.0535
+
+
+cep_mean =
+
+    4.0305
+
+
+fwSNRseg =
+
+   11.3318
+
+
+SIGv =
+
+    4.6843
+
+
+BAKv =
+
+    2.6476
+
+
+OVLv =
+
+    3.6183
+
+
+SIGm =
+
+    4.1253
+
+
+BAKm =
+
+    2.9118
+
+
+OVLm =
+
+    3.8434
+
+
+pesq_val =
+
+    2.4715    2.1009
+
+
+ LLR=0.576558   SNRseg=-6.412095   WSS=59.395982   PESQ=2.471506
+
+Csig =
+
+    3.4555
+
+
+Cbak =
+
+    1.9956
+
+
+Covl =
+
+    2.8726
+
+
+NCM_val =
+
+    0.8886
+
+
+CSh =
+
+    0.9359
+
+
+CSm =
+
+    0.6951
+
+
+CSl =
+
+    0.2147
+
+
+SII_val =
+
+    0.2357
+
+Processed Wiener 2/4: wiener_as_sp21_station_sn10.wav
+
+ ========== Obtaining Metrics for 3/4: wiener_as_sp21_station_sn15.wav ========== 
+
+snr_mean =
+
+   -3.4667
+
+
+segsnr_mean =
+
+   -5.1412
+
+
+wss_mean =
+
+   54.8284
+
+
+llr_mean =
+
+    0.5305
+
+
+is_mean =
+
+    1.5866
+
+
+cep_mean =
+
+    3.8352
+
+
+fwSNRseg =
+
+   12.2668
+
+
+SIGv =
+
+    4.8158
+
+
+BAKv =
+
+    2.6717
+
+
+OVLv =
+
+    3.7371
+
+
+SIGm =
+
+    4.3694
+
+
+BAKm =
+
+    3.0391
+
+
+OVLm =
+
+    4.4661
+
+
+pesq_val =
+
+    2.9963    2.8168
+
+
+ LLR=0.530533   SNRseg=-5.141191   WSS=54.828404   PESQ=2.996332
+
+Csig =
+
+    3.8604
+
+
+Cbak =
+
+    2.3586
+
+
+Covl =
+
+    3.3506
+
+
+NCM_val =
+
+    0.9414
+
+
+CSh =
+
+    0.9834
+
+
+CSm =
+
+    0.8460
+
+
+CSl =
+
+    0.3109
+
+
+SII_val =
+
+    0.2357
+
+Processed Wiener 3/4: wiener_as_sp21_station_sn15.wav
+
+ ========== Obtaining Metrics for 4/4: wiener_as_sp21_station_sn5.wav ========== 
+
+snr_mean =
+
+   -6.1696
+
+
+segsnr_mean =
+
+   -7.6343
+
+
+wss_mean =
+
+   52.0827
+
+
+llr_mean =
+
+    0.6760
+
+
+is_mean =
+
+    2.7594
+
+
+cep_mean =
+
+    4.7727
+
+
+fwSNRseg =
+
+    9.1374
+
+
+SIGv =
+
+    4.2271
+
+
+BAKv =
+
+    2.3240
+
+
+OVLv =
+
+    3.2072
+
+
+SIGm =
+
+    3.2840
+
+
+BAKm =
+
+    2.6236
+
+
+OVLm =
+
+    2.8699
+
+
+pesq_val =
+
+    2.4874    2.1199
+
+
+ LLR=0.678397   SNRseg=-7.634280   WSS=52.082734   PESQ=2.487360
+
+Csig =
+
+    3.4261
+
+
+Cbak =
+
+    1.9774
+
+
+Covl =
+
+    2.8844
+
+
+NCM_val =
+
+    0.7737
+
+
+CSh =
+
+    0.8413
+
+
+CSm =
+
+    0.5774
+
+
+CSl =
+
+    0.1628
+
+
+SII_val =
+
+    0.2357
+
+Processed Wiener 4/4: wiener_as_sp21_station_sn5.wav
+>> 
