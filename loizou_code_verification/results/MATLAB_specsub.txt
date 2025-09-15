@@ -1,0 +1,472 @@
+Processing noisy speech with specsub...
+Processed 1/4: specsub sp21_station_sn0.wav
+Processed 2/4: specsub sp21_station_sn10.wav
+Processed 3/4: specsub sp21_station_sn15.wav
+Processed 4/4: specsub sp21_station_sn5.wav
+specsub processing complete
+
+=== All Spectral processing complete ===
+Total files processed: 4
+Output directory: spectral_processed_output/
+=== SCENARIO 1: Evaluating Spectral-processed files ===
+
+ ========== Obtaining Metrics for 1/4: specsub_sp21_station_sn0.wav ========== 
+
+snr_mean =
+
+   -4.4660
+
+
+segsnr_mean =
+
+   -5.7668
+
+
+wss_mean =
+
+   87.4472
+
+
+llr_mean =
+
+    1.0664
+
+
+is_mean =
+
+    3.0485
+
+
+cep_mean =
+
+    6.1510
+
+
+fwSNRseg =
+
+    6.0942
+
+
+SIGv =
+
+    2.6778
+
+
+BAKv =
+
+    2.2384
+
+
+OVLv =
+
+    2.2088
+
+
+SIGm =
+
+    2.7638
+
+
+BAKm =
+
+    1.9463
+
+
+OVLm =
+
+    2.3272
+
+
+pesq_val =
+
+    1.3947    1.2817
+
+
+ LLR=1.204664   SNRseg=-5.766785   WSS=87.447220   PESQ=1.394743
+
+Csig =
+
+    1.9074
+
+
+Cbak =
+
+    1.3252
+
+
+Covl =
+
+    1.4878
+
+
+NCM_val =
+
+    0.5410
+
+
+CSh =
+
+    0.6042
+
+
+CSm =
+
+    0.2427
+
+
+CSl =
+
+    0.0516
+
+
+SII_val =
+
+    0.2357
+
+Processed Spectral 1/4: specsub_sp21_station_sn0.wav
+
+ ========== Obtaining Metrics for 2/4: specsub_sp21_station_sn10.wav ========== 
+
+snr_mean =
+
+   -3.1496
+
+
+segsnr_mean =
+
+   -5.1076
+
+
+wss_mean =
+
+   61.3839
+
+
+llr_mean =
+
+    0.6478
+
+
+is_mean =
+
+    1.8084
+
+
+cep_mean =
+
+    4.3899
+
+
+fwSNRseg =
+
+   11.3024
+
+
+SIGv =
+
+    4.6228
+
+
+BAKv =
+
+    2.6471
+
+
+OVLv =
+
+    3.5959
+
+
+SIGm =
+
+    3.6183
+
+
+BAKm =
+
+    3.0697
+
+
+OVLm =
+
+    3.0179
+
+
+pesq_val =
+
+    2.5094    2.1467
+
+
+ LLR=0.655833   SNRseg=-5.107624   WSS=61.383852   PESQ=2.509443
+
+Csig =
+
+    3.3789
+
+
+Cbak =
+
+    2.0820
+
+
+Covl =
+
+    2.8486
+
+
+NCM_val =
+
+    0.8964
+
+
+CSh =
+
+    0.9359
+
+
+CSm =
+
+    0.6923
+
+
+CSl =
+
+    0.2050
+
+
+SII_val =
+
+    0.2357
+
+Processed Spectral 2/4: specsub_sp21_station_sn10.wav
+
+ ========== Obtaining Metrics for 3/4: specsub_sp21_station_sn15.wav ========== 
+
+snr_mean =
+
+   -2.5765
+
+
+segsnr_mean =
+
+   -3.8029
+
+
+wss_mean =
+
+   45.8621
+
+
+llr_mean =
+
+    0.4563
+
+
+is_mean =
+
+    1.7272
+
+
+cep_mean =
+
+    3.4038
+
+
+fwSNRseg =
+
+   13.7084
+
+
+SIGv =
+
+     5
+
+
+BAKv =
+
+    2.9144
+
+
+OVLv =
+
+    4.0685
+
+
+SIGm =
+
+    3.9865
+
+
+BAKm =
+
+    3.2786
+
+
+OVLm =
+
+    3.5886
+
+
+pesq_val =
+
+    2.9282    2.7164
+
+
+ LLR=0.456308   SNRseg=-3.802893   WSS=45.862095   PESQ=2.928232
+
+Csig =
+
+    3.9764
+
+
+Cbak =
+
+    2.4731
+
+
+Covl =
+
+    3.3966
+
+
+NCM_val =
+
+    0.9413
+
+
+CSh =
+
+    0.9855
+
+
+CSm =
+
+    0.8590
+
+
+CSl =
+
+    0.2710
+
+
+SII_val =
+
+    0.2357
+
+Processed Spectral 3/4: specsub_sp21_station_sn15.wav
+
+ ========== Obtaining Metrics for 4/4: specsub_sp21_station_sn5.wav ========== 
+
+snr_mean =
+
+   -5.3102
+
+
+segsnr_mean =
+
+   -6.9013
+
+
+wss_mean =
+
+   64.4723
+
+
+llr_mean =
+
+    0.7272
+
+
+is_mean =
+
+    2.3802
+
+
+cep_mean =
+
+    4.9464
+
+
+fwSNRseg =
+
+    8.8312
+
+
+SIGv =
+
+    4.1407
+
+
+BAKv =
+
+    2.2450
+
+
+OVLv =
+
+    3.1168
+
+
+SIGm =
+
+    3.1039
+
+
+BAKm =
+
+    2.3951
+
+
+OVLm =
+
+    2.6117
+
+
+pesq_val =
+
+    2.4467    2.0716
+
+
+ LLR=0.739280   SNRseg=-6.901298   WSS=64.472281   PESQ=2.446713
+
+Csig =
+
+    3.2274
+
+
+Cbak =
+
+    1.9174
+
+
+Covl =
+
+    2.7338
+
+
+NCM_val =
+
+    0.7705
+
+
+CSh =
+
+    0.8398
+
+
+CSm =
+
+    0.5735
+
+
+CSl =
+
+    0.1574
+
+
+SII_val =
+
+    0.2357
+
+Processed Spectral 4/4: specsub_sp21_station_sn5.wav
+>> 

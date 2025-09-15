@@ -1,5 +1,5 @@
 % =========================================================================
-% Run Metrics for Spectral Translation Type Algorithm
+% Run Metrics for Spectral Type Algorithm
 % =========================================================================
 % This script evaluates Spectral-processed speech against clean reference S_56_02.wav
 % -------------------------------------------------------------------------
@@ -7,7 +7,7 @@
 % --- Add metric subfolders to MATLAB path ---
 addpath(genpath('objective_metrics/'));
 addpath(genpath('validation_dataset/'));
-addpath(genpath('python_specsub_processed_output/'))
+addpath(genpath('spectral_processed_output/'))
 
 % --- Reference files ---
 ref_clean_speech_spectral = 'validation_dataset/clean_speech/S_56_02.wav'; % Clean reference for Spectral-processed files
@@ -17,7 +17,7 @@ ref_clean_speech_spectral = 'validation_dataset/clean_speech/S_56_02.wav'; % Cle
 % =========================================================================
 fprintf('=== SCENARIO 1: Evaluating Spectral-processed files ===\n');
 
-spectral_processed_directory = 'python_specsub_processed_output/';
+spectral_processed_directory = 'spectral_processed_output/';
 if ~exist(spectral_processed_directory, 'dir')
     error('Processed directory "%s" does not exist.', spectral_processed_directory);
 end
