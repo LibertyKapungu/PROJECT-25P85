@@ -1,0 +1,1 @@
+This folder contains the raw data, the noise as well as the processed outputs for each experiment.
