@@ -40,10 +40,10 @@ end
 
 % Set default values if not provided
 if nargin < 3
-    Nband = 8; % Default number of bands
+    Nband = 4; % Default number of bands
 end
 if nargin < 4
-    Freq_spacing = 'mel'; % Default frequency spacing
+    Freq_spacing = 'log'; % Default frequency spacing
 end
 
 
