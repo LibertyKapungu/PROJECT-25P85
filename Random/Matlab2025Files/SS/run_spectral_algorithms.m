@@ -1,8 +1,8 @@
 % =========================================================================
-% Spectral Batch Validation Script
+% Wiener Batch Validation Script
 % =========================================================================
 % This script processes all .wav files from a given input folder using the
-% Spectral type algorithms described in Speech Enhancement: Theory and 
+% Wiener type algorithms described in Speech Enhancement: Theory and 
 % Practice, Second Edition by Philipos C. Loizou, and saves the processed 
 % results into a specified output folder. 
 % -------------------------------------------------------------------------
