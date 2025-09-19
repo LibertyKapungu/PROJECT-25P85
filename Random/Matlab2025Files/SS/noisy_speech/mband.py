@@ -152,6 +152,21 @@ def mband(filename, outfile, Nband, Freq_spacing):
     -----------------------------------------------
     """   
 
+     # Parameters
+    AVRGING = 0
+    FRMSZ = 20
+    OVLP = 50
+    Noisefr = 6
+    FLOOR = 0.002
+    VAD = 1
+
+    # AVRGING -> Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
+    # FRMSZ -> Frame length in milli-seconds, default=20
+    # OVLP -> Window overlap in percent of frame size, default=50
+    # Noisefr -> Number of noise frames at beginning of file for noise spectrum estimate, default=6
+    # FLOOR -> Spectral floor, default=0.002
+    # VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
+
     if filename is None or outfile is None:
         print('Usage: mband(noisyfile.wav, outFile.wav,  Nband, Freq_spacing)\n')
         return
@@ -192,20 +207,6 @@ def mband(filename, outfile, Nband, Freq_spacing):
         noisy_speech = data.astype(np.float64) / 32768.0
         nbits = 16
 
-    # Parameters
-    AVRGING = 1
-    FRMSZ = 20
-    OVLP = 50
-    Noisefr = 6
-    FLOOR = 0.002
-    VAD = 1
-
-    # AVRGING -> Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
-    # FRMSZ -> Frame length in milli-seconds, default=20
-    # OVLP -> Window overlap in percent of frame size, default=50
-    # Noisefr -> Number of noise frames at beginning of file for noise spectrum estimate, default=6
-    # FLOOR -> Spectral floor, default=0.002
-    # VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
     frmelen = int(np.floor(FRMSZ * fs / 1000))  # Frame size in samples
     ovlplen = int(np.floor(frmelen * OVLP / 100)) # Number of overlap samples
@@ -253,18 +254,20 @@ def mband(filename, outfile, Nband, Freq_spacing):
     noise_pow = np.zeros(fftl)
     j = 0
     for k in range(Noisefr):
-        if j + frmelen <= len(noisy_speech):
-            frame_data = noisy_speech[j:j + frmelen]
-        else:
-            frame_data = np.pad(noisy_speech[j:], (0,j+frmelen - len(noisy_speech)))
+        # if j + frmelen <= len(noisy_speech):
+        #     frame_data = noisy_speech[j:j + frmelen]
+        # else:
+        #     frame_data = np.pad(noisy_speech[j:], (0,j+frmelen - len(noisy_speech)))
         
-        n_fft = fft(frame_data * win, fftl)
+        n_fft = fft(noisy_speech[j:j + frmelen]* win, fftl)
         n_mag = np.abs(n_fft)
         n_magsq = n_mag ** 2
         noise_pow += n_magsq
         j += frmelen
 
+    #n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
     n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
+
 
     # **REAL-TIME ISSUE #3: Batch framing of entire signal**
     # Frame the input signal
@@ -294,28 +297,50 @@ def mband(filename, outfile, Nband, Freq_spacing):
             x_magsm[:, i] = x_tmp2[1:1 + len(x_mag[:,i])]
 
         # Weighted spectral estimate (temporal smoothing across frames)
-        Wn2, Wn1, W0 = 0.09, 0.25, 0.32
-        total_causal = Wn2 + Wn1 + W0
+        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.32
+        total_causal = Wn2 + Wn1 + Wn0
            # Frame 2: special boundary case
         if nframes > 1:
-            temp_total_2 = Wn1 + W0
+            temp_total_2 = Wn1 + Wn0
             x_magsm[:, 1] = (Wn1/temp_total_2 * x_magsm[:, 0] + 
-                            W0/temp_total_2 * x_magsm[:, 1])
+                            Wn0/temp_total_2 * x_magsm[:, 1])
         
         # Frames 3 onwards: full 3-tap causal filter
         for i in range(2, nframes):
             x_magsm[:, i] = (Wn2/total_causal * x_magsm[:, i-2] + 
                             Wn1/total_causal * x_magsm[:, i-1] + 
-                            W0/total_causal * x_magsm[:, i])
+                            Wn0/total_causal * x_magsm[:, i])
     else:
         x_magsm = x_mag
+    
+    # After noise estimation, before noiseupdt:
+    n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
+    n_spect = np.tile(n_spect, (1, nframes))  # Now n_spect has shape (fftl, nframes)
 
     # Noise update during silence frames
+    # if VAD:
+    #     n_spect, state = noiseupdt(x_magsm, n_spect, cmmnlen, nframes)
+    # else:
+    #     # Set all columns of n_spect to the first column (like MATLAB)
+    #     for i in range(1, nframes):
+    #         n_spect[:, i] = n_spect[:, 0]
+    
     if VAD:
-        n_spect_full = np.tile(n_spect, (1, nframes))
-        n_spect, state = noiseupdt(x_magsm, n_spect_full, cmmnlen, nframes)
+        # Expand n_spect to match number of frames BEFORE calling noiseupdt
+        n_spect_expanded = np.tile(n_spect, (1, nframes))
+        n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes)
     else:
-        n_spect = np.tile(n_spect, (1, nframes))
+        # Replicate noise spectrum for all frames (no VAD)
+        n_spect = np.tile(n_spect, (2, nframes))
+
+        #     if VAD
+        #     [n_spect,state]=noiseupdt(x_magsm,n_spect,cmmnlen,nframes);
+        # else
+        #     for i=2:nframes
+        #         n_spect(:,i)=n_spect(:,1);
+        #     end
+        # end
+        
 
     # Segmental SNR in each band
         
@@ -399,6 +424,6 @@ def mband(filename, outfile, Nband, Freq_spacing):
     wavfile.write(outfile, fs, enhanced_speech_int)
 
 # Example usage:
-mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 6, 'linear')
+mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
 
 
