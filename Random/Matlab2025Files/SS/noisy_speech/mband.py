@@ -342,7 +342,8 @@ def mband(filename, outfile, Nband, Freq_spacing):
         
         # Subtraction
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
-    for i in range(Nband-1):
+    k = 1
+    for i in range(Nband):
         start = lobin[i]
         stop = hibin[i] + 1
         
@@ -398,6 +399,6 @@ def mband(filename, outfile, Nband, Freq_spacing):
     wavfile.write(outfile, fs, enhanced_speech_int)
 
 # Example usage:
-# mband('sp04_babble_sn10.wav', 'out_mband.wav', 6, 'linear')
+mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 6, 'linear')
 
 

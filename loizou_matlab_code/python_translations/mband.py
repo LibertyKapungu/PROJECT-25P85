@@ -333,38 +333,16 @@ def mband(filename, outfile, Nband, Freq_spacing):
     start = lobin[Nband-1]
     stop = fftl//2 + 1
     for j in range(nframes):
-        signal_power = np.linalg.norm(x_magsm[start:stop, j], 2)**2
-        noise_power = np.linalg.norm(n_spect[start:stop, j], 2)**2
-        SNR_x[Nband-1, j] = 10 * np.log10(signal_power / (noise_power + 1e-10))
-    
-    # Compute over-subtraction factors
-    beta_x = berouti(SNR_x)
-        
-        # Subtraction
-    sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
-    for i in range(Nband-1):
-        start = lobin[i]
-        stop = hibin[i] + 1
-        
-        for j in range(nframes):
-            n_spec_sq = n_spect[start:stop, j] ** 2
-            if i == 0:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            elif i == Nband - 1:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
-            else:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
-            z = np.where(sub_speech < 0)[0]
-            if z.size > 0:
-                sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
-            if i == 0:
-                sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
-            elif i == Nband - 1:
-                sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
-            sub_speech_x[start:stop, j] += sub_speech
+        n_spec_sq = n_spect[start:stop, j] ** 2
+        sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[Nband-1, j] * n_spec_sq * 1.5
+        z = np.where(sub_speech < 0)[0]
+        if z.size > 0:
+            sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
+        sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
+        sub_speech[start:stop, j] += sub_speech
 
     # Reconstruct spectrum with Hermitian symmetry
-    enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
+    enhanced_mag = np.sqrt(np.maximum(sub_speech, 0))
     enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
     enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
     enhanced_spectrum[fftl // 2 + 1:, :] = np.conj(np.flipud(enhanced_spectrum[1:fftl // 2, :]))
@@ -398,6 +376,6 @@ def mband(filename, outfile, Nband, Freq_spacing):
     wavfile.write(outfile, fs, enhanced_speech_int)
 
 # Example usage:
-# mband('sp04_babble_sn10.wav', 'out_mband.wav', 6, 'linear')
+mband('sp04_babble_sn10.wav', 'out_mband.wav', 6, 'linear')
 
 
