@@ -153,7 +153,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
     """   
 
      # Parameters
-    AVRGING = 0
+    AVRGING = 1
     FRMSZ = 20
     OVLP = 50
     Noisefr = 6
@@ -283,39 +283,39 @@ def mband(filename, outfile, Nband, Freq_spacing):
     x_mag = np.abs(x_fft)
     x_ph = np.angle(x_fft)
 
-    # Smoothing
     if AVRGING:
+        # Smooth the input spectrum
         filtb = [0.9, 0.1]
         x_magsm = np.zeros_like(x_mag)
-        # First frame
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
-        # Remaining frames
+
         for i in range(1, nframes):
-            # Concatenate tail of previous frame and current frame
             x_tmp1 = np.concatenate([x_mag[frmelen - ovlplen:, i - 1], x_mag[:, i]])
             x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
-            x_magsm[:, i] = x_tmp2[1:1 + len(x_mag[:,i])]
+            x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 
-        # Weighted spectral estimate (temporal smoothing across frames)
-        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.32
-        total_causal = Wn2 + Wn1 + Wn0
-           # Frame 2: special boundary case
-        if nframes > 1:
-            temp_total_2 = Wn1 + Wn0
-            x_magsm[:, 1] = (Wn1/temp_total_2 * x_magsm[:, 0] + 
-                            Wn0/temp_total_2 * x_magsm[:, 1])
-        
-        # Frames 3 onwards: full 3-tap causal filter
-        for i in range(2, nframes):
-            x_magsm[:, i] = (Wn2/total_causal * x_magsm[:, i-2] + 
-                            Wn1/total_causal * x_magsm[:, i-1] + 
-                            Wn0/total_causal * x_magsm[:, i])
+        # Weighted spectral estimate 
+        Wn2, Wn1, W0 = 0.09, 0.25, 0.66  # Sum = 1.0
+
+        if nframes > 2:
+            x_magsm[:, 1] = (
+                Wn1 * x_magsm[:, 0] +
+                W0 * x_magsm[:, 1]
+            )
+            for i in range(2, nframes):
+                x_magsm[:, i] = (
+                    Wn2 * x_magsm[:, i - 2] +
+                    Wn1 * x_magsm[:, i - 1] +
+                    W0 * x_magsm[:, i]
+                )
+        elif nframes == 2:
+            x_magsm[:, 1] = (
+                Wn1 * x_magsm[:, 0] +
+                W0 * x_magsm[:, 1]
+            )
     else:
         x_magsm = x_mag
-    
-    # After noise estimation, before noiseupdt:
-    n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
-    n_spect = np.tile(n_spect, (1, nframes))  # Now n_spect has shape (fftl, nframes)
+   
 
     # Noise update during silence frames
     # if VAD:
@@ -331,16 +331,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
         n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes)
     else:
         # Replicate noise spectrum for all frames (no VAD)
-        n_spect = np.tile(n_spect, (2, nframes))
-
-        #     if VAD
-        #     [n_spect,state]=noiseupdt(x_magsm,n_spect,cmmnlen,nframes);
-        # else
-        #     for i=2:nframes
-        #         n_spect(:,i)=n_spect(:,1);
-        #     end
-        # end
-        
+        n_spect = np.tile(n_spect, (2, nframes))        
 
     # Segmental SNR in each band
         
@@ -424,6 +415,6 @@ def mband(filename, outfile, Nband, Freq_spacing):
     wavfile.write(outfile, fs, enhanced_speech_int)
 
 # Example usage:
-mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
+mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn5.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
 
 
