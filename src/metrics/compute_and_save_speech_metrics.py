@@ -7,7 +7,14 @@ from torchmetrics.audio import PerceptualEvaluationSpeechQuality
 from torchmetrics.audio import ShortTimeObjectiveIntelligibility
 from torchmetrics.audio import ScaleInvariantSignalDistortionRatio
 
-def compute_and_save_speech_metrics(clean_file: str, enhanced_file: str, save_csv: str = None):
+def compute_and_save_speech_metrics(
+    clean_dir: str, clean_filename: str,
+    enhanced_dir: str, enhanced_filename: str,
+    csv_dir: str = None, csv_filename: str = None
+):
+    # Build full file paths
+    clean_file = os.path.join(clean_dir, clean_filename)
+    enhanced_file = os.path.join(enhanced_dir, enhanced_filename)
 
     clean, fs_clean = torchaudio.load(clean_file)
     enhanced, fs_enhanced = torchaudio.load(enhanced_file)
@@ -69,29 +76,35 @@ def compute_and_save_speech_metrics(clean_file: str, enhanced_file: str, save_cs
     }
     metrics_dict.update(dnsmos_dict)
 
-    # Save to CSV if path is provided
-    if save_csv is not None:
-        base_clean = os.path.splitext(os.path.basename(clean_file))[0]
-        base_enhanced = os.path.splitext(os.path.basename(enhanced_file))[0]
-        csv_filename = os.path.join(save_csv, f"ENHANCED_{base_enhanced}_Clean_{base_clean}.csv")
+    # Save to CSV only if both csv_dir and csv_filename are provided
+    if csv_dir is not None and csv_filename is not None:
+        os.makedirs(csv_dir, exist_ok=True)
 
-        os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
+        base_csv, ext = os.path.splitext(csv_filename)
+        if ext == "":
+            ext = ".csv" 
+
+        base_clean = os.path.splitext(clean_filename)[0]
+        base_enhanced = os.path.splitext(enhanced_filename)[0]
+        final_csv_name = f"{base_csv}_ENH-{base_enhanced}_CLN-{base_clean}{ext}"
+        csv_path = os.path.join(csv_dir, final_csv_name)
+
         header = list(metrics_dict.keys())
         row = list(metrics_dict.values())
 
-        # Always create a new CSV
-        with open(csv_filename, mode='w', newline='') as f:
+        with open(csv_path, mode='w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
             writer.writerow(row)
 
-        print(f"Metrics saved to {csv_filename}")
+        print(f"Metrics saved to {csv_path}")
 
     return metrics_dict
 
+
 # Example usage
 # compute_and_save_speech_metrics(
-#     "audio_stuff/S_56_02.wav",
-#     "audio_stuff/wiener_as_sp21_station_sn0.wav",
-#     save_csv="yoh/metrics/"
+#     clean_dir="audio_stuff", clean_filename="S_56_02.wav",
+#     enhanced_dir="audio_stuff", enhanced_filename="wiener_as_sp21_station_sn0.wav",
+#     csv_dir="yoh/metrics", csv_filename="wiener_results.csv"
 # )
