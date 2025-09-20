@@ -63,7 +63,9 @@ def wiener_filter(
 
     # Load waveform
     waveform, fs = torchaudio.load(input_path)
-    waveform = waveform.mean(dim=0)  # convert to mono
+    # Convert to mono if necessary
+    if waveform.dim() == 2:
+        waveform = waveform.mean(dim=0)
     waveform = waveform.to(device)
 
     # Parameters dependent on sampling rate
