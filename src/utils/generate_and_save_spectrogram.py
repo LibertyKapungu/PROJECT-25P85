@@ -114,4 +114,4 @@ def generate_and_save_spectrogram(audio_file: str, output_image_path: str, outpu
     print(f"  - Output files: {base_path}.pdf, {base_path}.png")
 
 # Example usage
-generate_and_save_spectrogram("audio_stuff/S_56_02.wav", "yoh/", "spectrogram_3", title="My Mel Spectrogram")
+# generate_and_save_spectrogram("audio_stuff/S_56_02.wav", "yoh/", "spectrogram_3", title="My Mel Spectrogram")
