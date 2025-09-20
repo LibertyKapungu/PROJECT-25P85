@@ -1,6 +1,7 @@
 import torch
 import torchaudio
 from scipy.signal.windows import hamming
+import os
 
 ############################################################
 # Wiener_AS Algorithm (Python Translation)
@@ -26,16 +27,29 @@ from scipy.signal.windows import hamming
 #   - It uses torchaudio for audio I/O and PyTorch tensors for processing.
 ############################################################
 
-def wiener_as_torch(input_dir: str, input_file: str, output_dir: str=None, output_file: str=None):
+def wiener_filter(
+    input_dir: str,
+    input_file: str,
+    output_dir: str = None,
+    output_file: str = None,
+    mu: float = 0.98,
+    a_dd: float = 0.98,
+    eta: float = 0.15,
+    frame_dur: int = 20
+):
     """
     Wiener filtering algorithm using torchaudio.
 
     Parameters:
-        input_dir  - directory of the noisy input speech file
-        input_file - name of the noisy input speech file (e.g., 'noisy.wav')
-        output_dir - directory where the enhanced speech will be saved
-        output_file - name of the output enhanced speech file (e.g., 'enhanced.wav')
-    
+        input_dir   - directory of the noisy input speech file
+        input_file  - name of the noisy input speech file (e.g., 'noisy.wav')
+        output_dir  - directory where the enhanced speech will be saved
+        output_file - base name of the output enhanced speech file (e.g., 'enhanced')
+        mu          - smoothing factor for noise update (default=0.98)
+        a_dd        - decision-directed factor for priori SNR (default=0.98)
+        eta         - VAD threshold (default=0.15)
+        frame_dur   - frame duration in milliseconds (default=20)
+
     Returns:
         enhanced_speech tensor if output_dir/output_file not provided
     """
@@ -44,18 +58,15 @@ def wiener_as_torch(input_dir: str, input_file: str, output_dir: str=None, outpu
     print(f"Using device: {device}")
 
     # Build full input path
-    input_path = os.path.join(input_dir, input_file)
+    input_path = os.path.join(input_dir.strip(), input_file.strip())
+    print(f"Loading input file: {input_path}")
 
     # Load waveform
     waveform, fs = torchaudio.load(input_path)
     waveform = waveform.mean(dim=0)  # convert to mono
     waveform = waveform.to(device)
 
-    # Parameters
-    mu = 0.98
-    a_dd = 0.98
-    eta = 0.15
-    frame_dur = 20
+    # Parameters dependent on sampling rate
     L = int(frame_dur * fs / 1000)
     hamming_win = torch.tensor(hamming(L), dtype=torch.float32, device=device)
     U = (hamming_win @ hamming_win) / L
@@ -127,17 +138,32 @@ def wiener_as_torch(input_dir: str, input_file: str, output_dir: str=None, outpu
     enhanced_speech[n_start:n_start + L // 2] = overlap
     enhanced_speech = enhanced_speech.clamp(-1.0, 1.0)
 
+    # Save enhanced speech if output path is provided
     if output_dir is not None and output_file is not None:
         os.makedirs(output_dir, exist_ok=True)
 
-        base_name = os.path.splitext(input_file)[0] 
-        output_filename = f"{os.path.splitext(output_file)[0]}_{base_name}.wav"
+        base_name = os.path.splitext(input_file)[0]
+
+        # Add metadata to filename
+        output_filename = (
+            f"{output_file}_{base_name}"
+            f"_FRAME{frame_dur}ms"
+            f"_MU{mu}"
+            f"_ADD{a_dd}"
+            f"_ETA{eta}.wav"
+        )
 
         output_path = os.path.join(output_dir, output_filename)
         torchaudio.save(output_path, enhanced_speech.unsqueeze(0).cpu(), fs)
         print(f"Enhanced file saved to: {output_path}")
     else:
         return enhanced_speech, fs
-
+    
 # Example usage
-wiener_as_torch('audio_stuff/', 'sp21_station_sn0.wav', 'wiener_filter_priori', 'wiener')
+# wiener_as_torch(
+#     'audio_stuff',
+#     'sp21_station_sn0.wav',
+#     'wiener_filter_priori',
+#     'wiener'
+# )
+
