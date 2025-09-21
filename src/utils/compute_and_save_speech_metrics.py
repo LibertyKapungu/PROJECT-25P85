@@ -94,7 +94,7 @@ def compute_and_save_speech_metrics(
     pesq_metric = PerceptualEvaluationSpeechQuality(fs=fs, mode=pesq_mode).to(device)
     stoi_metric = ShortTimeObjectiveIntelligibility(fs=fs).to(device) 
     si_sdr_metric = ScaleInvariantSignalDistortionRatio().to(device)
-    dnsmos_metric = DeepNoiseSuppressionMeanOpinionScore(fs=fs, personalized=False).to(device)
+    dnsmos_metric = DeepNoiseSuppressionMeanOpinionScore(fs=fs, personalized=True).to(device)
     
     # Compute metrics
     print("Computing PESQ...")
