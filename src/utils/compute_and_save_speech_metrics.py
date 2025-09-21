@@ -8,26 +8,40 @@ from torchmetrics.audio import ShortTimeObjectiveIntelligibility
 from torchmetrics.audio import ScaleInvariantSignalDistortionRatio
 
 def compute_and_save_speech_metrics(
-    clean_dir: str, clean_filename: str,
-    enhanced_dir: str, enhanced_filename: str,
-    csv_dir: str = None, csv_filename: str = None
+    clean_filename: str,
+    enhanced_filename: str,
+    clean_dir: str = None,
+    enhanced_dir: str = None,
+    clean_tensor: torch.Tensor = None,
+    enhanced_tensor: torch.Tensor = None,
+    fs: int = None,
+    csv_dir: str = None,
+    csv_filename: str = None
 ):
-    # Build full file paths
-    clean_file = os.path.join(clean_dir, clean_filename)
-    enhanced_file = os.path.join(enhanced_dir, enhanced_filename)
+    # Load signals from file if tensors are not provided
+    if clean_tensor is None or enhanced_tensor is None:
+        if clean_dir is None or enhanced_dir is None:
+            raise ValueError("clean_dir and enhanced_dir must be provided when using file input mode.")
+        clean_file = os.path.join(clean_dir, clean_filename)
+        enhanced_file = os.path.join(enhanced_dir, enhanced_filename)
+        clean, fs_clean = torchaudio.load(clean_file)
+        enhanced, fs_enhanced = torchaudio.load(enhanced_file)
+        # Ensure same sampling rate
+        if fs_clean != fs_enhanced:
+            raise ValueError(f"Sampling rates do not match: {fs_clean} vs {fs_enhanced}")
+        fs = fs_clean
+        # Trim to the same length
+        min_len = min(clean.shape[1], enhanced.shape[1])
+        clean = clean[:, :min_len]
+        enhanced = enhanced[:, :min_len]
+    else:
+        clean = clean_tensor
+        enhanced = enhanced_tensor
+        if fs is None:
+            raise ValueError("Sampling rate (fs) must be provided when using tensor inputs.")
+        clean_file = None
+        enhanced_file = None
 
-    clean, fs_clean = torchaudio.load(clean_file)
-    enhanced, fs_enhanced = torchaudio.load(enhanced_file)
-
-    # Ensure same sampling rate
-    if fs_clean != fs_enhanced:
-        raise ValueError(f"Sampling rates do not match: {fs_clean} vs {fs_enhanced}")
-    fs = fs_clean
-
-    # Trim to the same length
-    min_len = min(clean.shape[1], enhanced.shape[1])
-    clean = clean[:, :min_len]
-    enhanced = enhanced[:, :min_len]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clean = clean.to(device)
@@ -39,6 +53,7 @@ def compute_and_save_speech_metrics(
     if enhanced.ndim == 1:
         enhanced = enhanced.unsqueeze(0)
 
+
     # Choose PESQ mode based on sampling rate
     if fs == 8000:
         pesq_mode = 'nb'  # narrowband
@@ -46,6 +61,7 @@ def compute_and_save_speech_metrics(
         pesq_mode = 'wb'  # wideband
     else:
         raise ValueError("PESQ supports only 8000 Hz (nb) or 16000 Hz (wb)")
+
 
     # Initialize metrics
     pesq_metric = PerceptualEvaluationSpeechQuality(fs=fs, mode=pesq_mode).to(device)
@@ -57,6 +73,7 @@ def compute_and_save_speech_metrics(
     pesq_score = pesq_metric(enhanced, clean).item()
     stoi_score = stoi_metric(enhanced, clean).item()
     si_sdr_score = si_sdr_metric(enhanced, clean).item()
+
 
     dnsmos_scores = dnsmos_metric(enhanced).squeeze().cpu().numpy()
     dnsmos_dict = {
@@ -75,6 +92,7 @@ def compute_and_save_speech_metrics(
         "STOI": stoi_score
     }
     metrics_dict.update(dnsmos_dict)
+
 
     # Save to CSV only if both csv_dir and csv_filename are provided
     if csv_dir is not None and csv_filename is not None:
