@@ -28,45 +28,54 @@ import os
 ############################################################
 
 def wiener_filter(
-    input_dir: str,
-    input_file: str,
+    input_dir: str = None,
+    input_file: str = None,
     output_dir: str = None,
     output_file: str = None,
     mu: float = 0.98,
     a_dd: float = 0.98,
     eta: float = 0.15,
-    frame_dur: int = 20
+    frame_dur: int = 20,
+    noisy_audio: torch.Tensor = None,
+    fs: int = None
 ):
     """
     Wiener filtering algorithm using torchaudio.
 
     Parameters:
-        input_dir   - directory of the noisy input speech file
-        input_file  - name of the noisy input speech file (e.g., 'noisy.wav')
-        output_dir  - directory where the enhanced speech will be saved
-        output_file - base name of the output enhanced speech file (e.g., 'enhanced')
-        mu          - smoothing factor for noise update (default=0.98)
-        a_dd        - decision-directed factor for priori SNR (default=0.98)
-        eta         - VAD threshold (default=0.15)
-        frame_dur   - frame duration in milliseconds (default=20)
+        input_dir (str) : directory of the noisy input speech file
+        input_file (str) : name of the noisy input speech file (e.g., 'noisy.wav')
+        output_dir (str) : directory where the enhanced speech will be saved
+        output_file (str) : base name of the output enhanced speech file (e.g., 'enhanced')
+        mu (float) : smoothing factor for noise update (default=0.98)
+        a_dd (float) : decision-directed factor for priori SNR (default=0.98)
+        eta (float) : VAD threshold (default=0.15)
+        frame_dur (int) : frame duration in milliseconds (default=20)
 
     Returns:
-        enhanced_speech tensor if output_dir/output_file not provided
+        enhanced_speech (torch.Tensor) : tensor if output_dir/output_file not provided
+        fs (int) : sampling rate of the enhanced speech if returned as tensor
     """
     # Automatically select device: GPU if available, else CPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    # Build full input path
-    input_path = os.path.join(input_dir.strip(), input_file.strip())
-    print(f"Loading input file: {input_path}")
+    if not (input_dir and input_file) and noisy_audio is not None:
+        if fs is None:
+            raise ValueError("Sampling rate 'fs' must be provided when using noisy_audio tensor input.")
+        waveform = noisy_audio.to(device)
+        print("Using noisy_audio tensor input.")
+    else:
+        # Build full input path
+        input_path = os.path.join((input_dir or "").strip(), (input_file or "").strip())
+        print(f"Loading input file: {input_path}")
 
-    # Load waveform
-    waveform, fs = torchaudio.load(input_path)
-    # Convert to mono if necessary
-    if waveform.dim() == 2:
-        waveform = waveform.mean(dim=0)
-    waveform = waveform.to(device)
+        waveform, fs = torchaudio.load(input_path)
+        
+        if waveform.dim() == 2: # Convert to mono if necessary
+            waveform = waveform.mean(dim=0)
+        waveform = waveform.to(device)
+
 
     # Parameters dependent on sampling rate
     L = int(frame_dur * fs / 1000)
@@ -159,7 +168,7 @@ def wiener_filter(
         torchaudio.save(output_path, enhanced_speech.unsqueeze(0).cpu(), fs)
         print(f"Enhanced file saved to: {output_path}")
     else:
-        return enhanced_speech, fs
+        return enhanced_speech.cpu(), fs
     
 # Example usage
 # wiener_as_torch(
