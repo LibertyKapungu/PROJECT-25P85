@@ -24,7 +24,7 @@ function mband(infile,outfile,Nband,Freq_spacing);
 %-------------------------------------------------------------------------
 
 
-AVRGING=0; FRMSZ=20; OVLP=50; Noisefr=6; FLOOR=0.002; VAD=1;
+AVRGING=1; FRMSZ=20; OVLP=50; Noisefr=6; FLOOR=0.002; VAD=1;
 % VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 % AVRGING -> Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
 % FRMSZ -> Frame length in milli-seconds, default=20

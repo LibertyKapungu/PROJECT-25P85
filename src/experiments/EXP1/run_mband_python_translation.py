@@ -5,8 +5,8 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from dsp_algorithms.mband import mband
 
-Nbands = 8
-freq_spacing = 'log'
+Nbands = 4
+freq_spacing = 'mel'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # input_folder = "C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/loizou_code_verification_OLD_STUFF_DELETE/validation_dataset/noisy_speech"
