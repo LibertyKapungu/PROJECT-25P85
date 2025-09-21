@@ -33,6 +33,7 @@ def add_noise_over_speech(
         
     Returns:
         noisy_audio (torch.Tensor): Tensor containing noisy audio if output_dir is None.
+        target_sr (int): Sample rate of the noisy audio if output_dir is None.
     """
 
     # Select device
@@ -109,7 +110,7 @@ def add_noise_over_speech(
 
         print(f"Noisy audio saved to {output_path}")
     else:
-        return noisy_audio.cpu()
+        return noisy_audio.cpu(), target_sr
 
 
 # add_noise_over_speech(
