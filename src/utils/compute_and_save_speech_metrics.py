@@ -1,128 +1,187 @@
+"""
+Speech enhancement metrics computation module.
+
+Computes PESQ, STOI, SI-SDR, and DNSMOS metrics for speech enhancement evaluation.
+"""
+
 import torch
 import torchaudio
 import csv
 import os
-from torchmetrics.audio import DeepNoiseSuppressionMeanOpinionScore
-from torchmetrics.audio import PerceptualEvaluationSpeechQuality
-from torchmetrics.audio import ShortTimeObjectiveIntelligibility
-from torchmetrics.audio import ScaleInvariantSignalDistortionRatio
+from pathlib import Path
+from typing import Dict, Optional, Union, Tuple, Any
+from torchmetrics.audio import (
+    DeepNoiseSuppressionMeanOpinionScore,
+    PerceptualEvaluationSpeechQuality, 
+    ShortTimeObjectiveIntelligibility,
+    ScaleInvariantSignalDistortionRatio
+)
+
 
 def compute_and_save_speech_metrics(
-    clean_filename: str,
-    enhanced_filename: str,
-    clean_dir: str = None,
-    enhanced_dir: str = None,
-    clean_tensor: torch.Tensor = None,
-    enhanced_tensor: torch.Tensor = None,
-    fs: int = None,
-    csv_dir: str = None,
-    csv_filename: str = None
-):
-    # Load signals from file if tensors are not provided
+    clean_tensor: torch.Tensor,
+    enhanced_tensor: torch.Tensor,
+    fs: int,
+    clean_name: Optional[str] = None,
+    enhanced_name: Optional[str] = None,
+    csv_dir: Optional[Union[str, Path]] = None,
+    csv_filename: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Compute speech enhancement metrics between clean and enhanced speech tensors.
+
+    Args:
+        clean_tensor: Required. Clean speech tensor (channels, samples) or (samples,).
+        enhanced_tensor: Required. Enhanced speech tensor (channels, samples) or (samples,).
+        fs: Required. Sampling rate in Hz (must be 8000 or 16000 for PESQ).
+        clean_name: Optional base name for the clean signal (used when saving CSV).
+        enhanced_name: Optional base name for the enhanced signal (used when saving CSV).
+        csv_dir: Optional directory to save CSV metrics file. If provided together
+            with `csv_filename`, metrics will be written to disk.
+        csv_filename: Optional base name for the CSV file.
+
+    Returns:
+        Dictionary containing computed metrics.
+
+    Raises:
+        ValueError: If required parameters are missing or invalid.
+    """
+    # Input validation: tensors and sample rate are required
     if clean_tensor is None or enhanced_tensor is None:
-        if clean_dir is None or enhanced_dir is None:
-            raise ValueError("clean_dir and enhanced_dir must be provided when using file input mode.")
-        clean_file = os.path.join(clean_dir, clean_filename)
-        enhanced_file = os.path.join(enhanced_dir, enhanced_filename)
-        clean, fs_clean = torchaudio.load(clean_file)
-        enhanced, fs_enhanced = torchaudio.load(enhanced_file)
-        # Ensure same sampling rate
-        if fs_clean != fs_enhanced:
-            raise ValueError(f"Sampling rates do not match: {fs_clean} vs {fs_enhanced}")
-        fs = fs_clean
-        # Trim to the same length
-        min_len = min(clean.shape[1], enhanced.shape[1])
-        clean = clean[:, :min_len]
-        enhanced = enhanced[:, :min_len]
-    else:
-        clean = clean_tensor
-        enhanced = enhanced_tensor
-        if fs is None:
-            raise ValueError("Sampling rate (fs) must be provided when using tensor inputs.")
-        clean_file = None
-        enhanced_file = None
+        raise ValueError("clean_tensor and enhanced_tensor must be provided")
+    if fs is None:
+        raise ValueError("Sampling rate 'fs' must be provided")
 
-
+    clean = clean_tensor
+    enhanced = enhanced_tensor
+    enhanced_file_path = None
+    # Use provided names for CSV/saving metadata
+    clean_filename = clean_name if clean_name is not None else "clean"
+    enhanced_filename = enhanced_name if enhanced_name is not None else "enhanced"
+    
+    # Ensure same length (truncate to shortest)
+    min_length = min(clean.shape[-1], enhanced.shape[-1])
+    clean = clean[..., :min_length]
+    enhanced = enhanced[..., :min_length]
+    
+    # Move to appropriate device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clean = clean.to(device)
     enhanced = enhanced.to(device)
-
-    # Ensure batch dimension (N, L)
+    
+    # Ensure proper tensor dimensions for metrics (batch dimension required)
     if clean.ndim == 1:
-        clean = clean.unsqueeze(0)
+        clean = clean.unsqueeze(0)  # Add batch dimension
     if enhanced.ndim == 1:
         enhanced = enhanced.unsqueeze(0)
+    
+    # Convert multi-channel to mono if needed
+    if clean.shape[0] > 1:
+        clean = torch.mean(clean, dim=0, keepdim=True)
+    if enhanced.shape[0] > 1:
+        enhanced = torch.mean(enhanced, dim=0, keepdim=True)
+    
+    # Validate sampling rate for PESQ
+    if fs not in [8000, 16000]:
+        raise ValueError(f"PESQ requires sampling rate of 8000Hz or 16000Hz, got {fs}Hz")
 
-
-    # Choose PESQ mode based on sampling rate
     if fs == 8000:
-        pesq_mode = 'nb'  # narrowband
-    elif fs == 16000:
-        pesq_mode = 'wb'  # wideband
+        pesq_mode = 'nb'
     else:
-        raise ValueError("PESQ supports only 8000 Hz (nb) or 16000 Hz (wb)")
-
-
-    # Initialize metrics
+        pesq_mode = 'wb'  # narrowband vs wideband
+    
+    # Initialize metrics with proper device placement
     pesq_metric = PerceptualEvaluationSpeechQuality(fs=fs, mode=pesq_mode).to(device)
-    stoi_metric = ShortTimeObjectiveIntelligibility(fs=fs).to(device)
+    stoi_metric = ShortTimeObjectiveIntelligibility(fs=fs).to(device) 
     si_sdr_metric = ScaleInvariantSignalDistortionRatio().to(device)
     dnsmos_metric = DeepNoiseSuppressionMeanOpinionScore(fs=fs, personalized=False).to(device)
-
+    
     # Compute metrics
+    print("Computing PESQ...")
     pesq_score = pesq_metric(enhanced, clean).item()
+    
+    print("Computing STOI...")
     stoi_score = stoi_metric(enhanced, clean).item()
+    
+    print("Computing SI-SDR...")
     si_sdr_score = si_sdr_metric(enhanced, clean).item()
-
-
-    dnsmos_scores = dnsmos_metric(enhanced).squeeze().cpu().numpy()
+    
+    print("Computing DNSMOS...")
+    dnsmos_scores = dnsmos_metric(enhanced)
+    
+    # Handle DNSMOS output format
+    if dnsmos_scores.dim() > 1:
+        dnsmos_scores = dnsmos_scores.squeeze()
+    dnsmos_numpy = dnsmos_scores.cpu().numpy()
+    
+    # DNSMOS returns 4 scores: [p808_mos, mos_sig, mos_bak, mos_ovr]  
     dnsmos_dict = {
-        "DNSMOS_p808_mos": dnsmos_scores[0],
-        "DNSMOS_mos_sig": dnsmos_scores[1],
-        "DNSMOS_mos_bak": dnsmos_scores[2],
-        "DNSMOS_mos_ovr": dnsmos_scores[3]
+        "DNSMOS_p808_mos": float(dnsmos_numpy[0]),
+        "DNSMOS_mos_sig": float(dnsmos_numpy[1]),
+        "DNSMOS_mos_bak": float(dnsmos_numpy[2]),
+        "DNSMOS_mos_ovr": float(dnsmos_numpy[3])
     }
-
-    # Combine metrics
+    
+    # Compile all metrics
     metrics_dict = {
-        "clean_file": clean_file,
-        "enhanced_file": enhanced_file,
-        "PESQ": pesq_score,
-        "SI-SDR": si_sdr_score,
-        "STOI": stoi_score
+        "clean_file": str(clean_filename),
+        "enhanced_file": str(enhanced_filename),
+        "sampling_rate": fs,
+        "PESQ": float(pesq_score),
+        "SI_SDR": float(si_sdr_score),
+        "STOI": float(stoi_score),
+        **dnsmos_dict
     }
-    metrics_dict.update(dnsmos_dict)
-
-
-    # Save to CSV only if both csv_dir and csv_filename are provided
+    
+    # Save to CSV if requested
     if csv_dir is not None and csv_filename is not None:
-        os.makedirs(csv_dir, exist_ok=True)
+        csv_dir = Path(csv_dir)
+        csv_dir.mkdir(parents=True, exist_ok=True)
 
-        base_csv, ext = os.path.splitext(csv_filename)
-        if ext == "":
-            ext = ".csv" 
+        # Generate descriptive CSV filename
+        clean_base = Path(clean_filename).stem
+        enhanced_base = Path(enhanced_filename).stem
+        csv_base = Path(csv_filename).stem
 
-        base_clean = os.path.splitext(clean_filename)[0]
-        base_enhanced = os.path.splitext(enhanced_filename)[0]
-        final_csv_name = f"{base_csv}_ENH-{base_enhanced}_CLN-{base_clean}{ext}"
-        csv_path = os.path.join(csv_dir, final_csv_name)
-
-        header = list(metrics_dict.keys())
-        row = list(metrics_dict.values())
-
-        with open(csv_path, mode='w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(header)
-            writer.writerow(row)
-
-        print(f"Metrics saved to {csv_path}")
-
+        final_csv_name = f"{csv_base}_ENH-{enhanced_base}_CLN-{clean_base}.csv"
+        csv_path = csv_dir / final_csv_name
+        
+        # Write metrics to CSV
+        with open(csv_path, mode='w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=metrics_dict.keys())
+            writer.writeheader()
+            writer.writerow(metrics_dict)
+        
+        print(f"Metrics saved to: {csv_path}")
+    
+    # Print summary
+    print("\n--- Speech Enhancement Metrics ---")
+    print(f"PESQ: {metrics_dict['PESQ']:.3f}")
+    print(f"STOI: {metrics_dict['STOI']:.3f}")
+    print(f"SI-SDR: {metrics_dict['SI_SDR']:.2f} dB")
+    print(f"DNSMOS Overall: {metrics_dict['DNSMOS_mos_ovr']:.3f}")
+    print("------------------------------------")
+    
     return metrics_dict
 
 
-# Example usage
-# compute_and_save_speech_metrics(
-#     clean_dir="audio_stuff", clean_filename="S_56_02.wav",
-#     enhanced_dir="audio_stuff", enhanced_filename="wiener_as_sp21_station_sn0.wav",
-#     csv_dir="yoh/metrics", csv_filename="wiener_results.csv"
-# )
+if __name__ == "__main__":
+    # Example usage
+    # Load clean and enhanced files and call the tensor-based API
+    clean_path = 'audio_files/clean_speech.wav'
+    enhanced_path = 'enhanced_audio/wiener_enhanced.wav'
+    clean_tensor, clean_sr = torchaudio.load(clean_path)
+    enhanced_tensor, enh_sr = torchaudio.load(enhanced_path)
+
+    if clean_sr != enh_sr:
+        raise ValueError(f"Sampling rates do not match: clean={clean_sr}, enhanced={enh_sr}")
+
+    metrics = compute_and_save_speech_metrics(
+        clean_tensor=clean_tensor,
+        enhanced_tensor=enhanced_tensor,
+        fs=clean_sr,
+        clean_name=Path(clean_path).name,
+        enhanced_name=Path(enhanced_path).name,
+        csv_dir="results/metrics",
+        csv_filename="enhancement_results.csv"
+    )
