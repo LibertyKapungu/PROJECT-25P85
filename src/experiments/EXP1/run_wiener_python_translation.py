@@ -111,7 +111,7 @@ def main():
         fs=noisy_fs,
         output_dir=str(output_dir),
         #output_file=f'wiener_filter_priori_P{participant_id}_S{sentence}_F{fold}_SNR{snr}',
-        causal=True,  # Use causal processing
+        causal=False,  # Use causal processing
         mu=0.98,
         a_dd=0.95,
         eta=0.15,
@@ -138,8 +138,7 @@ def main():
     # For tensor mode, we need to provide the enhanced tensor and sampling rate
     metrics = compute_and_save_speech_metrics(
         clean_tensor=clean_tensor,
-        enhanced_tensor=clean_tensor,
-        #enhanced_speech,
+        enhanced_tensor=enhanced_speech,
         fs=enhanced_fs,
         clean_name=clean_filename,
         enhanced_name=f'enhanced_tensor_P{participant_id}_S{sentence}_F{fold}_SNR{snr}.wav',
