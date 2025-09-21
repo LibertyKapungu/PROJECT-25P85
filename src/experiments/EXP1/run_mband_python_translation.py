@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from dsp_algorithms.mband import mband
 
-Nbands = 4
+Nbands = 8
 freq_spacing = 'log'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +20,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 #     raise FileNotFoundError(f'Output directory "{output_folder}" does not exist.')
 
 input_folder = "C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/loizou_code_verification_OLD_STUFF_DELETE/validation_dataset/noisy_speech"
+#output_folder = os.path.join(script_dir, "python_mband_processed_output/")
 output_folder = os.path.join(script_dir, "python_mband_processed_output/")
+
 
 if not os.path.isdir(input_folder):
     raise FileNotFoundError(f'Input directory "{input_folder}" does not exist.')

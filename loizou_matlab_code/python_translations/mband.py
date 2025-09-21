@@ -158,8 +158,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
 
     fs, data = wavfile.read(filename)
 
-    # Convert to double precision normalized samples (MATLAB wavread default behavior (see waveread docs  for details))
-    # Based on MATLAB wavread documentation scaling rules
+    # Convert to double precision normalized samples 
     if data.dtype == np.uint8: # 8-bit: 0 <= y <= 255 -> convert to -1.0 <= y < +1.0
         noisy_speech = (data.astype(np.float64) - 128.0) / 128.0
         nbits = 8
