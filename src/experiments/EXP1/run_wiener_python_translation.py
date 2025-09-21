@@ -82,6 +82,17 @@ def main():
     clean_tensor, clean_sr = torchaudio.load(clean_file_path)
     noise_tensor, noise_sr = torchaudio.load(noise_file_path)
 
+    # Resample to 16000 Hz if needed
+    target_sr = 16000
+    if clean_sr != target_sr:
+        resampler_clean = torchaudio.transforms.Resample(orig_freq=clean_sr, new_freq=target_sr)
+        clean_tensor = resampler_clean(clean_tensor)
+        clean_sr = target_sr
+    if noise_sr != target_sr:
+        resampler_noise = torchaudio.transforms.Resample(orig_freq=noise_sr, new_freq=target_sr)
+        noise_tensor = resampler_noise(noise_tensor)
+        noise_sr = target_sr
+
     noisy_speech, noisy_fs = add_noise_over_speech(
         clean_audio=clean_tensor,
         clean_sr=clean_sr,
@@ -90,8 +101,7 @@ def main():
         snr_db=snr,
         output_dir=None,
         clean_name=clean_filename,
-        noise_name=noise_filename,
-        sr=16000
+        noise_name=noise_filename
     )
     
     # Step 2: Apply Wiener filtering (using causal processing)
@@ -100,7 +110,7 @@ def main():
         noisy_audio=noisy_speech,
         fs=noisy_fs,
         output_dir=str(output_dir),
-        output_file=f'wiener_filter_priori_P{participant_id}_S{sentence}_F{fold}_SNR{snr}',
+        #output_file=f'wiener_filter_priori_P{participant_id}_S{sentence}_F{fold}_SNR{snr}',
         causal=True,  # Use causal processing
         mu=0.98,
         a_dd=0.95,
@@ -128,7 +138,8 @@ def main():
     # For tensor mode, we need to provide the enhanced tensor and sampling rate
     metrics = compute_and_save_speech_metrics(
         clean_tensor=clean_tensor,
-        enhanced_tensor=enhanced_speech,
+        enhanced_tensor=clean_tensor,
+        #enhanced_speech,
         fs=enhanced_fs,
         clean_name=clean_filename,
         enhanced_name=f'enhanced_tensor_P{participant_id}_S{sentence}_F{fold}_SNR{snr}.wav',
