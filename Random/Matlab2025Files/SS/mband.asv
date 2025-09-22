@@ -38,9 +38,17 @@ if nargin<4
     return;
 end
 
+% Set default values if not provided
+if nargin < 3
+    Nband = 8; % Default number of bands
+end
+if nargin < 4
+    Freq_spacing = 'log'; % Default frequency spacing
+end
 
 
-[in,fs]=wavread(infile);
+
+[in,fs]=audioread(infile);
 
 
 frmelen=floor(FRMSZ*fs/1000);           % Frame size in samples 
@@ -126,6 +134,7 @@ if AVRGING
     x_magsm(:,2) = (Wn1*x_magsm(:,1)+W0*x_magsm(:,2)+W1*x_magsm(:,3)+W2*x_magsm(:,4));
     for i=3:nframes-2
         x_magsm(:,i) = (Wn2*x_magsm(:,i-2)+Wn1*x_magsm(:,i-1)+W0*x_magsm(:,i)+W1*x_magsm(:,i+1)+W2*x_magsm(:,i+2));
+  
     end
     x_magsm(:,nframes-1) = (Wn2*x_magsm(:,nframes-1-2)+Wn1*x_magsm(:,nframes-1-1)+W0*x_magsm(:,nframes-1)+W1*x_magsm(:,nframes));
     x_magsm(:,nframes) = (Wn2*x_magsm(:,nframes-2)+Wn1*x_magsm(:,nframes-1)+W0*x_magsm(:,nframes));
@@ -240,7 +249,10 @@ for i=2:nframes
 end
 out=y1;
 
-wavwrite(out(1:length(x)),fs,16,outfile);
+%audiowrite(out(1:length(x)),fs,16,outfile);
+audiowrite(outfile, out(1:length(x)), fs, 'BitsPerSample', 16);
+
+
 
 
 
@@ -251,7 +263,7 @@ function a=berouti(SNR)
 [nbands,nframes]=size(SNR);
 for i=1:nbands
     for j=1:nframes
-        if SNR(i,j)>=-5.0 & SNR(i,j)<=20
+        if SNR(i,j)>=-5.0 && SNR(i,j)<=20
             a(i,j)=4-SNR(i,j)*3/20; 
         elseif SNR(i,j)<-5.0
             a(i,j)=4.75;

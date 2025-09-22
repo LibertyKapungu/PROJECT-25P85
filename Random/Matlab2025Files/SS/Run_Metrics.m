@@ -10,7 +10,7 @@ addpath(genpath('validation_dataset/'));
 ref_clean_speech = 'validation_dataset/clean_speech/S_56_02.wav';
 
 % --- List of algorithm output folders ---
-algorithm_dirs = {'mband_processed_output', 'python_mband_processed_output'};  % Add more if needed
+algorithm_dirs = {'specsub_processed_output', 'mband_processed_output', 'mband_causal_processed_output'};  % Add more if needed
 
 % --- Initialize results table ---
 results = table();
