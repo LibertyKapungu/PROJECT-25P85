@@ -183,25 +183,6 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
 
     return fdata, fstart
 
-# Not part of matlab code
-def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
-    """Calculate frequency-dependent delta factors from Loizou eq 5.62"""
-    delta_factors = np.zeros(Nband)
-    
-    for i in range(Nband):
-        # Convert bin index to frequency
-        upper_freq_hz = hibin[i] * fs / (2 * fftl)  # Nyquist scaling
-        
-        # Apply Loizou's rules
-        if upper_freq_hz <= 1000:  # f <= 1 kHz
-            delta_factors[i] = 1.0
-        elif 1000 < upper_freq_hz <= (fs/2 - 1000):  # 1 kHz < f <= Fs/2 - 1 kHz  
-            delta_factors[i] = 2.5
-        else:  # f > Fs/2 - 1 kHz
-            delta_factors[i] = 1.5
-            
-    return delta_factors
-
 def mband(filename, outfile, Nband, Freq_spacing):
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
@@ -318,7 +299,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
     # Calculate Hamming window
     win = np.sqrt(hamming(frmelen))
 
-    # **REAL-TIME ISSUE #2: Initial noise estimation requires buffering**  (can fix with noisefr = 1?)
+    # **REAL-TIME ISSUE #2: Initial noise estimation requires buffering**
     # Estimate noise magnitude for first 'Noisefr' frames
 
     noise_pow = np.zeros(fftl)
@@ -336,55 +317,14 @@ def mband(filename, outfile, Nband, Freq_spacing):
 
     # **REAL-TIME ISSUE #3: Batch framing of entire signal**
     # Frame the input signal
-    # fdata, fstart = frame(noisy_speech, win, ovlplen, 0, 0)
-    # tmp, nframes = fdata.shape
-
-     # Frame-by-frame processing (real-time compatible)
-
-    # Initialize frame-by-frame processing
-    x_mag_frames = []  # Store magnitude spectra for each frame
-    x_ph_frames = []   # Store phase spectra for each frame
-    frame_count = 0
-    
-    # Process audio frame by frame with overlap
-    sample_pos = 0
-    while sample_pos + frmelen <= len(noisy_speech):
-        # Step 1: Extract current frame
-        current_frame = noisy_speech[sample_pos:sample_pos + frmelen]
-        
-        # Step 2: Apply window function
-        windowed_frame = current_frame * win
-        
-        # Step 3: Single-frame FFT (instead of batch FFT)
-        frame_fft = fft(windowed_frame, fftl)
-        frame_mag = np.abs(frame_fft)
-        frame_ph = np.angle(frame_fft)
-        
-        # Step 4: Store results
-        x_mag_frames.append(frame_mag)
-        x_ph_frames.append(frame_ph)
-        
-        # Step 5: Advance by hop size (cmmnlen) for proper overlap
-        sample_pos += cmmnlen  # NOT frmelen - this creates overlap
-        frame_count += 1
-        
-    # Convert lists to matrices (same format as original batch method)
-    if x_mag_frames:
-        x_mag = np.array(x_mag_frames).T  # Shape: (fftl, nframes)
-        x_ph = np.array(x_ph_frames).T    # Shape: (fftl, nframes)
-        nframes = len(x_mag_frames)
-    else:
-        # Handle edge case of very short audio
-        x_mag = np.array([]).reshape(fftl, 0)
-        x_ph = np.array([]).reshape(fftl, 0)
-        nframes = 0
-        print("Warning: No frames generated - audio too short")
+    fdata, fstart = frame(noisy_speech, win, ovlplen, 0, 0)
+    tmp, nframes = fdata.shape
 
     # **REAL-TIME ISSUE #4: Batch FFT processing**
     # ==========Start Processing =======
-    # x_fft = fft( fdata, fftl, axis=0)
-    # x_mag = np.abs(x_fft)
-    # x_ph = np.angle(x_fft)
+    x_fft = fft( fdata, fftl, axis=0)
+    x_mag = np.abs(x_fft)
+    x_ph = np.angle(x_fft)
 
     if AVRGING:
         # Smooth the input spectrum
@@ -404,7 +344,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
             x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
 
             for i in range(2, nframes):
-                x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_mag[:, i])
+                x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_magsm[:, i])
     else:
         x_magsm = x_mag   
 
@@ -440,9 +380,7 @@ def mband(filename, outfile, Nband, Freq_spacing):
     # ---------- START SUBTRACTION PROCEDURE --------------------------
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
 
-    # Include the deltas?
-    delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
-   
+    # Include the deltas? 
 
     for i in range(Nband):
         start = lobin[i]
@@ -450,13 +388,12 @@ def mband(filename, outfile, Nband, Freq_spacing):
         
         for j in range(nframes):
             n_spec_sq = n_spect[start:stop, j] ** 2
-            sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
-            # if i == 0:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            # elif i == Nband - 1:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
-            # else:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
+            if i == 0:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
+            elif i == Nband - 1:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
+            else:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
@@ -502,4 +439,5 @@ def mband(filename, outfile, Nband, Freq_spacing):
 
 # Example usage:
 mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn5.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
+
 
