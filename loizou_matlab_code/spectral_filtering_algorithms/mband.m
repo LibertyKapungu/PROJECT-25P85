@@ -110,6 +110,30 @@ x_fft = fft(x_win,fftl);
 x_mag = abs(x_fft);
 x_ph = angle(x_fft);
 
+// if AVRGING
+//     % smooth the input spectrum
+//     filtb = [0.9 0.1];
+//     x_magsm(:,1) = filter(filtb, 1, x_mag(:,1));
+//     for i=2:nframes
+//         x_tmp1 = [x_mag(frmelen-ovlplen,i-1); x_mag(:,i)];
+//         x_tmp2 = filter(filtb, 1, x_tmp1);
+//         x_magsm(:,i) = x_tmp2(2:end);
+//     end
+    
+//     % weighted spectral estimate 
+//     Wn2=0.09; Wn1=0.25; W0=0.32; W1=0.25; W2=0.09;
+//     x_magsm(:,1) = (W0*x_magsm(:,1)+W1*x_magsm(:,2)+W2*x_magsm(:,3));
+//     x_magsm(:,2) = (Wn1*x_magsm(:,1)+W0*x_magsm(:,2)+W1*x_magsm(:,3)+W2*x_magsm(:,4));
+//     for i=3:nframes-2
+//         x_magsm(:,i) = (Wn2*x_magsm(:,i-2)+Wn1*x_magsm(:,i-1)+W0*x_magsm(:,i)+W1*x_magsm(:,i+1)+W2*x_magsm(:,i+2));
+//     end
+//     x_magsm(:,nframes-1) = (Wn2*x_magsm(:,nframes-1-2)+Wn1*x_magsm(:,nframes-1-1)+W0*x_magsm(:,nframes-1)+W1*x_magsm(:,nframes));
+//     x_magsm(:,nframes) = (Wn2*x_magsm(:,nframes-2)+Wn1*x_magsm(:,nframes-1)+W0*x_magsm(:,nframes));
+// else
+//     x_magsm = x_mag;
+// end
+
+
 if AVRGING
     % smooth the input spectrum
     filtb = [0.9 0.1];
