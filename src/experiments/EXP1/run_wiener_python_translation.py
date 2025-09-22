@@ -110,7 +110,7 @@ def main():
         noisy_audio=noisy_speech,
         fs=noisy_fs,
         output_dir=str(output_dir),
-        #output_file=f'wiener_filter_priori_P{participant_id}_S{sentence}_F{fold}_SNR{snr}',
+        output_file=f'wiener_filter_priori_P{participant_id}_S{sentence}_F{fold}_SNR{snr}',
         causal=False,  # Use causal processing
         mu=0.98,
         a_dd=0.95,
