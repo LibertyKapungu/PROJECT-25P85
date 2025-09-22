@@ -163,14 +163,23 @@ def wiener_filter(
     if causal:
         # Causal processing: process frames sequentially without overlap
         num_frames = signal_length // frame_samples
-        enhanced_signal = torch.zeros_like(waveform)
-        
+
+        # We'll perform window-compensated accumulation to avoid the
+        # multiplicative envelope introduced by applying a Hamming window
+        # and writing frames directly back-to-back. This keeps zero
+        # look-ahead (real-time friendly) while removing the gating effect.
+        enhanced_accum = None
+        window_sum = None
+
         # Pad signal if needed for complete frames
         if signal_length % frame_samples != 0:
             padding_needed = frame_samples - (signal_length % frame_samples)
             waveform = torch.cat([waveform, torch.zeros(padding_needed, device=device)])
-            enhanced_signal = torch.cat([enhanced_signal, torch.zeros(padding_needed, device=device)])
             num_frames += 1
+        total_length = len(waveform)
+
+        enhanced_accum = torch.zeros(total_length, device=device)
+        window_sum = torch.zeros(total_length, device=device)
     else:
         # Non-causal processing: overlap-add reconstruction
         num_frames = (signal_length - frame_samples) // hop_samples + 1
@@ -184,6 +193,11 @@ def wiener_filter(
     
     print(f"Processing {num_frames} frames...")
     
+    # Clamp window when used as normalization denominator to avoid large
+    # amplification at near-zero edges
+    eps_window = 1e-3
+    hamming_window_clamped = torch.clamp(hamming_window, min=eps_window)
+
     for frame_idx in range(num_frames):
         if causal:
             # Causal frame extraction: sequential, non-overlapping
@@ -253,8 +267,11 @@ def wiener_filter(
         
         # Frame reconstruction
         if causal:
-            # Causal reconstruction: direct replacement (no overlap-add)
-            enhanced_signal[start_idx:end_idx] = enhanced_frame
+            # Causal reconstruction with window-compensation: accumulate the
+            # enhanced (time-domain) frame and keep track of the window sum
+            # so we can divide later to undo the per-frame Hamming envelope.
+            enhanced_accum[start_idx:end_idx] += enhanced_frame
+            window_sum[start_idx:end_idx] += hamming_window_clamped
         else:
             # Non-causal reconstruction: overlap-add
             if frame_idx == 0:
@@ -281,8 +298,14 @@ def wiener_filter(
         posteri_prev = posterior_snr
     
     # Trim enhanced signal back to original length if padding was added
-    if causal and len(enhanced_signal) > signal_length:
-        enhanced_signal = enhanced_signal[:signal_length]
+    if causal:
+        # Normalize accumulator by window sum (safe division) and trim to
+        # original signal_length
+        safe_window = torch.clamp(window_sum, min=eps_window)
+        enhanced_signal = enhanced_accum / safe_window
+
+        if len(enhanced_signal) > signal_length:
+            enhanced_signal = enhanced_signal[:signal_length]
     
     # Normalize output to prevent clipping
     max_amplitude = torch.max(torch.abs(enhanced_signal))
