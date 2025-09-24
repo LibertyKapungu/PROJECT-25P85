@@ -25,7 +25,7 @@ def add_noise_over_speech(
     sr: Optional[int] = None,
     clean_name: Optional[str] = None,
     noise_name: Optional[str] = None,
-) -> Optional[Tuple[torch.Tensor, int]]:
+ ) -> Tuple[torch.Tensor, int]:
     """
     Add noise to clean speech at a specified SNR using PyTorch.
 
@@ -46,7 +46,9 @@ def add_noise_over_speech(
         noise_name: Optional base name of the noise file for saved filename
 
     Returns:
-        Tuple of (noisy_audio, sample_rate) if output_dir is None, otherwise None
+        Tuple of (`noisy_audio`, `sample_rate`). If `output_dir` is provided the
+        noisy audio will also be written to disk, but the tensor is returned in
+        all cases.
     """
     
     # Select device - prefer CUDA if available
