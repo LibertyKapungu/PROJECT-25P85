@@ -8,7 +8,7 @@ repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1_output'
-results_dir = repo_root / 'results' / 'EXP1'
+results_dir = repo_root / 'results' / 'EXP1' / 'wiener'
 
 import utils.audio_dataset_loader as loader
 from dsp_algorithms.wiener_as import wiener_filter
@@ -39,13 +39,13 @@ for urban_path, ears_path in paired_files:
         output_file=output_filename,
         causal=True, 
         mu=0.98,
-        a_dd=0.95,
+        a_dd=0.98,
         eta=0.15,
-        frame_dur=10
+        frame_dur=4
     )
 
     # Step 3: Generate spectrogram
-    print("\n3. Generating spectrogram...")
+    print("\n3. Generating spectrograms...")
     generate_and_save_spectrogram(
         waveform=enhanced_speech,
         sample_rate=enhanced_fs,
@@ -55,10 +55,29 @@ for urban_path, ears_path in paired_files:
         include_metadata_in_filename=True,
         audio_name=output_filename
     )
+
+    generate_and_save_spectrogram(
+        waveform=noise_waveform,
+        sample_rate=enhanced_fs,
+        output_image_path=str(results_dir),
+        output_file_name='noisy_wave_spectrogram',
+        title=f'URBS:{noise_filename}',
+        include_metadata_in_filename=True,
+        audio_name=output_filename
+    )
+
+    generate_and_save_spectrogram(
+        waveform=clean_waveform,
+        sample_rate=enhanced_fs,
+        output_image_path=str(results_dir),
+        output_file_name='clean_spectrogram',
+        title=f'EARS:{clean_filename}',
+        include_metadata_in_filename=True,
+        audio_name=output_filename
+    )
     
     # Step 4: Compute and save metrics
     print("\n4. Computing speech enhancement metrics...")
-    
     metrics = compute_and_save_speech_metrics(
         clean_tensor=clean_waveform,
         enhanced_tensor=enhanced_speech,
