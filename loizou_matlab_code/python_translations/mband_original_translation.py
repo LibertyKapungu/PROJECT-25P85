@@ -3,9 +3,6 @@ import scipy.io.wavfile as wavfile
 from scipy.signal.windows import hamming
 from scipy.fft import fft, ifft
 import scipy.signal
-import torch
-from typing import Optional, Union, Tuple
-from pathlib import Path
 
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
@@ -205,21 +202,12 @@ def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
             
     return delta_factors
 
-def mband(
-        noisy_audio: torch.Tensor,
-        fs: int,
-        output_dir: Optional[Union[str, Path]] = None,
-        output_file: Optional[str] = None,
-        input_name: Optional[str] = None,
-        Nband: int = 4,
-        Freq_spacing: str = 'log',
-        frame_dur: int = 20
-) -> Tuple[torch.Tensor, int]:
+def mband(filename, outfile, Nband, Freq_spacing):
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
-    Usage:  mband(noisy_audio, outputfile,Nband,Freq_spacing)
+    Usage:  mband(filename, outputfile,Nband,Freq_spacing)
            
-         noisy_audio - noisy speech file in .wav format
+         filename - noisy speech file in .wav format
          outputFile - enhanced output file in .wav format
          Nband - Number of frequency bands (recommended 4-8)
          Freq_spacing - Type of frequency spacing for the bands, choices:
@@ -255,54 +243,44 @@ def mband(
     # FLOOR -> Spectral floor, default=0.002
     # VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
-        # Handle tensor input
-    if noisy_audio.dim() > 1 and noisy_audio.shape[0] > 1:
-        noisy_speech = torch.mean(noisy_audio, dim=0).numpy()
+    if filename is None or outfile is None:
+        print('Usage: mband(noisyfile.wav, outFile.wav,  Nband, Freq_spacing)\n')
+        return
+
+    fs, data = wavfile.read(filename)
+
+    # Convert to double precision normalized samples
+    if data.dtype == np.uint8: # 8-bit: 0 <= y <= 255 -> convert to -1.0 <= y < +1.0
+        noisy_speech = (data.astype(np.float64) - 128.0) / 128.0
+        nbits = 8
+
+    elif data.dtype == np.int16: # 16-bit: -32768 <= y <= +32767 -> convert to -1.0 <= y < +1.0
+        noisy_speech = data.astype(np.float64) / 32768.0
+        nbits = 16
+
+    elif data.dtype == np.int32:
+        max_val = np.max(np.abs(data))
+
+        if max_val <= 2**23: # 24-bit: -2^23 <= y <= 2^23-1 -> convert to -1.0 <= y < +1.0
+            noisy_speech = data.astype(np.float64) / (2**23)
+            nbits = 24
+
+        else: # 32-bit: -2^31 <= y <= 2^31-1 -> convert to -1.0 <= y < +1.0
+            noisy_speech = data.astype(np.float64) / (2**31)
+            nbits = 32
+
+    elif data.dtype == np.float32:
+        noisy_speech = data.astype(np.float64) # 32-bit float: already in -1.0 <= y < +1.0 range
+        nbits = 32
+
+    elif data.dtype == np.float64: # 64-bit float: already in proper range
+        noisy_speech = data
+        nbits = 64
+
     else:
-        noisy_speech = noisy_audio.squeeze().numpy()
-
-    # Convert to double precision
-    noisy_speech = noisy_speech.astype(np.float64)
-    input_name = input_name if input_name is not None else "spectral"
-
-    # if noisy_audio is None or outfile is None:
-    #     print('Usage: mband(noisyfile.wav, outFile.wav,  Nband, Freq_spacing)\n')
-    #     return
-
-    # fs, data = wavfile.read(noisy_audio)
-
-    # # Convert to double precision normalized samples
-    # if data.dtype == np.uint8: # 8-bit: 0 <= y <= 255 -> convert to -1.0 <= y < +1.0
-    #     noisy_speech = (data.astype(np.float64) - 128.0) / 128.0
-    #     nbits = 8
-
-    # elif data.dtype == np.int16: # 16-bit: -32768 <= y <= +32767 -> convert to -1.0 <= y < +1.0
-    #     noisy_speech = data.astype(np.float64) / 32768.0
-    #     nbits = 16
-
-    # elif data.dtype == np.int32:
-    #     max_val = np.max(np.abs(data))
-
-    #     if max_val <= 2**23: # 24-bit: -2^23 <= y <= 2^23-1 -> convert to -1.0 <= y < +1.0
-    #         noisy_speech = data.astype(np.float64) / (2**23)
-    #         nbits = 24
-
-    #     else: # 32-bit: -2^31 <= y <= 2^31-1 -> convert to -1.0 <= y < +1.0
-    #         noisy_speech = data.astype(np.float64) / (2**31)
-    #         nbits = 32
-
-    # elif data.dtype == np.float32:
-    #     noisy_speech = data.astype(np.float64) # 32-bit float: already in -1.0 <= y < +1.0 range
-    #     nbits = 32
-
-    # elif data.dtype == np.float64: # 64-bit float: already in proper range
-    #     noisy_speech = data
-    #     nbits = 64
-
-    # else:
-    #     # Default fallback - treat unknown types as 16-bit
-    #     noisy_speech = data.astype(np.float64) / 32768.0
-    #     nbits = 16
+        # Default fallback - treat unknown types as 16-bit
+        noisy_speech = data.astype(np.float64) / 32768.0
+        nbits = 16
 
     frmelen = int(np.floor(FRMSZ * fs / 1000))  # Frame size in samples
     ovlplen = int(np.floor(frmelen * OVLP / 100)) # Number of overlap samples
@@ -505,59 +483,23 @@ def mband(
         win_sum[start:start + frmelen] += win
     out /= (win_sum + 1e-8)
 
-        # Trim to original length and normalize
+    # Output normalization and type conversion
     out = out[:len(noisy_speech)]
-
-    # Normalize to prevent clipping
-    max_amplitude = np.max(np.abs(out))
-    if max_amplitude > 1.0:
-        out = out / max_amplitude
-        print(f"Output normalized by factor {max_amplitude:.3f}")
-
-    # Convert to tensor
-    enhanced_tensor = torch.tensor(out, dtype=torch.float32)
-
-    # Save to file if output path provided
-    if output_dir is not None and output_file is not None:
-        output_path = Path(output_dir)
-        output_path.mkdir(parents=True, exist_ok=True)
-        
-        # Create filename with metadata
-        metadata_parts = [
-            f"BANDS{Nband}",
-            f"SPACING{Freq_spacing.upper()}",
-            f"FRAME{frame_dur}ms"
-        ]
-        
-        # Extract base name without extension
-        base_name = output_file.replace('.wav', '') if output_file.endswith('.wav') else output_file
-        output_filename = f"{base_name}_{input_name}_{'_'.join(metadata_parts)}.wav"
-        full_output_path = output_path / output_filename
-        
-        # Save as 16-bit WAV
+    if nbits == 8:
+        enhanced_speech_int = np.clip(out * 128.0 + 128.0, 0, 255).astype(np.uint8)
+    elif nbits == 16:
         enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
-        wavfile.write(str(full_output_path), fs, enhanced_speech_int)
-        print(f"Enhanced audio saved to: {full_output_path}")
+    elif nbits == 32:
+        if data.dtype == np.float32:
+            enhanced_speech_int = np.clip(out, -1.0, 1.0).astype(np.float32)
+        else:
+            max_val = np.iinfo(np.int32).max
+            enhanced_speech_int = np.clip(out * max_val, -max_val, max_val - 1).astype(np.int32)
+    else:
+        enhanced_speech_int = np.clip(out, -1.0, 1.0)
 
-    return enhanced_tensor, fs
+    wavfile.write(outfile, fs, enhanced_speech_int)
 
-#     # Output normalization and type conversion
-#     out = out[:len(noisy_speech)]
-#     if nbits == 8:
-#         enhanced_speech_int = np.clip(out * 128.0 + 128.0, 0, 255).astype(np.uint8)
-#     elif nbits == 16:
-#         enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
-#     elif nbits == 32:
-#         if data.dtype == np.float32:
-#             enhanced_speech_int = np.clip(out, -1.0, 1.0).astype(np.float32)
-#         else:
-#             max_val = np.iinfo(np.int32).max
-#             enhanced_speech_int = np.clip(out * max_val, -max_val, max_val - 1).astype(np.int32)
-#     else:
-#         enhanced_speech_int = np.clip(out, -1.0, 1.0)
-
-#     wavfile.write(outfile, fs, enhanced_speech_int)
-
-# # Example usage:
-# mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn5.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
+# Example usage:
+mband('C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn5.wav', 'C:/Users/E7440/Documents/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/out_mband.wav', 4, 'log')
 
