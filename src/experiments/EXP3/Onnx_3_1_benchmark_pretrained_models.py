@@ -51,6 +51,11 @@ onnx_model = onnx.load(str(pytorch_pretrained_models_dir))
 torch_model = ConvertModel(onnx_model)
 torch_model.eval()
 print("Conversion complete.")
+# Save as pytorch model for future use
+torch_model_path = pytorch_pretrained_models_dir.with_suffix('.pt')
+torch.save(torch_model.state_dict(), torch_model_path)
+print(f"PyTorch model saved at: {torch_model_path}")
+
 
 # ------------------------------
 # Load and preprocess audio
