@@ -11,7 +11,7 @@ output_dir = repo_root / 'sound_data' / 'processed' / 'spectral_processed_output
 results_dir = repo_root / 'results' / 'EXP1'
 
 import utils.audio_dataset_loader as loader
-from dsp_algorithms.mband import spectral_filter
+from dsp_algorithms.mband import mband
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 
@@ -31,14 +31,15 @@ for urban_path, ears_path in paired_files:
     output_filename = f"spectral_filter_{clean_filename}_{noise_filename}_SNR{snr_db}dB.wav"
 
     # Step 2: Apply spectral filtering (using causal processing)
-    # CHECK
     print("\n2. Applying causal spectral filtering...")
-    enhanced_speech, enhanced_fs = spectral_filter(
+    enhanced_speech, enhanced_fs = mband(
         noisy_audio=noisy_speech,
         fs=clean_sr,
         output_dir=output_dir,
         output_file=output_filename,
-        frame_dur=10
+        Nband = 4,
+        Freq_spacing = 'log',
+        frame_dur=20
     )
 
     # Step 3: Generate spectrogram
