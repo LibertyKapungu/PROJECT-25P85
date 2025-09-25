@@ -1,16 +1,4 @@
-"""
-Wiener Filter Speech Enhancement Implementation
-
-This implementation is based on the algorithm by Scalart and Filho (1996)
-and follows the MATLAB code by Yi Hu and Philipos C. Loizou from:
-"Speech Enhancement: Theory and Practice, 2nd Edition"
-
-References:
-[1] Scalart, P. and Filho, J. (1996). "Speech enhancement based on a priori 
-    signal to noise estimation." Proc. IEEE Int. Conf. Acoustics, Speech, 
-    and Signal Processing, 629-632.
-"""
-
+# Replace your old wiener_filter with this updated function
 import torch
 import torchaudio
 import numpy as np
@@ -18,7 +6,7 @@ import os
 from pathlib import Path
 from typing import Optional, Union, Tuple
 from scipy.signal.windows import hamming
-
+from collections import deque
 
 def wiener_filter(
     noisy_audio: torch.Tensor,
@@ -30,68 +18,30 @@ def wiener_filter(
     a_dd: float = 0.98,
     eta: float = 0.15,
     frame_dur: int = 20,
-    causal: bool = True
+    causal: bool = True,
+    
+    gain_smooth_alpha: float = 0.85,   # smoothing for gain (0<alpha<1)
+    min_gain: float = 0.01,            # absolute floor for gain
+    spectral_floor_beta: float = 0.02, # spectral floor for magnitudes (0..0.1)
+    noise_min_history_frames: int = 8, # frames for simple min-tracking
+    freq_smooth_len: int = 3           # small freq smoothing kernel (odd)
 ) -> Optional[Tuple[torch.Tensor, int]]:
-    """
-    Apply Wiener filtering for speech enhancement with causal processing option.
 
-    This function accepts a pre-loaded noisy audio tensor (as returned by
-    `torchaudio.load`) and its sample rate. It performs frame-based Wiener
-    filtering using a decision-directed a priori SNR estimator and optionally
-    saves the enhanced output to disk with a descriptive filename.
-
-    Args:
-        noisy_audio: Required. Noisy audio tensor. Shape can be (channels, samples)
-            or (samples,) for mono. The tensor will be converted to mono if
-            multi-channel.
-        fs: Required. Sampling rate (Hz) corresponding to `noisy_audio`.
-        output_dir: Optional directory to save the enhanced audio. If None,
-            the function returns the enhanced tensor and sample rate.
-        output_file: Optional base name used when saving the enhanced audio.
-            If provided together with `output_dir` a WAV file will be written.
-        input_name: Optional short name to include in the generated filename
-            (useful when calling with tensors). Defaults to "wiener_as_" if
-            not provided.
-        mu: Smoothing factor for noise update (0 < mu < 1).
-        a_dd: Decision-directed factor for a priori SNR (0 < a_dd < 1).
-        eta: Voice activity detection threshold (positive float).
-        frame_dur: Frame duration in milliseconds (positive integer).
-        causal: If True, use causal processing (real-time compatible). When
-            False, 50% overlap processing (non-causal) is used.
-
-    Returns:
-        If `output_dir` and `output_file` are provided, the function saves the
-        enhanced audio to disk and returns None. Otherwise it returns a tuple
-        `(enhanced_audio, fs)` where `enhanced_audio` is a 1-D CPU tensor.
-
-    Raises:
-        ValueError: If numeric parameters are out of valid ranges.
-
-    Note:
-        When `causal=True`, the algorithm processes frames sequentially without
-        look-ahead, making it suitable for real-time applications. This may
-        slightly reduce performance compared to non-causal processing.
-    """
-    # Device selection
+    # --- device + basic setup ---
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
-    
-    # Input handling: tensor input (waveform + sample rate) are required
+
     waveform = noisy_audio.clone()
-    # Allow caller to supply a name used for saved filenames
     input_name = input_name if input_name is not None else "wiener_as_"
     print("Processing tensor input")
-    
-    # Convert to mono if stereo
+
     if waveform.dim() > 1 and waveform.shape[0] > 1:
         waveform = torch.mean(waveform, dim=0)
     else:
         waveform = waveform.squeeze()
-    
-    # Move to device
+
     waveform = waveform.to(device)
-    
-    # Validate parameters
+
     if not 0 < mu < 1:
         raise ValueError("mu must be between 0 and 1")
     if not 0 < a_dd < 1:
@@ -100,270 +50,214 @@ def wiener_filter(
         raise ValueError("eta must be positive")
     if frame_dur <= 0:
         raise ValueError("frame_dur must be positive")
-    
-    # Calculate frame parameters
-    frame_samples = int(frame_dur * fs / 1000)  # Frame length in samples
-    
-    if causal:
-        # Causal processing: no overlap, sequential frame processing
-        hop_samples = frame_samples  # No overlap for causal processing
-        print(f"CAUSAL MODE: Frame duration: {frame_dur}ms ({frame_samples} samples)")
-        print(f"No overlap processing for real-time compatibility")
-    else:
-        # Non-causal processing: 50% overlap
-        hop_samples = frame_samples // 2
-        print(f"NON-CAUSAL MODE: Frame duration: {frame_dur}ms ({frame_samples} samples)")
-        print(f"Hop length: {hop_samples} samples (50% overlap)")
-    
-    print(f"Sampling rate: {fs}Hz")
-    
-    # Create Hamming window
-    hamming_window = torch.tensor(
-        hamming(frame_samples), 
-        dtype=torch.float32, 
-        device=device
-    )
-    
-    # Window normalization factor
+
+    frame_samples = int(frame_dur * fs / 1000)
+
+    # --- IMPORTANT: use overlap even in causal mode (WOLA-style reconstruction)
+    # Using 50% overlap reduces gating and musical noise. This is still causal if we
+    # buffer frames and output at hop intervals (increased latency = frame length).
+    hop_samples = frame_samples // 2
+    print(f"{'CAUSAL' if causal else 'NON-CAUSAL'} MODE: Frame {frame_dur}ms ({frame_samples} samples), hop {hop_samples} samples")
+
+    # window & window power
+    hamming_window = torch.tensor(hamming(frame_samples), dtype=torch.float32, device=device)
     window_power = torch.sum(hamming_window ** 2) / frame_samples
-    
-    # Estimate initial noise spectrum from first 120ms (assumed noise-only)
+
+    # initial noise estimate from first 120ms
     noise_duration_ms = 120
     noise_samples = int(fs * noise_duration_ms / 1000)
-    noise_samples = min(noise_samples, len(waveform) // 4)  # Don't use more than 25% of signal
+    noise_samples = min(noise_samples, len(waveform) // 4)
     
     if noise_samples < frame_samples:
         print("Warning: Audio too short for reliable noise estimation")
         noise_samples = min(len(waveform) // 2, frame_samples * 2)
-    
+
     first_segment = waveform[:noise_samples]
     print(f"Noise estimation from first {noise_samples/fs*1000:.1f}ms")
-    
-    # Estimate noise power spectrum using overlapping frames
+
     num_noise_frames = max(1, (noise_samples - frame_samples) // hop_samples + 1)
     noise_power_spectrum = torch.zeros(frame_samples, device=device)
-    
+
     for i in range(num_noise_frames):
+
         start_idx = i * hop_samples
         end_idx = start_idx + frame_samples
-        
+
         if end_idx <= noise_samples:
+
             noise_frame = first_segment[start_idx:end_idx] * hamming_window
             noise_fft = torch.fft.fft(noise_frame, n=frame_samples)
             noise_power_spectrum += torch.abs(noise_fft) ** 2 / (frame_samples * window_power)
-    
+
     noise_power_spectrum /= num_noise_frames
-    
-    # Add small epsilon to prevent division by zero
     noise_power_spectrum = torch.clamp(noise_power_spectrum, min=1e-10)
-    
-    # Frame-by-frame processing with causal or non-causal approach
+
     signal_length = len(waveform)
-    
-    if causal:
-        # Causal processing: process frames sequentially without overlap
-        num_frames = signal_length // frame_samples
+    # pad to fit integer number of hops + frames
+    n_hops = (signal_length - frame_samples) // hop_samples + 1 if signal_length >= frame_samples else 1
+    pad_needed = (n_hops * hop_samples + frame_samples) - signal_length
 
-        # We'll perform window-compensated accumulation to avoid the
-        # multiplicative envelope introduced by applying a Hamming window
-        # and writing frames directly back-to-back. This keeps zero
-        # look-ahead (real-time friendly) while removing the gating effect.
-        enhanced_accum = None
-        window_sum = None
+    if pad_needed > 0:
+        waveform = torch.cat([waveform, torch.zeros(pad_needed, device=device)])
 
-        # Pad signal if needed for complete frames
-        if signal_length % frame_samples != 0:
-            padding_needed = frame_samples - (signal_length % frame_samples)
-            waveform = torch.cat([waveform, torch.zeros(padding_needed, device=device)])
-            num_frames += 1
-        total_length = len(waveform)
+    total_length = len(waveform)
+    num_frames = (total_length - frame_samples) // hop_samples + 1
 
-        enhanced_accum = torch.zeros(total_length, device=device)
-        window_sum = torch.zeros(total_length, device=device)
-    else:
-        # Non-causal processing: overlap-add reconstruction
-        num_frames = (signal_length - frame_samples) // hop_samples + 1
-        enhanced_signal = torch.zeros_like(waveform)
-    
+    # Outputs & accumulators (WOLA-style for both modes)
+    enhanced_accum = torch.zeros(total_length, device=device)
+    window_sum = torch.zeros(total_length, device=device)
+
     vad_decisions = torch.zeros(num_frames, device=device)
-    
-    # Initialize variables for decision-directed approach
-    G_prev = None  # Previous gain
-    posteri_prev = None  # Previous posterior SNR
-    
-    print(f"Processing {num_frames} frames...")
-    
-    # Clamp window when used as normalization denominator to avoid large
-    # amplification at near-zero edges
+
+    # for decision-directed a priori SNR
+    G_prev = torch.ones(frame_samples, device=device) * 0.5
+    posteri_prev = torch.ones(frame_samples, device=device) * 1.0
+
+    # additional state for smoothing gains and min-noise tracking
+    smoothed_gain = torch.ones(frame_samples, device=device) * 1.0
+    # simple per-bin minimum history using deque of tensors (small memory)
+    noise_history = deque(maxlen=noise_min_history_frames)
+    # initialize history with initial noise estimate
+    for _ in range(noise_min_history_frames):
+        noise_history.append(noise_power_spectrum.clone())
+
+    # small frequency smoothing kernel (uniform)
+    if freq_smooth_len > 1:
+        k = freq_smooth_len
+        freq_kernel = torch.ones(k, device=device) / float(k)
+    else:
+        freq_kernel = None
+
     eps_window = 1e-3
     hamming_window_clamped = torch.clamp(hamming_window, min=eps_window)
 
+    print(f"Processing {num_frames} frames with WOLA-style reconstruction ...")
+
     for frame_idx in range(num_frames):
-        if causal:
-            # Causal frame extraction: sequential, non-overlapping
-            start_idx = frame_idx * frame_samples
-            end_idx = start_idx + frame_samples
-            
-            if end_idx > len(waveform):
-                break  # Skip incomplete frames in causal mode
-                
-            current_frame = waveform[start_idx:end_idx]
-        else:
-            # Non-causal frame extraction: overlapping
-            start_idx = frame_idx * hop_samples
-            end_idx = start_idx + frame_samples
-            
-            if end_idx > signal_length:
-                # Zero-pad if necessary
-                current_frame = torch.zeros(frame_samples, device=device)
-                available_samples = signal_length - start_idx
-                current_frame[:available_samples] = waveform[start_idx:signal_length]
-            else:
-                current_frame = waveform[start_idx:end_idx]
-        
-        # Apply window
-        windowed_frame = current_frame * hamming_window
-        
+        start_idx = frame_idx * hop_samples
+        end_idx = start_idx + frame_samples
+        current_frame = waveform[start_idx:end_idx] * hamming_window
+
         # FFT
-        noisy_fft = torch.fft.fft(windowed_frame, n=frame_samples)
+        noisy_fft = torch.fft.fft(current_frame, n=frame_samples)
         noisy_power_spectrum = torch.abs(noisy_fft) ** 2 / (frame_samples * window_power)
-        
-        # Compute posterior SNR
-        posterior_snr = noisy_power_spectrum / noise_power_spectrum
-        
-        # Compute a priori SNR using decision-directed approach
+
+        # optional frequency smoothing to reduce narrow spikes (lowers variance)
+        if freq_kernel is not None:
+            # simple 1D conv with circular padding in freq domain (small kernel)
+            padded = torch.nn.functional.pad(noisy_power_spectrum.unsqueeze(0).unsqueeze(0),
+                                             (k//2, k//2), mode='reflect')
+            conv = torch.nn.functional.conv1d(padded, freq_kernel.view(1,1,-1))
+            noisy_power_smoothed = conv.squeeze()
+        else:
+            noisy_power_smoothed = noisy_power_spectrum
+
+        # posterior SNR
+        posterior_snr = noisy_power_smoothed / noise_power_spectrum
+        posterior_snr = torch.clamp(posterior_snr, min=1e-6)
+
+        # decision-directed a priori SNR (uses past estimates only)
         if frame_idx == 0:
-            # For first frame, use spectral subtraction rule
             prior_snr = torch.clamp(posterior_snr - 1, min=0.01)
         else:
-            # Decision-directed approach (causal: only uses past information)
-            spectral_subtraction_term = torch.clamp(posterior_snr - 1, min=0)
-            prior_snr = (a_dd * (G_prev ** 2) * posteri_prev + 
-                        (1 - a_dd) * spectral_subtraction_term)
+            spectral_subtraction_term = torch.clamp(posterior_snr - 1, min=0.0)
+            # use previous gain & previous posterior in the DD formula (vector)
+            prior_snr = (a_dd * (G_prev ** 2) * posteri_prev + (1 - a_dd) * spectral_subtraction_term)
             prior_snr = torch.clamp(prior_snr, min=0.01)
-        
-        # Voice Activity Detection using log-likelihood ratio
-        log_likelihood_ratio = (posterior_snr * prior_snr / (1 + prior_snr) - 
-                               torch.log1p(prior_snr))
+
+        # VAD metric (log-likelihood ratio style)
+        log_likelihood_ratio = (posterior_snr * prior_snr / (1 + prior_snr) - torch.log1p(prior_snr))
         vad_metric = torch.mean(log_likelihood_ratio).item()
         vad_decisions[frame_idx] = vad_metric
-        
-        # Update noise spectrum if VAD indicates noise
-        # In causal mode, this update only uses current and past information
-        if vad_metric < eta:  # Noise frame
-            noise_power_spectrum = (mu * noise_power_spectrum + 
-                                  (1 - mu) * noisy_power_spectrum)
-            noise_power_spectrum = torch.clamp(noise_power_spectrum, min=1e-10)
-        
-        # Compute Wiener gain
-        wiener_gain = torch.sqrt(prior_snr / (1 + prior_snr))
-        wiener_gain = torch.clamp(wiener_gain, min=0.01, max=1.0)
-        
-        # Apply gain to noisy spectrum
-        enhanced_fft = noisy_fft * wiener_gain
-        
-        # IFFT to get time domain signal
-        enhanced_frame = torch.fft.ifft(enhanced_fft, n=frame_samples).real
-        
-        # Frame reconstruction
-        if causal:
-            # Causal reconstruction with window-compensation: accumulate the
-            # enhanced (time-domain) frame and keep track of the window sum
-            # so we can divide later to undo the per-frame Hamming envelope.
-            enhanced_accum[start_idx:end_idx] += enhanced_frame
-            window_sum[start_idx:end_idx] += hamming_window_clamped
-        else:
-            # Non-causal reconstruction: overlap-add
-            if frame_idx == 0:
-                enhanced_signal[start_idx:start_idx + hop_samples] = enhanced_frame[:hop_samples]
-            else:
-                # Add overlap region
-                overlap_end = min(end_idx, signal_length)
-                overlap_start = start_idx
-                overlap_length = min(hop_samples, overlap_end - overlap_start)
-                
-                if overlap_length > 0:
-                    enhanced_signal[overlap_start:overlap_start + overlap_length] += enhanced_frame[:overlap_length]
-            
-            # Add non-overlapping region
-            non_overlap_start = start_idx + hop_samples
-            non_overlap_end = min(end_idx, signal_length)
-            non_overlap_length = non_overlap_end - non_overlap_start
-            
-            if non_overlap_length > 0:
-                enhanced_signal[non_overlap_start:non_overlap_end] = enhanced_frame[hop_samples:hop_samples + non_overlap_length]
-        
-        # Store for next iteration (causal: only past information)
-        G_prev = wiener_gain
-        posteri_prev = posterior_snr
-    
-    # Trim enhanced signal back to original length if padding was added
-    if causal:
-        # Normalize accumulator by window sum (safe division) and trim to
-        # original signal_length
-        safe_window = torch.clamp(window_sum, min=eps_window)
-        enhanced_signal = enhanced_accum / safe_window
 
-        if len(enhanced_signal) > signal_length:
-            enhanced_signal = enhanced_signal[:signal_length]
-    
-    # Normalize output to prevent clipping
+        # --- Noise update strategy: combine exponential update + minimum tracking
+        # If frame likely noise, update quickly; if speech present, update slowly.
+        if vad_metric < eta:
+            # update instantaneous noise estimate (fast)
+            noise_instant = noisy_power_smoothed
+            noise_power_spectrum = mu * noise_power_spectrum + (1 - mu) * noise_instant
+            noise_power_spectrum = torch.clamp(noise_power_spectrum, min=1e-10)
+        else:
+            # speech present: slow update to avoid over-estimation
+            noise_power_spectrum = mu * noise_power_spectrum + (1 - mu) * noisy_power_smoothed * 0.1
+            noise_power_spectrum = torch.clamp(noise_power_spectrum, min=1e-10)
+
+        # update noise history and compute a minima-based floor (simple minimum statistics)
+        noise_history.append(noise_power_spectrum.clone())
+        min_noise = torch.min(torch.stack(list(noise_history)), dim=0)[0]
+        # combine the running estimate with the local minima to be conservative
+        noise_power_spectrum = torch.maximum(noise_power_spectrum, 0.8 * min_noise)
+
+        # Compute Wiener gain (square-root Wiener as before)
+        wiener_gain = torch.sqrt(prior_snr / (1 + prior_snr))
+        # apply spectral floor to gain to avoid deep valleys (prevents musical spikes)
+        wiener_gain = torch.clamp(wiener_gain, min=min_gain)
+        # impose an upper limit
+        wiener_gain = torch.clamp(wiener_gain, max=1.0)
+
+        # --- Temporal smoothing of the *gain* to suppress frame-to-frame variation
+        # Adaptive strategy: if VAD indicates stable noise -> more smoothing; if speech -> less smoothing
+        if vad_metric < eta:
+            alpha = gain_smooth_alpha  # more smoothing in noise frames
+        else:
+            # allow faster adaptation during speech activity (less smoothing)
+            alpha = 0.6 + 0.4 * (1 - min(0.9, abs(vad_metric)))  # heuristic but prevents extremes
+            alpha = float(max(0.5, min(alpha, gain_smooth_alpha)))
+
+        smoothed_gain = alpha * smoothed_gain + (1 - alpha) * wiener_gain
+
+        # apply small additional spectral floor to the smoothed gain (spectral-flooring principle)
+        smoothed_gain = torch.clamp(smoothed_gain, min=spectral_floor_beta)
+
+        # apply gain to complex spectrum (magnitude scaling)
+        enhanced_fft = noisy_fft * smoothed_gain
+
+        # IFFT
+        enhanced_frame = torch.fft.ifft(enhanced_fft, n=frame_samples).real
+
+        # WOLA reconstruction (add to accumulator with the analysis/synthesis window)
+        enhanced_accum[start_idx:end_idx] += enhanced_frame * hamming_window  # synthesis uses same window here
+        window_sum[start_idx:end_idx] += hamming_window_clamped
+
+        # update previous values for DD estimator
+        G_prev = smoothed_gain
+        posteri_prev = posterior_snr
+
+    # finalize: divide out window sum (safe)
+    safe_window = torch.clamp(window_sum, min=eps_window)
+    enhanced_signal = enhanced_accum / safe_window
+    enhanced_signal = enhanced_signal[:signal_length]  # trim padding
+
+    # normalize to prevent clipping (same as before)
     max_amplitude = torch.max(torch.abs(enhanced_signal))
     if max_amplitude > 1.0:
         enhanced_signal = enhanced_signal / max_amplitude
         print(f"Output normalized by factor {max_amplitude:.3f}")
-    
-    # Calculate enhancement statistics
+
+    # stats & save (unchanged semantics)
     voice_frames = torch.sum(vad_decisions >= eta).item()
     noise_frames = num_frames - voice_frames
-    
+
     print(f"\nProcessing complete:")
     print(f"  Voice frames: {voice_frames}/{num_frames} ({voice_frames/num_frames*100:.1f}%)")
     print(f"  Noise frames: {noise_frames}/{num_frames} ({noise_frames/num_frames*100:.1f}%)")
     print(f"  VAD threshold: {eta}")
-    
-    # Save enhanced audio if output path provided
+
     if output_dir is not None and output_file is not None:
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
-        
-        # Create descriptive filename
         metadata_parts = [
             f"FRAME{frame_dur}ms",
             f"MU{mu:.3f}".replace('.', 'p'),
-            f"ADD{a_dd:.3f}".replace('.', 'p'), 
+            f"ADD{a_dd:.3f}".replace('.', 'p'),
             f"ETA{eta:.3f}".replace('.', 'p')
         ]
-        
-        if causal:
-            metadata_parts.append("CAUSAL")
-        else:
-            metadata_parts.append("NONCAUSAL")
-        
+
+        metadata_parts.append("CAUSAL_WOLA" if causal else "NONCAUSAL")
         output_filename = f"{output_file}_{input_name}_{'_'.join(metadata_parts)}.wav"
         full_output_path = output_path / output_filename
-        
-        # Save with proper tensor shape for torchaudio
         enhanced_for_save = enhanced_signal.unsqueeze(0).cpu()
         torchaudio.save(full_output_path, enhanced_for_save, fs)
-        
         print(f"Enhanced audio saved to: {full_output_path}")
-        
+
     return enhanced_signal.cpu(), fs
-
-if __name__ == "__main__":
-    # Example usage - single file
-    # Load an example noisy file and call the tensor-based API
-    noisy_path = 'noisy_audio/noisy_speech.wav'
-    noisy_tensor, noisy_rate = torchaudio.load(noisy_path)
-
-    wiener_filter(
-        noisy_audio=noisy_tensor,
-        fs=noisy_rate,
-        output_dir="enhanced_audio",
-        output_file="wiener_enhanced",
-        mu=0.98,
-        a_dd=0.95,
-        eta=0.15,
-        frame_dur=20
-    )
