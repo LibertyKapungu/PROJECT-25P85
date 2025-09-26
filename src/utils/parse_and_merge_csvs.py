@@ -46,3 +46,15 @@ def merge_csvs(
     else:
         print("[ERROR] No CSV files found in the directory.")
         return None
+
+
+if __name__ == "__main__":
+    # Example usage
+    merged_path = merge_csvs(
+        input_dir="results/EXP1/wiener/-5dB",
+        output_dir="results/EXP1/wiener",
+        output_filename="merged_data.csv",
+        keep_source=True
+    )
+    if merged_path:
+        print(f"Merged CSV saved to: {merged_path}")
