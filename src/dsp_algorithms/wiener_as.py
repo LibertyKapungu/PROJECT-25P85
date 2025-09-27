@@ -1,3 +1,32 @@
+############################################################
+# Wiener_AS Algorithm (Python Translation)
+#
+# This implementation is translated from the MATLAB code by
+# Philipos C. Loizou, provided on the CD that accompanies his book:
+#
+#   "Speech Enhancement: Theory and Practice, 2nd Edition"
+#   ['https://www.routledge.com/Speech-Enhancement-Theory-and-Practice-Second-Edition/Loizou/p/book/9781466504219']
+#
+# The original MATLAB code:
+#   Authors: Yi Hu and Philipos C. Loizou
+#   Copyright (c) 2006 by Philipos C. Loizou
+#   $Revision: 0.0 $   $Date: 10/09/2006 $
+#
+# References:
+#   [1] Scalart, P. and Filho, J. (1996).
+#       "Speech enhancement based on a priori signal to noise estimation."
+#       Proc. IEEE Int. Conf. Acoustics, Speech, and Signal Processing, 629–632.
+#   [2] Crochiere, R. (1980).
+#       "A weighted overlap-add method of short-time Fourier analysis/synthesis."
+#       IEEE Transactions on Acoustics, Speech, and Signal Processing, 28(1), 99-102.
+#
+# Notes:
+#   - This Python version follows the original algorithm structure.
+#   - Some parameter values may need tuning for optimal performance.
+#   - Implementation uses weighted overlap-add (WOLA) for frame synthesis,
+#     ensuring perfect reconstruction with 50% frame overlap.
+############################################################
+
 import torch
 import torchaudio
 import numpy as np
@@ -15,8 +44,39 @@ def wiener_filter(
     a_dd: float = 0.98,
     eta: float = 0.15,
     frame_dur_ms: int = 8,
-
 ) -> Optional[Tuple[torch.Tensor, int]]:
+    """Implements the a-priori SNR-based Wiener filter for speech enhancement.
+
+    This function implements the Wiener filtering algorithm based on a-priori SNR 
+    estimation as described by Scalart and Filho (1996). The implementation uses
+    weighted overlap-add (WOLA) processing with Hann windows and 50% overlap.
+
+    Args:
+        noisy_audio (torch.Tensor): Input noisy speech signal (mono, 1D tensor)
+        fs (int): Sampling frequency in Hz
+        output_dir (Optional[Union[str, Path]], optional): Directory to save enhanced audio. Defaults to None.
+        output_file (Optional[str], optional): Output filename prefix. Defaults to None.
+        input_name (Optional[str], optional): Input filename for metadata. Defaults to None.
+        mu (float, optional): Noise power update parameter. Defaults to 0.98.
+        a_dd (float, optional): Decision-directed a priori SNR smoothing. Defaults to 0.98.
+        eta (float, optional): VAD threshold. Defaults to 0.15.
+        frame_dur_ms (int, optional): Frame duration in milliseconds. Defaults to 8.
+
+    Returns:
+        Optional[Tuple[torch.Tensor, int]]: Tuple containing:
+            - Enhanced speech signal as torch.Tensor
+            - Sampling frequency
+            Returns None if output_dir and output_file are provided (saves to file instead)
+
+    Raises:
+        ValueError: If mu, a_dd not in (0,1), or if eta, frame_dur_ms <= 0
+
+    Notes:
+        - Initial noise estimate uses first 120ms of signal
+        - Uses CUDA if available, falls back to CPU
+        - Implements VAD-based noise updating
+        - Uses power complementary windows for perfect reconstruction
+    """
 
     # --- device + basic setup ---
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
