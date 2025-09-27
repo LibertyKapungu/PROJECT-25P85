@@ -17,7 +17,7 @@ def wiener_filter(
     mu: float = 0.98,
     a_dd: float = 0.98,
     eta: float = 0.15,
-    frame_dur_ms: int = 5,
+    frame_dur_ms: int = 8,
 
 ) -> Optional[Tuple[torch.Tensor, int]]:
 
@@ -140,9 +140,10 @@ def wiener_filter(
             f"ETA{eta:.3f}".replace('.', 'p')
         ]
 
+        output_file = output_file.replace(".wav", "")
         input_name = input_name.replace(".wav", "")
 
-        output_filename = f"{output_file}_{input_name}_{'_'.join(metadata_parts)}.wav"
+        output_filename = f"{output_file}_{input_name}{'_'.join(metadata_parts)}.wav"
         full_output_path = output_path / output_filename
         torchaudio.save(full_output_path, enhanced.unsqueeze(0), fs)
         print(f"Enhanced audio saved to: {full_output_path}")
