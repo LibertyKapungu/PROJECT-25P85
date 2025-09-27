@@ -11,7 +11,7 @@ output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs'
 results_dir = repo_root / 'results' / 'EXP1' / 'wiener'
 
 import utils.audio_dataset_loader as loader
-from dsp_algorithms.wiener_as_wola import wiener_filter
+from dsp_algorithms.wiener_as import wiener_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 
