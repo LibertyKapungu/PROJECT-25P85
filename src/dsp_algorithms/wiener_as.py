@@ -1,12 +1,9 @@
-# Replace your old wiener_filter with this updated function
 import torch
 import torchaudio
 import numpy as np
 import os
 from pathlib import Path
 from typing import Optional, Union, Tuple
-from scipy.signal.windows import hamming
-from collections import deque
 
 def wiener_filter(
     noisy_audio: torch.Tensor,
