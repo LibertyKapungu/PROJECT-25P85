@@ -213,7 +213,12 @@ def mband(
         input_name: Optional[str] = None,
         Nband: int = 4,
         Freq_spacing: str = 'log',
-        frame_dur: int = 20
+        FRMSZ: int = 20, 
+        OVLP: int = 50, 
+        AVRGING: int = 1,
+        Noisefr: int = 1,
+        FLOOR: float = 0.002,
+        VAD: int = 1
 ) -> Tuple[torch.Tensor, int]:
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
@@ -224,6 +229,13 @@ def mband(
          Nband - Number of frequency bands (recommended 4-8)
          Freq_spacing - Type of frequency spacing for the bands, choices:
                         'linear', 'log' and 'mel'
+         AVRGING - Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
+         FRMSZ - Frame length in milli-seconds, default=20. hop size of 16ms * (1 - 0.50) = 8ms 
+         OVLP - Window overlap in percent of frame size, default=50
+         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=6 .Matlab recommends 6 but doing 1 so less latency  
+         FLOOR - Spectral floor, default=0.002
+         VAD - Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
+
 
     Example call:  mband('sp04_babble_sn10.wav','out_mband.wav',6,'linear');
 
@@ -240,22 +252,16 @@ def mband(
     -----------------------------------------------
     """   
 
-    # Parameters
-    AVRGING = 1
-    FRMSZ = 20
-    OVLP = 50
-    Noisefr = 1  # Matlab recommends 6 but doing 1 so less latency  
-    FLOOR = 0.002
-    VAD = 1
+    # # Parameters
+    # AVRGING = 1
+    # FRMSZ = 20           # hop size of 16ms * (1 - 0.50) = 8ms
+    # OVLP = 50
+    # Noisefr = 1  # Matlab recommends 6 but doing 1 so less latency  
+    # FLOOR = 0.002
+    # VAD = 1
 
-    # AVRGING -> Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
-    # FRMSZ -> Frame length in milli-seconds, default=20
-    # OVLP -> Window overlap in percent of frame size, default=50
-    # Noisefr -> Number of noise frames at beginning of file for noise spectrum estimate, default=6
-    # FLOOR -> Spectral floor, default=0.002
-    # VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
-        # Handle tensor input
+    # Handle tensor input
     if noisy_audio.dim() > 1 and noisy_audio.shape[0] > 1:
         noisy_speech = torch.mean(noisy_audio, dim=0).numpy()
     else:
@@ -526,7 +532,7 @@ def mband(
         metadata_parts = [
             f"BANDS{Nband}",
             f"SPACING{Freq_spacing.upper()}",
-            f"FRAME{frame_dur}ms"
+            f"FRAME{FRMSZ}ms"
         ]
         
         # Extract base name without extension
