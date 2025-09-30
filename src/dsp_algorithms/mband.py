@@ -9,17 +9,9 @@ from pathlib import Path
 
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
-    # Should probs avoid the for loop 
-    nbands, nframes = SNR.shape
-    a = np.zeros((nbands, nframes))
-    for i in range(nbands):
-        for j in range(nframes):
-            if SNR[i, j] >= -5.0 and SNR[i, j] <= 20:
-                a[i, j] = 4 - SNR[i, j] * 3 / 20
-            elif SNR[i, j] < -5.0:
-                a[i, j] = 4.75
-            else:
-                a[i, j] = 1
+    a = np.ones_like(SNR)
+    a[(SNR >= -5.0) & (SNR <= 20)] = 4 - SNR[(SNR >= -5.0) & (SNR <= 20)] * 3 / 20
+    a[SNR < -5.0] = 4.75
     return a
 
 def noiseupdt(x_magsm, n_spect, cmmnlen, nframes):
@@ -186,23 +178,31 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
 
     return fdata, fstart
 
-# Not part of matlab code
 def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
-    """Calculate frequency-dependent delta factors from Loizou eq 5.62"""
-    delta_factors = np.zeros(Nband)
-    
-    for i in range(Nband):
-        # Convert bin index to frequency
-        upper_freq_hz = hibin[i] * fs / (2 * fftl)  # Nyquist scaling
-        
-        # Apply Loizou's rules
-        if upper_freq_hz <= 1000:  # f <= 1 kHz
-            delta_factors[i] = 1.0
-        elif 1000 < upper_freq_hz <= (fs/2 - 1000):  # 1 kHz < f <= Fs/2 - 1 kHz  
-            delta_factors[i] = 2.5
-        else:  # f > Fs/2 - 1 kHz
-            delta_factors[i] = 1.5
-            
+    """
+    Calculate frequency-dependent delta factors based on Loizou Eq. 5.62.
+    Parameters:
+    - lobin: array-like, lower FFT bin indices for each band (not used here but kept for interface consistency)
+    - hibin: array-like, upper FFT bin indices for each band
+    - fs: sampling frequency in Hz
+    - Nband: number of frequency bands
+    - fftl: FFT length
+
+    Returns:
+    - delta_factors: NumPy array of shape (Nband,) with delta values per band
+    """
+    hibin = np.array(hibin) # Ensure hibin is a NumPy array for vectorized operations
+    upper_freq_hz = hibin * fs / (2 * fftl) # Convert FFT bin indices to frequency in Hz using Nyquist scaling
+
+    # Apply Loizou's rule:
+    # - 1.0 for f <= 1000 Hz
+    # - 2.5 for 1000 < f <= (fs/2 - 1000)
+    # - 1.5 for f > (fs/2 - 1000)
+    delta_factors = np.where(
+        upper_freq_hz <= 1000,
+        1.0,
+        np.where(upper_freq_hz <= (fs / 2 - 1000), 2.5, 1.5)
+    )
     return delta_factors
 
 def mband(

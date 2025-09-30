@@ -28,13 +28,13 @@ results_dir.mkdir(parents=True, exist_ok=True)
 # ========== PARAMETER GRID DEFINITION ==========
 param_grid = {
     'Freq_spacing': ['linear', 'log', 'mel'],
-    'Nband': [4,16],           # Test different band counts
-    'FRMSZ': [20],       # Frame duration in ms
-    'OVLP': [50],         # Overlap percentage
-    'AVRGING': [1],                   # Smoothing on/off
+    'Nband': [4,6,8,16,32],           # Test different band counts
+    'FRMSZ': [8,20],       # Frame duration in ms
+    'OVLP': [25,50,75],         # Overlap percentage
+    'AVRGING': [1,0],                   # Smoothing on/off
     'Noisefr': [1],                   # Noise frame
-    'VAD': [1],                       # VAD on/off
-    'FLOOR': [0.002]       # Spectral floor values
+    'VAD': [1,0],                       # VAD on/off
+    'FLOOR': [0.001, 0.002, 0.01]       # Spectral floor values
 }
 
 # Generate all combinations
