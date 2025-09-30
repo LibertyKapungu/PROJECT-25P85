@@ -96,9 +96,43 @@ def compute_and_save_speech_metrics(
     si_sdr_metric = ScaleInvariantSignalDistortionRatio().to(device)
     dnsmos_metric = DeepNoiseSuppressionMeanOpinionScore(fs=fs, personalized=True).to(device)
     
-    # Compute metrics
+    # Validate audio signals before computing metrics
+    def validate_audio(audio_tensor, name):
+        if torch.isnan(audio_tensor).any() or torch.isinf(audio_tensor).any():
+            raise ValueError(f"{name} contains NaN or Inf values")
+        
+        # Check for silent audio (RMS below threshold)
+        rms = torch.sqrt(torch.mean(audio_tensor**2))
+        if rms < 1e-6:
+            print(f"Warning: {name} appears to be silent or very quiet (RMS: {rms:.2e})")
+        
+        # Check energy content
+        energy = torch.sum(audio_tensor**2)
+        if energy < 1e-10:
+            raise ValueError(f"{name} has extremely low energy: {energy:.2e}")
+    
+    print("Validating audio signals...")
+    validate_audio(clean, "Clean audio")
+    validate_audio(enhanced, "Enhanced audio")
+    
+    # Compute metrics with error handling
     print("Computing PESQ...")
-    pesq_score = pesq_metric(enhanced, clean).item()
+    pesq_score = None
+    stoi_score = None
+    si_sdr_score = None
+    dnsmos_scores = None
+    
+    # Try PESQ with error handling for NoUtterancesError
+    try:
+        pesq_score = pesq_metric(enhanced, clean).item()
+    except Exception as e:
+        if "NoUtterancesError" in str(type(e)) or "No utterances detected" in str(e):
+            print(f"Warning: PESQ computation failed - No utterances detected. Setting PESQ to NaN.")
+            print(f"This usually indicates silent or very quiet audio.")
+            pesq_score = float('nan')
+        else:
+            print(f"Error computing PESQ: {e}")
+            raise
     
     print("Computing STOI...")
     stoi_score = stoi_metric(enhanced, clean).item()
@@ -123,11 +157,13 @@ def compute_and_save_speech_metrics(
     }
     
     # Compile all metrics
+    # Handle potential NaN values safely
+    import math
     metrics_dict = {
         "clean_file": str(clean_filename),
         "enhanced_file": str(enhanced_filename),
         "sampling_rate": fs,
-        "PESQ": float(pesq_score),
+        "PESQ": float(pesq_score) if pesq_score is not None and not math.isnan(pesq_score) else float('nan'),
         "SI_SDR": float(si_sdr_score),
         "STOI": float(stoi_score),
         **dnsmos_dict
