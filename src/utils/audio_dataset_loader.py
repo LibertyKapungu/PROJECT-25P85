@@ -222,7 +222,9 @@ def pair_sequentially(
     Each UrbanSound8K entry from ``urban_files`` is paired with the next
     entry from ``ears_files``. If there are more urban entries than EARS
     entries the EARS list is cycled (wrap-around) until every urban item
-    is paired.
+    is paired. The cycling ensures unique mapping where EARS participants
+    cycle from p1-p100 back to p1, and test participants cycle from p101-p107
+    back to p107.
 
     Parameters
     ----------
@@ -254,9 +256,13 @@ def pair_sequentially(
         raise ValueError("ears_files must be a non-empty iterable")
 
     paired: List[Tuple[Path, Path]] = []
-    ears_iter = cycle(ears_list)
-    for urban in urban_files:
-        ears = next(ears_iter)
+    urban_list = list(urban_files)
+    
+    # Create mapping with cycling
+    for i, urban in enumerate(urban_list):
+        # Use modulo to cycle through EARS files
+        ears_idx = i % len(ears_list)
+        ears = ears_list[ears_idx]
 
         if "file" not in urban:
             raise KeyError("each urban entry must contain a 'file' key")
@@ -320,13 +326,13 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
         sliceID_filter: Optional[Iterable[int]] = None
 
     elif mode == "test":
-        ears_ids = [106, 107]
+        ears_ids = list(range(101, 108))  # p101 to p107
         folds = [10]
-        sliceID_filter = [0]
+        sliceID_filter = None
 
     elif mode == "train":
-        ears_ids = list(range(1, 106))  # p1 to p105
-        folds = [f for f in range(1, 11) if f != 10]
+        ears_ids = list(range(1, 101))  # p1 to p100
+        folds = list(range(1, 10))  # folds 1 to 9
         sliceID_filter = None
 
     else:
