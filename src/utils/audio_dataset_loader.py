@@ -54,7 +54,17 @@ def get_ears_files(ears_dataset_path: Path, participant_ids: Iterable[Union[int,
         if not participant_dir.exists():
             continue
         for f in sorted(participant_dir.glob("*.wav")):
-            files.append({"participant": f"p{pid}", "file": f})
+            # Check audio duration - only include files less than 60 seconds
+            try:
+                info = torchaudio.info(f)
+                duration_seconds = info.num_frames / info.sample_rate
+                if duration_seconds < 60.0:
+                    files.append({"participant": f"p{pid}", "file": f})
+                else:
+                    print(f"Skipping {f.name} (duration: {duration_seconds:.2f}s > 60s)")
+            except Exception as e:
+                print(f"Warning: Could not load audio info for {f.name}: {e}")
+                # Skip files that can't be loaded
     return files
 
 def get_urban_files(
@@ -98,7 +108,17 @@ def get_urban_files(
     files: List[Dict[str, Union[int, Path]]] = []
     for row in df.itertuples():
         urban_file = urban_dataset_path / f"fold{row.fold}" / row.slice_file_name
-        files.append({"fold": row.fold, "sliceID": row.sliceID, "file": urban_file})
+        # Check audio duration - only include files less than 60 seconds
+        try:
+            info = torchaudio.info(urban_file)
+            duration_seconds = info.num_frames / info.sample_rate
+            if duration_seconds < 60.0:
+                files.append({"fold": row.fold, "sliceID": row.sliceID, "file": urban_file})
+            else:
+                print(f"Skipping {urban_file.name} (duration: {duration_seconds:.2f}s > 60s)")
+        except Exception as e:
+            print(f"Warning: Could not load audio info for {urban_file.name}: {e}")
+            # Skip files that can't be loaded
     return files
 
 def prerocess_audio(
