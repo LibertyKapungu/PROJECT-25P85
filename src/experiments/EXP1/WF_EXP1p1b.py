@@ -114,10 +114,18 @@ for snr_dB in snr_dB_range:
         print(f"Enhanced audio saved to: {output_dir}")
         print(f"Results saved to: {results_dir_snr}")
         print(f"Metrics:")
-        print(f"  PESQ: {metrics['PESQ']:.3f}")
-        print(f"  STOI: {metrics['STOI']:.3f}")
-        print(f"  SI-SDR: {metrics['SI_SDR']:.2f} dB")
-        print(f"  DNSMOS Overall: {metrics['DNSMOS_mos_ovr']:.3f}")
+        
+        # Handle potential NaN values in output
+        import math
+        pesq_str = f"{metrics['PESQ']:.3f}" if not math.isnan(metrics['PESQ']) else "NaN (No utterances detected)"
+        stoi_str = f"{metrics['STOI']:.3f}" if not math.isnan(metrics['STOI']) else "NaN"
+        si_sdr_str = f"{metrics['SI_SDR']:.2f} dB" if not math.isnan(metrics['SI_SDR']) else "NaN dB"
+        dnsmos_str = f"{metrics['DNSMOS_mos_ovr']:.3f}" if not math.isnan(metrics['DNSMOS_mos_ovr']) else "NaN"
+        
+        print(f"  PESQ: {pesq_str}")
+        print(f"  STOI: {stoi_str}")
+        print(f"  SI-SDR: {si_sdr_str}")
+        print(f"  DNSMOS Overall: {dnsmos_str}")
         print(f"{'='*100}\n")
 
     merged_path = merge_csvs(
