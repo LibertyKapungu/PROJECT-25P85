@@ -488,9 +488,14 @@ def mband(
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
-            if i == 0:
+            # if i == 0:
+            #     sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
+            # elif i == Nband - 1:
+            #     sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
+            # sub_speech_x[start:stop, j] += sub_speech
+            if i < Nband-1:
                 sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
-            elif i == Nband - 1:
+            else:
                 sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
             sub_speech_x[start:stop, j] += sub_speech
 

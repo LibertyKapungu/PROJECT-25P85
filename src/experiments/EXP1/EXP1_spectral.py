@@ -39,7 +39,7 @@ for urban_path, ears_path in paired_files:
         output_file=output_filename,
         input_name=clean_filename,
         Nband = 4,
-        Freq_spacing = 'mel',
+        Freq_spacing = 'log',
         FRMSZ = 20,
         OVLP = 50,
         AVRGING = 1,

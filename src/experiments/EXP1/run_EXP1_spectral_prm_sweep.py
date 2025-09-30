@@ -28,10 +28,11 @@ results_dir.mkdir(parents=True, exist_ok=True)
 # ========== PARAMETER GRID DEFINITION ==========
 param_grid = {
     'Freq_spacing': ['linear', 'log', 'mel'],
-    'Nband': [2, 4, 5, 6, 8],           # Test different band counts
-    'FRMSZ': [5, 15, 25],       # Frame duration in ms
-    'OVLP': [20, 50, 75],         # Overlap percentage
+    'Nband': [4,16],           # Test different band counts
+    'FRMSZ': [20],       # Frame duration in ms
+    'OVLP': [50],         # Overlap percentage
     'AVRGING': [1],                   # Smoothing on/off
+    'Noisefr': [1],                   # Noise frame
     'VAD': [1],                       # VAD on/off
     'FLOOR': [0.002]       # Spectral floor values
 }
@@ -43,6 +44,7 @@ param_combinations = list(product(
     param_grid['FRMSZ'],
     param_grid['OVLP'],
     param_grid['AVRGING'],
+    param_grid['Noisefr'],
     param_grid['VAD'],
     param_grid['FLOOR']
 ))
@@ -85,16 +87,16 @@ for snr_db in snr_levels:
     )
 
     for idx, params in enumerate(param_combinations, 1):
-        freq_spacing, nband, FRMSZ, OVLP, AVRGING, VAD, FLOOR = params
+        freq_spacing, nband, FRMSZ, OVLP, AVRGING, Noisefr, VAD, FLOOR = params
         print(f"\n[{idx}/{len(param_combinations)}] Testing configuration:")
         print(f"  Freq: {freq_spacing}, Bands: {nband}, Frame: {FRMSZ}ms, "
-            f"Overlap: {OVLP}%, Avg: {AVRGING}, VAD: {VAD}, Floor: {FLOOR}")
+            f"Overlap: {OVLP}%, Avg: {AVRGING}, VAD: {VAD}, Floor: {FLOOR}, Noisefr: {Noisefr}")
 
         try:
             # Create unique output filename
             output_filename = (f"spectral_F{freq_spacing}_B{nband}_"
                             f"FR{FRMSZ}_OV{OVLP}_"
-                            f"AVG{AVRGING}_VAD{VAD}_FL{FLOOR}.wav")
+                            f"AVG{AVRGING}_VAD{VAD}_FL{FLOOR}_NF{Noisefr}.wav")
             
             # Apply spectral subtraction with current parameters
             enhanced_speech, enhanced_fs = mband(
@@ -108,7 +110,7 @@ for snr_db in snr_levels:
                 FRMSZ=FRMSZ,
                 OVLP=OVLP,
                 AVRGING=AVRGING,
-                Noisefr=1,  # Keep at 1 for low latency
+                Noisefr=Noisefr,
                 FLOOR=FLOOR,
                 VAD=VAD
             )
@@ -137,6 +139,7 @@ for snr_db in snr_levels:
                 'FRMSZ_ms': FRMSZ,
                 'OVLP': OVLP,
                 'Averaging': AVRGING,
+                'Noisefr': Noisefr,
                 'VAD': VAD,
                 'Floor': FLOOR,
                 'PESQ': metrics['PESQ'],
@@ -160,6 +163,7 @@ for snr_db in snr_levels:
                 'FRMSZ_ms': FRMSZ,
                 'OVLP': OVLP,
                 'Averaging': AVRGING,
+                'Noisefr': Noisefr,
                 'VAD': VAD,
                 'Floor': FLOOR,
                 'PESQ': None,
@@ -195,7 +199,7 @@ for metric in ['PESQ', 'STOI', 'SI_SDR', 'DNSMOS_mos_ovr']:
     print(f"\n--- Best {metric} ---")
     top_configs = results_df.nlargest(5, metric)[
         ['Config_ID', 'Freq_spacing', 'Nband', 'FRMSZ_ms', 
-         'OVLP', 'Averaging', 'VAD', 'Floor', metric]
+         'OVLP', 'Averaging', 'VAD', 'Floor', 'Noisefr', metric]
     ]
     print(top_configs.to_string(index=False))
 
