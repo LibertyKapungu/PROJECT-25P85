@@ -129,17 +129,17 @@ print(f"\n{'='*120}")
 print("MERGING CSV FILES")
 print(f"{'='*120}")
 
-for param_name, param_values, _, _, _ in parameter_sets:
-    for snr_dB in snr_dB_range:
-        results_dir_snr = results_dir / f"{snr_dB}dB"
-        
-        merged_path = merge_csvs(
-            input_dir=results_dir_snr,
-            output_dir=results_dir,
-            output_filename=f'WF_EXP1p2_{param_name}_merged_{snr_dB}dB.csv',
-            keep_source=True
-        )
-        print(f"Merged {param_name} results for {snr_dB}dB: {merged_path}")
+
+for snr_dB in snr_dB_range:
+    results_dir_snr = results_dir / f"{snr_dB}dB"
+    
+    merged_path = merge_csvs(
+        input_dir=results_dir_snr,
+        output_dir=results_dir,
+        output_filename=f'WF_EXP1p2_merged_{snr_dB}dB.csv',
+        keep_source=True
+    )
+    print(f"Merged results for {snr_dB}dB: {merged_path}")
 
 print(f"\n{'='*120}")
 print("ALL PARAMETER VARIATIONS COMPLETED")
