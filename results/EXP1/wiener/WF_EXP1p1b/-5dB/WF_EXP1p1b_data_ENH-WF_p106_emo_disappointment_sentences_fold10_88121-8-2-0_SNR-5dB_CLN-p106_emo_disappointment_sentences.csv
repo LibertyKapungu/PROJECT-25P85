@@ -1,0 +1,2 @@
+clean_file,enhanced_file,sampling_rate,PESQ,SI_SDR,STOI,DNSMOS_p808_mos,DNSMOS_mos_sig,DNSMOS_mos_bak,DNSMOS_mos_ovr
+p106_emo_disappointment_sentences,WF_p106_emo_disappointment_sentences_fold10_88121-8-2-0_SNR-5dB.wav,16000,1.0429476499557495,-4.931413173675537,0.538003146648407,2.738572359085083,2.33997684002058,2.0476597300320862,1.638660714778381

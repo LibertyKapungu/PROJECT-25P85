@@ -83,7 +83,7 @@ def wiener_filter(
     print(f"Using device: {device}")
 
     waveform = noisy_audio.clone()
-    input_name = input_name if input_name is not None else "wiener_as_"
+    input_name = input_name if input_name is not None else "WF_"
     print("Processing tensor input")
 
     waveform = waveform.to(device)

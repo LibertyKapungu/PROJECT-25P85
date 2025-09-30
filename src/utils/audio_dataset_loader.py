@@ -54,7 +54,17 @@ def get_ears_files(ears_dataset_path: Path, participant_ids: Iterable[Union[int,
         if not participant_dir.exists():
             continue
         for f in sorted(participant_dir.glob("*.wav")):
-            files.append({"participant": f"p{pid}", "file": f})
+            # Check audio duration - only include files less than 60 seconds
+            try:
+                info = torchaudio.info(f)
+                duration_seconds = info.num_frames / info.sample_rate
+                if duration_seconds < 60.0:
+                    files.append({"participant": f"p{pid}", "file": f})
+                else:
+                    print(f"Skipping {f.name} (duration: {duration_seconds:.2f}s > 60s)")
+            except Exception as e:
+                print(f"Warning: Could not load audio info for {f.name}: {e}")
+                # Skip files that can't be loaded
     return files
 
 def get_urban_files(
@@ -98,7 +108,17 @@ def get_urban_files(
     files: List[Dict[str, Union[int, Path]]] = []
     for row in df.itertuples():
         urban_file = urban_dataset_path / f"fold{row.fold}" / row.slice_file_name
-        files.append({"fold": row.fold, "sliceID": row.sliceID, "file": urban_file})
+        # Check audio duration - only include files less than 60 seconds
+        try:
+            info = torchaudio.info(urban_file)
+            duration_seconds = info.num_frames / info.sample_rate
+            if duration_seconds < 60.0:
+                files.append({"fold": row.fold, "sliceID": row.sliceID, "file": urban_file})
+            else:
+                print(f"Skipping {urban_file.name} (duration: {duration_seconds:.2f}s > 60s)")
+        except Exception as e:
+            print(f"Warning: Could not load audio info for {urban_file.name}: {e}")
+            # Skip files that can't be loaded
     return files
 
 def prerocess_audio(
@@ -202,7 +222,9 @@ def pair_sequentially(
     Each UrbanSound8K entry from ``urban_files`` is paired with the next
     entry from ``ears_files``. If there are more urban entries than EARS
     entries the EARS list is cycled (wrap-around) until every urban item
-    is paired.
+    is paired. The cycling ensures unique mapping where EARS participants
+    cycle from p1-p100 back to p1, and test participants cycle from p101-p107
+    back to p107.
 
     Parameters
     ----------
@@ -234,9 +256,13 @@ def pair_sequentially(
         raise ValueError("ears_files must be a non-empty iterable")
 
     paired: List[Tuple[Path, Path]] = []
-    ears_iter = cycle(ears_list)
-    for urban in urban_files:
-        ears = next(ears_iter)
+    urban_list = list(urban_files)
+    
+    # Create mapping with cycling
+    for i, urban in enumerate(urban_list):
+        # Use modulo to cycle through EARS files
+        ears_idx = i % len(ears_list)
+        ears = ears_list[ears_idx]
 
         if "file" not in urban:
             raise KeyError("each urban entry must contain a 'file' key")
@@ -300,13 +326,13 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
         sliceID_filter: Optional[Iterable[int]] = None
 
     elif mode == "test":
-        ears_ids = [106, 107]
+        ears_ids = list(range(101, 108))  # p101 to p107
         folds = [10]
-        sliceID_filter = [0]
+        sliceID_filter = None
 
     elif mode == "train":
-        ears_ids = list(range(1, 106))  # p1 to p105
-        folds = [f for f in range(1, 11) if f != 10]
+        ears_ids = list(range(1, 101))  # p1 to p100
+        folds = list(range(1, 10))  # folds 1 to 9
         sliceID_filter = None
 
     else:
