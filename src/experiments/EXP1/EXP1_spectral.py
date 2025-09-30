@@ -8,7 +8,7 @@ repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'spectral_processed_outputs' / 'EXP1_output'
-results_dir = repo_root / 'results' / 'EXP1'
+results_dir = repo_root / 'results' / 'EXP1' / 'spectral'
 
 import utils.audio_dataset_loader as loader
 from dsp_algorithms.mband import mband
@@ -28,7 +28,7 @@ for urban_path, ears_path in paired_files:
 
     clean_filename = f"{ears_path.parent.name}_{ears_path.stem}"
     noise_filename = f"{urban_path.parent.name}_{urban_path.stem}"
-    output_filename = f"spectral_filter_{clean_filename}_{noise_filename}_SNR{snr_db}dB.wav"
+    output_filename = f"spectral_{clean_filename}_{noise_filename}_SNR{snr_db}dB.wav"
 
     # Step 2: Apply spectral filtering (using causal processing)
     print("\n2. Applying causal spectral filtering...")
@@ -37,9 +37,15 @@ for urban_path, ears_path in paired_files:
         fs=clean_sr,
         output_dir=output_dir,
         output_file=output_filename,
+        input_name=clean_filename,
         Nband = 4,
         Freq_spacing = 'log',
-        frame_dur=20
+        FRMSZ = 8,
+        OVLP = 50,
+        AVRGING = 1,
+        Noisefr = 1,
+        FLOOR = 0.002,
+        VAD = 1
     )
 
     # Step 3: Generate spectrogram
@@ -49,7 +55,7 @@ for urban_path, ears_path in paired_files:
         sample_rate=enhanced_fs,
         output_image_path=str(results_dir),
         output_file_name='spectral_mel_spectrogram',
-        title=f'spectral Enhanced Speech - EARS:{clean_filename} URBS:{noise_filename} SNR:{snr_db}dB',
+        title=f'Spectral Enhanced Speech - EARS:{clean_filename} URBS:{noise_filename} SNR:{snr_db}dB',
         include_metadata_in_filename=True,
         audio_name=output_filename
     )
@@ -64,7 +70,7 @@ for urban_path, ears_path in paired_files:
         clean_name=clean_filename,
         enhanced_name=output_filename,
         csv_dir=str(results_dir),
-        csv_filename='spectral_filter_EXP1_results'
+        csv_filename='spectral_EXP1_results'
     )
     
     # Print summary
