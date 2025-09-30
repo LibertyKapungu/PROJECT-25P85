@@ -14,6 +14,7 @@ import utils.audio_dataset_loader as loader
 from dsp_algorithms.wiener_as import wiener_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
+from utils.parse_and_merge_csvs import merge_csvs
 
 dataset = loader.load_dataset(repo_root, mode="test")
 paired_files = loader.pair_sequentially(dataset["urban"], dataset["ears"])
@@ -118,3 +119,10 @@ for snr_dB in snr_dB_range:
         print(f"  SI-SDR: {metrics['SI_SDR']:.2f} dB")
         print(f"  DNSMOS Overall: {metrics['DNSMOS_mos_ovr']:.3f}")
         print(f"{'='*100}\n")
+
+    merged_path = merge_csvs(
+        input_dir=results_dir_snr,
+        output_dir=results_dir,
+        output_filename=f'WF_EXP1p1b_merged_{snr_dB}dB.csv',
+        keep_source=True
+    )
