@@ -290,8 +290,10 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
         Root of the repository (or the parent directory that contains
         ``sound_data``). This is typically the repository root.
     mode
-        One of ``'all'``, ``'train'`` or ``'test'``. Determines which EARS
-        participant ids and UrbanSound8K folds are returned.
+        One of ``'all'``, ``'train'``, ``'test'`` or ``'classid_unique_test'``. 
+        Determines which EARS participant ids and UrbanSound8K folds are returned.
+        The ``'classid_unique_test'`` mode uses participants 101-107 and fold 10,
+        but selects only one instance from each unique class ID.
 
     Returns
     -------
@@ -335,12 +337,38 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
         folds = list(range(1, 10))  # folds 1 to 9
         sliceID_filter = None
 
+    elif mode == "classid_unique_test":
+        ears_ids = list(range(101, 108))  # p101 to p107 (test participants)
+        folds = [10]  # only fold 10
+        sliceID_filter = None
+
     else:
-        raise ValueError("mode must be one of ['all', 'test', 'train']")
+        raise ValueError("mode must be one of ['all', 'test', 'train', 'classid_unique_test']")
 
     ears_files = get_ears_files(EARS_DATASET_PATH, ears_ids)
     urban_files = get_urban_files(
         URBANSOUND8K_PATH, urban_metadata, folds=folds, sliceID_filter=sliceID_filter
     )
+
+    # Apply unique class ID filtering for classid_unique_test mode
+    if mode == "classid_unique_test":
+        # Filter to get only one instance per class ID
+        seen_class_ids = set()
+        unique_urban_files = []
+        
+        # Get the class ID for each urban file by looking up in metadata
+        for urban_file in urban_files:
+            # Extract the filename and find corresponding row in metadata
+            filename = urban_file["file"].name
+            matching_row = urban_metadata[urban_metadata["slice_file_name"] == filename]
+            
+            if not matching_row.empty:
+                class_id = matching_row.iloc[0]["classID"]
+                if class_id not in seen_class_ids:
+                    seen_class_ids.add(class_id)
+                    unique_urban_files.append(urban_file)
+        
+        urban_files = unique_urban_files
+        print(f"classid_unique_test mode: Selected {len(urban_files)} files with unique class IDs: {sorted(seen_class_ids)}")
 
     return {"urban": urban_files, "ears": ears_files}
