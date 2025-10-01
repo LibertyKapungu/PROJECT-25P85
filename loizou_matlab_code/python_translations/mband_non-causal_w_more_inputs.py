@@ -297,9 +297,6 @@ def mband(
     # Calculate Hamming window
     win = np.sqrt(hamming(frmelen))
 
-    # **REAL-TIME ISSUE #2: Initial noise estimation requires buffering**  (can fix with noisefr = 1?)
-    # Estimate noise magnitude for first 'Noisefr' frames
-
     noise_pow = np.zeros(fftl)
     j = 0
     for k in range(Noisefr):
@@ -352,6 +349,7 @@ def mband(
         nframes = 0
         print("Warning: No frames generated - audio too short")
 
+    # ==========Start Processing =======
     if AVRGING:
         # Smooth the input spectrum
         filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
@@ -383,8 +381,7 @@ def mband(
         # Replicate noise spectrum for all frames (no VAD)   
         n_spect = np.repeat(n_spect, nframes, axis=1)
    
-    # Calculate segmental SNR in each band
-    
+    # Calculate segmental SNR in each band    
     SNR_x = np.zeros((Nband, nframes))
 
     for i in range(Nband):
