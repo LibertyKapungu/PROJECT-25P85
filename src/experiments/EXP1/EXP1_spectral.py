@@ -41,7 +41,7 @@ for urban_path, ears_path in paired_files:
         Nband = 4,
         Freq_spacing = 'log',
         FRMSZ = 8,
-        OVLP = 50,
+        OVLP = 75,
         AVRGING = 1,
         Noisefr = 1,
         FLOOR = 0.002,
