@@ -29,6 +29,12 @@ mu_values = [0.90, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
 a_dd_values = [0.90, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
 eta_values = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
 
+# Debug: Print default values to verify they're correct
+print(f"\nDEBUG: Default values - mu_default={mu_default}, a_dd_default={a_dd_default}, eta_default={eta_default}")
+print(f"DEBUG: Parameter ranges - mu_values={mu_values}")
+print(f"DEBUG: Parameter ranges - a_dd_values={a_dd_values}")
+print(f"DEBUG: Parameter ranges - eta_values={eta_values}")
+
 # Define parameter sets to loop through
 parameter_sets = [
     ("mu", mu_values, mu_default, a_dd_default, eta_default),
@@ -39,25 +45,30 @@ parameter_sets = [
 for param_name, param_values, default_mu, default_a_dd, default_eta in parameter_sets:
     print(f"\n{'='*120}")
     print(f"VARYING PARAMETER: {param_name.upper()}")
+    print(f"DEBUG: Unpacked defaults - default_mu={default_mu}, default_a_dd={default_a_dd}, default_eta={default_eta}")
+    print(f"DEBUG: Values to iterate: {param_values}")
     print(f"{'='*120}")
     
     for param_value in param_values:
+        print(f"\nDEBUG: Processing param_value = {param_value} (type: {type(param_value)})")
         
-        # Set current parameter values
+        # Set current parameter values - ensure they're float type
         if param_name == "mu":
-            current_mu = param_value
-            current_a_dd = default_a_dd
-            current_eta = default_eta
+            current_mu = float(param_value)
+            current_a_dd = float(default_a_dd)
+            current_eta = float(default_eta)
         elif param_name == "a_dd":
-            current_mu = default_mu
-            current_a_dd = param_value
-            current_eta = default_eta
+            current_mu = float(default_mu)
+            current_a_dd = float(param_value)
+            current_eta = float(default_eta)
         else:  # eta
-            current_mu = default_mu
-            current_a_dd = default_a_dd
-            current_eta = param_value
+            current_mu = float(default_mu)
+            current_a_dd = float(default_a_dd)
+            current_eta = float(param_value)
             
-        print(f"\nCurrent parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
+        print(f"Current parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
+        print(f"DEBUG: Types - mu: {type(current_mu)}, a_dd: {type(current_a_dd)}, eta: {type(current_eta)}")
+        print(f"DEBUG: CSV filename will be: WF_EXP1p2_data_SNR{{snr_dB}}dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}")
 
         for snr_dB in snr_dB_range:
 
