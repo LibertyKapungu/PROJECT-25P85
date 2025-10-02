@@ -21,6 +21,7 @@ from dsp_algorithms.wiener_as import wiener_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
+from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 
 # Load NOIZEUS noise dataset (test mode only)
 noise_files = load_noizeus_dataset(repo_root)
@@ -176,6 +177,11 @@ for snr_dB in snr_dB_range:
         keep_source=True
     )
     print(f"Merged results for {snr_dB}dB: {merged_path}")
+
+    # Step 5: Delete individual CSV files
+    delete_csvs(input_directory=results_dir_snr)
+    
+    print(f"Deleted individual CSV files in {results_dir_snr}")
 
 print(f"\n{'='*120}")
 print("ALL PARAMETER VARIATIONS COMPLETED")
