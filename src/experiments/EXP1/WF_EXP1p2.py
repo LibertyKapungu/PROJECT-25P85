@@ -1,23 +1,38 @@
 import pandas as pd
 import torchaudio
+import torch
 from pathlib import Path
 import sys
+import math
+import numpy as np
+
+SEED = 42
+torch.manual_seed(SEED)
 
 current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
 
-output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p2_output' 
+output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p2' 
 results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP1p2'
 
-import utils.audio_dataset_loader as loader
+from utils.audio_dataset_loader import load_noizeus_dataset, load_ears_dataset, create_audio_pairs, preprocess_audio 
 from dsp_algorithms.wiener_as import wiener_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 
-dataset = loader.load_dataset(repo_root, mode="classid_unique_test")
-paired_files = loader.pair_sequentially(dataset["urban"], dataset["ears"])
+# Load NOIZEUS noise dataset (test mode only)
+noise_files = load_noizeus_dataset(repo_root)
+print(f"Loaded {len(noise_files)} NOIZEUS noise files")
+
+# Load EARS clean speech dataset (test mode: participants 92-107)
+clean_files = load_ears_dataset(repo_root, mode="test")
+print(f"Loaded {len(clean_files)} EARS clean speech files for test mode")
+
+# Create pairs of noise and clean speech files
+paired_files = create_audio_pairs(noise_files, clean_files)
+print(f"Created {len(paired_files)} audio pairs using NOIZEUS dataset")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
@@ -25,15 +40,20 @@ mu_default = 0.98
 a_dd_default = 0.98
 eta_default = 0.15
 
-mu_values = [0.90, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
-a_dd_values = [0.90, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
-eta_values = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
+# mu: from 0.80 → 0.99
+mu_values = np.linspace(0.8, 0.99, 20).round(3).tolist()
+
+# a_dd: from 0.80 → 0.99
+a_dd_values = np.linspace(0.8, 0.99, 20).round(3).tolist()
+
+# eta: from 0.05 → 1.00
+eta_values = np.linspace(0.05, 1.00, 20).round(3).tolist()
 
 # Debug: Print default values to verify they're correct
-print(f"\nDEBUG: Default values - mu_default={mu_default}, a_dd_default={a_dd_default}, eta_default={eta_default}")
-print(f"DEBUG: Parameter ranges - mu_values={mu_values}")
-print(f"DEBUG: Parameter ranges - a_dd_values={a_dd_values}")
-print(f"DEBUG: Parameter ranges - eta_values={eta_values}")
+print(f"\n[DEBUG]: Default values - mu_default={mu_default}, a_dd_default={a_dd_default}, eta_default={eta_default}")
+print(f"[DEBUG]: Parameter ranges - mu_values={mu_values}")
+print(f"[DEBUG]: Parameter ranges - a_dd_values={a_dd_values}")
+print(f"[DEBUG]: Parameter ranges - eta_values={eta_values}")
 
 # Define parameter sets to loop through
 parameter_sets = [
@@ -45,8 +65,8 @@ parameter_sets = [
 for param_name, param_values, default_mu, default_a_dd, default_eta in parameter_sets:
     print(f"\n{'='*120}")
     print(f"VARYING PARAMETER: {param_name.upper()}")
-    print(f"DEBUG: Unpacked defaults - default_mu={default_mu}, default_a_dd={default_a_dd}, default_eta={default_eta}")
-    print(f"DEBUG: Values to iterate: {param_values}")
+    print(f"[DEBUG]: Unpacked defaults - default_mu={default_mu}, default_a_dd={default_a_dd}, default_eta={default_eta}")
+    print(f"[DEBUG]: Values to iterate: {param_values}")
     print(f"{'='*120}")
     
     for param_value in param_values:
@@ -67,8 +87,8 @@ for param_name, param_values, default_mu, default_a_dd, default_eta in parameter
             current_eta = float(param_value)
             
         print(f"Current parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
-        print(f"DEBUG: Types - mu: {type(current_mu)}, a_dd: {type(current_a_dd)}, eta: {type(current_eta)}")
-        print(f"DEBUG: CSV filename will be: WF_EXP1p2_data_SNR{{snr_dB}}dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}")
+        print(f"[DEBUG]: Types - mu: {type(current_mu)}, a_dd: {type(current_a_dd)}, eta: {type(current_eta)}")
+        print(f"[DEBUG]: CSV filename will be: WF_EXP1p2_data_SNR{{snr_dB}}dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}")
 
         for snr_dB in snr_dB_range:
 
@@ -80,15 +100,20 @@ for param_name, param_values, default_mu, default_a_dd, default_eta in parameter
             results_dir_snr = results_dir / f"{snr_dB}dB"
             results_dir_snr.mkdir(parents=True, exist_ok=True)
 
-            for urban_path, ears_path in paired_files:
+            for noise_path, clean_path in paired_files:
 
-                participant = ears_path.parent.name
-                print(f"Urban: {urban_path.name} | EARS: {ears_path.name} | Participant: {participant}")
+                participant = clean_path.parent.name
+                print(f"NOIZEUS Noise: {noise_path.name} | EARS Clean: {clean_path.name} | Participant: {participant}")
 
-                clean_waveform, noise_waveform, noisy_speech, clean_sr = loader.prerocess_audio(noisy_audio=urban_path, clean_speech=ears_path, snr_db=snr_dB)
+                # Import the preprocess_audio function
+                clean_waveform, noise_waveform, noisy_speech, clean_sr = preprocess_audio(
+                    clean_speech=clean_path, 
+                    noisy_audio=noise_path, 
+                    snr_db=snr_dB
+                )
 
-                clean_filename = f"{ears_path.parent.name}_{ears_path.stem}"
-                noise_filename = f"{urban_path.parent.name}_{urban_path.stem}"
+                clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
+                noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
                 output_filename = f"WF_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
 
                 # Step 2: Apply Wiener filtering (using causal processing)
@@ -111,19 +136,19 @@ for param_name, param_values, default_mu, default_a_dd, default_eta in parameter
                     clean_name=clean_filename,
                     enhanced_name=output_filename,
                     csv_dir=str(results_dir_snr),
-                    csv_filename=f'WF_EXP1p2_data_SNR{snr_dB}dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}'
+                    csv_filename=f'WF_EXP1p2_data_SNR{snr_dB}dB_MU{current_mu}_AADD{current_a_dd}_ETA{current_eta}_'
                 )
                 
                 # Print summary
                 print(f"\n{'='*100}")
-                print(f"Completed Urban: {urban_path.name} | EARS: {ears_path.name} | Participant: {participant}")
+                print(f"Completed NOIZEUS: {noise_path.name} | EARS: {clean_path.name} | Participant: {participant} | SNR: {snr_dB} dB")
+                print(f"Current parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
                 print(f"{'='*100}")
                 print(f"Enhanced audio saved to: {output_dir}")
                 print(f"Results saved to: {results_dir_snr}")
                 print(f"Metrics:")
                 
                 # Handle potential NaN values in output
-                import math
                 pesq_str = f"{metrics['PESQ']:.3f}" if not math.isnan(metrics['PESQ']) else "NaN (No utterances detected)"
                 stoi_str = f"{metrics['STOI']:.3f}" if not math.isnan(metrics['STOI']) else "NaN"
                 si_sdr_str = f"{metrics['SI_SDR']:.2f} dB" if not math.isnan(metrics['SI_SDR']) else "NaN dB"
