@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-WHAM Dataset Splitter (Directory-Aware)
+WHAM Dataset Splitter (Directory-Aware, Repo-Relative Paths)
+
 Ensures exact counts per split by sorting files within each original split directory.
 
 Requirements (ENFORCED - NO ADJUSTMENTS):
@@ -8,8 +9,10 @@ Requirements (ENFORCED - NO ADJUSTMENTS):
 - Validation (cv dir): 2,496 files (EXACTLY)
 - Test (tt dir): 2,496 files (EXACTLY)
 
-Strategy: Within each directory, sort files longest → shortest,
-keep the required number, and (optionally) delete the rest.
+Strategy:
+- Within each directory (tr/cv/tt), sort files longest → shortest
+- Keep the required number
+- (Optionally) delete the rest
 """
 
 import os
@@ -22,7 +25,14 @@ import json
 import argparse
 
 
+# --- Resolve paths relative to repo root ---
+REPO_ROOT = Path(__file__).resolve().parent.parent
+WHAM_PATH = REPO_ROOT / "sound_data" / "raw" / "WHAM_NOISE_DATASET"
+OUTPUT_PATH = WHAM_PATH / "datasplit"
+
+
 def get_audio_duration(file_path: str) -> float:
+    """Return duration of an audio file in seconds, or 0.0 if unreadable."""
     try:
         return librosa.get_duration(filename=file_path)
     except Exception as e:
@@ -96,6 +106,7 @@ def save_and_manage(splits, unselected, output_base_path, copy_files, delete_uns
     }
     with open(output_path / "split_summary.json", 'w') as f:
         json.dump(summary, f, indent=2)
+    print(f"Saved summary to {output_path / 'split_summary.json'}")
 
     # Optionally delete unselected
     if delete_unselected:
@@ -111,10 +122,16 @@ def save_and_manage(splits, unselected, output_base_path, copy_files, delete_uns
 
 def main():
     parser = argparse.ArgumentParser(description='WHAM Dataset Splitter (Directory-Aware)')
-    parser.add_argument('--wham_path', required=True, help='Path to WHAM dataset root (with tr/cv/tt dirs)')
-    parser.add_argument('--output_path', required=True, help='Output path for split CSVs and summary')
-    parser.add_argument('--copy_files', action='store_true', help='Copy selected files into new dirs')
-    parser.add_argument('--delete_unselected', action='store_true', help='Delete unselected (shorter) files')
+    parser.add_argument('--wham_path',
+        default=WHAM_PATH,
+        help='Path to WHAM dataset root (with tr/cv/tt dirs)')
+    parser.add_argument('--output_path',
+        default=OUTPUT_PATH,
+        help='Output path for split CSVs and summary')
+    parser.add_argument('--copy_files', action='store_true',
+        help='Copy selected files into new dirs')
+    parser.add_argument('--delete_unselected', action='store_true',
+        help='Delete unselected (shorter) files')
     args = parser.parse_args()
 
     base_path = Path(args.wham_path)
@@ -140,3 +157,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # Usage example:
+    # python wham_dataset_splitter.py --copy_files --delete_unselected
+
+    #Analysis Only:
+    # python scripts/wham_dataset_splitter.py
