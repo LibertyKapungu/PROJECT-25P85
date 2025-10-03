@@ -9,17 +9,9 @@ from pathlib import Path
 
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
-    # Should probs avoid the for loop 
-    nbands, nframes = SNR.shape
-    a = np.zeros((nbands, nframes))
-    for i in range(nbands):
-        for j in range(nframes):
-            if SNR[i, j] >= -5.0 and SNR[i, j] <= 20:
-                a[i, j] = 4 - SNR[i, j] * 3 / 20
-            elif SNR[i, j] < -5.0:
-                a[i, j] = 4.75
-            else:
-                a[i, j] = 1
+    a = np.ones_like(SNR)
+    a[(SNR >= -5.0) & (SNR <= 20)] = 4 - SNR[(SNR >= -5.0) & (SNR <= 20)] * 3 / 20
+    a[SNR < -5.0] = 4.75
     return a
 
 def noiseupdt(x_magsm, n_spect, cmmnlen, nframes):
@@ -186,23 +178,31 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
 
     return fdata, fstart
 
-# Not part of matlab code
 def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
-    """Calculate frequency-dependent delta factors from Loizou eq 5.62"""
-    delta_factors = np.zeros(Nband)
-    
-    for i in range(Nband):
-        # Convert bin index to frequency
-        upper_freq_hz = hibin[i] * fs / (2 * fftl)  # Nyquist scaling
-        
-        # Apply Loizou's rules
-        if upper_freq_hz <= 1000:  # f <= 1 kHz
-            delta_factors[i] = 1.0
-        elif 1000 < upper_freq_hz <= (fs/2 - 1000):  # 1 kHz < f <= Fs/2 - 1 kHz  
-            delta_factors[i] = 2.5
-        else:  # f > Fs/2 - 1 kHz
-            delta_factors[i] = 1.5
-            
+    """
+    Calculate frequency-dependent delta factors based on Loizou Eq. 5.62.
+    Parameters:
+    - lobin: array-like, lower FFT bin indices for each band (not used here but kept for interface consistency)
+    - hibin: array-like, upper FFT bin indices for each band
+    - fs: sampling frequency in Hz
+    - Nband: number of frequency bands
+    - fftl: FFT length
+
+    Returns:
+    - delta_factors: NumPy array of shape (Nband,) with delta values per band
+    """
+    hibin = np.array(hibin) # Ensure hibin is a NumPy array for vectorized operations
+    upper_freq_hz = hibin * fs / (2 * fftl) # Convert FFT bin indices to frequency in Hz using Nyquist scaling
+
+    # Apply Loizou's rule:
+    # - 1.0 for f <= 1000 Hz
+    # - 2.5 for 1000 < f <= (fs/2 - 1000)
+    # - 1.5 for f > (fs/2 - 1000)
+    delta_factors = np.where(
+        upper_freq_hz <= 1000,
+        1.0,
+        np.where(upper_freq_hz <= (fs / 2 - 1000), 2.5, 1.5)
+    )
     return delta_factors
 
 def mband(
@@ -213,7 +213,12 @@ def mband(
         input_name: Optional[str] = None,
         Nband: int = 4,
         Freq_spacing: str = 'log',
-        frame_dur: int = 20
+        FRMSZ: int = 20, 
+        OVLP: int = 50, 
+        AVRGING: int = 1,
+        Noisefr: int = 1,
+        FLOOR: float = 0.002,
+        VAD: int = 1
 ) -> Tuple[torch.Tensor, int]:
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
@@ -224,6 +229,13 @@ def mband(
          Nband - Number of frequency bands (recommended 4-8)
          Freq_spacing - Type of frequency spacing for the bands, choices:
                         'linear', 'log' and 'mel'
+         AVRGING - Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
+         FRMSZ - Frame length in milli-seconds, default=20. hop size of 16ms * (1 - 0.50) = 8ms 
+         OVLP - Window overlap in percent of frame size, default=50
+         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=6 .Matlab recommends 6 but doing 1 so less latency  
+         FLOOR - Spectral floor, default=0.002
+         VAD - Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
+
 
     Example call:  mband('sp04_babble_sn10.wav','out_mband.wav',6,'linear');
 
@@ -240,22 +252,16 @@ def mband(
     -----------------------------------------------
     """   
 
-    # Parameters
-    AVRGING = 1
-    FRMSZ = 20
-    OVLP = 50
-    Noisefr = 1  # Matlab recommends 6 but doing 1 so less latency  
-    FLOOR = 0.002
-    VAD = 1
+    # # Parameters
+    # AVRGING = 1
+    # FRMSZ = 20           # hop size of 16ms * (1 - 0.50) = 8ms
+    # OVLP = 50
+    # Noisefr = 1  # Matlab recommends 6 but doing 1 so less latency  
+    # FLOOR = 0.002
+    # VAD = 1
 
-    # AVRGING -> Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
-    # FRMSZ -> Frame length in milli-seconds, default=20
-    # OVLP -> Window overlap in percent of frame size, default=50
-    # Noisefr -> Number of noise frames at beginning of file for noise spectrum estimate, default=6
-    # FLOOR -> Spectral floor, default=0.002
-    # VAD -> Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
-        # Handle tensor input
+    # Handle tensor input
     if noisy_audio.dim() > 1 and noisy_audio.shape[0] > 1:
         noisy_speech = torch.mean(noisy_audio, dim=0).numpy()
     else:
@@ -462,10 +468,8 @@ def mband(
     # ---------- START SUBTRACTION PROCEDURE --------------------------
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
 
-    # Include the deltas?
     delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
    
-
     for i in range(Nband):
         start = lobin[i]
         stop = hibin[i] + 1
@@ -482,9 +486,9 @@ def mband(
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
-            if i == 0:
+            if i < Nband-1:
                 sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
-            elif i == Nband - 1:
+            else:
                 sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
             sub_speech_x[start:stop, j] += sub_speech
 
@@ -526,7 +530,7 @@ def mband(
         metadata_parts = [
             f"BANDS{Nband}",
             f"SPACING{Freq_spacing.upper()}",
-            f"FRAME{frame_dur}ms"
+            f"FRAME{FRMSZ}ms"
         ]
         
         # Extract base name without extension
