@@ -11,6 +11,7 @@ from pathlib import Path
 import torchaudio
 import torch
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
+import random
 
 from utils.add_noise_over_speech import add_noise_over_speech
 
@@ -44,11 +45,13 @@ def get_ears_files(ears_dataset_path: Path, participant_ids: Iterable[Union[int,
     The function does not raise if a participant directory is missing; it
     silently yields zero files for that participant. Caller code should
     validate the returned list if the presence of files is required.
+    Files over 60 seconds are automatically skipped.
     """
 
     files: List[Dict[str, Path]] = []
     for pid in participant_ids:
-        participant_dir = ears_dataset_path / f"p{pid}"
+        # Format participant ID with 3-digit zero padding (p001, p002, etc.)
+        participant_dir = ears_dataset_path / f"p{pid:03d}"
         # If the participant folder does not exist, skip it (keeps behavior
         # backward-compatible with the previous implementation).
         if not participant_dir.exists():
@@ -59,7 +62,7 @@ def get_ears_files(ears_dataset_path: Path, participant_ids: Iterable[Union[int,
                 info = torchaudio.info(f)
                 duration_seconds = info.num_frames / info.sample_rate
                 if duration_seconds < 60.0:
-                    files.append({"participant": f"p{pid}", "file": f})
+                    files.append({"participant": f"p{pid:03d}", "file": f})
                 else:
                     print(f"Skipping {f.name} (duration: {duration_seconds:.2f}s > 60s)")
             except Exception as e:
@@ -67,61 +70,75 @@ def get_ears_files(ears_dataset_path: Path, participant_ids: Iterable[Union[int,
                 # Skip files that can't be loaded
     return files
 
-def get_urban_files(
-    urban_dataset_path: Path,
-    urban_metadata: pd.DataFrame,
-    folds: Optional[Iterable[int]] = None,
-    sliceID_filter: Optional[Iterable[int]] = None,
-) -> List[Dict[str, Union[int, Path]]]:
-    """Build a list of UrbanSound8K audio file entries from metadata.
 
+def get_wham_noise_files(wham_dataset_path: Path, split: str) -> List[Dict[str, Path]]:
+    """Collect WAV file paths from WHAM noise dataset.
+    
     Parameters
     ----------
-    urban_dataset_path
-        Path to the UrbanSound8K dataset root. The function expects subfolders
-        named ``fold1``, ``fold2``, ... containing the WAV files.
-    urban_metadata
-        Pandas DataFrame loaded from ``UrbanSound8K.csv``. The function
-        requires the DataFrame to contain columns ``'fold'`` and
-        ``'slice_file_name'``. The caller may add a ``'sliceID'`` column used
-        for filtering.
-    folds
-        Optional filter over fold numbers. If provided only rows whose
-        ``'fold'`` column is in this iterable are returned.
-    sliceID_filter
-        Optional filter over the ``'sliceID'`` column. When provided only
-        rows whose ``'sliceID'`` is in this iterable are returned.
-
+    wham_dataset_path
+        Path to the root directory of the WHAM_NOISE_DATASET.
+    split
+        One of 'train', 'val', or 'test' to specify which split to load.
+        
     Returns
     -------
-    List[Dict[str, Union[int, Path]]]
-        Each entry is a dict with keys ``'fold'``, ``'sliceID'`` and ``'file'``
-        where ``'file'`` is a :class:`pathlib.Path` pointing to the WAV file.
+    List[Dict[str, Path]]
+        A list of dictionaries with keys 'split' and 'file'.
     """
-
-    df = urban_metadata
-    if folds is not None:
-        df = df[df["fold"].isin(folds)]
-    if sliceID_filter is not None:
-        df = df[df["sliceID"].isin(sliceID_filter)]
-
-    files: List[Dict[str, Union[int, Path]]] = []
-    for row in df.itertuples():
-        urban_file = urban_dataset_path / f"fold{row.fold}" / row.slice_file_name
-        # Check audio duration - only include files less than 60 seconds
-        try:
-            info = torchaudio.info(urban_file)
-            duration_seconds = info.num_frames / info.sample_rate
-            if duration_seconds < 60.0:
-                files.append({"fold": row.fold, "sliceID": row.sliceID, "file": urban_file})
-            else:
-                print(f"Skipping {urban_file.name} (duration: {duration_seconds:.2f}s > 60s)")
-        except Exception as e:
-            print(f"Warning: Could not load audio info for {urban_file.name}: {e}")
-            # Skip files that can't be loaded
+    split_mapping = {
+        'train': 'tr',
+        'val': 'cv', 
+        'test': 'tt'
+    }
+    
+    if split not in split_mapping:
+        raise ValueError(f"Split must be one of {list(split_mapping.keys())}, got {split}")
+    
+    wham_split = split_mapping[split]
+    split_dir = wham_dataset_path / wham_split
+    
+    files: List[Dict[str, Path]] = []
+    if not split_dir.exists():
+        print(f"Warning: WHAM split directory does not exist: {split_dir}")
+        return files
+    
+    for f in sorted(split_dir.glob("*.wav")):
+        files.append({"split": split, "file": f})
+    
     return files
 
-def prerocess_audio(
+
+def get_noizeus_files(noizeus_dataset_path: Path) -> List[Dict[str, Path]]:
+    """Collect WAV file paths from NOIZEUS noise dataset.
+    
+    This dataset can only be used in test mode.
+    
+    Parameters
+    ----------
+    noizeus_dataset_path
+        Path to the root directory of the NOIZEUS_NOISE_DATASET.
+        
+    Returns
+    -------
+    List[Dict[str, Path]]
+        A list of dictionaries with keys 'dataset' and 'file'.
+    """
+    files: List[Dict[str, Path]] = []
+    
+    if not noizeus_dataset_path.exists():
+        print(f"Warning: NOIZEUS dataset directory does not exist: {noizeus_dataset_path}")
+        return files
+    
+    # Look for WAV files in the root directory and subdirectories
+    for f in sorted(noizeus_dataset_path.rglob("*.wav")):
+        files.append({"dataset": "noizeus", "file": f})
+    
+    return files
+
+
+
+def preprocess_audio(
     clean_speech: Path,
     noisy_audio: Path,
     target_sr: int = 16000,
@@ -214,75 +231,77 @@ from itertools import cycle
 
 
 def pair_sequentially(
-    urban_files: Iterable[Dict[str, Any]],
-    ears_files: Iterable[Dict[str, Any]],
+    noise_files: Iterable[Dict[str, Any]],
+    clean_files: Iterable[Dict[str, Any]],
 ) -> List[Tuple[Path, Path]]:
-    """Pair UrbanSound8K entries with EARS entries in-order, returning file paths.
+    """Pair noise entries with clean speech entries in-order, returning file paths.
 
-    Each UrbanSound8K entry from ``urban_files`` is paired with the next
-    entry from ``ears_files``. If there are more urban entries than EARS
-    entries the EARS list is cycled (wrap-around) until every urban item
-    is paired. The cycling ensures unique mapping where EARS participants
-    cycle from p1-p100 back to p1, and test participants cycle from p101-p107
-    back to p107.
+    Each noise entry from ``noise_files`` is paired with the next
+    entry from ``clean_files``. If there are more noise entries than clean
+    entries the clean list is cycled (wrap-around) until every noise item
+    is paired. The number of pairs is limited to the number of noise files.
 
     Parameters
     ----------
-    urban_files
-        Iterable of dictionaries describing UrbanSound8K files. Each dict
+    noise_files
+        Iterable of dictionaries describing noise files. Each dict
         is expected to have a ``'file'`` key whose value is a path-like
         (either a :class:`pathlib.Path` or a string path).
-    ears_files
-        Iterable of dictionaries describing EARS files. Each dict is
+    clean_files
+        Iterable of dictionaries describing clean speech files. Each dict is
         expected to have a ``'file'`` key whose value is a path-like.
 
     Returns
     -------
     List[Tuple[pathlib.Path, pathlib.Path]]
-        A list of tuples ``(urban_path, ears_path)`` where both elements are
+        A list of tuples ``(noise_path, clean_path)`` where both elements are
         :class:`pathlib.Path` objects pointing to the respective WAV files.
+        The length is limited to the number of noise files.
 
     Raises
     ------
     ValueError
-        If ``ears_files`` is empty because pairing/cycling would be undefined.
+        If ``clean_files`` is empty because pairing/cycling would be undefined.
     KeyError
-        If any entry in ``urban_files`` or ``ears_files`` does not contain a
+        If any entry in ``noise_files`` or ``clean_files`` does not contain a
         ``'file'`` key.
     """
 
-    ears_list = list(ears_files)
-    if len(ears_list) == 0:
-        raise ValueError("ears_files must be a non-empty iterable")
+    clean_list = list(clean_files)
+    noise_list = list(noise_files)
+    
+    if len(clean_list) == 0:
+        raise ValueError("clean_files must be a non-empty iterable")
+    if len(noise_list) == 0:
+        raise ValueError("noise_files must be a non-empty iterable")
 
     paired: List[Tuple[Path, Path]] = []
-    urban_list = list(urban_files)
     
-    # Create mapping with cycling
-    for i, urban in enumerate(urban_list):
-        # Use modulo to cycle through EARS files
-        ears_idx = i % len(ears_list)
-        ears = ears_list[ears_idx]
+    # Create pairs up to the number of noise files (cycling clean files if needed)
+    for i in range(len(noise_list)):
+        noise = noise_list[i]
+        # Use modulo to cycle through clean files
+        clean_idx = i % len(clean_list)
+        clean = clean_list[clean_idx]
 
-        if "file" not in urban:
-            raise KeyError("each urban entry must contain a 'file' key")
-        if "file" not in ears:
-            raise KeyError("each ears entry must contain a 'file' key")
+        if "file" not in noise:
+            raise KeyError("each noise entry must contain a 'file' key")
+        if "file" not in clean:
+            raise KeyError("each clean entry must contain a 'file' key")
 
-        urban_path = Path(urban["file"]) if not isinstance(urban["file"], Path) else urban["file"]
-        ears_path = Path(ears["file"]) if not isinstance(ears["file"], Path) else ears["file"]
+        noise_path = Path(noise["file"]) if not isinstance(noise["file"], Path) else noise["file"]
+        clean_path = Path(clean["file"]) if not isinstance(clean["file"], Path) else clean["file"]
 
-        paired.append((urban_path, ears_path))
+        paired.append((noise_path, clean_path))
     return paired
 
 
-def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, Any]]]:
-    """Discover dataset files required for experiments.
-
-    The project layout this helper expects (relative to ``src_dir``) is::
-
-        sound_data/raw/URBANSOUND8K_DATASET/...
-        sound_data/raw/EARS_DATASET/...
+def load_ears_dataset(
+    src_dir: Path, 
+    mode: str, 
+    max_files: Optional[int] = None
+) -> List[Dict[str, Any]]:
+    """Load EARS dataset files for the specified mode.
 
     Parameters
     ----------
@@ -290,17 +309,18 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
         Root of the repository (or the parent directory that contains
         ``sound_data``). This is typically the repository root.
     mode
-        One of ``'all'``, ``'train'``, ``'test'`` or ``'classid_unique_test'``. 
-        Determines which EARS participant ids and UrbanSound8K folds are returned.
-        The ``'classid_unique_test'`` mode uses participants 101-107 and fold 10,
-        but selects only one instance from each unique class ID.
+        One of ``'train'``, ``'validation'``, or ``'test'``. 
+        Determines which EARS participant ids are returned.
+        - 'train': participants 1-75
+        - 'validation': participants 76-91  
+        - 'test': participants 92-107
+    max_files
+        Optional maximum number of files to return. If None, all files are returned.
 
     Returns
     -------
-    Dict[str, List[Dict[str, Any]]]
-        A mapping with two keys: ``'urban'`` and ``'ears'``. Each value is a
-        list of dictionaries describing audio files. Urban entries contain
-        ``'fold'``, ``'sliceID'`` and ``'file'`` keys. EARS entries contain
+    List[Dict[str, Any]]
+        A list of dictionaries describing EARS audio files. Each entry contains
         ``'participant'`` and ``'file'`` keys.
 
     Raises
@@ -308,67 +328,152 @@ def load_dataset(src_dir: Path, mode: str = "all") -> Dict[str, List[Dict[str, A
     ValueError
         If ``mode`` is not one of the supported options.
     """
-
-    # Paths
-    URBANSOUND8K_PATH = src_dir / "sound_data" / "raw" / "URBANSOUND8K_DATASET"
-    URBANSOUND8K_METADATA = URBANSOUND8K_PATH / "UrbanSound8K.csv"
     EARS_DATASET_PATH = src_dir / "sound_data" / "raw" / "EARS_DATASET"
 
-    # Load UrbanSound8K metadata
-    urban_metadata = pd.read_csv(URBANSOUND8K_METADATA)
-
-    urban_metadata["sliceID"] = urban_metadata["slice_file_name"].apply(
-        lambda x: int(x.split("-")[-1].split(".")[0])
-    )
-
-    # Determine participant IDs and urban filters
-    if mode == "all":
-        ears_ids = list(range(1, 108))  # p1 to p107
-        folds: Optional[Iterable[int]] = None
-        sliceID_filter: Optional[Iterable[int]] = None
-
+    # Determine participant IDs based on mode
+    if mode == "train":
+        ears_ids = list(range(1, 76))  # p1 to p75
+    elif mode == "validation":
+        ears_ids = list(range(76, 92))  # p76 to p91
     elif mode == "test":
-        ears_ids = list(range(101, 108))  # p101 to p107
-        folds = [10]
-        sliceID_filter = None
-
-    elif mode == "train":
-        ears_ids = list(range(1, 101))  # p1 to p100
-        folds = list(range(1, 10))  # folds 1 to 9
-        sliceID_filter = None
-
-    elif mode == "classid_unique_test":
-        ears_ids = list(range(101, 108))  # p101 to p107 (test participants)
-        folds = [10]  # only fold 10
-        sliceID_filter = None
-
+        ears_ids = list(range(92, 108))  # p92 to p107
     else:
-        raise ValueError("mode must be one of ['all', 'test', 'train', 'classid_unique_test']")
+        raise ValueError("mode must be one of ['train', 'validation', 'test']")
 
     ears_files = get_ears_files(EARS_DATASET_PATH, ears_ids)
-    urban_files = get_urban_files(
-        URBANSOUND8K_PATH, urban_metadata, folds=folds, sliceID_filter=sliceID_filter
-    )
+    
+    # Limit the number of files if max_files is specified
+    if max_files is not None and len(ears_files) > max_files:
+        # Shuffle to get random subset
+        random.shuffle(ears_files)
+        ears_files = ears_files[:max_files]
+        print(f"Limited EARS dataset to {max_files} files for {mode} mode")
 
-    # Apply unique class ID filtering for classid_unique_test mode
-    if mode == "classid_unique_test":
-        # Filter to get only one instance per class ID
-        seen_class_ids = set()
-        unique_urban_files = []
-        
-        # Get the class ID for each urban file by looking up in metadata
-        for urban_file in urban_files:
-            # Extract the filename and find corresponding row in metadata
-            filename = urban_file["file"].name
-            matching_row = urban_metadata[urban_metadata["slice_file_name"] == filename]
-            
-            if not matching_row.empty:
-                class_id = matching_row.iloc[0]["classID"]
-                if class_id not in seen_class_ids:
-                    seen_class_ids.add(class_id)
-                    unique_urban_files.append(urban_file)
-        
-        urban_files = unique_urban_files
-        print(f"classid_unique_test mode: Selected {len(urban_files)} files with unique class IDs: {sorted(seen_class_ids)}")
+    return ears_files
 
-    return {"urban": urban_files, "ears": ears_files}
+
+def load_wham_dataset(
+    src_dir: Path, 
+    mode: str, 
+    max_files: Optional[int] = None
+) -> List[Dict[str, Any]]:
+    """Load WHAM noise dataset files for the specified mode.
+
+    Parameters
+    ----------
+    src_dir
+        Root of the repository (or the parent directory that contains
+        ``sound_data``). This is typically the repository root.
+    mode
+        One of ``'train'``, ``'validation'``, or ``'test'``. 
+        Determines which WHAM split is loaded.
+    max_files
+        Optional maximum number of files to return. If None, all files are returned.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        A list of dictionaries describing WHAM noise files. Each entry contains
+        ``'split'`` and ``'file'`` keys.
+
+    Raises
+    ------
+    ValueError
+        If ``mode`` is not one of the supported options.
+    """
+    WHAM_DATASET_PATH = src_dir / "sound_data" / "raw" / "WHAM_NOISE_DATASET"
+
+    # Map mode to WHAM split
+    if mode == "validation":
+        wham_split = "val"
+    else:
+        wham_split = mode  # train or test
+
+    wham_files = get_wham_noise_files(WHAM_DATASET_PATH, wham_split)
+    
+    # Limit the number of files if max_files is specified
+    if max_files is not None and len(wham_files) > max_files:
+        # Shuffle to get random subset
+        random.shuffle(wham_files)
+        wham_files = wham_files[:max_files]
+        print(f"Limited WHAM dataset to {max_files} files for {mode} mode")
+
+    return wham_files
+
+
+def load_noizeus_dataset(
+    src_dir: Path, 
+    max_files: Optional[int] = None
+) -> List[Dict[str, Any]]:
+    """Load NOIZEUS noise dataset files (test mode only).
+
+    Parameters
+    ----------
+    src_dir
+        Root of the repository (or the parent directory that contains
+        ``sound_data``). This is typically the repository root.
+    max_files
+        Optional maximum number of files to return. If None, all files are returned.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        A list of dictionaries describing NOIZEUS noise files. Each entry contains
+        ``'dataset'`` and ``'file'`` keys.
+    """
+    NOIZEUS_DATASET_PATH = src_dir / "sound_data" / "raw" / "NOIZEUS_NOISE_DATASET"
+
+    noizeus_files = get_noizeus_files(NOIZEUS_DATASET_PATH)
+    
+    # Limit the number of files if max_files is specified
+    if max_files is not None and len(noizeus_files) > max_files:
+        # Shuffle to get random subset
+        random.shuffle(noizeus_files)
+        noizeus_files = noizeus_files[:max_files]
+        print(f"Limited NOIZEUS dataset to {max_files} files")
+
+    return noizeus_files
+
+
+def create_audio_pairs(
+    noise_files: List[Dict[str, Any]], 
+    clean_files: List[Dict[str, Any]], 
+    max_pairs: Optional[int] = None
+) -> List[Tuple[Path, Path]]:
+    """Create pairs of noise and clean audio files.
+
+    The number of pairs is automatically limited by the number of noise files.
+    Clean files will be cycled if there are fewer clean files than noise files.
+
+    Parameters
+    ----------
+    noise_files
+        List of dictionaries describing noise files.
+    clean_files
+        List of dictionaries describing clean speech files.
+    max_pairs
+        Optional maximum number of pairs to return. If None, defaults to the
+        number of noise files available.
+
+    Returns
+    -------
+    List[Tuple[Path, Path]]
+        A list of tuples ``(noise_path, clean_path)`` where both elements are
+        :class:`pathlib.Path` objects pointing to the respective WAV files.
+        The length is limited to min(len(noise_files), max_pairs).
+    """
+    # Default max_pairs to the number of noise files if not specified
+    if max_pairs is None:
+        max_pairs = len(noise_files)
+    
+    # Limit noise files to max_pairs if needed
+    if len(noise_files) > max_pairs:
+        random.shuffle(noise_files)
+        noise_files = noise_files[:max_pairs]
+        print(f"Limited noise files to {max_pairs} files")
+    
+    # Create pairs (this will automatically limit to the number of noise files)
+    pairs = pair_sequentially(noise_files, clean_files)
+    
+    print(f"Created {len(pairs)} audio pairs")
+    return pairs

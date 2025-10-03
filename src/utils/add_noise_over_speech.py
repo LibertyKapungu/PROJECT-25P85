@@ -29,26 +29,36 @@ def add_noise_over_speech(
     """
     Add noise to clean speech at a specified SNR using PyTorch.
 
-    This variant accepts already-loaded torchaudio tensors instead of file
-    paths. The expected shapes for `clean_audio` and `noise_audio` are
-    (channels, samples) or (samples,) for mono. `clean_sr` and `noise_sr`
-    should be their respective sample rates.
+    This function handles different audio length scenarios to avoid statistical artifacts:
+    - If noise > speech: Truncates noise to a random frame of speech size (no repetition)
+    - If speech > noise: Uses overlap-crossfade extension for smooth transitions
+    
+    The expected shapes for `clean_audio` and `noise_audio` are (channels, samples) 
+    or (samples,) for mono. Both signals are automatically resampled to the target 
+    sample rate and converted to mono if necessary.
 
     Args:
-        clean_audio: Loaded clean audio tensor
-        clean_sr: Sample rate for the clean audio
-        noise_audio: Loaded noise audio tensor
-        noise_sr: Sample rate for the noise audio
+        clean_audio: Loaded clean audio tensor (channels, samples) or (samples,)
+        clean_sr: Sample rate for the clean audio in Hz
+        noise_audio: Loaded noise audio tensor (channels, samples) or (samples,)
+        noise_sr: Sample rate for the noise audio in Hz
         snr_db: Desired signal-to-noise ratio in dB
-        output_dir: Directory to save the noisy audio. If None, returns tensor
-        sr: Target sample rate. If None, uses the clean speech sample rate
-        clean_name: Optional base name of the clean file for saved filename
-        noise_name: Optional base name of the noise file for saved filename
+        output_dir: Directory to save the noisy audio. If None, only returns tensor
+        sr: Target sample rate in Hz. If None, uses the clean speech sample rate
+        clean_name: Optional base name of the clean file for generating output filename
+        noise_name: Optional base name of the noise file for generating output filename
 
     Returns:
-        Tuple of (`noisy_audio`, `sample_rate`). If `output_dir` is provided the
-        noisy audio will also be written to disk, but the tensor is returned in
-        all cases.
+        Tuple of (noisy_audio, sample_rate):
+        - noisy_audio: torch.Tensor of shape (samples,) containing the mixed audio
+        - sample_rate: int, the sample rate of the output audio
+        
+        If `output_dir` is provided, the noisy audio is also saved to disk with
+        a descriptive filename including SNR information.
+        
+    Note:
+        For reproducible results, set torch.manual_seed() before calling this function
+        in your calling code, as random frame selection uses torch.randint().
     """
     
     # Select device - prefer CUDA if available
@@ -88,17 +98,71 @@ def add_noise_over_speech(
     clean = clean.squeeze(0)
     noise = noise.squeeze(0)
     
-    # Match noise length to clean length
+    # Calculate sizes and implement length matching logic to avoid repetitions
     clean_len = clean.shape[0]
     noise_len = noise.shape[0]
+    clean_duration_seconds = clean_len / target_sr
+    noise_duration_seconds = noise_len / target_sr
     
-    if noise_len < clean_len:
-        # Repeat noise to match or exceed clean length
-        num_repeats = (clean_len + noise_len - 1) // noise_len  # Ceiling division
-        noise = noise.repeat(num_repeats)
+    print(f"Clean speech duration: {clean_duration_seconds:.2f}s ({clean_len} samples)")
+    print(f"Noise duration: {noise_duration_seconds:.2f}s ({noise_len} samples)")
     
-    # Truncate noise to exact clean length
-    noise = noise[:clean_len]
+    if noise_len > clean_len:
+        # Case 1: Noise is longer than speech - truncate noise to random frame of speech size
+        max_start_idx = noise_len - clean_len
+        random_start = torch.randint(0, max_start_idx + 1, (1,)).item()
+        noise = noise[random_start:random_start + clean_len]
+        print(f"Noise truncated to random frame starting at sample {random_start}")
+        
+    elif clean_len > noise_len:
+        # Case 2: Speech is longer than noise - use overlap-crossfade method for natural extension
+        crossfade_samples = min(int(0.05 * target_sr), noise_len // 8)  # 50ms crossfade
+        num_full_copies = (clean_len - crossfade_samples) // (noise_len - crossfade_samples)
+        
+        noise_extended = torch.zeros(clean_len, device=noise.device, dtype=noise.dtype)
+        pos = 0
+        
+        for i in range(num_full_copies + 1):
+            if pos >= clean_len:
+                break
+                
+            end_pos = min(pos + noise_len, clean_len)
+            copy_len = end_pos - pos
+            
+            if i == 0:
+                # First copy - no crossfade at start
+                noise_extended[pos:end_pos] = noise[:copy_len]
+            else:
+                # Subsequent copies - apply crossfade
+                if crossfade_samples > 0 and pos >= crossfade_samples:
+                    # Crossfade region
+                    fade_out = torch.linspace(1, 0, crossfade_samples, device=noise.device)
+                    fade_in = torch.linspace(0, 1, crossfade_samples, device=noise.device)
+                    
+                    crossfade_start = pos - crossfade_samples
+                    crossfade_end = pos
+                    
+                    # Apply crossfade
+                    noise_extended[crossfade_start:crossfade_end] *= fade_out
+                    noise_extended[crossfade_start:crossfade_end] += noise[:crossfade_samples] * fade_in
+                    
+                    # Add rest of the signal
+                    remaining_start = pos
+                    remaining_end = min(pos + noise_len - crossfade_samples, clean_len)
+                    remaining_len = remaining_end - remaining_start
+                    noise_extended[remaining_start:remaining_end] = noise[crossfade_samples:crossfade_samples + remaining_len]
+                else:
+                    noise_extended[pos:end_pos] = noise[:copy_len]
+            
+            pos += noise_len - crossfade_samples
+        
+        noise = noise_extended
+        print(f"Noise extended using overlap-crossfade method with {crossfade_samples}-sample crossfades")
+    
+    # Ensure both signals have the same length after processing
+    final_len = min(clean.shape[0], noise.shape[0])
+    clean = clean[:final_len]
+    noise = noise[:final_len]
     
     # Calculate RMS values
     rms_clean = torch.sqrt(torch.mean(clean**2))
@@ -121,7 +185,7 @@ def add_noise_over_speech(
     max_amplitude = torch.max(torch.abs(noisy_audio))
     if max_amplitude > 1.0:
         noisy_audio = noisy_audio / max_amplitude
-        print(f"Warning: Audio was normalized by factor {max_amplitude:.3f} to prevent clipping")
+        print(f"[Warning]: Audio was normalized by factor {max_amplitude:.3f} to prevent clipping")
     
     # Handle output
     if output_dir is not None:
@@ -148,8 +212,8 @@ def add_noise_over_speech(
 if __name__ == "__main__":
     # Example usage
     # Load example files with torchaudio and call the tensor-based API
-    clean_path = 'audio_files/clean_speech.wav'
-    noise_path = 'noise_files/background_noise.wav'
+    clean_path = 'sound_data/raw/EARS_DATASET/p001/emo_adoration_freeform.wav'
+    noise_path = 'sound_data/raw/WHAM_NOISE_DATASET/tt/22ga010d_1.5482_052o020t_-1.5482.wav'
     clean_tensor, clean_rate = torchaudio.load(clean_path)
     noise_tensor, noise_rate = torchaudio.load(noise_path)
 
