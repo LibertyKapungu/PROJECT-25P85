@@ -5,9 +5,13 @@ from pathlib import Path
 import sys
 import math
 import numpy as np
+import random
 
-SEED = 42
+#set random seeds for reproducibility
+SEED = 0
 torch.manual_seed(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
 
 current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent

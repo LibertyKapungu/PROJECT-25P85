@@ -16,8 +16,8 @@ current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
 
-output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p1b_output' 
-results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP1p1b'
+output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p1a_output' 
+results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP1p1a'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -26,6 +26,7 @@ from utils.audio_dataset_loader import (
     preprocess_audio
 )
 from dsp_algorithms.wiener_as import wiener_filter
+from dsp_algorithms.wiener_PCL import wiener_pcl_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
@@ -69,11 +70,11 @@ for snr_dB in snr_dB_range:
 
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-        output_filename = f"WF_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
+        output_filename = f"WF_PCL_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
 
         # Step 2: Apply Wiener filtering (using causal processing)
         print("\n2. Applying causal Wiener filtering...")
-        enhanced_speech, enhanced_fs = wiener_filter(
+        enhanced_speech, enhanced_fs = wiener_pcl_filter(
             noisy_audio=noisy_speech,
             fs=clean_sr,
             mu=0.98,
@@ -91,7 +92,7 @@ for snr_dB in snr_dB_range:
             clean_name=clean_filename,
             enhanced_name=output_filename,
             csv_dir=str(results_dir_snr),
-            csv_filename='WF_EXP1p1b_data'
+            csv_filename='WF_PCL_EXP1p1a_data'
         )
         
         # Print summary
@@ -118,7 +119,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_EXP1p1b_merged_{snr_dB}dB.csv',
+        output_filename=f'WF_PCL_EXP1p1a_merged_{snr_dB}dB.csv',
         keep_source=True
     )
 
