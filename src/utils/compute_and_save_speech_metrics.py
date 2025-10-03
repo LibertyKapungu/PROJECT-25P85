@@ -177,7 +177,7 @@ def compute_and_save_speech_metrics(
         # Generate descriptive CSV filename
         clean_base = Path(clean_filename).stem
         enhanced_base = Path(enhanced_filename).stem
-        csv_base = Path(csv_filename).stem
+        csv_base = Path(csv_filename)
 
         final_csv_name = f"{csv_base}_ENH-{enhanced_base}_CLN-{clean_base}.csv"
         csv_path = csv_dir / final_csv_name
