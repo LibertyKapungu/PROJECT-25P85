@@ -70,7 +70,7 @@ for snr_dB in snr_dB_range:
 
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-        output_filename = f"WF_PCL_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
+        output_filename = f"WF_PCL_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
 
         # Step 2: Apply Wiener filtering (using causal processing)
         print("\n2. Applying causal Wiener filtering...")
@@ -119,7 +119,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_PCL_EXP1p1a_merged_{snr_dB}dB.csv',
+        output_filename=f'WF_PCL_EXP1p1a_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
 
