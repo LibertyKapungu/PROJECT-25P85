@@ -209,3 +209,6 @@ __marimo__/
 # Datasets
 *_DATASET/
 URBANSOUNDS_8K
+
+# Conda Environments
+ENV_DIR/
