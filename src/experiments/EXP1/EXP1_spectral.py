@@ -15,19 +15,21 @@ from dsp_algorithms.mband import mband
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 
-dataset = loader.load_dataset(repo_root, mode="test")
-paired_files = loader.pair_sequentially(dataset["urban"], dataset["ears"])
+ears_files = loader.load_ears_dataset(repo_root, mode="test")
+noizeus_files = loader.load_noizeus_dataset(repo_root)
+paired_files = loader.pair_sequentially(noizeus_files, ears_files)
 
-for urban_path, ears_path in paired_files:
+
+for noizeus_path, ears_path in paired_files:
 
     participant = ears_path.parent.name
-    print(f"Urban: {urban_path.name} | EARS: {ears_path.name} | Participant: {participant}")
+    print(f"Noizeus: {noizeus_path.name} | EARS: {ears_path.name} | Participant: {participant}")
 
     snr_db = 5
-    clean_waveform, noise_waveform, noisy_speech, clean_sr = loader.prerocess_audio(noisy_audio=urban_path, clean_speech=ears_path, snr_db=snr_db)
+    clean_waveform, noise_waveform, noisy_speech, clean_sr = loader.preprocess_audio(noisy_audio=noizeus_path, clean_speech=ears_path, snr_db=snr_db)
 
     clean_filename = f"{ears_path.parent.name}_{ears_path.stem}"
-    noise_filename = f"{urban_path.parent.name}_{urban_path.stem}"
+    noise_filename = f"{noizeus_path.parent.name}_{noizeus_path.stem}"
     output_filename = f"spectral_{clean_filename}_{noise_filename}_SNR{snr_db}dB.wav"
 
     # Step 2: Apply spectral filtering (using causal processing)
@@ -35,13 +37,11 @@ for urban_path, ears_path in paired_files:
     enhanced_speech, enhanced_fs = mband(
         noisy_audio=noisy_speech,
         fs=clean_sr,
-        output_dir=output_dir,
-        output_file=output_filename,
         input_name=clean_filename,
         Nband = 4,
-        Freq_spacing = 'log',
-        FRMSZ = 8,
-        OVLP = 75,
+        Freq_spacing = 'linear',
+        FRMSZ = 20,
+        OVLP = 50,
         AVRGING = 1,
         Noisefr = 1,
         FLOOR = 0.002,
@@ -55,7 +55,7 @@ for urban_path, ears_path in paired_files:
         sample_rate=enhanced_fs,
         output_image_path=str(results_dir),
         output_file_name='spectral_mel_spectrogram',
-        title=f'Spectral Enhanced Speech - EARS:{clean_filename} URBS:{noise_filename} SNR:{snr_db}dB',
+        title=f'Spectral Enhanced Speech - EARS:{clean_filename} Noizeus:{noise_filename} SNR:{snr_db}dB',
         include_metadata_in_filename=True,
         audio_name=output_filename
     )

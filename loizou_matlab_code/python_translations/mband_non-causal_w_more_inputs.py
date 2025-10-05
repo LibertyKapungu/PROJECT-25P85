@@ -7,6 +7,8 @@ import torch
 from typing import Optional, Union, Tuple
 from pathlib import Path
 
+import torchaudio
+
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
     a = np.ones_like(SNR)
@@ -297,6 +299,9 @@ def mband(
     # Calculate Hamming window
     win = np.sqrt(hamming(frmelen))
 
+    # **REAL-TIME ISSUE #2: Initial noise estimation requires buffering**  (can fix with noisefr = 1?)
+    # Estimate noise magnitude for first 'Noisefr' frames
+
     noise_pow = np.zeros(fftl)
     j = 0
     for k in range(Noisefr):
@@ -349,10 +354,31 @@ def mband(
         nframes = 0
         print("Warning: No frames generated - audio too short")
 
-    # ==========Start Processing =======
+    # if AVRGING:
+    #     # Smooth the input spectrum
+    #     filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
+    #     x_magsm = np.zeros_like(x_mag)
+    #     x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
+
+    #     for i in range(1, nframes):
+    #         x_tmp1 = np.concatenate([x_mag[frmelen - ovlplen:, i - 1], x_mag[:, i]])
+    #         x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
+    #         x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
+
+    #     # Weighted spectral estimate 
+    #     Wn2, Wn1, W0 , W1 , W2 = 0.09, 0.25, 0.66, 0.25, 0.09  # Sum = 1.0
+
+    #     if nframes > 1:
+    #         x_magsm[:, 1] = Wn1 * x_magsm[:, 0] + W0 * x_magsm[:, 1]
+
+    #         for i in range(2, nframes):
+    #             x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] +  W0 * x_mag[:, i])
+    # else:
+    #     x_magsm = x_mag  
+    # 
     if AVRGING:
-        # Smooth the input spectrum
-        filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
+        # Smooth the input spectrum (this part is causal and can stay)
+        filtb = [0.9, 0.1]
         x_magsm = np.zeros_like(x_mag)
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
 
@@ -361,16 +387,49 @@ def mband(
             x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
             x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 
-        # Weighted spectral estimate 
-        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0
-
-        if nframes > 1:
-            x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
-
-            for i in range(2, nframes):
-                x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_mag[:, i])
+        # NON-CAUSAL weighted spectral estimate (uses future frames)
+        Wn2, Wn1, W0, W1, W2 = 0.09, 0.25, 0.32, 0.25, 0.09  # Note: W0 = 0.32, not 0.66
+        
+        # Create a copy to avoid overwriting during computation
+        x_magsm_filtered = x_magsm.copy()
+        
+        # Frame 1 (index 0): uses current + 2 future frames
+        if nframes >= 3:
+            x_magsm_filtered[:, 0] = (W0 * x_magsm[:, 0] + 
+                                    W1 * x_magsm[:, 1] + 
+                                    W2 * x_magsm[:, 2])
+        
+        # Frame 2 (index 1): uses 1 past + current + 2 future frames
+        if nframes >= 4:
+            x_magsm_filtered[:, 1] = (Wn1 * x_magsm[:, 0] + 
+                                    W0 * x_magsm[:, 1] + 
+                                    W1 * x_magsm[:, 2] + 
+                                    W2 * x_magsm[:, 3])
+        
+        # Middle frames: full 5-tap filter (2 past + current + 2 future)
+        for i in range(2, nframes - 2):
+            x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + 
+                                    Wn1 * x_magsm[:, i - 1] + 
+                                    W0 * x_magsm[:, i] + 
+                                    W1 * x_magsm[:, i + 1] + 
+                                    W2 * x_magsm[:, i + 2])
+        
+        # Second-to-last frame (index nframes-2)
+        if nframes >= 3:
+            x_magsm_filtered[:, nframes - 2] = (Wn2 * x_magsm[:, nframes - 4] + 
+                                                Wn1 * x_magsm[:, nframes - 3] + 
+                                                W0 * x_magsm[:, nframes - 2] + 
+                                                W1 * x_magsm[:, nframes - 1])
+        
+        # Last frame (index nframes-1)
+        if nframes >= 2:
+            x_magsm_filtered[:, nframes - 1] = (Wn2 * x_magsm[:, nframes - 3] + 
+                                                Wn1 * x_magsm[:, nframes - 2] + 
+                                                W0 * x_magsm[:, nframes - 1])
+        
+        x_magsm = x_magsm_filtered
     else:
-        x_magsm = x_mag   
+        x_magsm = x_mag 
 
     # Noise update during silence frames    
     if VAD:
@@ -381,7 +440,8 @@ def mband(
         # Replicate noise spectrum for all frames (no VAD)   
         n_spect = np.repeat(n_spect, nframes, axis=1)
    
-    # Calculate segmental SNR in each band    
+    # Calculate segmental SNR in each band
+    
     SNR_x = np.zeros((Nband, nframes))
 
     for i in range(Nband):
@@ -402,7 +462,7 @@ def mband(
     # ---------- START SUBTRACTION PROCEDURE --------------------------
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
 
-    delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
+    # delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
    
     for i in range(Nband):
         start = lobin[i]
@@ -410,13 +470,13 @@ def mband(
         
         for j in range(nframes):
             n_spec_sq = n_spect[start:stop, j] ** 2
-            sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
-            # if i == 0:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            # elif i == Nband - 1:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
-            # else:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
+            # sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
+            if i == 0:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
+            elif i == Nband - 1:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
+            else:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
@@ -472,9 +532,13 @@ def mband(
         output_filename = f"{base_name}_{input_name}_{'_'.join(metadata_parts)}.wav"
         full_output_path = output_path / output_filename
         
+        torchaudio.save(full_output_path, enhanced_tensor.unsqueeze(0), fs)
+
         # Save as 16-bit WAV
-        enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
-        wavfile.write(str(full_output_path), fs, enhanced_speech_int)
+        # enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
+        # wavfile.write(str(full_output_path), fs, enhanced_speech_int)
         print(f"Enhanced audio saved to: {full_output_path}")
 
     return enhanced_tensor, fs
+
+mband('C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 16000, output_dir='C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/mband_python_', output_file='sp21_station_sn0.wav', input_name='sp21_station_sn0', Nband=4, Freq_spacing='log', FRMSZ=20, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1)

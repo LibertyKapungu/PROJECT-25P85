@@ -6,6 +6,7 @@ import scipy.signal
 import torch
 from typing import Optional, Union, Tuple
 from pathlib import Path
+import torchaudio
 
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
@@ -218,7 +219,8 @@ def mband(
         AVRGING: int = 1,
         Noisefr: int = 1,
         FLOOR: float = 0.002,
-        VAD: int = 1
+        VAD: int = 1, 
+        return_spectrograms: bool = False,
 ) -> Tuple[torch.Tensor, int]:
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
@@ -236,8 +238,9 @@ def mband(
          FLOOR - Spectral floor, default=0.002
          VAD - Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
+    Example call:
+            mband(noisy_audio, fs, output_dir='output', output_file='enhanced.wav', Nband=4, Freq_spacing='log')
 
-    Example call:  mband('sp04_babble_sn10.wav','out_mband.wav',6,'linear');
 
     References:
     [1] Kamath, S. and Loizou, P. (2002). A multi-band spectral subtraction 
@@ -271,8 +274,7 @@ def mband(
     while fftl < frmelen:
         fftl *= 2       # set to the smallest power of two greater than or equal to the frame length in sample
 
-    # Band setup
- 
+    # Band setup 
     if Freq_spacing.lower() == 'linear':
         bandsz = [int(np.floor(fftl / (2 * Nband)))] * Nband   #  the code divides the FFT spectrum evenly into Nband bands. It calculates the size of each band (bandsz) by dividing half the FFT length (since the FFT of a real signal is symmetric) by the number of bands.
         lobin = [i * bandsz[0] for i in range(Nband)]  # The lower (lobin) and upper (hibin) bin indices for each band are then determined so that each band covers an equal range of frequency bin
@@ -297,9 +299,7 @@ def mband(
     # Calculate Hamming window
     win = np.sqrt(hamming(frmelen))
 
-    # **REAL-TIME ISSUE #2: Initial noise estimation requires buffering**  (can fix with noisefr = 1?)
     # Estimate noise magnitude for first 'Noisefr' frames
-
     noise_pow = np.zeros(fftl)
     j = 0
     for k in range(Noisefr):
@@ -321,25 +321,20 @@ def mband(
     # Process audio frame by frame with overlap
     sample_pos = 0
     while sample_pos + frmelen <= len(noisy_speech):
-        # Step 1: Extract current frame
         current_frame = noisy_speech[sample_pos:sample_pos + frmelen]
-        
-        # Step 2: Apply window function
         windowed_frame = current_frame * win
-        
-        # Step 3: Single-frame FFT (instead of batch FFT)
+
         frame_fft = fft(windowed_frame, fftl)
         frame_mag = np.abs(frame_fft)
         frame_ph = np.angle(frame_fft)
         
-        # Step 4: Store results
         x_mag_frames.append(frame_mag)
         x_ph_frames.append(frame_ph)
         
-        # Step 5: Advance by hop size (cmmnlen) for proper overlap
-        sample_pos += cmmnlen  # NOT frmelen - this creates overlap
+        # Advance by hop size (cmmnlen) for proper overlap
+        sample_pos += cmmnlen 
         frame_count += 1
-        
+
     # Convert lists to matrices (same format as original batch method)
     if x_mag_frames:
         x_mag = np.array(x_mag_frames).T  # Shape: (fftl, nframes)
@@ -384,7 +379,6 @@ def mband(
         n_spect = np.repeat(n_spect, nframes, axis=1)
    
     # Calculate segmental SNR in each band
-    
     SNR_x = np.zeros((Nband, nframes))
 
     for i in range(Nband):
@@ -431,6 +425,17 @@ def mband(
 
     # Reconstruct whole spectrum
     enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
+
+    if return_spectrograms:
+            # Return BEFORE overlap-add for GRU training
+            return {
+                'enhanced_mag': enhanced_mag,  # (257, nframes)
+                'noisy_mag': x_mag[:fftl // 2 + 1, :],  # (257, nframes)
+                'phase': x_ph[:fftl // 2 + 1, :],  # Keep phase for reconstruction
+                'fs': fs,
+                'fftl': fftl
+            }
+
     enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
     enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
     enhanced_spectrum[fftl // 2 + 1:, :] = np.conj(np.flipud(enhanced_spectrum[1:fftl // 2, :]))
@@ -446,7 +451,7 @@ def mband(
         win_sum[start:start + frmelen] += win
     out /= (win_sum + 1e-8)
 
-        # Trim to original length and normalize
+    # Trim to original length and normalize
     out = out[:len(noisy_speech)]
 
     # Normalize to prevent clipping
@@ -475,9 +480,7 @@ def mband(
         output_filename = f"{base_name}_{input_name}_{'_'.join(metadata_parts)}.wav"
         full_output_path = output_path / output_filename
         
-        # Save as 16-bit WAV
-        enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
-        wavfile.write(str(full_output_path), fs, enhanced_speech_int)
+        torchaudio.save(full_output_path, enhanced_tensor.unsqueeze(0), fs)
         print(f"Enhanced audio saved to: {full_output_path}")
 
     return enhanced_tensor, fs
