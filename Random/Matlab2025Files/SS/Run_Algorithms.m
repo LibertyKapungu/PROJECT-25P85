@@ -8,14 +8,24 @@ addpath(genpath('spectral_algorithms/'))
 
 % --- Define input folder and algorithms ---
 inputFolder = 'validation_dataset/noisy_speech/';
-algorithms = {'specsub', 'mband', 'mband_causal'};  % Add more algorithm names here
+algorithms = {'mband'};  % Add more algorithm names here
 
 % --- Define function handles with optional parameters ---
-algorithmFuncs = containers.Map;
-algorithmFuncs('specsub') = @(infile, outfile) specsub(infile, outfile);
-algorithmFuncs('mband')   = @(infile, outfile) mband(infile, outfile, 4, 'log');  
-algorithmFuncs('mband_causal')   = @(infile, outfile) mband_causal(infile, outfile, 4, 'log');
+% algorithmFuncs = containers.Map;
+% algorithmFuncs('mband')   = @(infile, outfile) mband(infile, outfile, 4, 'log'); 
 
+algorithmFuncs = containers.Map;
+nbands = [4, 8];
+freq_types = {'log', 'mel', 'linear'};
+
+for b = 1:length(nbands)
+    for f = 1:length(freq_types)
+        key = sprintf('mband_B%d_%s', nbands(b), freq_types{f});
+        algorithmFuncs(key) = @(infile, outfile) mband(infile, outfile, nbands(b), freq_types{f});
+    end
+end
+
+algorithms = keys(algorithmFuncs);  % Automatically use all generated keys
 
 % --- Check input folder exists ---
 if ~exist(inputFolder, 'dir')

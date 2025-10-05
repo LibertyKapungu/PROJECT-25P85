@@ -28,9 +28,9 @@ results_dir.mkdir(parents=True, exist_ok=True)
 # ========== PARAMETER GRID DEFINITION ==========
 param_grid = {
     'Freq_spacing': ['linear', 'log', 'mel'],
-    'Nband': [4,8],           # Test different band counts
-    'FRMSZ': [8],       # Frame duration in ms
-    'OVLP': [50],         # Overlap percentage
+    'Nband': [4,8,32],           # Test different band counts
+    'FRMSZ': [8,10,20],       # Frame duration in ms
+    'OVLP': [50,75],         # Overlap percentage
     'AVRGING': [1],                   # Smoothing on/off
     'Noisefr': [1],                   # Noise frame
     'VAD': [1],                       # VAD on/off
@@ -52,21 +52,25 @@ param_combinations = list(product(
 print(f"Total configurations to test: {len(param_combinations)}")
 
 # ========== LOAD DATASET ==========
-dataset = loader.load_dataset(repo_root, mode="test")
-paired_files = loader.pair_sequentially(dataset["urban"], dataset["ears"])
+# dataset = loader.load_dataset(repo_root, mode="test")
+# paired_files = loader.pair_sequentially(dataset["urban"], dataset["ears"])
+ears_files = loader.load_ears_dataset(repo_root, mode="test")
+noizeus_files = loader.load_noizeus_dataset(repo_root)
+paired_files = loader.create_audio_pairs(noizeus_files, ears_files)
 
 # Process only FIRST audio pair for parameter sweep
 # urban_path, ears_path = next(iter(paired_files))
-urban_path, ears_path = paired_files[5]
+#urban_path, ears_path = paired_files[5]
+noizeus_path, ears_path = paired_files[2]  
 participant = ears_path.parent.name
 print(f"\nUsing test file:")
-print(f"Urban: {urban_path.name} | EARS: {ears_path.name} | Participant: {participant}")
+print(f"Noizeus: {noizeus_path.name} | EARS: {ears_path.name} | Participant: {participant}")
 
 #snr_db = 5
 snr_levels = [0, 5, 10, 15]  # Test multiple SNR levels
 
 clean_filename = f"{ears_path.parent.name}_{ears_path.stem}"
-noise_filename = f"{urban_path.parent.name}_{urban_path.stem}"
+noise_filename = f"{noizeus_path.parent.name}_{noizeus_path.stem}"
 
 # ========== RUN PARAMETER SWEEP ==========
 all_results = []
@@ -80,9 +84,9 @@ for snr_db in snr_levels:
     print(f"{'='*70}")
     
     # Generate noisy speech at this SNR 
-    clean_waveform, noise_waveform, noisy_speech, clean_sr = loader.prerocess_audio(
-        noisy_audio=urban_path, 
+    clean_waveform, noise_waveform, noisy_speech, clean_sr = loader.preprocess_audio(   
         clean_speech=ears_path, 
+        noisy_audio=noizeus_path, 
         snr_db=snr_db
     )
 
