@@ -26,16 +26,16 @@ algorithm_dirs = {
     % 'mband_python_c_mel', 
     % 
     % 'mband_python_c_station_log',
-    % 'mband_python_c_station_mel',
-    % 'mband_python_c_station_linear',
+    'mband_python_c_station_mel',
+    'mband_python_c_station_linear',
 
     % 'mband_python_c_babble_log',
-    % 'mband_python_c_babble_mel',
+    'mband_python_c_babble_mel',
     'mband_python_c_babble_linear',
 
     % 'mband_python_c_car_log',
-    % 'mband_python_c_car_mel',
-    % 'mband_python_c_car_linear',
+    'mband_python_c_car_mel',
+    'mband_python_c_car_linear',
     % % 
     % 'mband_python_c_airport_log',
     %  'mband_python_c_airport_mel',

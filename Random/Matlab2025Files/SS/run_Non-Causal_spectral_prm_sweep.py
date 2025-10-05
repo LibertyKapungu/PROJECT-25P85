@@ -6,8 +6,8 @@ ss_folder = Path(__file__).parent
 sys.path.insert(0, str(ss_folder))
 
 # Now import mband from the original translation (file-based interface)
-from mband_causalChange_original_translation import mband
-#from mband_non_causal_original_translation import mband
+#from mband_causalChange_original_translation import mband
+from mband_non_causal_original_translation import mband
 
 # Base paths
 base_input_dir = Path('C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech')
@@ -15,7 +15,7 @@ base_output_dir = Path('C:/Users/gabi/Documents/University/Uni2025/Investigation
 
 # Parameters
 noise_types = ['babble']
-snr_levels = [5, 10]
+snr_levels = [5]
 nbands = [4]
 freq_spacings = ['linear']
 

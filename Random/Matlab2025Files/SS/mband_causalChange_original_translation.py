@@ -230,8 +230,8 @@ def mband(filename, outfile, Nband, Freq_spacing):
 
     # Parameters
     AVRGING = 0
-    FRMSZ = 20
-    OVLP = 50
+    FRMSZ = 10
+    OVLP = 75
     Noisefr = 1  # Matlab recommends 6 but doing 1 so less latency  
     FLOOR = 0.002
     VAD = 1

@@ -27,10 +27,10 @@ results_dir.mkdir(parents=True, exist_ok=True)
 
 # ========== PARAMETER GRID DEFINITION ==========
 param_grid = {
-    'Freq_spacing': ['linear', 'log', 'mel'],
-    'Nband': [4,8,32],           # Test different band counts
-    'FRMSZ': [8,10,20],       # Frame duration in ms
-    'OVLP': [50,75],         # Overlap percentage
+    'Freq_spacing': ['linear'],
+    'Nband': [4],           # Test different band counts
+    'FRMSZ': [20],       # Frame duration in ms
+    'OVLP': [50],         # Overlap percentage
     'AVRGING': [1],                   # Smoothing on/off
     'Noisefr': [1],                   # Noise frame
     'VAD': [1],                       # VAD on/off
@@ -58,7 +58,7 @@ ears_files = loader.load_ears_dataset(repo_root, mode="test")
 noizeus_files = loader.load_noizeus_dataset(repo_root)
 paired_files = loader.create_audio_pairs(noizeus_files, ears_files)
 
-# Process only FIRST audio pair for parameter sweep
+
 # urban_path, ears_path = next(iter(paired_files))
 #urban_path, ears_path = paired_files[5]
 noizeus_path, ears_path = paired_files[2]  
@@ -66,8 +66,7 @@ participant = ears_path.parent.name
 print(f"\nUsing test file:")
 print(f"Noizeus: {noizeus_path.name} | EARS: {ears_path.name} | Participant: {participant}")
 
-#snr_db = 5
-snr_levels = [0, 5, 10, 15]  # Test multiple SNR levels
+snr_levels = [5]  # Test multiple SNR levels
 
 clean_filename = f"{ears_path.parent.name}_{ears_path.stem}"
 noise_filename = f"{noizeus_path.parent.name}_{noizeus_path.stem}"

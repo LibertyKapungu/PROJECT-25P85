@@ -1,12 +1,25 @@
+import os
 import pandas as pd
 import torchaudio
+import numpy as np
 from pathlib import Path
 import sys
-import numpy as np
 import random
 import torch
+import time
 
-#set random seeds for reproducibility
+"""
+-Loads EARS test dataset using load_ears_dataset(repo_root, mode="test")
+-Loads NOIZEUS test dataset using load_noizeus_dataset(repo_root)
+-Creates pairs using create_audio_pairs(noizeus_files, ears_files)
+-Iterates over all SNR levels: [-5, 0, 5, 10, 15]
+-Applies DSP (mband) to each pair
+-Computes PESQ, STOI, SI-SDR, DNSMOS
+-Saves results to CSV per SNR
+
+"""
+
+# Set random seeds for reproducibility
 SEED = 0
 torch.manual_seed(SEED)
 random.seed(SEED)
@@ -22,7 +35,7 @@ results_dir = repo_root / 'results' / 'EXP1' / 'spectral' / 'SS_EXP1p1b'
 from utils.audio_dataset_loader import (
     load_ears_dataset,
     load_noizeus_dataset,
-    create_audio_pairs,
+    create_audio_pairs, 
     preprocess_audio
 )
 from dsp_algorithms.mband import mband
@@ -34,6 +47,7 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 # Load test datasets
 print("Loading EARS test dataset...")
 ears_files = load_ears_dataset(repo_root, mode="test")
+
 print(f"Loaded {len(ears_files)} EARS files for test mode")
 
 print("Loading NOIZEUS test dataset...")
@@ -69,23 +83,24 @@ for snr_dB in snr_dB_range:
 
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-        output_filename = f"WF_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
+        output_filename = f"SS_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
 
         # Step 2: Apply Spectral filtering (using causal processing)
         print("\n2. Applying causal Spectral filtering...")
+
         enhanced_speech, enhanced_fs = mband(
-        noisy_audio=noisy_speech,
-        fs=clean_sr,
-        input_name=clean_filename,
-        Nband = 4,
-        Freq_spacing = 'log',
-        FRMSZ = 20,
-        OVLP = 50,
-        AVRGING = 1,
-        Noisefr = 1,
-        FLOOR = 0.002,
-        VAD = 1
-    )
+            noisy_audio=noisy_speech,
+            fs=clean_sr,
+            Nband=4,
+            Freq_spacing='linear',
+            FRMSZ=20,
+            OVLP=50,
+            AVRGING=1,
+            Noisefr=1,
+            FLOOR=0.002,
+            VAD=1,
+            return_spectrograms=False
+        )
         
         # Step 4: Compute and save metrics
         print("\n4. Computing speech enhancement metrics...")

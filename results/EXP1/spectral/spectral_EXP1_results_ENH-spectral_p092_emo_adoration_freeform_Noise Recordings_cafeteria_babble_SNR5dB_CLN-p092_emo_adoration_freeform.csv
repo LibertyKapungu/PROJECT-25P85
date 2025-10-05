@@ -1,2 +1,2 @@
 clean_file,enhanced_file,sampling_rate,PESQ,SI_SDR,STOI,DNSMOS_p808_mos,DNSMOS_mos_sig,DNSMOS_mos_bak,DNSMOS_mos_ovr
-p092_emo_adoration_freeform,spectral_p092_emo_adoration_freeform_Noise Recordings_cafeteria_babble_SNR5dB.wav,16000,1.250931739807129,6.361567497253418,0.7280651926994324,2.6990575790405273,2.6602925004488664,2.0309210697026914,1.6595004252539376
+p092_emo_adoration_freeform,spectral_p092_emo_adoration_freeform_Noise Recordings_cafeteria_babble_SNR5dB.wav,16000,1.2599122524261475,5.919859886169434,0.7546107172966003,2.805410305658976,4.044172251482046,2.4019476796096546,2.713620273255661
