@@ -6,6 +6,7 @@ import scipy.signal
 import torch
 from typing import Optional, Union, Tuple
 from pathlib import Path
+import torchaudio
 
 def berouti(SNR):
     """Berouti's algorithm for computing over-subtraction factor"""
@@ -475,9 +476,11 @@ def mband(
         output_filename = f"{base_name}_{input_name}_{'_'.join(metadata_parts)}.wav"
         full_output_path = output_path / output_filename
         
+        torchaudio.save(full_output_path, enhanced_tensor.unsqueeze(0), fs)
+
         # Save as 16-bit WAV
-        enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
-        wavfile.write(str(full_output_path), fs, enhanced_speech_int)
+        # enhanced_speech_int = np.clip(out * 32768.0, -32768, 32767).astype(np.int16)
+        # wavfile.write(str(full_output_path), fs, enhanced_speech_int)
         print(f"Enhanced audio saved to: {full_output_path}")
 
     return enhanced_tensor, fs

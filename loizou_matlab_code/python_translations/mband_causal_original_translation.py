@@ -386,9 +386,31 @@ def mband(filename, outfile, Nband, Freq_spacing):
     # x_mag = np.abs(x_fft)
     # x_ph = np.angle(x_fft)
 
+    # if AVRGING:
+    #     # Smooth the input spectrum
+    #     filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
+    #     x_magsm = np.zeros_like(x_mag)
+    #     x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
+
+    #     for i in range(1, nframes):
+    #         x_tmp1 = np.concatenate([x_mag[frmelen - ovlplen:, i - 1], x_mag[:, i]])
+    #         x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
+    #         x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
+
+    #     # Weighted spectral estimate 
+    #     Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0
+
+    #     if nframes > 1:
+    #         x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
+
+    #         for i in range(2, nframes):
+    #             x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_mag[:, i])
+    # else:
+    #     x_magsm = x_mag  
+    # 
     if AVRGING:
-        # Smooth the input spectrum
-        filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
+        # Smooth the input spectrum (this part is causal and can stay)
+        filtb = [0.9, 0.1]
         x_magsm = np.zeros_like(x_mag)
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
 
@@ -397,16 +419,50 @@ def mband(filename, outfile, Nband, Freq_spacing):
             x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
             x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 
-        # Weighted spectral estimate 
-        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0
-
-        if nframes > 1:
-            x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
-
-            for i in range(2, nframes):
-                x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_mag[:, i])
+        # NON-CAUSAL weighted spectral estimate (uses future frames)
+        Wn2, Wn1, W0, W1, W2 = 0.09, 0.25, 0.32, 0.25, 0.09  # Note: W0 = 0.32, not 0.66
+        
+        # Create a copy to avoid overwriting during computation
+        x_magsm_filtered = x_magsm.copy()
+        
+        # Frame 1 (index 0): uses current + 2 future frames
+        if nframes >= 3:
+            x_magsm_filtered[:, 0] = (W0 * x_magsm[:, 0] + 
+                                    W1 * x_magsm[:, 1] + 
+                                    W2 * x_magsm[:, 2])
+        
+        # Frame 2 (index 1): uses 1 past + current + 2 future frames
+        if nframes >= 4:
+            x_magsm_filtered[:, 1] = (Wn1 * x_magsm[:, 0] + 
+                                    W0 * x_magsm[:, 1] + 
+                                    W1 * x_magsm[:, 2] + 
+                                    W2 * x_magsm[:, 3])
+        
+        # Middle frames: full 5-tap filter (2 past + current + 2 future)
+        for i in range(2, nframes - 2):
+            x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + 
+                                    Wn1 * x_magsm[:, i - 1] + 
+                                    W0 * x_magsm[:, i] + 
+                                    W1 * x_magsm[:, i + 1] + 
+                                    W2 * x_magsm[:, i + 2])
+        
+        # Second-to-last frame (index nframes-2)
+        if nframes >= 3:
+            x_magsm_filtered[:, nframes - 2] = (Wn2 * x_magsm[:, nframes - 4] + 
+                                                Wn1 * x_magsm[:, nframes - 3] + 
+                                                W0 * x_magsm[:, nframes - 2] + 
+                                                W1 * x_magsm[:, nframes - 1])
+        
+        # Last frame (index nframes-1)
+        if nframes >= 2:
+            x_magsm_filtered[:, nframes - 1] = (Wn2 * x_magsm[:, nframes - 3] + 
+                                                Wn1 * x_magsm[:, nframes - 2] + 
+                                                W0 * x_magsm[:, nframes - 1])
+        
+        x_magsm = x_magsm_filtered
     else:
-        x_magsm = x_mag   
+        x_magsm = x_mag 
+ 
 
     # Noise update during silence frames    
     if VAD:
@@ -440,8 +496,8 @@ def mband(filename, outfile, Nband, Freq_spacing):
     # ---------- START SUBTRACTION PROCEDURE --------------------------
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
 
-    # Include the deltas?
-    delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
+  
+    #delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
    
 
     for i in range(Nband):
@@ -450,19 +506,19 @@ def mband(filename, outfile, Nband, Freq_spacing):
         
         for j in range(nframes):
             n_spec_sq = n_spect[start:stop, j] ** 2
-            sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
-            # if i == 0:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            # elif i == Nband - 1:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
-            # else:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
+            #sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
+            if i == 0:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
+            elif i == Nband - 1:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
+            else:
+                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
-            if i == 0:
+            if i < Nband-1:
                 sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
-            elif i == Nband - 1:
+            else:
                 sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
             sub_speech_x[start:stop, j] += sub_speech
 
