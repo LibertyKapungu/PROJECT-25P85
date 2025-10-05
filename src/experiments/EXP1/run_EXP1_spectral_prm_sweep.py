@@ -34,7 +34,7 @@ param_grid = {
     'AVRGING': [1],                   # Smoothing on/off
     'Noisefr': [1],                   # Noise frame
     'VAD': [1],                       # VAD on/off
-    'FLOOR': [0.002]       # Spectral floor values
+    'FLOOR': [0.002, 0.01]       # Spectral floor values
 }
 
 # Generate all combinations
