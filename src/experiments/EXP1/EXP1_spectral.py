@@ -34,10 +34,12 @@ for noizeus_path, ears_path in paired_files:
 
     # Step 2: Apply spectral filtering (using causal processing)
     print("\n2. Applying causal spectral filtering...")
-    enhanced_speech, enhanced_fs = mband(
+    enhanced_speech, enhanced_fs, spectrogram = mband(
         noisy_audio=noisy_speech,
         fs=clean_sr,
         input_name=clean_filename,
+        output_file= "enhanced.wav",
+        output_dir= ".",
         Nband = 4,
         Freq_spacing = 'linear',
         FRMSZ = 20,
@@ -45,7 +47,8 @@ for noizeus_path, ears_path in paired_files:
         AVRGING = 1,
         Noisefr = 1,
         FLOOR = 0.002,
-        VAD = 1
+        VAD = 1,
+        return_spectrograms=True
     )
 
     # Step 3: Generate spectrogram
