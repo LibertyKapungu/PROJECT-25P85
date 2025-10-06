@@ -194,10 +194,11 @@ def wiener_filter_with_tiny_vad(
     vad_threshold: float = 0.5,
     frame_dur_ms: int = 8,
 ) -> Optional[Tuple[torch.Tensor, int]]:
-    """Wiener filter with TinyGRUVAD instead of traditional VAD.
+    """Wiener filter with TinyGRUVAD frame-by-frame VAD supplement.
     
-    This version uses mel-spectrogram features for VAD decisions while
-    performing Wiener filtering in the STFT domain.
+    This version processes each frame causally, computing VAD decision on-the-fly
+    using mel-spectrogram features while performing Wiener filtering in the STFT domain.
+    The GRU hidden state is maintained across frames for true streaming processing.
     
     Args:
         noisy_audio: Input noisy speech signal (mono, 1D tensor)
@@ -228,19 +229,8 @@ def wiener_filter_with_tiny_vad(
         threshold=vad_threshold,
     )
     
-    # Get VAD predictions for entire audio
-    print("\nComputing VAD predictions...")
-    vad_decisions, vad_probs = vad_processor.predict_audio(
-        waveform.cpu(), 
-        fs,
-        frame_len_ms=frame_dur_ms,
-        hop_len_ms=frame_dur_ms / 2,
-    )
-    print(f"VAD: {vad_decisions.sum()}/{len(vad_decisions)} frames detected as speech "
-          f"({vad_decisions.mean()*100:.1f}%)")
-    
     # --- Wiener Filter Processing ---
-    print("\nApplying Wiener filter...")
+    print("\nApplying frame-by-frame Wiener filter with TinyGRUVAD...")
     frame_samples = int(frame_dur_ms * fs / 1000)
     if frame_samples % 2 != 0:
         frame_samples += 1
@@ -251,6 +241,14 @@ def wiener_filter_with_tiny_vad(
     analysis_win = hann.sqrt()
     synth_win = analysis_win.clone()
     U = (analysis_win @ analysis_win) / frame_samples
+    
+    # Setup for mel-spectrogram VAD features
+    n_fft = frame_samples
+    mel_transform = torchaudio.transforms.MelScale(
+        n_mels=vad_processor.n_mels,
+        sample_rate=fs,
+        n_stft=n_fft // 2 + 1
+    ).to(device)
     
     # --- Initial noise PSD estimate ---
     len_120ms = int(fs * 0.120)
@@ -277,19 +275,51 @@ def wiener_filter_with_tiny_vad(
     G_prev = torch.ones(frame_samples, device=device)
     posteri_prev = torch.ones(frame_samples, device=device)
     
-    # --- Process each frame ---
+    # VAD state variables
+    vad_hidden = None  # GRU hidden state
+    prev_log_mel = None  # For computing delta features
+    speech_frame_count = 0
+    
+    # --- Process each frame (TRUE FRAME-BY-FRAME) ---
     for j in range(n_frames):
         n_start = j * hop
         frame = waveform[n_start:n_start + frame_samples]
         if frame.numel() < frame_samples:
             frame = torch.nn.functional.pad(frame, (0, frame_samples - frame.numel()))
         
-        # Apply window and FFT
+        # Apply window and FFT for Wiener filtering
         win_frame = frame * analysis_win
         X = torch.fft.fft(win_frame, n=frame_samples)
         noisy_ps = (X.abs() ** 2) / (frame_samples * U)
         
-        # SNR estimation
+        # --- Frame-by-frame VAD decision using TinyGRUVAD ---
+        # Compute mel features from current frame's STFT
+        pspec_frame = X.abs() ** 2  # Power spectrum (frame_samples,)
+        # MelScale expects (n_freqs, n_frames), so reshape: (n_fft//2+1, 1)
+        pspec_for_mel = pspec_frame[:n_fft//2+1].unsqueeze(1)  # (n_fft//2+1, 1)
+        mel_frame = mel_transform(pspec_for_mel).clamp_min(1e-8)  # (n_mels, 1)
+        log_mel_frame = torch.log(mel_frame.squeeze(1) + 1e-8)  # (n_mels,)
+        
+        # Compute delta feature (causal: use previous frame)
+        if prev_log_mel is None:
+            delta_frame = torch.zeros_like(log_mel_frame)
+        else:
+            delta_frame = log_mel_frame - prev_log_mel
+        prev_log_mel = log_mel_frame.clone()
+        
+        # Concatenate log-mel + delta for VAD input
+        vad_features = torch.cat([log_mel_frame, delta_frame]).unsqueeze(0).unsqueeze(0)  # (1, 1, n_mels*2)
+        
+        # Get VAD decision for this single frame
+        vad_decision, vad_prob, vad_hidden = vad_processor.predict_frame_features(
+            vad_features, 
+            vad_hidden
+        )
+        
+        if vad_decision:
+            speech_frame_count += 1
+        
+        # --- SNR estimation (Wiener filter) ---
         if j == 0:
             posteri = noisy_ps / (noise_ps + 1e-16)
             posteri_prime = torch.clamp(posteri - 1.0, min=0.0)
@@ -299,8 +329,8 @@ def wiener_filter_with_tiny_vad(
             posteri_prime = torch.clamp(posteri - 1.0, min=0.0)
             priori = a_dd * (G_prev**2) * posteri_prev + (1 - a_dd) * posteri_prime
         
-        # Update noise estimate using TinyGRUVAD decision
-        if j < len(vad_decisions) and not vad_decisions[j]:  # Non-speech frame
+        # Update noise estimate using frame-by-frame TinyGRUVAD decision
+        if not vad_decision:  # Non-speech frame
             noise_ps = mu * noise_ps + (1 - mu) * noisy_ps
         
         # Wiener gain
@@ -325,6 +355,10 @@ def wiener_filter_with_tiny_vad(
     
     # Trim to original length
     enhanced = enhanced[:len(waveform)]
+    
+    # Print VAD statistics
+    print(f"VAD: {speech_frame_count}/{n_frames} frames detected as speech "
+          f"({speech_frame_count/n_frames*100:.1f}%)")
     
     # Save if requested
     if output_dir is not None and output_file is not None:
