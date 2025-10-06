@@ -28,6 +28,8 @@ paired_files = create_audio_pairs(noizeus_files, ears_files)
 SNR_VALUES = [-5,0,5,10,15] 
 MAX_PAIRS = 125  # Limit total pairs
 
+# assign random snr to each pair
+
 pair_count = 0
 for snr_dB in SNR_VALUES:
     print(f"\nProcessing SNR: {snr_dB} dB")

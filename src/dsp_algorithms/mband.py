@@ -426,15 +426,15 @@ def mband(
     # Reconstruct whole spectrum
     enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
 
-    if return_spectrograms:
-            # Return BEFORE overlap-add for GRU training
-            return {
-                'enhanced_mag': enhanced_mag,  # (257, nframes)
-                'noisy_mag': x_mag[:fftl // 2 + 1, :],  # (257, nframes)
-                'phase': x_ph[:fftl // 2 + 1, :],  # Keep phase for reconstruction
-                'fs': fs,
-                'fftl': fftl
-            }
+    # if return_spectrograms:
+    #         # Return BEFORE overlap-add for GRU training
+    #         return {
+    #             'enhanced_mag': enhanced_mag,  # (257, nframes)
+    #             'noisy_mag': x_mag[:fftl // 2 + 1, :],  # (257, nframes)
+    #             'phase': x_ph[:fftl // 2 + 1, :],  # Keep phase for reconstruction
+    #             'fs': fs,
+    #             'fftl': fftl
+    #         }
 
     enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
     enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
@@ -483,4 +483,20 @@ def mband(
         torchaudio.save(full_output_path, enhanced_tensor.unsqueeze(0), fs)
         print(f"Enhanced audio saved to: {full_output_path}")
 
-    return enhanced_tensor, fs
+    # Might be better to use dataclass to make cleaner
+    
+    if return_spectrograms:
+        spectrogram = {
+            'enhanced_mag': enhanced_mag,
+            'noisy_mag': x_mag[:fftl // 2 + 1, :],
+            'phase': x_ph[:fftl // 2 + 1, :],
+            'fs': fs,
+            'fftl': fftl
+        }
+    else:
+        spectrogram = None
+    print("Returning:", type(enhanced_tensor), type(fs), type(spectrogram))
+    return enhanced_tensor, fs, spectrogram
+
+    return enhanced_tensor, fs, spectrogram
+ 
