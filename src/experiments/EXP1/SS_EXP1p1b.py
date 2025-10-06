@@ -88,12 +88,12 @@ for snr_dB in snr_dB_range:
         # Step 2: Apply Spectral filtering (using causal processing)
         print("\n2. Applying causal Spectral filtering...")
 
-        enhanced_speech, enhanced_fs = mband(
+        enhanced_speech, enhanced_fs, spectrogram = mband(
             noisy_audio=noisy_speech,
             fs=clean_sr,
             Nband=4,
             Freq_spacing='linear',
-            FRMSZ=20,
+            FRMSZ=8,
             OVLP=50,
             AVRGING=1,
             Noisefr=1,
@@ -138,7 +138,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_EXP1p1b_merged_{snr_dB}dB.csv',
+        output_filename=f'SS_EXP1p1b_merged_{snr_dB}dB.csv',
         keep_source=True
     )
 

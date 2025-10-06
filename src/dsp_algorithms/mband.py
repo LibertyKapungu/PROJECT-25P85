@@ -426,16 +426,6 @@ def mband(
     # Reconstruct whole spectrum
     enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
 
-    # if return_spectrograms:
-    #         # Return BEFORE overlap-add for GRU training
-    #         return {
-    #             'enhanced_mag': enhanced_mag,  # (257, nframes)
-    #             'noisy_mag': x_mag[:fftl // 2 + 1, :],  # (257, nframes)
-    #             'phase': x_ph[:fftl // 2 + 1, :],  # Keep phase for reconstruction
-    #             'fs': fs,
-    #             'fftl': fftl
-    #         }
-
     enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
     enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
     enhanced_spectrum[fftl // 2 + 1:, :] = np.conj(np.flipud(enhanced_spectrum[1:fftl // 2, :]))
@@ -496,7 +486,5 @@ def mband(
     else:
         spectrogram = None
     print("Returning:", type(enhanced_tensor), type(fs), type(spectrogram))
-    return enhanced_tensor, fs, spectrogram
-
     return enhanced_tensor, fs, spectrogram
  
