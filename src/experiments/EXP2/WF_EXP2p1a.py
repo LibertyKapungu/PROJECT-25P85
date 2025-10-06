@@ -19,13 +19,15 @@ sys.path.insert(0, str(repo_root / "src"))
 output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP2_output' 
 results_dir = repo_root / 'results' / 'EXP2' / 'wiener' / 'WF_EXP2p1a'
 
+model_path = repo_root / 'models' / 'tiny_vad_best.pth'
+
 from utils.audio_dataset_loader import (
     load_ears_dataset,
     load_noizeus_dataset,
     create_audio_pairs,
     preprocess_audio
 )
-from dsp_algorithms.wiener_as_gru_vad import wiener_filter_gru as wiener_filter
+from deep_learning.tiny_vad_integration import wiener_filter_with_tiny_vad
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
@@ -73,13 +75,16 @@ for snr_dB in snr_dB_range:
 
         # Step 2: Apply Wiener filtering (using causal processing)
         print("\n2. Applying causal Wiener filtering...")
-        enhanced_speech, enhanced_fs = wiener_filter(
+        
+        enhanced_speech, enhanced_fs = wiener_filter_with_tiny_vad(
             noisy_audio=noisy_speech,
-            fs=clean_sr,
-            mu=0.98,
-            a_dd=0.98,
-            eta=0.15,
-            frame_dur_ms=32
+            fs=16000,
+            vad_model_path=model_path,  # Trained TinyGRUVAD model
+            vad_threshold=0.5,
+            frame_dur_ms=8,
+            #output_dir=output_dir_snr,
+            #output_file=output_filename.replace('.wav', ''),
+            input_name=clean_filename,
         )
         
         # Step 4: Compute and save metrics
