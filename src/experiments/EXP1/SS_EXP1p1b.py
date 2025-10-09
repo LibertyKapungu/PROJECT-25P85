@@ -88,7 +88,7 @@ for snr_dB in snr_dB_range:
         # Step 2: Apply Spectral filtering (using causal processing)
         print("\n2. Applying causal Spectral filtering...")
 
-        enhanced_speech, enhanced_fs, spectrogram = mband(
+        enhanced_speech, enhanced_fs= mband(
             noisy_audio=noisy_speech,
             fs=clean_sr,
             Nband=4,
@@ -99,7 +99,6 @@ for snr_dB in snr_dB_range:
             Noisefr=1,
             FLOOR=0.002,
             VAD=1,
-            return_spectrograms=False
         )
         
         # Step 4: Compute and save metrics

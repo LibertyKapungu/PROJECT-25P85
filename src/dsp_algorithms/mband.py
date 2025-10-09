@@ -23,9 +23,8 @@ def noiseupdt(x_magsm, n_spect, cmmnlen, nframes):
     # Initialize arrays
     state = np.zeros(nframes * cmmnlen, dtype=int)
     judgevalue1 = np.zeros(nframes * cmmnlen)
-    
-    # Process first frame
-    i = 0
+
+    i = 0   # Process first frame
     x_var = x_magsm[:, i] ** 2
     n_var = n_spect[:, i] ** 2
     rti = x_var / n_var - np.log10(x_var / n_var) - 1
@@ -75,29 +74,15 @@ def estfilt1(nChannels, Srate):
     return lower1, center, upper1
 
 def mel(N, low, high):
-    """Mel scale frequency mapping
-    
-       This function returns the lower, center and upper freqs
-       of the filters equally spaced in mel-scale
-       Input: N - number of filters
- 	   low - (left-edge) 3dB frequency of the first filter
-	   high - (right-edge) 3dB frequency of the last filter
-
-       # The mel scale is designed to approximate the human ear's perception of pitch.
-
-       Copyright (c) 1996-97 by Philipos C. Loizou
-
-    """
+    """Compute Mel-spaced filter bank edges"""
     ac = 1100
     fc = 800
-    
     LOW = ac * np.log(1 + low / fc)
     HIGH = ac * np.log(1 + high / fc)
     N1 = N + 1
     
     fmel = LOW + np.arange(1, N1 + 1) * (HIGH - LOW) / N1
     cen2 = fc * (np.exp(fmel / ac) - 1)
-    
     lower = cen2[:N]
     upper = cen2[1:N+1]
     center = 0.5 * (lower + upper)
@@ -105,28 +90,7 @@ def mel(N, low, high):
     return lower, center, upper
 
 def frame(sdata, window, frmshift, offset=0, trunc=0):
-    """Frame signal into overlapping windows
-    
-    This function places sampled data in vector sdata into a matrix of
-    frame data.  The input sampled data sdata must be a vector.  The
-    window is a windowing vector (eg, hamming) applied to each frame of
-    sampled data and must be specified, because it defines the length
-    of each frame in samples.  The optional frmshift parameter
-    specifies the number of samples to shift between frames, and if not
-    specified defaults to the window size (which implies no overlap).
-    The optional offset specifies the offset from the first sample to
-    be used for processing.  If not specified, it is set to 0, which
-    means that the first sample of the sdata is the first sample of the
-    frame data.  The value of offset can be negative, in which case
-    initial padding of 0 samples is done.  The optional argument trunc
-    is a flag that specifies that sample data at the end should be 
-    truncated so that the last frame contains only valid data from the
-    samples and no zero padding is done at the end of the sample data
-    to fill a frame.  This means some sample data at the end will be
-    lost.  The default is not to truncate, but to pad with zero
-    samples until all sample data is represented in a frame at the end.
-    
-    """
+    """Frame the signal into overlapping frames"""
 
     if sdata.ndim != 1:
         raise ValueError("frame: sdata must be a 1D vector")
@@ -140,17 +104,15 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
     
     if frmshift <= 0:
         raise ValueError('frame: shift must be positive')
-    
-    # Apply offset
-    if offset > 0:
+
+    if offset > 0:          # Apply offset
         sdata = sdata[offset:max(offset, ndata)]
         ndata = len(sdata)
     elif offset < 0:
         sdata = np.concatenate([np.zeros(abs(offset)), sdata])
         ndata = len(sdata)
-    
-    # Determine number of frames
-    if trunc:
+
+    if trunc:               # Determine number of frames
         nframes = int(np.floor((ndata - nwind) / frmshift + 1))
     else:
         nframes = int(np.ceil(ndata / frmshift))
@@ -170,9 +132,8 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
 
     if offset != 0:
         fstart = [i + offset for i in fstart]
-    
-    # Apply window
-    if dowind:
+
+    if dowind:              # Apply window
         fdata = tdata * window.reshape(-1, 1)
     else:
         fdata = tdata
@@ -180,19 +141,8 @@ def frame(sdata, window, frmshift, offset=0, trunc=0):
     return fdata, fstart
 
 def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
-    """
-    Calculate frequency-dependent delta factors based on Loizou Eq. 5.62.
-    Parameters:
-    - lobin: array-like, lower FFT bin indices for each band (not used here but kept for interface consistency)
-    - hibin: array-like, upper FFT bin indices for each band
-    - fs: sampling frequency in Hz
-    - Nband: number of frequency bands
-    - fftl: FFT length
-
-    Returns:
-    - delta_factors: NumPy array of shape (Nband,) with delta values per band
-    """
-    hibin = np.array(hibin) # Ensure hibin is a NumPy array for vectorized operations
+    """Calculate frequency-dependent delta factors based on Loizou's rule"""
+    hibin = np.array(hibin) 
     upper_freq_hz = hibin * fs / (2 * fftl) # Convert FFT bin indices to frequency in Hz using Nyquist scaling
 
     # Apply Loizou's rule:
@@ -213,34 +163,54 @@ def mband(
         output_file: Optional[str] = None,
         input_name: Optional[str] = None,
         Nband: int = 4,
-        Freq_spacing: str = 'log',
-        FRMSZ: int = 20, 
+        Freq_spacing: str = 'linear',
+        FRMSZ: int = 8, 
         OVLP: int = 50, 
         AVRGING: int = 1,
         Noisefr: int = 1,
         FLOOR: float = 0.002,
         VAD: int = 1, 
-        return_spectrograms: bool = False,
-) -> Tuple[torch.Tensor, int]:
-    """
-    Implements the multi-band spectral subtraction algorithm [1]. 
-    Usage:  mband(noisy_audio, outputfile,Nband,Freq_spacing)
-           
+) -> Optional[Tuple[torch.Tensor, int]]:
+    """ Implements the multi-band spectral subtraction algorithm for speech enhancement.
+    This function implements an advanced spectral subtraction method that divides the frequency
+    spectrum into multiple bands to better handle colored noise. The algorithm is particularly
+    effective for speech corrupted by non-stationary or colored noise, as it applies different
+    subtraction parameters in each frequency band based on the local SNR.
+
+    Algorithm Overview:
+    1. Divides the FFT spectrum into Nband frequency bands (linear, log, or mel spacing)
+    2. Estimates initial noise spectrum from first few frames
+    3. For each frame:
+        - Computes the segmental SNR in each frequency band
+        - Determines over-subtraction factor using Berouti's rule based on SNR
+        - Applies band-specific spectral subtraction with floor constraint
+    4. Features voice activity detection (VAD) for noise update
+    5. Uses weighted overlap-add (WOLA) with Hamming windows for synthesis
+    6. Optionally saves enhanced output to specified directory/file
+
+    Args:
          noisy_audio - noisy speech file in .wav format
-         outputFile - enhanced output file in .wav format
+         fs - sampling frequency of the audio file
+         output_dir - directory to save enhanced output file (if None, no file is saved)
+         output_file - enhanced output file in .wav format
          Nband - Number of frequency bands (recommended 4-8)
          Freq_spacing - Type of frequency spacing for the bands, choices:
-                        'linear', 'log' and 'mel'
-         AVRGING - Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
-         FRMSZ - Frame length in milli-seconds, default=20. hop size of 16ms * (1 - 0.50) = 8ms 
+                        'linear', 'log' and 'mel', default='linear'
+         FRMSZ - Frame length in milli-seconds, default=8. 
          OVLP - Window overlap in percent of frame size, default=50
-         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=6 .Matlab recommends 6 but doing 1 so less latency  
+         AVRGING - Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
+         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=1. 
          FLOOR - Spectral floor, default=0.002
          VAD - Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 
-    Example call:
-            mband(noisy_audio, fs, output_dir='output', output_file='enhanced.wav', Nband=4, Freq_spacing='log')
+         Returns:
+            Optional[Tuple[torch.Tensor, int]]: Tuple containing:
+                - Enhanced speech signal as torch.Tensor
+                - Sampling frequency
+                Returns None if output_dir and output_file are provided (saves to file instead)
 
+   Example call:
+            enhanced_audio, fs = mband(noisy_audio, fs, output_dir='output/', output_file='enhanced.wav', Nband=4, Freq_spacing='linear', FRMSZ=8, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1)
 
     References:
     [1] Kamath, S. and Loizou, P. (2002). A multi-band spectral subtraction 
@@ -248,21 +218,23 @@ def mband(
         Conf. Acoust.,Speech, Signal Processing
     
     Authors: Sunil Kamath and Philipos C. Loizou
-
     Copyright (c) 2006 by Philipos C. Loizou
     $Revision: 0.0 $  $Date: 10/09/2006 $
 
     -----------------------------------------------
     """   
 
-    # Handle tensor input
-    if noisy_audio.dim() > 1 and noisy_audio.shape[0] > 1:
-        noisy_speech = torch.mean(noisy_audio, dim=0).numpy()
-    else:
-        noisy_speech = noisy_audio.squeeze().numpy()
+    # Setup device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
 
-    # Convert to double precision
-    noisy_speech = noisy_speech.astype(np.float64)
+    # Handle tensor input and keep on device
+    if noisy_audio.dim() > 1 and noisy_audio.shape[0] > 1:
+        noisy_speech = torch.mean(noisy_audio, dim=0)
+    else:
+        noisy_speech = noisy_audio.squeeze()
+    
+    noisy_speech = noisy_speech.to(device)
     input_name = input_name if input_name is not None else "spectral"
 
     frmelen = int(np.floor(FRMSZ * fs / 1000))  # Frame size in samples
@@ -291,8 +263,6 @@ def mband(
         lobin[0] = 0
         hibin[-1] = fftl // 2
         bandsz = hibin - lobin + 1
-        #  The resulting frequency edges are again converted to FFT bin indices. The first lower bin is set to zero and the last upper bin is set to half 
-        # the FFT length to ensure the bands cover the entire spectrum. The band sizes are computed similarly to the logarithmic case.
     else:
         raise ValueError('Error in selecting frequency spacing')
 
@@ -335,10 +305,10 @@ def mband(
         sample_pos += cmmnlen 
         frame_count += 1
 
-    # Convert lists to matrices (same format as original batch method)
+    # Convert lists to matrices
     if x_mag_frames:
-        x_mag = np.array(x_mag_frames).T  # Shape: (fftl, nframes)
-        x_ph = np.array(x_ph_frames).T    # Shape: (fftl, nframes)
+        x_mag = np.array(x_mag_frames).T 
+        x_ph = np.array(x_ph_frames).T   
         nframes = len(x_mag_frames)
     else:
         # Handle edge case of very short audio
@@ -371,7 +341,6 @@ def mband(
 
     # Noise update during silence frames    
     if VAD:
-        # Expand n_spect to match number of frames BEFORE calling noiseupdt
         n_spect_expanded = np.tile(n_spect, (1, nframes))
         n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes)
     else:
@@ -398,22 +367,15 @@ def mband(
         
     # ---------- START SUBTRACTION PROCEDURE --------------------------
     sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
-
     delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
    
     for i in range(Nband):
         start = lobin[i]
         stop = hibin[i] + 1
-        
+
         for j in range(nframes):
             n_spec_sq = n_spect[start:stop, j] ** 2
             sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
-            # if i == 0:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            # elif i == Nband - 1:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
-            # else:
-            #     sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
             z = np.where(sub_speech < 0)[0]
             if z.size > 0:
                 sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
@@ -425,7 +387,6 @@ def mband(
 
     # Reconstruct whole spectrum
     enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
-
     enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
     enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
     enhanced_spectrum[fftl // 2 + 1:, :] = np.conj(np.flipud(enhanced_spectrum[1:fftl // 2, :]))
@@ -464,7 +425,7 @@ def mband(
             f"SPACING{Freq_spacing.upper()}",
             f"FRAME{FRMSZ}ms"
         ]
-        
+
         # Extract base name without extension
         base_name = output_file.replace('.wav', '') if output_file.endswith('.wav') else output_file
         output_filename = f"{base_name}_{input_name}_{'_'.join(metadata_parts)}.wav"
@@ -473,18 +434,5 @@ def mband(
         torchaudio.save(full_output_path, enhanced_tensor.unsqueeze(0), fs)
         print(f"Enhanced audio saved to: {full_output_path}")
 
-    # Might be better to use dataclass to make cleaner
-    
-    if return_spectrograms:
-        spectrogram = {
-            'enhanced_mag': enhanced_mag,
-            'noisy_mag': x_mag[:fftl // 2 + 1, :],
-            'phase': x_ph[:fftl // 2 + 1, :],
-            'fs': fs,
-            'fftl': fftl
-        }
-    else:
-        spectrogram = None
-    print("Returning:", type(enhanced_tensor), type(fs), type(spectrogram))
-    return enhanced_tensor, fs, spectrogram
+    return enhanced_tensor, fs
  
