@@ -209,3 +209,6 @@ __marimo__/
 # Datasets
 *_DATASET/
 URBANSOUNDS_8K
+
+# Testing Notebooks Liberty for experminetations setup only (volatile)
+Notebooks/
