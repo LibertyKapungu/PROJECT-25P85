@@ -49,9 +49,10 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = np.linspace(0.0, 1.0, 11)  # VAD threshold
+# Threshold = np.linspace(0.0, 1.0, 11)  # VAD threshold
+threshold = 0.5  # Fixed threshold for spectral subtraction
 
-for threshold in Threshold:
+for threshold in [threshold]:
     for snr_dB in snr_dB_range:
 
         print(f"Processing SNR: {snr_dB} dB")
@@ -84,8 +85,8 @@ for threshold in Threshold:
                 noisy_audio=noisy_speech,
                 fs=16000,
                 vad_model_path=model_path,  # Trained TinyGRUVAD model
-                output_dir=output_dir_snr,
-                output_file= output_filename.replace('.wav', ''),
+                # output_dir=output_dir_snr,
+                # output_file= output_filename.replace('.wav', ''),
                 input_name=clean_filename,
                 Nband=4,
                 Freq_spacing='linear',
