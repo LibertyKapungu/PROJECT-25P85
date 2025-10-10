@@ -1,0 +1,21 @@
+Wiener Filter Analysis Summary (EXP1 + EXP2p1a)
+==========================================
+
+Generated on: 2025-10-09 11:38:32
+
+Overall Performance:
+                PESQ      STOI    SI_SDR  DNSMOS_mos_ovr
+Experiment                                              
+WF_EXP1p1a  1.405825  0.694330  7.780822        2.091460
+WF_EXP1p1b  1.415405  0.695915  7.908772        2.098652
+WF_EXP1p2   1.369706  0.694521  7.179728        2.164904
+
+Parameter Optimization Results (EXP1p2):
+- See notebook for detailed parameter sweep analysis
+- Optimal parameters identified for each metric
+
+
+VAD Threshold Analysis (EXP2p1a):
+- Threshold range: 0.0 to 1.0 (0.1 increments)
+- Best thresholds vary by metric and SNR
+- Significant improvements over traditional Wiener filtering
