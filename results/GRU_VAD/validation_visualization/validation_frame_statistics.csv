@@ -1,0 +1,6 @@
+metric,value
+total_frames,4185.0
+errors,3812.0
+false_positives,0.0
+false_negatives,3812.0
+frame_accuracy,0.08912783751493425

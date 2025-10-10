@@ -46,13 +46,13 @@ a_dd_default = 0.98
 eta_default = 0.15
 
 # mu: from 0.80 → 0.99
-mu_values = np.linspace(0.8, 0.99, 20).round(3).tolist()
+mu_values = np.linspace(0.10, 0.99, 40).round(3).tolist()
 
 # a_dd: from 0.80 → 0.99
-a_dd_values = np.linspace(0.8, 0.99, 20).round(3).tolist()
+a_dd_values = np.linspace(0.10, 0.99, 40).round(3).tolist()
 
 # eta: from 0.05 → 1.00
-eta_values = np.linspace(0.05, 1.00, 20).round(3).tolist()
+eta_values = np.linspace(0.05, 1.00, 40).round(3).tolist()
 
 # Debug: Print default values to verify they're correct
 print(f"\n[DEBUG]: Default values - mu_default={mu_default}, a_dd_default={a_dd_default}, eta_default={eta_default}")
@@ -119,7 +119,7 @@ for param_name, param_values, default_mu, default_a_dd, default_eta in parameter
 
                 clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
                 noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-                output_filename = f"WF_{clean_filename}_{noise_filename}_SNR{snr_dB}dB.wav"
+                output_filename = f"WF_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
 
                 # Step 2: Apply Wiener filtering (using causal processing)
                 print("\n2. Applying causal Wiener filtering...")
@@ -141,7 +141,7 @@ for param_name, param_values, default_mu, default_a_dd, default_eta in parameter
                     clean_name=clean_filename,
                     enhanced_name=output_filename,
                     csv_dir=str(results_dir_snr),
-                    csv_filename=f'WF_EXP1p2_data_SNR{snr_dB}dB_MU{current_mu}_AADD{current_a_dd}_ETA{current_eta}_'
+                    csv_filename=f'WF_EXP1p2_data_SNR[{snr_dB}]dB_MU[{current_mu}]_AADD[{current_a_dd}]_ETA[{current_eta}]'
                 )
                 
                 # Print summary
@@ -177,7 +177,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_EXP1p2_merged_{snr_dB}dB.csv',
+        output_filename=f'WF_EXP1p2_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
     print(f"Merged results for {snr_dB}dB: {merged_path}")
