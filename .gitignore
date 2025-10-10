@@ -212,3 +212,5 @@ URBANSOUNDS_8K
 
 # Testing Notebooks Liberty for experminetations setup only (volatile)
 Notebooks/
+# Conda Environments
+ENV_DIR/

@@ -10,7 +10,43 @@ addpath(genpath('validation_dataset/'));
 ref_clean_speech = 'validation_dataset/clean_speech/S_56_02.wav';
 
 % --- List of algorithm output folders ---
-algorithm_dirs = {'specsub_processed_output', 'mband_processed_output', 'mband_causal_processed_output'};  % Add more if needed
+%algorithm_dirs = {'specsub_processed_output', 'mband_processed_output', 'mband_causal_processed_output'};  % Add more if needed
+algorithm_dirs = {
+    % 'mband_B4_log_processed_output',
+    % 'mband_B4_mel_processed_output',
+    % 'mband_B4_linear_processed_output',
+    % 'mband_B8_log_processed_output',
+    % 'mband_B8_mel_processed_output',
+    % 'mband_B8_linear_processed_output',
+    % 'mband_python_nc_linear',
+    % 'mband_python_nc_log',
+    % 'mband_python_nc_mel',
+    % 'mband_python_c_linear',
+    % 'mband_python_c_log',
+    % 'mband_python_c_mel', 
+    % 
+    % 'mband_python_c_station_log',
+    'mband_python_c_station_mel',
+    'mband_python_c_station_linear',
+
+    % 'mband_python_c_babble_log',
+    'mband_python_c_babble_mel',
+    'mband_python_c_babble_linear',
+
+    % 'mband_python_c_car_log',
+    'mband_python_c_car_mel',
+    'mband_python_c_car_linear',
+    % % 
+    % 'mband_python_c_airport_log',
+    %  'mband_python_c_airport_mel',
+    %  'mband_python_c_airport_linear',
+    % 
+    % 'mband_python_c_train_log',
+    % 'mband_python_c_train_mel',
+    % 'mband_python_c_train_linear',
+    
+};
+
 
 % --- Initialize results table ---
 results = table();
