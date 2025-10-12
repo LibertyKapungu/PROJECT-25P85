@@ -286,7 +286,7 @@ def mband(
     return enhanced_tensor, fs
 
 # ==============================================================================
-# DATA PREPARATION - Identical to your original
+# DATA PREPARATION
 # ==============================================================================
 
 def prepare_audio_data(clean_path, noise_path, target_sr, snr_db):

@@ -15,43 +15,74 @@ def berouti(SNR):
     a[SNR < -5.0] = 4.75
     return a
 
-def noiseupdt(x_magsm, n_spect, cmmnlen, nframes):
-    """Voice Activity Detection and noise spectrum update"""
+def noiseupdt(x_magsm, n_spect, cmmnlen, nframes, n_spect_actual=None):
+    """Voice Activity Detection and noise spectrum update
+    Voice Activity Detection and noise spectrum update.
+
+    This function can operate in two modes:
+    1. Estimation Mode (if n_spect_actual is None): It estimates the noise
+       spectrum frame by frame based on the VAD decision.
+    2. Ground Truth Mode (if n_spect_actual is provided): It uses the
+       actual noise spectrum to make a perfect VAD decision.
+    """
     SPEECH = 1
     SILENCE = 0
     state = np.zeros(nframes * cmmnlen, dtype=int)
-    judgevalue1 = np.zeros(nframes * cmmnlen)
 
-    # Process first frame
-    i = 0  
-    x_var = x_magsm[:, i] ** 2  # The power of the current audio frame
-    n_var = n_spect[:, i] ** 2  # The power of the estimated background noise
-    rti = x_var / n_var - np.log10(x_var / n_var) - 1  # x_var / n_var: This is the Signal-to-Noise Ratio (SNR). A high SNR means the signal is much louder than the noise, which usually indicates speech.
-    judgevalue = np.mean(rti)  # If the signal power is very close to the noise power (i.e., silence), this formula results in a value near 0. If the signal power is much larger than the noise power (i.e., speech), it results in a large positive value.
-    judgevalue1[i*cmmnlen:(i+1)*cmmnlen] = judgevalue
+    # Mode 1: Using Ground Truth Noise Spectrum
+
+    if n_spect_actual is not None:
+        for i in range(nframes):
+            x_var = x_magsm[:,i]**2
+            n_var = n_spect_actual[:,i] **2 
+
+            epsilon = 1e-10
+            n_var[n_var<epsilon] = epsilon
+            x_var[x_var<epsilon] = epsilon
+
+            rti = x_var/n_var - np.log10(x_var/n_var) -1
+            judgevalue = np.mean(rti)
+            if judgevalue > 0.45:
+                state[i*cmmnlen:(i+1)*cmmnlen]= SPEECH
+            else:
+                state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
+        return n_spect_actual, state
     
-    if judgevalue > 0.4:  # Different threshold for first frame
-        state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
+    # MODE 2: Estimating noise spectrum (original logic)
     else:
-        state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
-        n_spect[:, i] = np.sqrt(0.9 * n_spect[:, i]**2 + (1-0.9) * x_magsm[:, i]**2)
-    
-    # Process remaining frames
-    for i in range(1, nframes):
-        x_var = x_magsm[:, i] ** 2
-        n_var = n_spect[:, i-1] ** 2
-        rti = x_var / n_var - np.log10(x_var / n_var) - 1
-        judgevalue = np.mean(rti)
+
+        judgevalue1 = np.zeros(nframes * cmmnlen)
+
+        # Process first frame
+        i = 0  
+        x_var = x_magsm[:, i] ** 2  # The power of the current audio frame
+        n_var = n_spect[:, i] ** 2  # The power of the estimated background noise
+        rti = x_var / n_var - np.log10(x_var / n_var) - 1  # x_var / n_var: This is the Signal-to-Noise Ratio (SNR). A high SNR means the signal is much louder than the noise, which usually indicates speech.
+        judgevalue = np.mean(rti)  # If the signal power is very close to the noise power (i.e., silence), this formula results in a value near 0. If the signal power is much larger than the noise power (i.e., speech), it results in a large positive value.
         judgevalue1[i*cmmnlen:(i+1)*cmmnlen] = judgevalue
         
-        if judgevalue > 0.45:  # Different threshold for subsequent frames
+        if judgevalue > 0.4:  # Different threshold for first frame
             state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
-            n_spect[:, i] = n_spect[:, i-1]  # Keep previous noise estimate
         else:
             state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
-            n_spect[:, i] = np.sqrt(0.9 * n_spect[:, i-1]**2 + (1-0.9) * x_magsm[:, i]**2)
-    
-    return n_spect, state
+            n_spect[:, i] = np.sqrt(0.9 * n_spect[:, i]**2 + (1-0.9) * x_magsm[:, i]**2)
+        
+        # Process remaining frames
+        for i in range(1, nframes):
+            x_var = x_magsm[:, i] ** 2
+            n_var = n_spect[:, i-1] ** 2
+            rti = x_var / n_var - np.log10(x_var / n_var) - 1
+            judgevalue = np.mean(rti)
+            judgevalue1[i*cmmnlen:(i+1)*cmmnlen] = judgevalue
+            
+            if judgevalue > 0.45:  # Different threshold for subsequent frames
+                state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
+                n_spect[:, i] = n_spect[:, i-1]  # Keep previous noise estimate
+            else:
+                state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
+                n_spect[:, i] = np.sqrt(0.9 * n_spect[:, i-1]**2 + (1-0.9) * x_magsm[:, i]**2)
+        
+        return n_spect, state
 
 def estfilt1(nChannels, Srate):
     """Estimate filter bank for logarithmic spacing"""
@@ -118,6 +149,7 @@ def mband(
         Noisefr: int = 1,
         FLOOR: float = 0.002,
         VAD: int = 1, 
+        actual_noise_audio: Optional[np.ndarray] = None,
 ) -> Optional[Tuple[torch.Tensor, int]]:
     """ Implements the multi-band spectral subtraction algorithm for speech enhancement.
     This function implements an advanced spectral subtraction method that divides the frequency
@@ -256,6 +288,25 @@ def mband(
     else:
         print("Warning: No frames generated - audio too short")
 
+    # ADDED CODE 
+    n_spect_actual = None
+    if actual_noise_audio is not None:
+        print("INFO: Processing ground truth noise signal into spectral frames.")
+        noise_speech = actual_noise_audio.to(device).squeeze()
+
+        n_mag_frames_actual = []
+        sample_pos = 0
+        while sample_pos + frmelen <= len(noise_speech):
+            current_frame = noise_speech[sample_pos:sample_pos+frmelen]
+            windowed_frame = current_frame*win
+            frame_fft = fft(windowed_frame,fftl)
+            n_mag_frames_actual.append(np.abs(frame_fft))
+            sample_pos += cmmnlen
+        if n_mag_frames_actual:
+            n_spect_actual = np.array(n_mag_frames_actual).T
+            if n_spect_actual.shape[1] > nframes:
+                n_spect_actual = n_spect_actual[:, :nframes]
+
     # Smooth the input spectrum
     if AVRGING:             
         filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
@@ -279,7 +330,7 @@ def mband(
     # Noise update during silence frames    
     if VAD:
         n_spect_expanded = np.tile(n_spect, (1, nframes))
-        n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes)
+        n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes, n_spect_actual)
     else:
         # Replicate noise spectrum for all frames (no VAD)   
         n_spect = np.repeat(n_spect, nframes, axis=1)
@@ -376,10 +427,9 @@ def mband(
 
     return enhanced_tensor, fs
 
-# if __name__ == "__main__":
-#     # Example usage
-#     noisy_audio = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\final_audio_check\\03_noisy_input_to_mband.wav")[0]
-#     mband(noisy_audio, fs=16000, output_dir="C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\validation_dataset\\enhanced_speech", output_file="enhanced_sp21_station_sn5.wav", input_name="sp21_station_sn5", Nband=4, Freq_spacing='linear', FRMSZ=8, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1)
+# ==============================================================================
+# DATA PREPARATION
+# ==============================================================================
 
 def prepare_audio_data(clean_path, noise_path, target_sr, snr_db):
     """Robustly prepares audio data using RMS-based SNR calculation."""
@@ -416,7 +466,7 @@ if __name__ == "__main__":
     OUTPUT_DIR = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\NOISE_ESTIMATION"
 
     torch.manual_seed(42)
-
+    
     clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
     noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
 
@@ -426,13 +476,19 @@ if __name__ == "__main__":
     print(f"Data pair created at {TARGET_SNR_DB} dB SNR.")
     print("-" * 30)
 
+    # Generate clean, noise, and noisy audio in output directory for reference
+    torchaudio.save(Path(OUTPUT_DIR) / "clean_reference.wav", clean_tensor.unsqueeze(0), fs)
+    torchaudio.save(Path(OUTPUT_DIR) / "noise_reference.wav", noise_tensor.unsqueeze(0), fs)
+    torchaudio.save(Path(OUTPUT_DIR) / "noisy_input.wav", noisy_tensor.unsqueeze(0), fs)
+
+
     print("\nRunning in STANDARD MODE (estimating noise)...")
 
     mband(
         noisy_audio=noisy_tensor,
         fs=fs,
         output_dir=OUTPUT_DIR,
-        output_file="mband_normal.wav",
+        output_file="enhanced_ESTIMATED_NOISE.wav",
         input_name="standard_mode",
         Nband=4,
         Freq_spacing='linear',
@@ -442,4 +498,28 @@ if __name__ == "__main__":
         Noisefr=1,
         FLOOR=0.002,
         VAD=1,
+        actual_noise_audio=None
     )
+
+    print("\nRunning in GROUND TRUTH MODE (using actual noise)...")
+    mband(
+        noisy_audio=noisy_tensor,
+        fs=fs,
+        output_dir=OUTPUT_DIR,
+        output_file="enhanced_GROUND_TRUTH_NOISE.wav",
+        input_name="ground_truth_mode",
+        Nband=4,
+        Freq_spacing='linear',
+        FRMSZ=8,
+        OVLP=50,
+        AVRGING=1,
+        Noisefr=1,
+        FLOOR=0.002,
+        VAD=1,
+        actual_noise_audio=noise_tensor
+    )
+
+    print("Processing complete.")
+    # Example usage
+    # noisy_audio = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\final_audio_check\\03_noisy_input_to_mband.wav")[0]
+    # mband(noisy_audio, fs=16000, output_dir="C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\validation_dataset\\enhanced_speech", output_file="enhanced_sp21_station_sn5.wav", input_name="sp21_station_sn5", Nband=4, Freq_spacing='linear', FRMSZ=8, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1, n_spect_actual=None)

@@ -6,20 +6,22 @@
 addpath(genpath('objective_metrics/'));
 
 % --- Reference clean speech file ---
-ref_clean_speech = 'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_restored\01_clean_aligned.wav';
+ref_clean_speech = 'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\clean_reference.wav';
 
 % --- List of processed speech files from different algorithms ---
 processed_files = {
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_FIXED\enhanced_ORACLE_FIXED.wav',
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_FIXED\enhanced_STANDARD_FIXED.wav',
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\Random\Matlab2025Files\SS\validation_dataset\enhanced_speech\enhanced_sp21_station_sn5_sp21_station_sn5_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\noisy_input.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\enhanced_GROUND_TRUTH_NOISE_ground_truth_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\enhanced_ESTIMATED_NOISE_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav', 
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_normal_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
 };
 
 % --- Corresponding algorithm names ---
 algorithm_names = {
-    'enhanced_ORACLE_fixed',
-    'enhanced_STANDARD_fixed',
-    'SS_BANDS4_LINEAR_8ms'
+    'noisy_speech',
+    'Ground_Truth',
+    'Estimated_noise', 
+    'mband_normal'
 };
 
 % --- Initialize results table ---
