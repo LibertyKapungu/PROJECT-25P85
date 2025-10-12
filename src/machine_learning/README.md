@@ -1,1 +1,0 @@
-This directory contains all scripts necessary for implementing transfer learning and other machine learning techniques.
