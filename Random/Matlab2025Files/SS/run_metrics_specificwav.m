@@ -10,19 +10,15 @@ ref_clean_speech = 'C:\Users\gabi\Documents\University\Uni2025\Investigation\PRO
 
 % --- List of processed speech files from different algorithms ---
 processed_files = {
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_restored\enhanced_ORACLE_final.wav',
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check\enhanced_ORACLE_restored.wav',
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check\enhanced_STANDARD_restored.wav',
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_restored\enhanced_STANDARD_final.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_FIXED\enhanced_ORACLE_FIXED.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\final_audio_check_FIXED\enhanced_STANDARD_FIXED.wav',
     'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\Random\Matlab2025Files\SS\validation_dataset\enhanced_speech\enhanced_sp21_station_sn5_sp21_station_sn5_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
 };
 
 % --- Corresponding algorithm names ---
 algorithm_names = {
-    'ORACLE_final',
-    'Oracle_restored',
-    'STANDARD_restored',
-    'STANDARD_final',
+    'enhanced_ORACLE_fixed',
+    'enhanced_STANDARD_fixed',
     'SS_BANDS4_LINEAR_8ms'
 };
 

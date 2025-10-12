@@ -18,12 +18,11 @@ def noiseupdt(x_magsm, n_spect, cmmnlen, nframes):
     """Voice Activity Detection and noise spectrum update"""
     SPEECH = 1
     SILENCE = 0
-    
-    # Initialize arrays
     state = np.zeros(nframes * cmmnlen, dtype=int)
     judgevalue1 = np.zeros(nframes * cmmnlen)
 
-    i = 0   # Process first frame
+    # Process first frame
+    i = 0  
     x_var = x_magsm[:, i] ** 2
     n_var = n_spect[:, i] ** 2
     rti = x_var / n_var - np.log10(x_var / n_var) - 1
@@ -215,21 +214,18 @@ def mband(
 
     # Calculate Hanning window
     win = np.sqrt(np.hanning(frmelen))
-
     U = np.sum(win**2) / frmelen  # Normalization factor for overlap-add
 
     # Estimate noise magnitude for first 'Noisefr' frames
     noise_pow = np.zeros(fftl)
     j = 0
     for k in range(Noisefr):
-
         n_fft = fft(noisy_speech[j:j + frmelen]* win, fftl)
         n_mag = np.abs(n_fft)
         n_ph = np.angle(n_fft)
         n_magsq = n_mag ** 2
         noise_pow += n_magsq
         j += frmelen
-
     n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
 
     # Initialize frame-by-frame processing
@@ -242,14 +238,11 @@ def mband(
     while sample_pos + frmelen <= len(noisy_speech):
         current_frame = noisy_speech[sample_pos:sample_pos + frmelen]
         windowed_frame = current_frame * win
-
         frame_fft = fft(windowed_frame, fftl)
         frame_mag = np.abs(frame_fft)
         frame_ph = np.angle(frame_fft)
-        
         x_mag_frames.append(frame_mag)
         x_ph_frames.append(frame_ph)
-        
         # Advance by hop size (cmmnlen) for proper overlap
         sample_pos += cmmnlen 
         frame_count += 1
@@ -260,13 +253,10 @@ def mband(
         x_ph = np.array(x_ph_frames).T   
         nframes = len(x_mag_frames)
     else:
-        # Handle edge case of very short audio
-        x_mag = np.array([]).reshape(fftl, 0)
-        x_ph = np.array([]).reshape(fftl, 0)
-        nframes = 0
         print("Warning: No frames generated - audio too short")
 
-    if AVRGING:             # Smooth the input spectrum
+    # Smooth the input spectrum
+    if AVRGING:             
         filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
         x_magsm = np.zeros_like(x_mag)
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
@@ -278,10 +268,8 @@ def mband(
 
         # Weighted spectral estimate 
         Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0
-
         if nframes > 1:
             x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
-
             for i in range(2, nframes):
                 x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_mag[:, i])
     else:
@@ -297,7 +285,6 @@ def mband(
    
     # Calculate segmental SNR in each band
     SNR_x = np.zeros((Nband, nframes))
-
     for i in range(Nband):
         if i < Nband - 1:
             start = lobin[i]
