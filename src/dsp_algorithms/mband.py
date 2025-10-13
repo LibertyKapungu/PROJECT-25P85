@@ -295,8 +295,8 @@ def mband(
             stop = fftl // 2 + 1 
 
         for j in range(nframes):
-            signal_power = np.linalg.norm(x_magsm[start:stop, j], 2) ** 2
-            noise_power = np.linalg.norm(n_spect[start:stop, j], 2) ** 2
+            signal_power = (np.linalg.norm(x_magsm[start:stop, j], 2) ** 2)/(frmelen*U) # the term frmlem*U may not be neccessary as they cancel out (snr). It only matters if computing absolute power values, not ratios.
+            noise_power = (np.linalg.norm(n_spect[start:stop, j], 2) ** 2)/(frmelen*U)
             SNR_x[i, j] = 10 * np.log10(signal_power / (noise_power + 1e-10))
 
     beta_x = berouti(SNR_x)
