@@ -77,7 +77,6 @@ pyreadline3==3.5.4
 pystoi==0.4.1
 python-dateutil==2.9.0.post0
 pytz==2025.2
-pywin32==311
 pyzmq==27.1.0
 pyzstd==0.17.0
 referencing==0.36.2
