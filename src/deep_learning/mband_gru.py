@@ -18,8 +18,8 @@ TinyGRUVAD model that works with mel-spectrogram features.
 """
 
 class TinyGRUVAD(nn.Module):
-    """Light GRU-based VAD, causal, hearing-aid friendly (~2 k params)."""
-    def __init__(self, input_dim=32, hidden_dim=16, dropout=0.1):
+    """Light GRU-based VAD, causal, hearing-aid friendly (~3.5k params with 24 mel bands)."""
+    def __init__(self, input_dim=48, hidden_dim=16, dropout=0.1):
         super().__init__()
         # use no right-padding in Conv1d; we'll apply left (causal) padding in forward
         self.pre = nn.Conv1d(input_dim, input_dim, kernel_size=3, padding=0, groups=input_dim)
@@ -52,7 +52,7 @@ class TinyVADProcessor:
         model_path: Union[str, Path],
         device: Optional[torch.device] = None,
         threshold: float = 0.5,
-        n_mels: int = 16,
+        n_mels: int = 24,
     ):
         """Initialize TinyGRUVAD processor.
         
@@ -60,7 +60,7 @@ class TinyVADProcessor:
             model_path: Path to saved model checkpoint (.pth file)
             device: Device to run model on (defaults to CUDA if available)
             threshold: Probability threshold for VAD decision (default: 0.5)
-            n_mels: Number of mel bands (default: 16)
+            n_mels: Number of mel bands (default: 24, matching training)
         """
         self.model_path = Path(model_path)
         self.device = device if device is not None else \
