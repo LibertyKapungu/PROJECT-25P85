@@ -28,7 +28,7 @@ from utils.audio_dataset_loader import (
     create_audio_pairs,
     preprocess_audio
 )
-from deep_learning.tiny_vad_integration import wiener_filter_with_tiny_vad
+from hybrid_algorithms.wiener_TinyGruVAD import wiener_filter_with_tiny_vad
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
@@ -49,7 +49,7 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = np.linspace(0.0, 1.0, 11)  # VAD threshold
+Threshold = [0.45, 0.5, 0.55]  # VAD threshold
 
 for threshold in Threshold:
     for snr_dB in snr_dB_range:
