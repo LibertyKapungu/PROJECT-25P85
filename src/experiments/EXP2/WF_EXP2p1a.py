@@ -7,7 +7,7 @@ targeted noise reduction processing.
 
 Key features:
 - Uses Tiny GRU VAD model for speech/non-speech detection
-- Causal Wiener filter with 8ms frame duration (default parameters)
+- Causal Wiener filter with 8ms frame duration
 - Tests multiple VAD thresholds to optimize speech detection
 
 VAD thresholds tested: 0.45, 0.50, 0.55

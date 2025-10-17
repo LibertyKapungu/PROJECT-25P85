@@ -6,7 +6,7 @@ signal processing with deep learning. The Wiener filter is used as a preprocesso
 clean the noisy speech before feeding it to the TinyDenoiserV2 GRU model.
 
 Processing pipeline:
-1. Wiener filter (25ms frames, default parameters) - removes initial noise and distortions
+1. Wiener filter (25ms frames) - removes initial noise and distortions
 2. TinyDenoiserV2 GRU model - further refines the enhanced speech from Wiener filter
 
 Key features:
