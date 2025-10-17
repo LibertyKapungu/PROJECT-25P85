@@ -79,7 +79,7 @@ for snr_dB in snr_dB_range:
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
         output_filename = f"WFTD_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
 
-        enhanced_speech, enhanced_fs = wiener_filter(
+        wf_enhanced_speech, enhanced_fs = wiener_filter(
                 noisy_audio=noisy_speech,
                 fs=clean_sr,
                 frame_dur_ms=25,
@@ -92,7 +92,7 @@ for snr_dB in snr_dB_range:
             )
 
         enhanced_speech, enhanced_fs = TinyDenoiser.enhance(
-            noisy_audio=noisy_speech,
+            noisy_audio=wf_enhanced_speech,
             fs=clean_sr,
             onnx_model=onnx_model_dir / "denoiser_GRU_dns.onnx"
         )
