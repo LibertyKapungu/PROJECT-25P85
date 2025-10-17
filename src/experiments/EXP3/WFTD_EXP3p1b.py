@@ -1,3 +1,37 @@
+"""
+Experiment WFTD_EXP3p1b: Wiener Filter Preprocessing for TinyDenoiserV2 GRU
+
+This experiment implements a hybrid speech enhancement pipeline that combines traditional
+signal processing with deep learning. The Wiener filter is used as a preprocessor to
+clean the noisy speech before feeding it to the TinyDenoiserV2 GRU model.
+
+Processing pipeline:
+1. Wiener filter (25ms frames, default parameters) - removes initial noise and distortions
+2. TinyDenoiserV2 GRU model - further refines the enhanced speech from Wiener filter
+
+Key features:
+- Two-stage processing: Wiener filter -> TinyDenoiserV2 GRU.
+- Wiener filter removes the majority noise.
+- TinyDenoiserV2 GRU handles residual noise and fine details.
+- 25ms frame duration for Wiener filter preprocessing.
+
+Models used:
+- Wiener filter: causal implementation
+- TinyDenoiserV2 GRU: denoiser_GRU_dns.onnx (pretrained on DNS datasets)
+
+Purpose: Evaluate the effectiveness of using Wiener filter as a preprocessor to improve
+the performance of the TinyDenoiserV2 GRU model by providing cleaner input and reducing
+artifacts that could affect the neural network's performance.
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path

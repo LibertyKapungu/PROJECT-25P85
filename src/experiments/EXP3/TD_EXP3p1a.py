@@ -1,3 +1,25 @@
+"""
+Experiment TD_EXP3p1a: TinyDenoiserV2 GRU Model Evaluation
+
+This experiment evaluates the performance of the TinyDenoiserV2 model, a lightweight GRU-based
+neural network architecture trained on the DNS (Deep Noise Suppression) challenge datasets.
+The model is designed for real-time speech denoising with minimal computational requirements.
+
+Model: denoiser_GRU_dns.onnx (pretrained TinyDenoiserV2)
+
+Purpose: Evaluate the baseline performance of the TinyDenoiserV2 GRU model on noisy speech
+data across various SNR conditions, establishing a deep learning baseline for comparison
+with traditional DSP algorithms.
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path
