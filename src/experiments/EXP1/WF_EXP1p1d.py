@@ -1,11 +1,11 @@
 """
-Experiment WF_EXP1p1b: Causal Wiener Filter with Default Settings but 8ms windows
+Experiment WF_EXP1p1d: Causal Wiener Filter with 25ms Windows
 
-This experiment evaluates the performance of the causal Wiener filter implementation on noisy speech data.
-The filter is applied with default parameters to assess its effectiveness in speech enhancement across
-various SNR levels, using a causal processing approach.
+This experiment evaluates the performance of the causal Wiener filter implementation on noisy speech data
+using 25ms frame durations. The filter is applied with default parameters to assess its effectiveness in
+speech enhancement across various SNR levels, comparing the impact of longer frame windows.
 
-Purpose: Run the causal Wiener filter translation at default settings
+Purpose: Run the causal Wiener filter translation at default settings with 25ms windows
 
 Datasets used:
 - EARS dataset for clean speech
@@ -34,8 +34,8 @@ current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
 
-output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p1b_output' 
-results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP1p1b'
+output_dir = repo_root / 'sound_data' / 'processed' / 'wiener_processed_outputs' / 'EXP1p1d_output' 
+results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP1p1d'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -97,7 +97,7 @@ for snr_dB in snr_dB_range:
             mu=0.98,
             a_dd=0.98,
             eta=0.15,
-            frame_dur_ms=8
+            frame_dur_ms=25
         )
         
         # Step 4: Compute and save metrics
@@ -109,7 +109,7 @@ for snr_dB in snr_dB_range:
             clean_name=clean_filename,
             enhanced_name=output_filename,
             csv_dir=str(results_dir_snr),
-            csv_filename='WF_EXP1p1b_data'
+            csv_filename='WF_EXP1p1d_data'
         )
         
         # Print summary
@@ -136,7 +136,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_EXP1p1b_merged_[{snr_dB}]dB.csv',
+        output_filename=f'WF_EXP1p1d_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
 
