@@ -47,12 +47,13 @@ print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
 paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
-snr_dB_range = [-5, 0, 5, 10, 15]
+# snr_dB_range = [-5, 0, 5, 10, 15]
+snr_dB_range = [5]
 
-Threshold = np.linspace(0.0, 1.0, 11)  # VAD threshold
-#threshold = 0.5  # Fixed threshold for spectral subtraction
+# Threshold = np.linspace(0.0, 1.0, 11)  # VAD threshold
+threshold = 0.55  # Fixed threshold for spectral subtraction
 
-for threshold in Threshold:
+for threshold in [threshold]:
     for snr_dB in snr_dB_range:
 
         print(f"Processing SNR: {snr_dB} dB")
