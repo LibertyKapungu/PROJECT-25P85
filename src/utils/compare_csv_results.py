@@ -581,13 +581,14 @@ if __name__ == "__main__":
     # Define your CSV files with descriptive names
     csv_files = {
         'Baseline_Noisy': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP0\\noisy_vs_clean\\BASELINE_merged_SNR[5]dB.csv",
-        'Spectral_SS_v1': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\OldCSVFiles\\SS_EXP1p1b8ms50OVLP_han_remove_framefxn\\SS_EXP1p1b_merged_5dB.csv",
-        'Spectral_GRU_VAD': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\OldCSVFiles\\SS_EXP2p1aGruModel05VAD\\SS_EXP1p2_merged_[5]dB.csv",
+        'Wiener_Filter':  "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\wiener\\WF_EXP1p1b\\WF_EXP1p1b_merged_[5]dB.csv",
+        'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
+        'SS_B4FRAME_CHANGE': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\SS_EXP2p1b\\SS_EXP1p2_merged_[5]dB.csv"
         # Add up to 6 total methods
     }
     
     # Set output folder (will create subdirectories)
-    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csv"
+    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csv_wf_ss_exp1"
     
     # Create comparator with experiment name
     comparator = MultiAudioEnhancementComparator(

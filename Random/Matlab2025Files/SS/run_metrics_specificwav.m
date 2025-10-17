@@ -13,7 +13,11 @@ processed_files = {
     'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\noisy_input.wav',
     'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\enhanced_GROUND_TRUTH_NOISE_ground_truth_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav',
     'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\enhanced_ESTIMATED_NOISE_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav', 
-    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_normal_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_neural_vad_neural_guided_BANDS4_SPACINGLINEAR_FRAME8ms_NEURAL_W0.1.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_neural_vad_neural_guided_BANDS4_SPACINGLINEAR_FRAME8ms_NEURAL_W0.3.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_neural_vad_neural_guided_BANDS4_SPACINGLINEAR_FRAME8ms_NEURAL_W0.5.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_neural_vad_neural_guided_BANDS4_SPACINGLINEAR_FRAME8ms_NEURAL_W0.7.wav',
+    'C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP2\spectral\NOISE_ESTIMATION\mband_neural_vad_neural_guided_BANDS4_SPACINGLINEAR_FRAME8ms_NEURAL_W0.9.wav',
 };
 
 % --- Corresponding algorithm names ---
@@ -21,7 +25,11 @@ algorithm_names = {
     'noisy_speech',
     'Ground_Truth',
     'Estimated_noise', 
-    'mband_normal'
+    'mband_noisetry_01',
+    'mband_noisetry_03',
+    'mband_noisetry_05',
+    'mband_noisetry_07',
+    'mband_noisetry_09',
 };
 
 % --- Initialize results table ---
