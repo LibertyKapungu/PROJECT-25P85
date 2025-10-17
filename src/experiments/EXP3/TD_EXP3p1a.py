@@ -33,7 +33,7 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 onnx_model_dir = repo_root / "models" / "pretrained" / "ONNX"
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'tinydenoiser_processed_outputs' / 'EXP3p1a_output' 
-results_dir = repo_root / 'results' / 'EXP1' / 'wiener' / 'WF_EXP3p1a'
+results_dir = repo_root / 'results' / 'EXP3' / 'tinydenoiser' / 'TD_EXP3p1a'
 
 # Load test datasets
 print("Loading EARS test dataset...")
