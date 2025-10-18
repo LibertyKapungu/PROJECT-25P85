@@ -418,7 +418,8 @@ if __name__ == "__main__":
     torch.manual_seed(42)
 
     clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
-    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
+    #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
+    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_noisy_input.wav")
 
     print("Preparing audio data pair...")
     noisy_tensor, clean_tensor, noise_tensor, fs = prepare_audio_data(clean_path, noise_path, TARGET_SR, TARGET_SNR_DB)
@@ -432,7 +433,7 @@ if __name__ == "__main__":
         noisy_audio=noisy_tensor,
         fs=fs,
         output_dir=OUTPUT_DIR,
-        output_file="mband_normal.wav",
+        output_file="mband_normal_gtcrn.wav",
         input_name="standard_mode",
         Nband=4,
         Freq_spacing='linear',

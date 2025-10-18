@@ -1,0 +1,2 @@
+clean_file,enhanced_file,sampling_rate,PESQ,SI_SDR,STOI,DNSMOS_p808_mos,DNSMOS_mos_sig,DNSMOS_mos_bak,DNSMOS_mos_ovr
+GTCRN_TEST,SSTD_GTCRN_TEST_C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\src\deep_learning\gtcrn\gtcrn-main\test_wavs\noisy_input.wav.wav,16000,1.13496994972229,5.004077911376953,0.7534809112548828,2.613240361213684,4.462071384513105,2.2050003370228333,2.7454561233044377

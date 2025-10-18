@@ -1,0 +1,2 @@
+clean_file,enhanced_file,sampling_rate,PESQ,SI_SDR,STOI,DNSMOS_p808_mos,DNSMOS_mos_sig,DNSMOS_mos_bak,DNSMOS_mos_ovr,source_file
+GTCRN_TEST,SSTD_GTCRN_TEST_C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\src\deep_learning\gtcrn\gtcrn-main\test_wavs\mband_normal.wav.wav,16000,1.277113437652588,6.8629913330078125,0.7382823824882507,2.48378320535024,3.4469657626628827,2.435544754806368,2.39866668975216,GTCRN_mband_EXP3p1b_data_ENH-mband_normal.wav_CLN-GTCRN_TEST.csv
