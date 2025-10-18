@@ -49,88 +49,165 @@ def berouti(SNR):
     a[SNR < -5.0] = 4.75
     return a
 
-def noiseupdt_neural(x_magsm, n_spect, cmmnlen, nframes, model, mel_transform, device, 
-                     fftl, n_bands=32, update_weight=0.5):
-    """Neural-guided noise update with optimized mel inversion."""
+# def noiseupdt_neural(x_magsm, n_spect, cmmnlen, nframes, model, mel_transform, device, 
+#                      fftl, n_bands=32, update_weight=0.5):
+#     """Neural-guided noise update with optimized mel inversion."""
     
-    SPEECH, SILENCE = 1, 0
+#     SPEECH, SILENCE = 1, 0
+#     state = np.zeros(nframes * cmmnlen, dtype=int)
+#     n_stft_bins = fftl // 2 + 1
+
+#     # Maybe use cell 5 to get the correct format for input 
+    
+#     # === PRECOMPUTE MEL INVERSE (ONCE) ===
+#     mel_fb = mel_transform.fb.cpu().numpy()
+#     mel_fb_pinv = np.linalg.pinv(mel_fb.T, rcond=1e-3)
+#     print(f"[DEBUG] Mel inverse: {mel_fb_pinv.shape}, condition number: {np.linalg.cond(mel_fb.T):.2f}")
+    
+#     # === COLLECT MEL FEATURES ===
+#     log_mel_all = []
+#     model.eval()
+    
+#     with torch.no_grad():
+#         for i in range(nframes):
+#             x_mag_frame = x_magsm[:n_stft_bins, i]
+#             x_tensor = torch.tensor(x_mag_frame, dtype=torch.float32, device=device).unsqueeze(1)
+#             mel_spec = mel_transform(x_tensor).clamp_min(1e-8)
+#             log_mel = torch.log(mel_spec.squeeze() + 1e-8)
+#             log_mel_all.append(log_mel)
+    
+#     # === PROCESS FRAMES ===
+#     silence_count = 0
+    
+#     with torch.no_grad():
+#         for i in range(nframes):
+#             # Compute delta
+#             delta = log_mel_all[i] - log_mel_all[i-1] if i > 0 else torch.zeros_like(log_mel_all[0])
+#             features = torch.cat([log_mel_all[i], delta]).unsqueeze(0).unsqueeze(0)
+            
+#             # Get neural prediction
+#             log_noise_mel, _, confidence = model(features)
+#             linear_noise_mel = model.to_linear_power(log_noise_mel).squeeze().cpu().numpy()
+            
+#             # Mel → FFT inversion (FAST!)
+#             noise_power_fft = mel_fb_pinv @ linear_noise_mel
+#             noise_power_fft = np.clip(noise_power_fft, 1e-10, 1e3)
+#             neural_noise_fft = np.sqrt(noise_power_fft)
+            
+#             # Reconstruct full FFT
+#             neural_noise_full = np.zeros(fftl)
+#             neural_noise_full[:n_stft_bins] = neural_noise_fft
+#             if n_stft_bins < fftl:
+#                 neural_noise_full[n_stft_bins:] = np.flipud(neural_noise_fft[1:fftl - n_stft_bins + 1])
+            
+#             if i == 0:
+#                 print(f"[DEBUG] Neural mel: [{linear_noise_mel.min():.6f}, {linear_noise_mel.max():.6f}]")
+#                 print(f"[DEBUG] Neural FFT: [{noise_power_fft.min():.6f}, {noise_power_fft.max():.6f}]")
+#                 print(f"[DEBUG] Clipped bins: {np.sum(noise_power_fft < 0)}/{len(noise_power_fft)}")
+
+
+#             # Traditional update
+#             vad_update = n_spect[:, 0] if i == 0 else np.sqrt(0.9 * n_spect[:, i-1]**2 + 0.1 * x_magsm[:, i]**2)
+            
+#             # Blend
+#             n_spect[:, i] = (1 - update_weight) * vad_update + update_weight * neural_noise_full
+            
+#             # VAD decision
+#             x_var = x_magsm[:, i] ** 2
+#             n_var = (n_spect[:, 0] ** 2 if i == 0 else n_spect[:, i-1] ** 2)
+#             n_var = np.maximum(n_var, 1e-10)
+#             x_var = np.maximum(x_var, 1e-10)
+            
+#             rti = x_var / n_var - np.log10(x_var / n_var) - 1
+#             judgevalue = np.mean(rti)
+            
+#             if judgevalue > 0.30:  # Speech
+#                 state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
+#                 if i > 0:
+#                     n_spect[:, i] = n_spect[:, i-1]
+#             else:  # Silence
+#                 state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
+#                 silence_count += 1
+    
+#     return n_spect, state, silence_count
+
+def noiseupdt(x_magsm, n_spect, noise_model , cmmnlen, nframes, fs=16000):
+    """Voice Activity Detection and noise spectrum update
+    
+    Args:
+        x_magsm: Noisy magnitude spectrum (freq_bins, nframes)
+        n_spect: Current noise estimate (freq_bins, nframes)
+        cmmnlen: Samples per frame
+        nframes: Number of frames
+        n_spect_actual: Ground truth noise (optional, for Mode 1)
+        use_gru: Use TinyNoiseGru model (Mode 3)
+        fs: Sample rate (needed for mel transform)
+    """
+    # global hidden_state  # Persistent GRU state
+    
+    SPEECH = 1
+    SILENCE = 0
     state = np.zeros(nframes * cmmnlen, dtype=int)
-    n_stft_bins = fftl // 2 + 1
-
-    # Maybe use cell 5 to get the correct format for input 
     
-    # === PRECOMPUTE MEL INVERSE (ONCE) ===
-    mel_fb = mel_transform.fb.cpu().numpy()
-    mel_fb_pinv = np.linalg.pinv(mel_fb.T, rcond=1e-3)
-    print(f"[DEBUG] Mel inverse: {mel_fb_pinv.shape}, condition number: {np.linalg.cond(mel_fb.T):.2f}")
+    # MODE 3: Using TinyNoiseGru Model (NEW)
     
-    # === COLLECT MEL FEATURES ===
-    log_mel_all = []
-    model.eval()
-    
+    # Convert linear magnitude spectrum to mel-scale features
+    n_fft = (x_magsm.shape[0] - 1) * 2
+    mel_transform = torchaudio.transforms.MelScale(
+        n_mels=32, sample_rate=fs, n_stft=x_magsm.shape[0]        )
+        
+    # Process all frames at once
+    x_power = x_magsm ** 2  # Convert to power
+    x_mel = mel_transform(torch.from_numpy(x_power).float())  # (32, nframes)
+    log_mel = torch.log(x_mel.clamp_min(1e-8) + 1e-8)
+        
+    # Compute delta features
+    delta = torch.zeros_like(log_mel)
+    delta[:, 1:] = log_mel[:, 1:] - log_mel[:, :-1]
+        
+    # Concatenate [log_mel + delta]
+    features = torch.cat([log_mel, delta], dim=0).T.unsqueeze(0)  # (1, nframes, 64)
+        
+    # Get noise estimate from model
     with torch.no_grad():
-        for i in range(nframes):
-            x_mag_frame = x_magsm[:n_stft_bins, i]
-            x_tensor = torch.tensor(x_mag_frame, dtype=torch.float32, device=device).unsqueeze(1)
-            mel_spec = mel_transform(x_tensor).clamp_min(1e-8)
-            log_mel = torch.log(mel_spec.squeeze() + 1e-8)
-            log_mel_all.append(log_mel)
+        log_noise_mel, (h1, h2), confidence = noise_model(features, hidden_state)
+        hidden_state = (h1, h2)  # Update hidden state
+        
+    # Convert back to linear mel-scale power
+    noise_mel_power = torch.exp(log_noise_mel.squeeze(0).cpu())  # (nframes, 32)
+        
+    # Inverse mel transform to get full spectrum
+    # Option A: Simple upsampling (fast, less accurate)
+    n_spect_updated = torch.nn.functional.interpolate(
+        noise_mel_power.T.unsqueeze(0).unsqueeze(0),
+        size=x_magsm.shape[0],
+        mode='linear'
+    ).squeeze().T.numpy()
+        
+        # Option B: Use inverse mel filterbank (more accurate, slower)
+        # inverse_mel = torchaudio.transforms.InverseMelScale(
+        #     n_stft=x_magsm.shape[0], n_mels=32, sample_rate=fs
+        # )
+        # n_spect_updated = inverse_mel(noise_mel_power.T).T.numpy()
+        
+    # Compute VAD from estimated noise
+    for i in range(nframes):
+        x_var = x_magsm[:, i] ** 2
+        n_var = n_spect_updated[:, i] ** 2
+            
+        epsilon = 1e-10
+        n_var[n_var < epsilon] = epsilon
+        x_var[x_var < epsilon] = epsilon
+            
+        rti = x_var / n_var - np.log10(x_var / n_var) - 1
+        judgevalue = np.mean(rti)
+            
+        if judgevalue > 0.45:
+            state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
+        else:                state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
+        
+    return n_spect_updated, state
     
-    # === PROCESS FRAMES ===
-    silence_count = 0
-    
-    with torch.no_grad():
-        for i in range(nframes):
-            # Compute delta
-            delta = log_mel_all[i] - log_mel_all[i-1] if i > 0 else torch.zeros_like(log_mel_all[0])
-            features = torch.cat([log_mel_all[i], delta]).unsqueeze(0).unsqueeze(0)
-            
-            # Get neural prediction
-            log_noise_mel, _, confidence = model(features)
-            linear_noise_mel = model.to_linear_power(log_noise_mel).squeeze().cpu().numpy()
-            
-            # Mel → FFT inversion (FAST!)
-            noise_power_fft = mel_fb_pinv @ linear_noise_mel
-            noise_power_fft = np.clip(noise_power_fft, 1e-10, 1e3)
-            neural_noise_fft = np.sqrt(noise_power_fft)
-            
-            # Reconstruct full FFT
-            neural_noise_full = np.zeros(fftl)
-            neural_noise_full[:n_stft_bins] = neural_noise_fft
-            if n_stft_bins < fftl:
-                neural_noise_full[n_stft_bins:] = np.flipud(neural_noise_fft[1:fftl - n_stft_bins + 1])
-            
-            if i == 0:
-                print(f"[DEBUG] Neural mel: [{linear_noise_mel.min():.6f}, {linear_noise_mel.max():.6f}]")
-                print(f"[DEBUG] Neural FFT: [{noise_power_fft.min():.6f}, {noise_power_fft.max():.6f}]")
-                print(f"[DEBUG] Clipped bins: {np.sum(noise_power_fft < 0)}/{len(noise_power_fft)}")
-
-
-            # Traditional update
-            vad_update = n_spect[:, 0] if i == 0 else np.sqrt(0.9 * n_spect[:, i-1]**2 + 0.1 * x_magsm[:, i]**2)
-            
-            # Blend
-            n_spect[:, i] = (1 - update_weight) * vad_update + update_weight * neural_noise_full
-            
-            # VAD decision
-            x_var = x_magsm[:, i] ** 2
-            n_var = (n_spect[:, 0] ** 2 if i == 0 else n_spect[:, i-1] ** 2)
-            n_var = np.maximum(n_var, 1e-10)
-            x_var = np.maximum(x_var, 1e-10)
-            
-            rti = x_var / n_var - np.log10(x_var / n_var) - 1
-            judgevalue = np.mean(rti)
-            
-            if judgevalue > 0.30:  # Speech
-                state[i*cmmnlen:(i+1)*cmmnlen] = SPEECH
-                if i > 0:
-                    n_spect[:, i] = n_spect[:, i-1]
-            else:  # Silence
-                state[i*cmmnlen:(i+1)*cmmnlen] = SILENCE
-                silence_count += 1
-    
-    return n_spect, state, silence_count
-
 
 def estfilt1(nChannels, Srate):
     """Estimate filter bank for logarithmic spacing"""
@@ -356,20 +433,25 @@ def mband_neural(
         ).to(device)
         
         n_spect_expanded = np.tile(n_spect, (1, nframes))
-        n_spect, state, silence_count = noiseupdt_neural(
-            x_magsm, n_spect_expanded, cmmnlen, nframes, 
-            model, mel_transform, device, fftl, N_MEL_BANDS, 
-            update_weight=NEURAL_WEIGHT
+        # n_spect, state, silence_count = noiseupdt(
+        #     x_magsm, n_spect_expanded, cmmnlen, nframes, 
+        #     model, mel_transform, device, fftl, N_MEL_BANDS, 
+        #     update_weight=NEURAL_WEIGHT
+        # )
+
+        n_spect, state = noiseupdt(
+            x_magsm, n_spect_expanded, model, cmmnlen, nframes, fs
         )
+        
         
         # Debug: check VAD statistics
         speech_count = (state == 1).sum()
         silence_count_total = (state == 0).sum()
         print(f"[DEBUG] VAD: {speech_count} speech samples, {silence_count_total} silence samples ({100*silence_count_total/(speech_count+silence_count_total):.1f}%)")
-        print(f"[DEBUG] Neural GRU called {silence_count} times (once per silence frame)")
-        if silence_count == 0:
-            print(f"[WARNING] Neural model was NEVER called! VAD is marking everything as speech.")
-            print(f"[WARNING] Try lowering VAD threshold or disabling VAD (VAD=0)")
+        # print(f"[DEBUG] Neural GRU called {silence_count} times (once per silence frame)")
+        # if silence_count == 0:
+        #     print(f"[WARNING] Neural model was NEVER called! VAD is marking everything as speech.")
+        #     print(f"[WARNING] Try lowering VAD threshold or disabling VAD (VAD=0)")
     else:
         n_spect = np.repeat(n_spect, nframes, axis=1)
         print("[INFO] VAD disabled - using constant noise estimate")
@@ -526,7 +608,7 @@ if __name__ == "__main__":
             AVRGING=1,
             VAD=1,
             N_MEL_BANDS=32,
-            NEURAL_WEIGHT=weight,
+            # NEURAL_WEIGHT=weight,
         )
 
     print("\n[SUCCESS] Neural-guided VAD enhancement complete!")

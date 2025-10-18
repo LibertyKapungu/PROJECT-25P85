@@ -1,0 +1,138 @@
+========================================================================================================================
+EXPERIMENT: SPECTRAL_COMPARISON_5DB
+MULTI-METHOD AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Baseline_Noisy, SS_TD, TD_baseline
+Baseline method: Baseline_Noisy
+Number of common files: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csv_TD\spectral_comparison_5dB_20251017_142707
+========================================================================================================================
+
+AVERAGE METRIC VALUES:
+------------------------------------------------------------------------------------------------------------------------
+         Metric  Baseline_Noisy  SS_TD  TD_baseline
+           PESQ          1.3493 1.3399       1.3399
+         SI_SDR          9.9977 9.3934       9.3933
+           STOI          0.7695 0.7720       0.7720
+DNSMOS_p808_mos          2.9154 2.9141       2.9141
+ DNSMOS_mos_sig          4.0419 4.0714       4.0714
+ DNSMOS_mos_bak          2.2972 2.3243       2.3243
+ DNSMOS_mos_ovr          2.6121 2.6331       2.6331
+
+
+IMPROVEMENT OVER BASELINE:
+Format: Value |(Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+         Metric Baseline_Noisy SS_TD_Value SS_TD_Change SS_TD_% TD_baseline_Value TD_baseline_Change TD_baseline_%
+           PESQ         1.3493      1.3399      -0.0094  -0.70%            1.3399            -0.0094        -0.70%
+         SI_SDR         9.9977      9.3934      -0.6043  -6.04%            9.3933            -0.6044        -6.05%
+           STOI         0.7695      0.7720      +0.0025  +0.32%            0.7720            +0.0025        +0.32%
+DNSMOS_p808_mos         2.9154      2.9141      -0.0013  -0.04%            2.9141            -0.0013        -0.04%
+ DNSMOS_mos_sig         4.0419      4.0714      +0.0295  +0.73%            4.0714            +0.0295        +0.73%
+ DNSMOS_mos_bak         2.2972      2.3243      +0.0271  +1.18%            2.3243            +0.0271        +1.18%
+ DNSMOS_mos_ovr         2.6121      2.6331      +0.0210  +0.80%            2.6331            +0.0210        +0.80%
+
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+PESQ (Range: -0.5 to 4.5):
+  SS_TD:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  SS_TD:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  SS_TD:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  SS_TD:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  SS_TD:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  SS_TD:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  SS_TD:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  TD_baseline:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+
+PERFORMANCE BY NOISE CATEGORY (Hardest Cases):
+------------------------------------------------------------------------------------------------------------------------
+Noise_Category         Metric Baseline_Noisy           SS_TD     TD_baseline
+    Babble/SSN           PESQ          1.372  1.538 (+0.166)  1.538 (+0.166)
+    Babble/SSN         SI_SDR          9.995  8.849 (-1.146)  8.849 (-1.146)
+    Babble/SSN           STOI          0.702  0.764 (+0.062)  0.764 (+0.062)
+    Babble/SSN DNSMOS_mos_ovr          2.843  2.864 (+0.020)  2.864 (+0.020)
+           Car           PESQ          1.334  1.287 (-0.048)  1.287 (-0.048)
+           Car         SI_SDR          9.996  9.968 (-0.027)  9.968 (-0.027)
+           Car           STOI          0.827  0.809 (-0.018)  0.809 (-0.018)
+           Car DNSMOS_mos_ovr          2.785  2.774 (-0.011)  2.774 (-0.011)
+  Construction           PESQ          1.239  1.241 (+0.002)  1.241 (+0.002)
+  Construction         SI_SDR          9.995  8.489 (-1.507)  8.489 (-1.507)
+  Construction           STOI          0.792  0.800 (+0.009)  0.800 (+0.009)
+  Construction DNSMOS_mos_ovr          2.236  2.404 (+0.168)  2.404 (+0.168)
+    Stationary           PESQ          1.354  1.316 (-0.038)  1.316 (-0.038)
+    Stationary         SI_SDR         10.002  9.267 (-0.735)  9.267 (-0.735)
+    Stationary           STOI          0.770  0.755 (-0.015)  0.755 (-0.015)
+    Stationary DNSMOS_mos_ovr          2.842  2.583 (-0.259)  2.583 (-0.259)
+        Street           PESQ          1.289  1.301 (+0.012)  1.301 (+0.012)
+        Street         SI_SDR         10.003 10.014 (+0.012) 10.014 (+0.012)
+        Street           STOI          0.771  0.769 (-0.002)  0.769 (-0.002)
+        Street DNSMOS_mos_ovr          2.832  2.671 (-0.161)  2.671 (-0.161)
+         Train           PESQ          1.481  1.421 (-0.059)  1.421 (-0.059)
+         Train         SI_SDR          9.998  9.998 (-0.000)  9.998 (-0.000)
+         Train           STOI          0.739  0.736 (-0.003)  0.736 (-0.003)
+         Train DNSMOS_mos_ovr          2.566  2.700 (+0.134)  2.700 (+0.134)
+
+========================================================================================================================

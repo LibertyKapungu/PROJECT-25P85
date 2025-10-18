@@ -376,11 +376,6 @@ def mband(
 
     return enhanced_tensor, fs
 
-# if __name__ == "__main__":
-#     # Example usage
-#     noisy_audio = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\final_audio_check\\03_noisy_input_to_mband.wav")[0]
-#     mband(noisy_audio, fs=16000, output_dir="C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\validation_dataset\\enhanced_speech", output_file="enhanced_sp21_station_sn5.wav", input_name="sp21_station_sn5", Nband=4, Freq_spacing='linear', FRMSZ=8, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1)
-
 def prepare_audio_data(clean_path, noise_path, target_sr, snr_db):
     """Robustly prepares audio data using RMS-based SNR calculation."""
     clean_audio, clean_sr = torchaudio.load(clean_path)
@@ -418,7 +413,8 @@ if __name__ == "__main__":
     torch.manual_seed(42)
 
     clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
-    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
+    #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
+    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_noisy_input.wav")
 
     print("Preparing audio data pair...")
     noisy_tensor, clean_tensor, noise_tensor, fs = prepare_audio_data(clean_path, noise_path, TARGET_SR, TARGET_SNR_DB)
@@ -432,7 +428,7 @@ if __name__ == "__main__":
         noisy_audio=noisy_tensor,
         fs=fs,
         output_dir=OUTPUT_DIR,
-        output_file="mband_normal.wav",
+        output_file="mband_normal_gtcrn.wav",
         input_name="standard_mode",
         Nband=4,
         Freq_spacing='linear',
