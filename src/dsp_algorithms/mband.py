@@ -423,8 +423,6 @@ if __name__ == "__main__":
     print(f"Data pair created at {TARGET_SNR_DB} dB SNR.")
     print("-" * 30)
 
-    print("\nRunning in STANDARD MODE (estimating noise)...")
-
     mband(
         noisy_audio=noisy_tensor,
         fs=noisy_fs,
