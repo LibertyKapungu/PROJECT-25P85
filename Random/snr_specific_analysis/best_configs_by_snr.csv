@@ -1,0 +1,216 @@
+SNR_dB,Freq_spacing,Nband,FRMSZ_ms,OVLP,Floor,PESQ,STOI,SI_SDR,DNSMOS,Weighted_Score
+0,linear,4,8,75,0.01,1.421524167060852,0.8326846361160278,0.0299285054206848,2.2828457124040766,0.6084947347640991
+5,linear,4,8,75,0.01,1.5336768627166748,0.8743718266487122,5.004274845123291,2.264310878322361,0.6405535995960235
+10,linear,4,8,75,0.01,1.7654204368591309,0.9070501327514648,9.976139068603516,2.2129258161735783,0.6800671100616456
+15,linear,6,20,75,0.01,2.2106475830078125,0.9304466247558594,14.79079246520996,2.2608129618534,0.7362880706787109
+
+
+
+================================================================================
+BEST CONFIGURATIONS BY SNR LEVEL
+================================================================================
+
+================================================================================
+SNR = 0 dB
+================================================================================
+
+Best Configuration (Weighted Score: 0.6085):
+  Freq_spacing: linear
+  Nband: 4
+  FRMSZ: 8 ms
+  OVLP: 75%
+  Floor: 0.0100
+
+Metrics:
+  PESQ: 1.4215
+  STOI: 0.8327
+  SI-SDR: 0.03 dB
+  DNSMOS: 2.2828
+
+Top 5 Configurations at 0 dB SNR:
+ Config_ID Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor     PESQ     STOI  Weighted_Score
+        33       linear      4         8    75  0.010 1.421524 0.832685        0.608495
+        36       linear      4         8    75  0.010 1.421524 0.832685        0.608495
+        32       linear      4         8    75  0.002 1.421486 0.832667        0.608482
+        35       linear      4         8    75  0.002 1.421486 0.832667        0.608482
+        31       linear      4         8    75  0.001 1.421477 0.832665        0.608480
+
+Parameter Impact at 0 dB SNR:
+
+  Freq_spacing:
+    linear: 0.6001
+    mel: 0.5940
+    log: 0.5913
+
+  Nband:
+    4: 0.5994
+    6: 0.5966
+    8: 0.5958
+    32: 0.5919
+    16: 0.5918
+
+  OVLP:
+    75: 0.6028
+    50: 0.5950
+    25: 0.5875
+
+================================================================================
+SNR = 5 dB
+================================================================================
+
+Best Configuration (Weighted Score: 0.6406):
+  Freq_spacing: linear
+  Nband: 4
+  FRMSZ: 8 ms
+  OVLP: 75%
+  Floor: 0.0100
+
+Metrics:
+  PESQ: 1.5337
+  STOI: 0.8744
+  SI-SDR: 5.00 dB
+  DNSMOS: 2.2643
+
+Top 5 Configurations at 5 dB SNR:
+ Config_ID Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor     PESQ     STOI  Weighted_Score
+        33       linear      4         8    75  0.010 1.533677 0.874372        0.640554
+        36       linear      4         8    75  0.010 1.533677 0.874372        0.640554
+        32       linear      4         8    75  0.002 1.533566 0.874340        0.640527
+        35       linear      4         8    75  0.002 1.533566 0.874340        0.640527
+        31       linear      4         8    75  0.001 1.533550 0.874336        0.640523
+
+Parameter Impact at 5 dB SNR:
+
+  Freq_spacing:
+    linear: 0.6292
+    mel: 0.6217
+    log: 0.6174
+
+  Nband:
+    4: 0.6278
+    6: 0.6250
+    8: 0.6234
+    32: 0.6189
+    16: 0.6187
+
+  OVLP:
+    75: 0.6327
+    50: 0.6226
+    25: 0.6130
+
+================================================================================
+SNR = 10 dB
+================================================================================
+
+Best Configuration (Weighted Score: 0.6801):
+  Freq_spacing: linear
+  Nband: 4
+  FRMSZ: 8 ms
+  OVLP: 75%
+  Floor: 0.0100
+
+Metrics:
+  PESQ: 1.7654
+  STOI: 0.9071
+  SI-SDR: 9.98 dB
+  DNSMOS: 2.2129
+
+Top 5 Configurations at 10 dB SNR:
+ Config_ID Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor     PESQ     STOI  Weighted_Score
+        33       linear      4         8    75  0.010 1.765420 0.907050        0.680067
+        36       linear      4         8    75  0.010 1.765420 0.907050        0.680067
+        32       linear      4         8    75  0.002 1.765264 0.907010        0.680031
+        35       linear      4         8    75  0.002 1.765264 0.907010        0.680031
+        31       linear      4         8    75  0.001 1.765238 0.907004        0.680026
+
+Parameter Impact at 10 dB SNR:
+
+  Freq_spacing:
+    linear: 0.6653
+    mel: 0.6561
+    log: 0.6500
+
+  Nband:
+    4: 0.6633
+    6: 0.6599
+    8: 0.6577
+    32: 0.6525
+    16: 0.6522
+
+  OVLP:
+    75: 0.6702
+    50: 0.6568
+    25: 0.6443
+
+================================================================================
+SNR = 15 dB
+================================================================================
+
+Best Configuration (Weighted Score: 0.7363):
+  Freq_spacing: linear
+  Nband: 6
+  FRMSZ: 20 ms
+  OVLP: 75%
+  Floor: 0.0100
+
+Metrics:
+  PESQ: 2.2106
+  STOI: 0.9304
+  SI-SDR: 14.79 dB
+  DNSMOS: 2.2608
+
+Top 5 Configurations at 15 dB SNR:
+ Config_ID Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor     PESQ     STOI  Weighted_Score
+       141       linear      6        20    75  0.010 2.210648 0.930447        0.736288
+       140       linear      6        20    75  0.002 2.211121 0.930336        0.736280
+       139       linear      6        20    75  0.001 2.211140 0.930322        0.736275
+        69       linear      4        20    75  0.010 2.206969 0.930391        0.735893
+        68       linear      4        20    75  0.002 2.207442 0.930281        0.735885
+
+Parameter Impact at 15 dB SNR:
+
+  Freq_spacing:
+    linear: 0.7153
+    mel: 0.7023
+    log: 0.6939
+
+  Nband:
+    4: 0.7120
+    6: 0.7073
+    8: 0.7047
+    32: 0.6978
+    16: 0.6973
+
+  OVLP:
+    75: 0.7224
+    50: 0.7036
+    25: 0.6855
+
+================================================================================
+BEST CONFIGURATION COMPARISON ACROSS SNR LEVELS
+================================================================================
+
+ SNR_dB Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor     PESQ     STOI    SI_SDR   DNSMOS  Weighted_Score
+      0       linear      4         8    75   0.01 1.421524 0.832685  0.029929 2.282846        0.608495
+      5       linear      4         8    75   0.01 1.533677 0.874372  5.004275 2.264311        0.640554
+     10       linear      4         8    75   0.01 1.765420 0.907050  9.976139 2.212926        0.680067
+     15       linear      6        20    75   0.01 2.210648 0.930447 14.790792 2.260813        0.736288
+
+================================================================================
+PARAMETER CONSISTENCY ACROSS SNR LEVELS
+================================================================================
+
+Freq_spacing: linear (appears 4/4 times)
+Nband: 4 (appears 3/4 times)
+OVLP: 75% (appears 4/4 times)
+
+================================================================================
+RECOMMENDED UNIVERSAL CONFIGURATION
+================================================================================
+(Works well across all SNR levels)
+
+  Freq_spacing: linear
+  Nband: 4
+  FRMSZ_ms: 8
+  OVLP: 75%
+  Floor: 0.0100
