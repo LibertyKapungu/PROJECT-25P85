@@ -1,3 +1,21 @@
+"""
+Experiment WF_EXP1p1b: Causal Wiener Filter with Default Settings but 8ms windows
+
+This experiment evaluates the performance of the causal Wiener filter implementation on noisy speech data.
+The filter is applied with default parameters to assess its effectiveness in speech enhancement across
+various SNR levels, using a causal processing approach.
+
+Purpose: Run the causal Wiener filter translation at default settings
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path

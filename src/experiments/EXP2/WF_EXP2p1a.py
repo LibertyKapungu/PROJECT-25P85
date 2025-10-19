@@ -1,3 +1,29 @@
+"""
+Experiment WF_EXP2p1a: Wiener Filter with Tiny GRU VAD Integration
+
+This experiment evaluates the performance of the causal Wiener filter enhanced with voice activity
+detection using a Tiny GRU-based VAD network. The VAD helps identify speech segments for more
+targeted noise reduction processing.
+
+Key features:
+- Uses Tiny GRU VAD model for speech/non-speech detection
+- Causal Wiener filter with 8ms frame duration
+- Tests multiple VAD thresholds to optimize speech detection
+
+VAD thresholds tested: 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60
+
+Purpose: Integrate VAD with Wiener filtering to improve speech enhancement by focusing noise updates on
+non-speech segments.
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path
@@ -49,7 +75,7 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = [0.45, 0.5, 0.55]  # VAD threshold
+Threshold = [0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60]  # VAD threshold
 
 for threshold in Threshold:
     for snr_dB in snr_dB_range:
@@ -100,7 +126,7 @@ for threshold in Threshold:
                 clean_name=clean_filename,
                 enhanced_name=output_filename,
                 csv_dir=str(results_dir_snr),
-                csv_filename=f'WF_EXP2.1a_data_SNR[{snr_dB}]dB_THRESH[{threshold:.2f}]'
+                csv_filename=f'WF_EXP2p1a_data_SNR[{snr_dB}]dB_THRESH[{threshold:.2f}]'
             )
             
             # Print summary
@@ -131,7 +157,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WF_EXP1p2_merged_[{snr_dB}]dB.csv',
+        output_filename=f'WF_EXP2p1a_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
     print(f"Merged results for {snr_dB}dB: {merged_path}")

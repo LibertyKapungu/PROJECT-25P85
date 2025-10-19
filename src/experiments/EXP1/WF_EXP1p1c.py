@@ -1,3 +1,21 @@
+"""
+Experiment WF_EXP1p1c: Causal Wiener Filter with 20ms Windows
+
+This experiment evaluates the performance of the causal Wiener filter implementation on noisy speech data
+using 20ms frame durations. The filter is applied with default parameters to assess its effectiveness in
+speech enhancement across various SNR levels, comparing the impact of longer frame windows.
+
+Purpose: Run the causal Wiener filter translation at default settings with 20ms windows
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path

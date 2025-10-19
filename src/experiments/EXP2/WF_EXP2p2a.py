@@ -1,3 +1,29 @@
+"""
+Experiment WF_EXP2p2a: Wiener Filter with NVIDIA MarbleNet VAD Integration
+
+This experiment evaluates the performance of the causal Wiener filter enhanced with voice activity
+detection using NVIDIA's MarbleNet VAD model. MarbleNet is a lightweight, efficient VAD network
+designed for real-time speech processing applications.
+
+Key features:
+- Uses NVIDIA MarbleNet VAD model for speech/non-speech detection
+- Causal Wiener filter with 20ms frame duration (default parameters)
+- Tests multiple VAD thresholds to optimize speech detection
+
+VAD thresholds tested: 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60
+
+Purpose: Integrate MarbleNet VAD with Wiener filtering to improve speech enhancement by focusing
+noise reduction processing on detected speech segments, leveraging MarbleNet's efficiency.
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path
@@ -49,7 +75,7 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = [0.45, 0.5, 0.55]  # VAD threshold
+Threshold = [0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60]  # VAD threshold
 
 for threshold in Threshold:
     for snr_dB in snr_dB_range:
@@ -98,7 +124,7 @@ for threshold in Threshold:
                 clean_name=clean_filename,
                 enhanced_name=output_filename,
                 csv_dir=str(results_dir_snr),
-                csv_filename=f'WF_EXP2.1a_data_SNR[{snr_dB}]dB_THRESH[{threshold:.2f}]'
+                csv_filename=f'WF_EXP2p2a_data_SNR[{snr_dB}]dB_THRESH[{threshold:.2f}]'
             )
             
             # Print summary

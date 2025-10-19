@@ -1,3 +1,21 @@
+"""
+Experiment WF_EXP1p1a: Wiener PCL Filter with Default Settings but using 8ms windows
+
+This experiment evaluates the performance of the original Wiener PCL (Philipos C. Loizou) filter
+implementation on noisy speech data. The filter is applied with default parameters to assess its
+effectiveness in speech enhancement across various SNR levels.
+
+Purpose: Run the original Wiener PCL translation at default settings
+
+Datasets used:
+- EARS dataset for clean speech
+- NOIZEUS dataset for noise
+
+SNR levels tested: -5, 0, 5, 10, 15 dB
+
+Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+"""
+
 import pandas as pd
 import torchaudio
 from pathlib import Path
