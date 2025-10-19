@@ -12,7 +12,7 @@ ckpt = torch.load(os.path.join(base_dir,'checkpoints', 'model_trained_on_dns3.ta
 model.load_state_dict(ckpt['model'])
 
 ## load data
-mix, fs = sf.read(os.path.join(base_dir,'test_wavs', 'sp21_station_sn5.wav'), dtype='float32')
+mix, fs = sf.read(os.path.join(base_dir,'test_wavs', 'noisy_input.wav'), dtype='float32')
 # assert fs == 16000
 
 if fs != 16000:
@@ -35,4 +35,4 @@ complex_output = torch.complex(real, imag)
 enh = torch.istft(complex_output, 512, 256, 512, torch.hann_window(512).pow(0.5), return_complex=False)
 
 ## save enhanced wav
-sf.write(os.path.join(base_dir, 'test_wavs', 'enh_sp21_station_sn5.wav'), enh.detach().cpu().numpy(), fs)
+sf.write(os.path.join(base_dir, 'test_wavs', 'enh_noisy_input2.wav'), enh.detach().cpu().numpy(), fs)

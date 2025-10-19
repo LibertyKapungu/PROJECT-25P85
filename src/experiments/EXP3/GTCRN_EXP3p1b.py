@@ -57,27 +57,6 @@ from dsp_algorithms.mband import mband
 # Import GTCRN model
 from deep_learning.gtcrn_model.gtcrn import GTCRN
 
-
-def load_gtcrn_model(checkpoint_path, device='cpu'):
-    """
-    Load GTCRN model from checkpoint.
-    
-    Args:
-        checkpoint_path: Path to model checkpoint file
-        device: Device to load model on ('cpu' or 'cuda')
-    
-    Returns:
-        Loaded GTCRN model in eval mode
-    """
-    print(f"Loading GTCRN model from: {checkpoint_path}")
-    device = torch.device(device)
-    model = GTCRN().eval().to(device)
-    ckpt = torch.load(checkpoint_path, map_location=device)
-    model.load_state_dict(ckpt['model'])
-    print("GTCRN model loaded successfully")
-    return model, device
-
-
 def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
     """
     Enhance noisy speech using GTCRN model.
@@ -147,7 +126,10 @@ def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
 
 # Load GTCRN model
 checkpoint_path = gtcrn_path / "checkpoints" / "model_trained_on_dns3.tar"
-gtcrn_model, device = load_gtcrn_model(checkpoint_path, device='cpu')  # Make a class out of these functions? 
+device = torch.device("cpu")
+model = GTCRN().eval().to(device)
+ckpt = torch.load(checkpoint_path, map_location=device)
+model.load_state_dict(ckpt['model'])
 
 # Load test datasets
 print("\nLoading EARS test dataset...")
@@ -162,7 +144,8 @@ print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
 paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
-snr_dB_range = [-5, 0, 5, 10, 15]
+# snr_dB_range = [-5, 0, 5, 10, 15]
+snr_dB_range = [5]
 
 for snr_dB in snr_dB_range:
 
@@ -188,7 +171,6 @@ for snr_dB in snr_dB_range:
 
         # Step 2: Resample to 16kHz if needed (GTCRN requirement)
         if clean_sr != 16000:
-            print(f"2. Resampling from {clean_sr}Hz to 16000Hz...")
             resampler = torchaudio.transforms.Resample(orig_freq=clean_sr, new_freq=16000)
             clean_waveform_16k = resampler(clean_waveform)
             noisy_speech_16k = resampler(noisy_speech)
@@ -197,13 +179,12 @@ for snr_dB in snr_dB_range:
             clean_waveform_16k = clean_waveform
             noisy_speech_16k = noisy_speech
             processing_sr = clean_sr
-            print("2. Audio already at 16kHz, no resampling needed")
 
         # Step 3: Enhance with GTCRN
         print("3. Enhancing speech with GTCRN...")
         gtcrn_enhanced = enhance_with_gtcrn(
             noisy_waveform=noisy_speech_16k,
-            model=gtcrn_model,
+            model=model,
             device=device,
             target_sr=processing_sr
         )
@@ -214,13 +195,13 @@ for snr_dB in snr_dB_range:
         final_enhanced_speech, final_fs = mband(
             noisy_audio=gtcrn_enhanced,
             fs=processing_sr,
-            Nband=4,
+            Nband=8,
             Freq_spacing='linear',
-            FRMSZ=8,
+            FRMSZ=20,
             OVLP=50,
             AVRGING=1,
             Noisefr=1,
-            FLOOR=0.002,
+            FLOOR=0.02,
             VAD=1,
         )
 
@@ -268,7 +249,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'GTCRN_SS_NOIZEUS_EARS_[{snr_dB}]dB.csv',
+        output_filename=f'GTCRN_SS_TEST2_[{snr_dB}]dB.csv',
         keep_source=True
     )
     print(f"Merged results saved to: {merged_path}")

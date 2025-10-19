@@ -414,11 +414,11 @@ if __name__ == "__main__":
 
     clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
     #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
-    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_sp21_station_sn5.wav")
+    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\enh_noisy_input2.wav")
 
     noisy_tensor, noisy_fs = torchaudio.load(noise_path)
-    # print("Preparing audio data pair...")
-    # noisy_tensor, clean_tensor, noise_tensor, fs = prepare_audio_data(clean_path, noise_path, TARGET_SR, TARGET_SNR_DB)
+    print("Preparing audio data pair...")
+    noisy_tensor, clean_tensor, noise_tensor, fs = prepare_audio_data(clean_path, noise_path, TARGET_SR, TARGET_SNR_DB)
 
     print(f"Data pair created at {TARGET_SNR_DB} dB SNR.")
     print("-" * 30)
@@ -427,7 +427,7 @@ if __name__ == "__main__":
         noisy_audio=noisy_tensor,
         fs=noisy_fs,
         output_dir=OUTPUT_DIR,
-        output_file="mband_gtcrn_station.wav",
+        output_file="mband_gtcrn_noisy_input2.wav",
         input_name="standard_mode",
         Nband=4,
         Freq_spacing='linear',
