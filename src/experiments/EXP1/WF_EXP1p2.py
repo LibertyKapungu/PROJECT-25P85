@@ -124,11 +124,11 @@ for frame_dur_ms in frame_dur_ms_values:
                 current_a_dd = float(default_a_dd)
                 current_eta = float(param_value)
                 
-            print(f"Current parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
-            print(f"[DEBUG]: Types - mu: {type(current_mu)}, a_dd: {type(current_a_dd)}, eta: {type(current_eta)}")
-            print(f"[DEBUG]: CSV filename will be: WF_EXP1p2_data_SNR[{snr_dB}]dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}_frame{frame_dur_ms}ms")
-
             for snr_dB in snr_dB_range:
+
+                print(f"Current parameters: mu={current_mu}, a_dd={current_a_dd}, eta={current_eta}")
+                print(f"[DEBUG]: Types - mu: {type(current_mu)}, a_dd: {type(current_a_dd)}, eta: {type(current_eta)}")
+                print(f"[DEBUG]: CSV filename will be: WF_EXP1p2_data_SNR[{snr_dB}]dB_mu{current_mu}_a{current_a_dd}_eta{current_eta}_frame{frame_dur_ms}ms")
 
                 print(f"Processing SNR: {snr_dB} dB")
 

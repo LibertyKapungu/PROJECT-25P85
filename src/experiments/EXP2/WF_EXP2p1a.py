@@ -10,7 +10,7 @@ Key features:
 - Causal Wiener filter with 8ms frame duration
 - Tests multiple VAD thresholds to optimize speech detection
 
-VAD thresholds tested: 0.45, 0.50, 0.55
+VAD thresholds tested: 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60
 
 Purpose: Integrate VAD with Wiener filtering to improve speech enhancement by focusing noise updates on
 non-speech segments.
@@ -75,7 +75,7 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = [0.45, 0.5, 0.55]  # VAD threshold
+Threshold = [0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60]  # VAD threshold
 
 for threshold in Threshold:
     for snr_dB in snr_dB_range:
