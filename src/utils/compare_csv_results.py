@@ -581,23 +581,20 @@ if __name__ == "__main__":
     # Define your CSV files with descriptive names
     csv_files = {
         'Baseline_Noisy': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP0\\noisy_vs_clean\\BASELINE_merged_SNR[10]dB.csv",
-        # 'Wiener_Filter':  "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\wiener\\WF_EXP1p1b\\WF_EXP1p1b_merged_[5]dB.csv",
-        # 'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
-        # 'SS_B4FRAME_CHANGE': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\SS_EXP2p1b\\SS_EXP1p2_merged_[5]dB.csv",
-        'SS_TD': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\tinydenoiser\\SSTD_EXP3p1b\\WFTD_EXP3p1b_merged_[10]dB.csv",
-        'TD_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\tinydenoiser\\TD_EXP3p1a\\TD_EXP3p1a_merged_[10]dB.csv"
-
+        'Wiener_Filter':  "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\wiener\\WF_EXP1p1b\\WF_EXP1p1b_merged_[5]dB.csv",
+        'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
+        'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
         # Add up to 6 total methods
     }
     
     # Set output folder (will create subdirectories)
-    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csv_TD"
+    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csvs\\compare_GTCRN_baseline"
     
     # Create comparator with experiment name
     comparator = MultiAudioEnhancementComparator(
         csv_files,
         output_folder=output_folder,
-        experiment_name="spectral_comparison_5dB"
+        experiment_name="GTCRN_baseline_comparison_5dB"
     )
     
     # Calculate differences (relative to baseline - first method by default)
