@@ -162,8 +162,7 @@ print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
 paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
-#snr_dB_range = [-5, 0, 5, 10, 15]
-snr_dB_range = [5]
+snr_dB_range = [-5, 0, 5, 10, 15]
 
 for snr_dB in snr_dB_range:
 
