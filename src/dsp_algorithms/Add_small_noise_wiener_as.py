@@ -76,20 +76,43 @@ def wiener_filter_with_residual(
     synth_win = analysis_win.clone()
     U = (analysis_win @ analysis_win) / frame_samples
 
-    # Initial noise PSD estimate
+    # # Initial noise PSD estimate
+    # len_120ms = int(fs * 0.120)
+    # init_seg = waveform[:len_120ms]
+    # nsubframes = max(1, (len(init_seg) - frame_samples) // hop + 1)
+
+    # noise_ps = torch.zeros(frame_samples, device=device)
+    # for j in range(nsubframes):
+    #     seg = init_seg[j * hop:j * hop + frame_samples]
+    #     if seg.numel() < frame_samples:
+    #         seg = torch.nn.functional.pad(seg, (0, frame_samples - seg.numel()))
+    #     wseg = seg * analysis_win
+    #     X = torch.fft.fft(wseg, n=frame_samples)
+    #     noise_ps += (X.abs() ** 2) / (frame_samples * U)
+    # noise_ps /= nsubframes
+
     len_120ms = int(fs * 0.120)
     init_seg = waveform[:len_120ms]
     nsubframes = max(1, (len(init_seg) - frame_samples) // hop + 1)
 
-    noise_ps = torch.zeros(frame_samples, device=device)
+    # Collect power spectra for initial frames
+    init_frame_powers = []
     for j in range(nsubframes):
         seg = init_seg[j * hop:j * hop + frame_samples]
         if seg.numel() < frame_samples:
             seg = torch.nn.functional.pad(seg, (0, frame_samples - seg.numel()))
         wseg = seg * analysis_win
         X = torch.fft.fft(wseg, n=frame_samples)
-        noise_ps += (X.abs() ** 2) / (frame_samples * U)
-    noise_ps /= nsubframes
+        power = (X.abs() ** 2) / (frame_samples * U)
+        init_frame_powers.append(power)
+
+    init_frame_powers = torch.stack(init_frame_powers)
+
+    # Use 10th percentile (more robust than mean for post-GTCRN)
+    noise_ps = torch.quantile(init_frame_powers, 0.05, dim=0)
+
+    print(f"Initial noise estimate from {nsubframes} frames (10th percentile):")
+    print(f"  Mean noise power: {10*torch.log10(noise_ps.mean() + 1e-16):.2f} dB")
 
     # Frequency-dependent residual factors (like spectral subtraction)
     if freq_dependent and residual_method == 'power':
@@ -134,28 +157,87 @@ def wiener_filter_with_residual(
             priori = a_dd * (G_prev**2) * posteri_prev + (1 - a_dd) * posteri_prime
 
         # VAD / noise update
-        log_sigma_k = posteri * priori / (1 + priori) - torch.log1p(priori)
-        vad_decision = log_sigma_k.mean()
-        if vad_decision < eta:
+        # log_sigma_k = posteri * priori / (1 + priori) - torch.log1p(priori)
+        # vad_decision = log_sigma_k.mean()
+        # if vad_decision < eta:
+        #     noise_ps = mu * noise_ps + (1 - mu) * noisy_ps
+
+        # SNR-based VAD (more reliable after GTCRN enhancement)
+        frame_signal_power = noisy_ps.mean()
+        frame_noise_power = noise_ps.mean()
+        frame_snr_db = 10 * torch.log10((frame_signal_power / (frame_noise_power + 1e-16)) + 1e-16)
+
+        # If frame is quiet (< 10 dB above noise floor), update noise
+        vad_threshold_db = 20.0  # Adjustable: higher = more conservative
+        if frame_snr_db < vad_threshold_db:
+            # This is likely noise/silence, update estimate
             noise_ps = mu * noise_ps + (1 - mu) * noisy_ps
+            
+        # Debug (remove after testing)
+        # if j % 100 == 0:
+        #     print(f"Frame {j}: SNR = {frame_snr_db:.1f} dB, {'SPEECH' if frame_snr_db >= vad_threshold_db else 'NOISE'}")
 
         # Compute base Wiener gain
         G = torch.sqrt(priori / (1.0 + priori + 1e-16))
+        
+        # Prevent over-suppression (like spectral subtraction residual)
+        # min_gain = 0.3  # 30% minimum (adjustable: 0.2-0.5)
+        # G = torch.clamp(G, min=min_gain)
 
-        # Apply residual noise method
+        # # Apply gain + IFFT
+        # Y = X * G
+
+        # s = 0  # Random for now so can run the below function? 
+
+        # # Apply residual noise method
+        # if residual_method == 'power':
+        #     # # Method 1: Add residual to power spectrum
+        #     # enhanced_ps = (G**2) * noisy_ps + alpha_vec * noisy_ps
+        #     # G_modified = torch.sqrt(torch.clamp(enhanced_ps / (noisy_ps + 1e-16), max=1.0))
+        #     # Y = X * G_modified
+        #     s += 1 
+            
+        # elif residual_method == 'gain_floor':
+        #     # Method 2: Impose minimum gain
+        #     G_modified = torch.clamp(G, min=alpha)
+        #     Y = X * G_modified
+            
+        # else:  # residual_method == 'time'
+        #     # Method 3: Will blend in time domain after IFFT
+        #     Y = X * G
+
+                # Compute base Wiener gain
+        G = torch.sqrt(priori / (1.0 + priori + 1e-16))
+
         if residual_method == 'power':
-            # Method 1: Add residual to power spectrum
-            enhanced_ps = (G**2) * noisy_ps + alpha_vec * noisy_ps
-            G_modified = torch.sqrt(torch.clamp(enhanced_ps / (noisy_ps + 1e-16), max=1.0))
-            Y = X * G_modified
+            # Power domain processing with floor and residual
+            signal_power = noisy_ps
+            enhanced_power = (G**2) * signal_power
+            
+            # Spectral floor (prevents going to zero)
+            FLOOR = 0.02
+            enhanced_power = torch.clamp(enhanced_power, min=FLOOR * signal_power)
+            
+            # Add residual (key to preventing musical noise!)
+            if freq_dependent:
+                enhanced_power = enhanced_power + alpha_vec * signal_power
+            else:
+                enhanced_power = enhanced_power + alpha * signal_power
+            
+            # Clamp to prevent amplification
+            enhanced_power = torch.clamp(enhanced_power, max=signal_power)
+            
+            # Convert to gain
+            G_final = torch.sqrt(enhanced_power / (signal_power + 1e-16))
+            Y = X * G_final
             
         elif residual_method == 'gain_floor':
-            # Method 2: Impose minimum gain
-            G_modified = torch.clamp(G, min=alpha)
-            Y = X * G_modified
+            min_gain = alpha  # Use alpha as min_gain
+            G_final = torch.clamp(G, min=min_gain)
+            Y = X * G_final
             
-        else:  # residual_method == 'time'
-            # Method 3: Will blend in time domain after IFFT
+        else:  # 'time'
+            G_final = G
             Y = X * G
 
         # IFFT
@@ -166,8 +248,10 @@ def wiener_filter_with_residual(
         enhanced[n_start:n_start + frame_samples] += synth_seg
         norm[n_start:n_start + frame_samples] += synth_win**2
 
-        # Update states
-        G_prev = G if residual_method == 'power' else G_modified if residual_method == 'gain_floor' else G
+        if residual_method in ['power', 'gain_floor']:
+            G_prev = G_final
+        else:
+            G_prev = G
         posteri_prev = posteri
 
     # Normalize WOLA overlap
@@ -212,7 +296,7 @@ def wiener_filter_with_residual(
 # Example usage demonstrating all three methods
 if __name__ == "__main__":
     # Load test audio
-    noisy_audio, fs = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\noisy_input.wav")
+    noisy_audio, fs = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_noisy_input.wav")
     noisy_audio = noisy_audio.mean(dim=0)  # Convert to mono
     
     # Method 1: Power spectrum residual (most similar to spectral subtraction)
