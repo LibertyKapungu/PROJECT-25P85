@@ -13,4 +13,4 @@ source ~/.bashrc
 conda activate py312
 
 # Run your Python script
-python /home/25p85/Gabi/PROJECT-25P85/src/experiments/EXP3/GTCRN_EXP3p1b.py
+python /home/25p85/Gabi/PROJECT-25P85/src/experiments/EXP3/EXP_GTCRN_SS_prm_sweep.py

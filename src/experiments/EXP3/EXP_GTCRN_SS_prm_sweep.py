@@ -86,39 +86,6 @@ def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
     
     return enhanced
 
-# def compute_metrics_fast(clean, enhanced, fs):
-#     """Fast metric computation."""
-#     from torchmetrics.audio.pesq import PerceptualEvaluationSpeechQuality
-#     from torchmetrics.audio.stoi import ShortTimeObjectiveIntelligibility
-#     from torchmetrics.audio import ScaleInvariantSignalDistortionRatio
-    
-#     clean_cpu = clean.cpu().float()
-#     enhanced_cpu = enhanced.cpu().float()
-    
-#     min_len = min(clean_cpu.shape[-1], enhanced_cpu.shape[-1])
-#     clean_cpu = clean_cpu[..., :min_len]
-#     enhanced_cpu = enhanced_cpu[..., :min_len]
-    
-#     try:
-#         pesq_metric = PerceptualEvaluationSpeechQuality(fs, 'wb')
-#         pesq_score = pesq_metric(enhanced_cpu.unsqueeze(0), clean_cpu.unsqueeze(0)).item()
-#     except:
-#         pesq_score = float('nan')
-    
-#     try:
-#         stoi_metric = ShortTimeObjectiveIntelligibility(fs)
-#         stoi_score = stoi_metric(enhanced_cpu.unsqueeze(0), clean_cpu.unsqueeze(0)).item()
-#     except:
-#         stoi_score = float('nan')
-    
-#     try:
-#         si_sdr_metric = ScaleInvariantSignalDistortionRatio()
-#         si_sdr_score = si_sdr_metric(enhanced_cpu.unsqueeze(0), clean_cpu.unsqueeze(0)).item()
-#     except:
-#         si_sdr_score = float('nan')
-    
-#     return {'PESQ': pesq_score, 'STOI': stoi_score, 'SI_SDR': si_sdr_score}
-
 def compute_metrics_fast(clean, enhanced, fs):
     """Fast metric computation with proper shape handling."""
     from torchmetrics.audio.pesq import PerceptualEvaluationSpeechQuality
@@ -167,14 +134,14 @@ def compute_metrics_fast(clean, enhanced, fs):
 # Based on standalone SS findings
 # ====================================
 param_grid = {
-    'Freq_spacing': ['linear'],      # Consistently best
-    'Nband': [4, 6, 8],              # Test around optimal
+    'Freq_spacing': ['linear', 'mel'],      # Consistently best
+    'Nband': [4, 6, 8, 16],              # Test around optimal
     'FRMSZ': [8,20],                    # 8ms was best at relevant SNRs
     'OVLP': [75],                    # Clearly optimal
     'AVRGING': [1],                  # Keep on
-    'Noisefr': [1,3],                  # Standard
+    'Noisefr': [1],                  # Standard
     'VAD': [1],                      # Keep on
-    'FLOOR': [0.002, 0.01]   # Gentler for GTCRN output
+    'FLOOR': [0.01]   # Gentler for GTCRN output
 }
 
 # Total: 1 × 3 × 1 × 1 × 1 × 1 × 1 × 3 = 9 configurations
@@ -196,7 +163,9 @@ print(f"Total configurations: {len(param_combinations)}")
 # REPRESENTATIVE NOISE FILES
 # Based on noise categories
 # ====================================
-NOISE_DIR = Path(r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\sound_data\raw\NOIZEUS_NOISE_DATASET\Noise Recordings")
+# NOISE_DIR = Path(r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\sound_data\raw\NOIZEUS_NOISE_DATASET\Noise Recordings")
+
+NOISE_DIR = repo_root/ "sound_data" /"raw"/"NOIZEUS_NOISE_DATASET"/"Noise Recordings"
 
 REPRESENTATIVE_NOISES = {
     'babble': 'cafeteria_babble.wav',
@@ -237,11 +206,6 @@ print(f"Loaded {len(ears_files)} EARS files")
 
 # Use 2 speech files per noise type for efficiency
 NUM_SPEECH_FILES = 2
-# paired_files = []
-# for category, noise_path in noise_files:
-#     for ears_path in ears_files[:NUM_SPEECH_FILES]:
-#         paired_files.append((category, noise_path, ears_path))
-
 paired_files = []
 for category, noise_path in noise_files:
     for ears_file in ears_files[:NUM_SPEECH_FILES]:
@@ -256,8 +220,7 @@ for category, noise_path in noise_files:
 print(f"\nTotal test pairs: {len(paired_files)}")
 
 # Test at key SNR levels
-#SNR_LEVELS = [-5, 0, 5, 10, 15]  
-SNR_LEVELS = [5]  
+SNR_LEVELS = [-5, 0, 5, 10, 15]  
 
 print(f"SNR levels: {SNR_LEVELS}")
 print(f"Total tests: {len(paired_files)} pairs {len(param_combinations)} configs {len(SNR_LEVELS)} SNRs")
@@ -395,25 +358,6 @@ for snr_dB in SNR_LEVELS:
                     'STOI_improvement': None,
                     'Status': f'Error: {str(e)}'
             }
-            # except Exception as e:
-            #     result = {
-            #         'SNR_dB': snr_dB,
-            #         'Noise_Type': category,
-            #         'Participant': participant,
-            #         'Method': 'GTCRN+SS',
-            #         'Nband': nband,
-            #         'Floor': floor,
-            #         'PESQ': None,
-            #         'STOI': None,
-            #         'SI_SDR': None,
-            #         'Weighted_Score': None,
-            #         'GTCRN_PESQ': gtcrn_metrics['PESQ'],
-            #         'GTCRN_STOI': gtcrn_metrics['STOI'],
-            #         'PESQ_improvement': None,
-            #         'STOI_improvement': None,
-            #         'Status': f'Error: {str(e)}'
-            #     }
-            
             all_results.append(result)
             test_count += 1
             
