@@ -23,7 +23,7 @@ from utils.audio_dataset_loader import (
     preprocess_audio
 )
 from dsp_algorithms.mband_btrnaming import mband
-from dsp_algorithms.wiener_as import wiener_filter
+from dsp_algorithms.Add_small_noise_wiener_as import wiener_filter_with_residual
 from deep_learning.TinyDenoiser import TinyDenoiser
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
@@ -34,11 +34,11 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 onnx_model_dir = repo_root / "models" / "pretrained" / "ONNX"
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'GTCRN' / 'EXP3p1b_output' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'wf'
+results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'wf_difnoise_est'
 
 clean_path = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\clean_reference.wav'
 # enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_mband_normal.wav'
-enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\noisy_input.wav'
+enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_noisy_input.wav'
 noisy_audio = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\noisy_input.wav"
 
 clean_waveform,  clean_fs = torchaudio.load(clean_path)
@@ -49,14 +49,14 @@ enhanced_waveform, enhanced_fs = torchaudio.load(enhanced_speech)
 #         )
 
 clean_filename = f"GTCRN_TEST"
-output_filename = f"SSTD_{clean_filename}_test.wav"
+output_filename = f"WF_{clean_filename}_test.wav"
 
 results_dir_snr = results_dir
 results_dir_snr.mkdir(parents=True, exist_ok=True)
 
 # Step 2: Apply Wiener filtering (using causal processing)
 print("\n2. Applying causal Wiener filtering...")
-enh_speech, enh_fs = wiener_filter(
+enh_speech, enh_fs = wiener_filter_with_residual(
     noisy_audio=enhanced_waveform.squeeze(),
     fs=enhanced_fs,
     mu=0.98,
@@ -101,7 +101,7 @@ print(f"{'='*100}\n")
 merged_path = merge_csvs(
 input_dir=results_dir_snr,
 output_dir=results_dir,
-output_filename=f'wf_EXP3p1b_merged_.csv',
+output_filename=f'wf_dif_ne_EXP3p1b_merged_.csv',
 keep_source=True
 )
 
