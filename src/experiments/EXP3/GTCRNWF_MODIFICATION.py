@@ -1,26 +1,25 @@
 """
-Experiment GTCRNWF_EXP3p2a_25ms: GTCRN with Modified Wiener Filter Post-processing (25ms frames)
+Experiment GTCRN_MWF: GTCRN with Modified Wiener Filter Post-processing
 
 This experiment implements a hybrid speech enhancement pipeline that combines deep learning
 with traditional signal processing. The GTCRN model is used first to remove noise, followed
-by a modified Wiener filter post-processing to further refine the enhanced speech.
+by modified Wiener filter post-processing optimized for quality (mu=0.98).
 
 Processing pipeline:
 1. GTCRN model - removes initial noise and distortions
-2. Modified Wiener filter (25ms frames) - further refines the enhanced speech from GTCRN with custom parameters
+2. Modified Wiener filter - further refines the enhanced speech from GTCRN
 
 Key features:
 - Two-stage processing: GTCRN -> Modified Wiener filter.
 - GTCRN removes the majority noise.
-- Modified Wiener filter handles residual noise and fine details with tuned parameters.
-- 25ms frame duration for Wiener filter post-processing.
-- Modified parameters: mu=0.95, a_dd=0.95, eta=0.1 for enhanced performance.
+- Modified Wiener filter handles residual noise and fine details.
+- Optimized parameters for quality enhancement.
 
 Models used:
 - GTCRN: pretrained on DNS3 dataset
-- Modified Wiener filter: causal implementation with custom parameter tuning
+- Modified Wiener filter: causal implementation
 
-Purpose: Evaluate the effectiveness of using a modified Wiener filter as a post-processor to improve
+Purpose: Evaluate the effectiveness of using modified Wiener filter as a post-processor to improve
 the performance of the GTCRN model by providing additional refinement and reducing
 artifacts that could affect the neural network's output.
 
@@ -60,7 +59,6 @@ from utils.audio_dataset_loader import (
     create_audio_pairs,
     preprocess_audio
 )
-from deep_learning.gtcrn import GTCRN
 from dsp_algorithms.wiener_GTCRN import wiener_filter
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
@@ -69,13 +67,14 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 
 # Load GTCRN model
 device = torch.device("cpu")
+from deep_learning.gtcrn import GTCRN
 gtcrn_model = GTCRN().eval()
 ckpt_path = repo_root / "src" / "deep_learning" / "gtcrn" / "gtcrn_main" / "checkpoints" / "model_trained_on_dns3.tar"
 ckpt = torch.load(ckpt_path, map_location=device)
 gtcrn_model.load_state_dict(ckpt['model'])
 
-output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'GTCRN_MWF_EXP3p2a_25ms_output' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRN_MWF_EXP3p2a_25ms'
+output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'GTCRN_MWF_output' 
+results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRN_MWF'
 
 # Load test datasets
 print("Loading EARS test dataset...")
@@ -119,7 +118,7 @@ for snr_dB in snr_dB_range:
 
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-        output_filename = f"GTCRN_MWF_25ms_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
+        output_filename = f"GTCRN_MWF_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
 
         # GTCRN inference
         input_stft = torch.stft(noisy_speech, 512, 256, 512, torch.hann_window(512).pow(0.5), return_complex=True)
@@ -133,8 +132,8 @@ for snr_dB in snr_dB_range:
                 noisy_audio=torch.from_numpy(gtcrn_enhanced_speech),
                 fs=clean_sr,
                 frame_dur_ms=8,
-                mu=0.95,
-                a_dd=0.95,
+                mu=0.98,
+                a_dd=0.98,
                 eta=0.15,
                 #output_dir=output_dir_snr,
                 #output_file=output_filename.replace('.wav', ''),
@@ -153,7 +152,7 @@ for snr_dB in snr_dB_range:
             clean_name=clean_filename,
             enhanced_name=output_filename,
             csv_dir=str(results_dir_snr),
-            csv_filename='GTCRN_MWF_EXP3p2a_25ms_data'
+            csv_filename='GTCRN_MWF_data'
         )
         
         # Print summary
@@ -180,7 +179,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'GTCRN_MWF_EXP3p2a_MODIFICATION_merged_[{snr_dB}]dB.csv',
+        output_filename=f'GTCRN_MWF_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
 
