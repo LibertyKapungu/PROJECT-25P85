@@ -52,10 +52,7 @@ from utils.audio_dataset_loader import (
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
-# from dsp_algorithms.mband import mband
 from dsp_algorithms.mband_var import mband
-
-# Import GTCRN model
 from deep_learning.gtcrn_model.gtcrn import GTCRN
 
 def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
@@ -163,7 +160,7 @@ for snr_dB in snr_dB_range:
         print(f"\nNoise: {noise_path.name} | EARS: {clean_path.name} | Participant: {participant}")
 
         # Step 1: Create noisy mixture
-        print("1. Creating noisy mixture...")
+        print("Creating noisy mixture...")
         clean_waveform, noise_waveform, noisy_speech, clean_sr = preprocess_audio(
             clean_speech=clean_path, 
             noisy_audio=noise_path, 
@@ -182,7 +179,7 @@ for snr_dB in snr_dB_range:
             processing_sr = clean_sr
 
         # Step 3: Enhance with GTCRN
-        print("3. Enhancing speech with GTCRN...")
+        print("Enhancing speech with GTCRN...")
         gtcrn_enhanced = enhance_with_gtcrn(
             noisy_waveform=noisy_speech_16k,
             model=model,
