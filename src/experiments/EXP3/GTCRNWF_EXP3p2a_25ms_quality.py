@@ -1,27 +1,28 @@
 """
-Experiment WFGTCRN_EXP3p2a: Wiener Filter Preprocessing for GTCRN
+Experiment GTCRNWF_EXP3p2a_25ms_quality: GTCRN with Wiener Filter Post-processing (25ms frames, quality-optimized)
 
-This experiment implements a hybrid speech enhancement pipeline that combines traditional
-signal processing with deep learning. The Wiener filter is used as a preprocessor to
-clean the noisy speech before feeding it to the GTCRN model.
+This experiment implements a hybrid speech enhancement pipeline that combines deep learning
+with traditional signal processing. The GTCRN model is used first to remove noise, followed
+by Wiener filter post-processing optimized for quality (mu=0.98).
 
 Processing pipeline:
-1. Wiener filter (25ms frames) - removes initial noise and distortions
-2. GTCRN model - further refines the enhanced speech from Wiener filter
+1. GTCRN model - removes initial noise and distortions
+2. Wiener filter (25ms frames, mu=0.98) - further refines the enhanced speech from GTCRN
 
 Key features:
-- Two-stage processing: Wiener filter -> GTCRN.
-- Wiener filter removes the majority noise.
-- GTCRN handles residual noise and fine details.
-- 25ms frame duration for Wiener filter preprocessing.
+- Two-stage processing: GTCRN -> Wiener filter.
+- GTCRN removes the majority noise.
+- Wiener filter handles residual noise and fine details.
+- 25ms frame duration for Wiener filter post-processing.
+- mu=0.98 optimized for quality.
 
 Models used:
-- Wiener filter: causal implementation
 - GTCRN: pretrained on DNS3 dataset
+- Wiener filter: causal implementation
 
-Purpose: Evaluate the effectiveness of using Wiener filter as a preprocessor to improve
-the performance of the GTCRN model by providing cleaner input and reducing
-artifacts that could affect the neural network's performance.
+Purpose: Evaluate the effectiveness of using Wiener filter as a post-processor to improve
+the performance of the GTCRN model by providing additional refinement and reducing
+artifacts that could affect the neural network's output. This version optimizes for quality.
 
 Datasets used:
 - EARS dataset for clean speech
@@ -35,10 +36,6 @@ Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
 import os
 import torch
 import soundfile as sf
-from deep_learning.gtcrn import GTCRN
-
-
-
 import pandas as pd
 import torchaudio
 from pathlib import Path
@@ -71,13 +68,14 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 
 # Load GTCRN model
 device = torch.device("cpu")
+from deep_learning.gtcrn import GTCRN
 gtcrn_model = GTCRN().eval()
 ckpt_path = repo_root / "src" / "deep_learning" / "gtcrn" / "gtcrn_main" / "checkpoints" / "model_trained_on_dns3.tar"
 ckpt = torch.load(ckpt_path, map_location=device)
 gtcrn_model.load_state_dict(ckpt['model'])
 
-output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'WFGTCRN_EXP3p2a_output' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'WFGTCRN_EXP3p2a'
+output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'GTCRNWF_EXP3p2a_25ms_quality_output' 
+results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRNWF_EXP3p2a_25ms_quality'
 
 # Load test datasets
 print("Loading EARS test dataset...")
@@ -121,10 +119,18 @@ for snr_dB in snr_dB_range:
 
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
         noise_filename = f"{noise_path.parent.name}_{noise_path.stem}"
-        output_filename = f"WFGTCRN_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
+        output_filename = f"GTCRNWF_25ms_quality_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB.wav"
+
+        # GTCRN inference
+        input_stft = torch.stft(noisy_speech, 512, 256, 512, torch.hann_window(512).pow(0.5), return_complex=True)
+        input_stft = torch.view_as_real(input_stft)  # Convert to (F, T, 2)
+        with torch.no_grad():
+            output_stft = gtcrn_model(input_stft[None])[0]  # Add batch dimension: (1, F, T, 2)
+        output_stft = torch.complex(output_stft[..., 0], output_stft[..., 1])  # Convert back to complex
+        gtcrn_enhanced_speech = torch.istft(output_stft, 512, 256, 512, torch.hann_window(512).pow(0.5)).detach().cpu().numpy()
 
         wf_enhanced_speech, enhanced_fs = wiener_filter(
-                noisy_audio=noisy_speech,
+                noisy_audio=torch.from_numpy(gtcrn_enhanced_speech),
                 fs=clean_sr,
                 frame_dur_ms=25,
                 mu=0.98,
@@ -135,15 +141,11 @@ for snr_dB in snr_dB_range:
                 input_name=clean_filename,
             )
 
-        # GTCRN inference
-        input_stft = torch.stft(torch.from_numpy(wf_enhanced_speech), 512, 256, 512, torch.hann_window(512).pow(0.5), return_complex=False)
-        with torch.no_grad():
-            output_stft = gtcrn_model(input_stft[None])[0]
-        enhanced_speech = torch.istft(output_stft, 512, 256, 512, torch.hann_window(512).pow(0.5), return_complex=False).detach().cpu().numpy()
+        enhanced_speech = wf_enhanced_speech
 
         # Step 4: Compute and save metrics
         print("\n4. Computing speech enhancement metrics...")
-        enhanced_tensor = torch.from_numpy(enhanced_speech).unsqueeze(0)
+        enhanced_tensor = enhanced_speech.unsqueeze(0)
         metrics = compute_and_save_speech_metrics(
             clean_tensor=clean_waveform,
             enhanced_tensor=enhanced_tensor,
@@ -151,7 +153,7 @@ for snr_dB in snr_dB_range:
             clean_name=clean_filename,
             enhanced_name=output_filename,
             csv_dir=str(results_dir_snr),
-            csv_filename='WFGTCRN_EXP3p2a_data'
+            csv_filename='GTCRNWF_EXP3p2a_25ms_quality_data'
         )
         
         # Print summary
@@ -178,7 +180,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'WFGTCRN_EXP3p2a_merged_[{snr_dB}]dB.csv',
+        output_filename=f'GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr_dB}]dB.csv',
         keep_source=True
     )
 
