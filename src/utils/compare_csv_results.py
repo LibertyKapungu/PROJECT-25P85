@@ -126,8 +126,8 @@ class MultiAudioEnhancementComparator:
                 return 'Construction'
             
             # Babble/Speech (hard)
-            elif any(x in filename_lower for x in ['babble', 'cafeteria', 'ssn']):
-                return 'Babble/SSN'
+            elif any(x in filename_lower for x in ['babble', 'cafeteria']):
+                return 'Babble'
             
             # Train (moderate-hard)
             elif 'train' in filename_lower:
@@ -142,7 +142,7 @@ class MultiAudioEnhancementComparator:
                 return 'Car'
             
             # Other stationary (easier)
-            elif any(x in filename_lower for x in ['fan', 'cooler', 'flight']):
+            elif any(x in filename_lower for x in ['fan', 'cooler', 'flight', 'ssn']):
                 return 'Stationary'
             
             else:
@@ -584,10 +584,12 @@ if __name__ == "__main__":
         # 'Wiener_Filter':  "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\wiener\\WF_EXP1p1b\\WF_EXP1p1b_merged_[5]dB.csv",
         # 'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
         'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
-        'GTCRN_SS': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_NOIZEUS_EARS_[5]dB.csv",
+        # 'GTCRN_SS': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_NOIZEUS_EARS_[5]dB.csv",
         'SS_GTCRN': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1c\\SS_GTCRN_[5]dB.csv",
-        'GTCRN_SS_wovad': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad\\GTCRN_SS_TEST2_[5]dB.csv",
         'GTCRN_SS_wovad_lowerfloor': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad9\\GTCRN_SS_TEST2_[5]dB.csv",
+        'GTCRN_WF': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF\\GTCRN_MWF_merged_[5]dB.csv",
+        'GTCRN_WF_eta08_25ms': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF_eta08\\GTCRN_MWF_merged_[5]dB.csv",
+        
         # Add up to 6 total methods
     }
     

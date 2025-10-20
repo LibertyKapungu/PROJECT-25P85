@@ -74,7 +74,7 @@ ckpt = torch.load(ckpt_path, map_location=device)
 gtcrn_model.load_state_dict(ckpt['model'])
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'GTCRN_MWF_output' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRN_MWF'
+results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRN_MWF_eta08'
 
 # Load test datasets
 print("Loading EARS test dataset...")
@@ -131,7 +131,7 @@ for snr_dB in snr_dB_range:
         wf_enhanced_speech, enhanced_fs = wiener_filter(
                 noisy_audio=torch.from_numpy(gtcrn_enhanced_speech),
                 fs=clean_sr,
-                frame_dur_ms=8,
+                frame_dur_ms=25,
                 mu=0.98,
                 a_dd=0.98,
                 eta=0.15,
