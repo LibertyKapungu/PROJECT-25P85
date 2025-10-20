@@ -1,0 +1,158 @@
+========================================================================================================================
+EXPERIMENT: GTCRN_SS_FLOOR_5DB
+MULTI-METHOD AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Baseline_Noisy, GTCRN_baseline, GTCRN_SS, GTCRN_SS_changes
+Baseline method: Baseline_Noisy
+Number of common files: 12
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\compare_GTCRN_SS_changes\GTCRN_SS_floor_5dB_20251019_221458
+========================================================================================================================
+
+AVERAGE METRIC VALUES:
+------------------------------------------------------------------------------------------------------------------------
+         Metric  Baseline_Noisy  GTCRN_baseline  GTCRN_SS  GTCRN_SS_changes
+           PESQ          1.3990          1.7413    1.6494            1.6475
+         SI_SDR          9.9993         11.4720   10.6726           10.1785
+           STOI          0.7459          0.7258    0.7113            0.7151
+DNSMOS_p808_mos          2.8632          3.2097    3.2262            3.3013
+ DNSMOS_mos_sig          4.0710          3.5316    3.5561            3.9996
+ DNSMOS_mos_bak          2.4300          3.5685    3.6645            3.9125
+ DNSMOS_mos_ovr          2.7256          2.9533    3.0037            3.4304
+
+
+IMPROVEMENT OVER BASELINE:
+Format: Value |(Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+         Metric Baseline_Noisy GTCRN_baseline_Value GTCRN_baseline_Change GTCRN_baseline_% GTCRN_SS_Value GTCRN_SS_Change GTCRN_SS_% GTCRN_SS_changes_Value GTCRN_SS_changes_Change GTCRN_SS_changes_%
+           PESQ         1.3990               1.7413               +0.3423          +24.47%         1.6494         +0.2504    +17.90%                 1.6475                 +0.2485            +17.76%
+         SI_SDR         9.9993              11.4720               +1.4727          +14.73%        10.6726         +0.6733     +6.73%                10.1785                 +0.1792             +1.79%
+           STOI         0.7459               0.7258               -0.0201           -2.69%         0.7113         -0.0346     -4.64%                 0.7151                 -0.0308             -4.13%
+DNSMOS_p808_mos         2.8632               3.2097               +0.3465          +12.10%         3.2262         +0.3630    +12.68%                 3.3013                 +0.4381            +15.30%
+ DNSMOS_mos_sig         4.0710               3.5316               -0.5394          -13.25%         3.5561         -0.5149    -12.65%                 3.9996                 -0.0714             -1.75%
+ DNSMOS_mos_bak         2.4300               3.5685               +1.1385          +46.85%         3.6645         +1.2345    +50.80%                 3.9125                 +1.4825            +61.01%
+ DNSMOS_mos_ovr         2.7256               2.9533               +0.2277           +8.35%         3.0037         +0.2781    +10.20%                 3.4304                 +0.7048            +25.86%
+
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN_baseline:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  5/12 files (41.7%)
+    Degraded:  7/12 files (58.3%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_changes:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+
+PERFORMANCE BY NOISE CATEGORY (Hardest Cases):
+------------------------------------------------------------------------------------------------------------------------
+Noise_Category         Metric Baseline_Noisy  GTCRN_baseline        GTCRN_SS GTCRN_SS_changes
+    Babble/SSN           PESQ          1.372  1.592 (+0.220)  1.507 (+0.135)   1.919 (+0.546)
+    Babble/SSN         SI_SDR          9.995  9.456 (-0.539)  8.860 (-1.135)  12.707 (+2.712)
+    Babble/SSN           STOI          0.702  0.681 (-0.021)  0.666 (-0.036)   0.744 (+0.042)
+    Babble/SSN DNSMOS_mos_ovr          2.843  2.931 (+0.088)  2.746 (-0.097)   3.768 (+0.925)
+    Stationary           PESQ          1.354  1.886 (+0.532)  1.818 (+0.464)   1.381 (+0.026)
+    Stationary         SI_SDR         10.002 12.611 (+2.609) 11.030 (+1.028)   7.292 (-2.710)
+    Stationary           STOI          0.770  0.744 (-0.026)  0.719 (-0.050)   0.658 (-0.111)
+    Stationary DNSMOS_mos_ovr          2.842  3.188 (+0.346)  3.370 (+0.528)   2.971 (+0.130)
+        Street           PESQ          1.289  1.587 (+0.298)  1.404 (+0.115)   1.498 (+0.209)
+        Street         SI_SDR         10.003 11.440 (+1.437) 10.772 (+0.770)  10.624 (+0.621)
+        Street           STOI          0.771  0.737 (-0.034)  0.722 (-0.048)   0.730 (-0.041)
+        Street DNSMOS_mos_ovr          2.832  2.436 (-0.396)  2.564 (-0.268)   3.018 (+0.186)
+         Train           PESQ          1.481  1.776 (+0.295)  1.703 (+0.223)   1.759 (+0.278)
+         Train         SI_SDR          9.998 11.608 (+1.610) 11.143 (+1.145)  10.721 (+0.723)
+         Train           STOI          0.739  0.728 (-0.011)  0.720 (-0.019)   0.731 (-0.008)
+         Train DNSMOS_mos_ovr          2.566  3.028 (+0.462)  3.063 (+0.496)   3.736 (+1.169)
+
+========================================================================================================================

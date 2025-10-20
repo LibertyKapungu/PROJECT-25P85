@@ -168,7 +168,7 @@ def wiener_filter_with_residual(
         frame_snr_db = 10 * torch.log10((frame_signal_power / (frame_noise_power + 1e-16)) + 1e-16)
 
         # If frame is quiet (< 10 dB above noise floor), update noise
-        vad_threshold_db = 20.0  # Adjustable: higher = more conservative
+        vad_threshold_db = 40.0  # Adjustable: higher = more conservative
         if frame_snr_db < vad_threshold_db:
             # This is likely noise/silence, update estimate
             noise_ps = mu * noise_ps + (1 - mu) * noisy_ps
@@ -296,7 +296,7 @@ def wiener_filter_with_residual(
 # Example usage demonstrating all three methods
 if __name__ == "__main__":
     # Load test audio
-    noisy_audio, fs = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_noisy_input.wav")
+    noisy_audio, fs = torchaudio.load("C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\enh_noisy_input.wav")
     noisy_audio = noisy_audio.mean(dim=0)  # Convert to mono
     
     # Method 1: Power spectrum residual (most similar to spectral subtraction)
