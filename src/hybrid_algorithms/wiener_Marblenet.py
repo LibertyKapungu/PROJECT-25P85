@@ -73,13 +73,18 @@ def _marblenet_vad_probabilities(
         ).detach().cpu().squeeze(0)
 
     if logits.ndim == 2:
-        # If logits has shape [num_frames, num_classes], take the speech class (index 1)
+        # Two-class output -> compute calibrated posterior for speech class
         if logits.shape[-1] == 2:
-            logits = logits[:, 1]  # Take speech probability (class 1)
+            probs = torch.softmax(logits, dim=-1)[:, 1]
+        # Single-logit output per frame -> collapse and treat as Bernoulli logit
+        elif logits.shape[-1] == 1:
+            probs = torch.sigmoid(logits.squeeze(-1))
         else:
-            logits = logits.squeeze(-1)
-
-    probs = torch.sigmoid(logits)
+            raise RuntimeError(
+                "Unexpected VAD logits shape; expected 1 or 2 classes per frame."
+            )
+    else:
+        probs = torch.sigmoid(logits)
     if probs.numel() == 0:
         raise RuntimeError("VAD model returned no frame probabilities.")
 
@@ -93,7 +98,7 @@ def wiener_filter(
     output_dir: Optional[Union[str, Path]] = None,
     output_file: Optional[str] = None,
     input_name: Optional[str] = None,
-    mu: float = 0.98,
+    mu: float = 0.374,
     a_dd: float = 0.98,
     eta: float = 0.5,
     frame_dur_ms: int = 20,
