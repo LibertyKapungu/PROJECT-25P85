@@ -585,18 +585,20 @@ if __name__ == "__main__":
         # 'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
         'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
         'GTCRN_SS': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_NOIZEUS_EARS_[5]dB.csv",
-        'GTCRN_SS_changes': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_TEST2_[5]dB.csv",
+        'SS_GTCRN': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1c\\SS_GTCRN_[5]dB.csv",
+        'GTCRN_SS_wovad': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad\\GTCRN_SS_TEST2_[5]dB.csv",
+        'GTCRN_SS_wovad_lowerfloor': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad9\\GTCRN_SS_TEST2_[5]dB.csv",
         # Add up to 6 total methods
     }
     
     # Set output folder (will create subdirectories)
-    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csvs\\compare_GTCRN_SS_changes"
+    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csvs\\compare_GTCRNS_hybrids_wwovad8_20ms"
     
     # Create comparator with experiment name
     comparator = MultiAudioEnhancementComparator(
         csv_files,
         output_folder=output_folder,
-        experiment_name="GTCRN_SS_floor_5dB"
+        experiment_name="GTCRNs_5dB"
     )
     
     # Calculate differences (relative to baseline - first method by default)

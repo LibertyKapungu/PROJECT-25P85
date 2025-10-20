@@ -49,7 +49,7 @@ enhanced_waveform, enhanced_fs = torchaudio.load(enhanced_speech)
 #         )
 
 clean_filename = f"GTCRN_TEST"
-output_filename = f"WF_{clean_filename}_test.wav"
+output_filename = f"SS_{clean_filename}_test.wav"
 
 results_dir_snr = results_dir
 results_dir_snr.mkdir(parents=True, exist_ok=True)

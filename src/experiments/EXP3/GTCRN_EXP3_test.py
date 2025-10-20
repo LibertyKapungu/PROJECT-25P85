@@ -37,7 +37,7 @@ results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'mband_test'
 
 clean_path = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\clean_reference.wav'
 # enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_mband_normal.wav'
-enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\mband_gtcrn_noisy_input2_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
+enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\NOISE_ESTIMATION\\mband_wo_VAD_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
 noisy_audio = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\noisy_input.wav"
 
 clean_waveform,  clean_fs = torchaudio.load(clean_path)
@@ -47,7 +47,7 @@ enhanced_waveform, enhanced_fs = torchaudio.load(enhanced_speech)
 #             clean_speech=clean_path, 
 #         )
 
-clean_filename = f"GTCRN_TEST"
+clean_filename = f"GTCRN_TEST_wovad"
 output_filename = f"SS_{clean_filename}_{enhanced_speech}.wav"
 
 results_dir_snr = results_dir
@@ -62,7 +62,7 @@ metrics = compute_and_save_speech_metrics(
         clean_name=clean_filename,
         enhanced_name=output_filename,
         csv_dir=str(results_dir_snr),
-        csv_filename='GTCRN_mband_test_EXP3p1b_data'
+        csv_filename='GTCRN_mband_wovad_EXP3p1b_data'
 )
 # Print summary
 print(f"\n{'='*100}")
@@ -87,7 +87,7 @@ print(f"{'='*100}\n")
 merged_path = merge_csvs(
 input_dir=results_dir_snr,
 output_dir=results_dir,
-output_filename=f'GTCRN_mband_EXP3p1b_merged_.csv',
+output_filename=f'GTCRN_mband_woVAD_EXP3p1b_merged_.csv',
 keep_source=True
 )
 

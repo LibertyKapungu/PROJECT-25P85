@@ -1,22 +1,15 @@
 """
-Experiment GTCRN_SS_EXP3p1b: GTCRN + Spectral Subtraction Enhanced Speech Metrics
+Experiment DSP_GTCRN_EXP3p1c: Spectral Subtraction + GTCRN Enhanced Speech Metrics
 
-This experiment evaluates the combined GTCRN + Spectral Subtraction enhancement by:
+This experiment evaluates the combined Spectral Subtraction + GTCRN enhancement by:
 1. Creating noisy speech mixtures (clean EARS speech + NOIZEUS noise at various SNR levels)
-2. Enhancing the noisy mixtures using GTCRN
-3. Post-processing GTCRN output with multi-band spectral subtraction (mband)
+2. Pre-processing with multi-band spectral subtraction (mband)
+3. Enhancing with GTCRN
 4. Computing quality metrics on the final enhanced speech
 
-Processing: Clean speech + noise -> noisy mixture -> GTCRN enhancement -> mband spectral subtraction -> compute quality metrics
+Processing: Clean speech + noise -> noisy mixture -> mband spectral subtraction -> GTCRN enhancement -> compute quality metrics
 
-Datasets used:
-- EARS dataset for clean speech
-- NOIZEUS dataset for noise
-
-Model: GTCRN (trained on DNS3)
-Post-processor: Multi-band Spectral Subtraction (mband)
-SNR levels tested: -5, 0, 5, 10, 15 dB
-Metrics computed: PESQ, STOI, SI-SDR, DNSMOS
+This demonstrates DSP (handles obvious noise) then DL (handles residuals) - conceptually sound hybrid.
 """
 
 import pandas as pd
@@ -41,7 +34,7 @@ sys.path.insert(0, str(repo_root / "src"))
 gtcrn_path = repo_root / "src" / "deep_learning" / "gtcrn_model" 
 sys.path.insert(0, str(gtcrn_path))
 
-results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b_wovad9'
+results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1c'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -52,8 +45,7 @@ from utils.audio_dataset_loader import (
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
-# from dsp_algorithms.mband import mband
-from dsp_algorithms.mband_var import mband
+from dsp_algorithms.mband import mband
 
 # Import GTCRN model
 from deep_learning.gtcrn_model.gtcrn import GTCRN
@@ -85,7 +77,7 @@ def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
     
     mix = mix.to(device)
     
-    # Convert to numpy for STFT (following original implementation)
+    # Convert to numpy for STFT
     mix_np = mix.squeeze(0).cpu().numpy()
     
     # Compute STFT
@@ -145,7 +137,6 @@ print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
 paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
-# snr_dB_range = [-5, 0, 5, 10, 15]
 snr_dB_range = [5]
 
 for snr_dB in snr_dB_range:
@@ -170,7 +161,7 @@ for snr_dB in snr_dB_range:
             snr_db=snr_dB
         )
 
-        # Step 2: Resample to 16kHz if needed (GTCRN requirement)
+        # Step 2: Resample to 16kHz if needed
         if clean_sr != 16000:
             resampler = torchaudio.transforms.Resample(orig_freq=clean_sr, new_freq=16000)
             clean_waveform_16k = resampler(clean_waveform)
@@ -181,29 +172,28 @@ for snr_dB in snr_dB_range:
             noisy_speech_16k = noisy_speech
             processing_sr = clean_sr
 
-        # Step 3: Enhance with GTCRN
-        print("3. Enhancing speech with GTCRN...")
-        gtcrn_enhanced = enhance_with_gtcrn(
-            noisy_waveform=noisy_speech_16k,
-            model=model,
-            device=device,
-            target_sr=processing_sr
-        )
-
-        # Step 4: Post-process with spectral subtraction
-        print("4. Applying multi-band spectral subtraction post-processing...")
-
-        final_enhanced_speech, final_fs = mband(
-            noisy_audio=gtcrn_enhanced,
+        # Step 3: PRE-PROCESS with spectral subtraction (DSP first)
+        print("3. Pre-processing with multi-band spectral subtraction...")
+        ss_preprocessed, _ = mband(
+            noisy_audio=noisy_speech_16k,
             fs=processing_sr,
             Nband=4,
             Freq_spacing='linear',
-            FRMSZ=20,
+            FRMSZ=8,
             OVLP=75,
             AVRGING=1,
             Noisefr=1,
-            FLOOR=0.8,
-            VAD=0,
+            FLOOR=0.002,
+            VAD=1,
+        )
+
+        # Step 4: Enhance with GTCRN (deep learning on DSP-cleaned input)
+        print("4. Enhancing with GTCRN deep learning model...")
+        final_enhanced = enhance_with_gtcrn(
+            noisy_waveform=ss_preprocessed,
+            model=model,
+            device=device,
+            target_sr=processing_sr
         )
 
         # Step 5: Compute and save metrics
@@ -213,17 +203,17 @@ for snr_dB in snr_dB_range:
         print("5. Computing speech quality metrics...")
         metrics = compute_and_save_speech_metrics(
             clean_tensor=clean_waveform_16k,
-            enhanced_tensor=final_enhanced_speech,
-            fs=final_fs,
+            enhanced_tensor=final_enhanced,
+            fs=processing_sr,
             clean_name=clean_filename,
-            enhanced_name=f"GTCRN+SS_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB",
+            enhanced_name=f"SS+GTCRN_{clean_filename}_{noise_filename}_SNR[{snr_dB}]dB",
             csv_dir=str(results_dir_snr),
-            csv_filename='GTCRN_SS_NOIZEUS_EARS_metrics.csv'
+            csv_filename='SS_GTCRN_NOIZEUS_EARS_metrics.csv'
         )
         
         # Print summary
         print(f"\n{'='*100}")
-        print(f"Completed GTCRN + Spectral Subtraction enhancement for:")
+        print(f"Completed Spectral Subtraction + GTCRN enhancement for:")
         print(f"  Noise: {noise_path.name}")
         print(f"  EARS: {clean_path.name}")
         print(f"  Participant: {participant}")
@@ -233,7 +223,7 @@ for snr_dB in snr_dB_range:
         
         # Handle potential NaN values in output
         import math
-        pesq_str = f"{metrics['PESQ']:.3f}" if not math.isnan(metrics['PESQ']) else "NaN (No utterances detected)"
+        pesq_str = f"{metrics['PESQ']:.3f}" if not math.isnan(metrics['PESQ']) else "NaN"
         stoi_str = f"{metrics['STOI']:.3f}" if not math.isnan(metrics['STOI']) else "NaN"
         si_sdr_str = f"{metrics['SI_SDR']:.2f} dB" if not math.isnan(metrics['SI_SDR']) else "NaN dB"
         dnsmos_str = f"{metrics['DNSMOS_mos_ovr']:.3f}" if not math.isnan(metrics['DNSMOS_mos_ovr']) else "NaN"
@@ -250,7 +240,7 @@ for snr_dB in snr_dB_range:
     merged_path = merge_csvs(
         input_dir=results_dir_snr,
         output_dir=results_dir,
-        output_filename=f'GTCRN_SS_TEST2_[{snr_dB}]dB.csv',
+        output_filename=f'SS_GTCRN_[{snr_dB}]dB.csv',
         keep_source=True
     )
     print(f"Merged results saved to: {merged_path}")
@@ -259,6 +249,6 @@ for snr_dB in snr_dB_range:
     delete_csvs(input_directory=results_dir_snr)
 
 print(f"\n{'='*100}")
-print("EXPERIMENT COMPLETE")
+print("EXPERIMENT COMPLETE: DSP (Spectral Subtraction) → DL (GTCRN)")
 print(f"All results saved to: {results_dir}")
 print(f"{'='*100}")
