@@ -10,7 +10,7 @@ Key features:
 - Causal Wiener filter with 20ms frame duration (default parameters)
 - Tests multiple VAD thresholds to optimize speech detection
 
-VAD thresholds tested: 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60
+VAD thresholds tested: 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75
 
 Purpose: Integrate MarbleNet VAD with Wiener filtering to improve speech enhancement by focusing
 noise reduction processing on detected speech segments, leveraging MarbleNet's efficiency.
@@ -75,7 +75,7 @@ print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
 
-Threshold = [0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60]  # VAD threshold
+Threshold = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75]  # VAD threshold
 
 for threshold in Threshold:
     for snr_dB in snr_dB_range:
