@@ -131,7 +131,7 @@ for snr_dB in snr_dB_range:
         wf_enhanced_speech, enhanced_fs = wiener_filter(
                 noisy_audio=torch.from_numpy(gtcrn_enhanced_speech),
                 fs=clean_sr,
-                frame_dur_ms=8,
+                frame_dur_ms=25,
                 mu=0.98,
                 a_dd=0.98,
                 eta=0.15,

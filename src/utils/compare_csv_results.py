@@ -126,7 +126,7 @@ class MultiAudioEnhancementComparator:
                 return 'Construction'
             
             # Babble/Speech (hard)
-            elif any(x in filename_lower for x in ['babble', 'cafeteria', 'ssn']):
+            elif any(x in filename_lower for x in ['babble', 'cafeteria']):
                 return 'Babble/SSN'
             
             # Train (moderate-hard)
@@ -142,7 +142,7 @@ class MultiAudioEnhancementComparator:
                 return 'Car'
             
             # Other stationary (easier)
-            elif any(x in filename_lower for x in ['fan', 'cooler', 'flight']):
+            elif any(x in filename_lower for x in ['fan', 'cooler', 'flight', 'ssn']):
                 return 'Stationary'
             
             else:
@@ -586,8 +586,9 @@ if __name__ == "__main__":
         'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
         'GTCRN_SS': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_NOIZEUS_EARS_[5]dB.csv",
         'SS_GTCRN': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1c\\SS_GTCRN_[5]dB.csv",
-        'GTCRN_SS_wovad': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad\\GTCRN_SS_TEST2_[5]dB.csv",
         'GTCRN_SS_wovad_lowerfloor': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad9\\GTCRN_SS_TEST2_[5]dB.csv",
+        'GTCRN_WF': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF_EXP3p2a_25ms\\GTCRN_MWF_EXP3p2a_MODIFICATION_merged_[5]dB.csv",
+        
         # Add up to 6 total methods
     }
     
