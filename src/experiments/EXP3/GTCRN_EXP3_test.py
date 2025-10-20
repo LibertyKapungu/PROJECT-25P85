@@ -33,11 +33,12 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 onnx_model_dir = repo_root / "models" / "pretrained" / "ONNX"
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'tinydenoiser_processed_outputs' / 'EXP3p1b_output2' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'mband_test'
+results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'wf_test2'
 
 clean_path = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\clean_reference.wav'
 # enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn\\gtcrn-main\\test_wavs\\enh_mband_normal.wav'
-enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\NOISE_ESTIMATION\\mband_wo_VAD_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
+# enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\NOISE_ESTIMATION\\mband_wo_VAD_standard_mode_BANDS4_SPACINGLINEAR_FRAME8ms.wav'
+enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\output\\enh1_test_FRAME8ms_METHODPOWER_ALPHA5PCT_FREQDEP.wav'
 noisy_audio = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\noisy_input.wav"
 
 clean_waveform,  clean_fs = torchaudio.load(clean_path)
