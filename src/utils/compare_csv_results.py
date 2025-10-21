@@ -580,7 +580,7 @@ class MultiAudioEnhancementComparator:
 if __name__ == "__main__":
     # Define your CSV files with descriptive names
     csv_files = {
-        'Baseline_Noisy': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP0\\noisy_vs_clean\\BASELINE_merged_SNR[10]dB.csv",
+        'Baseline_Noisy': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP0\\noisy_vs_clean\\BASELINE_merged_SNR[5]dB.csv",
         # 'Wiener_Filter':  "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\wiener\\WF_EXP1p1b\\WF_EXP1p1b_merged_[5]dB.csv",
         # 'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
         'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
