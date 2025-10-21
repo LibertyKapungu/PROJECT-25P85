@@ -276,6 +276,91 @@ class MultiSNRAudioEnhancementComparator:
         
         report_lines.append("\n" + "=" * 120)
         
+        # IMPROVEMENT ANALYSIS - comparing all methods to first method (baseline)
+        if len(self.method_names) > 1:
+            baseline_method = self.method_names[0]
+            comparison_methods = self.method_names[1:]
+            
+            report_lines.append("\nIMPROVEMENT OVER BASELINE:")
+            report_lines.append(f"Baseline method: {baseline_method}")
+            report_lines.append("Format: Value | (Absolute Change) | % (Percentage Change)")
+            report_lines.append("-" * 120)
+            
+            for snr in self.snr_levels:
+                if len(self.df_merged[snr]) == 0:
+                    continue
+                    
+                report_lines.append(f"\n>>> SNR = {snr}dB <<<")
+                
+                for metric in self.metrics:
+                    baseline_col = f'{metric}_{baseline_method}'
+                    
+                    if baseline_col not in self.df_merged[snr].columns:
+                        continue
+                    
+                    baseline_val = self.df_merged[snr][baseline_col].mean()
+                    line = f"  {metric:>20s}: {baseline_method}={baseline_val:.4f}"
+                    
+                    for comp_method in comparison_methods:
+                        comp_col = f'{metric}_{comp_method}'
+                        
+                        if comp_col in self.df_merged[snr].columns:
+                            comp_val = self.df_merged[snr][comp_col].mean()
+                            abs_change = comp_val - baseline_val
+                            
+                            # Avoid division by zero
+                            if abs(baseline_val) > 1e-6:
+                                pct_change = (abs_change / abs(baseline_val)) * 100
+                            else:
+                                pct_change = 0
+                            
+                            sign = "+" if abs_change >= 0 else ""
+                            line += f"  |  {comp_method}={comp_val:.4f} ({sign}{abs_change:.4f}, {sign}{pct_change:.2f}%)"
+                    
+                    report_lines.append(line)
+            
+            report_lines.append("\n" + "=" * 120)
+            
+            # FILE-LEVEL IMPROVEMENT STATISTICS
+            report_lines.append("\nFILE-LEVEL IMPROVEMENT STATISTICS:")
+            report_lines.append("-" * 120)
+            
+            for snr in self.snr_levels:
+                if len(self.df_merged[snr]) == 0:
+                    continue
+                
+                report_lines.append(f"\n>>> SNR = {snr}dB <<<")
+                
+                for metric in self.metrics:
+                    baseline_col = f'{metric}_{baseline_method}'
+                    
+                    if baseline_col not in self.df_merged[snr].columns:
+                        continue
+                    
+                    report_lines.append(f"\n{metric} (Range: {self.metric_ranges[metric][0]} to {self.metric_ranges[metric][1]}):")
+                    
+                    for comp_method in comparison_methods:
+                        comp_col = f'{metric}_{comp_method}'
+                        
+                        if comp_col not in self.df_merged[snr].columns:
+                            continue
+                        
+                        # Calculate per-file improvements
+                        df = self.df_merged[snr]
+                        differences = df[comp_col] - df[baseline_col]
+                        
+                        improved = (differences > 0).sum()
+                        degraded = (differences < 0).sum()
+                        unchanged = (differences == 0).sum()
+                        total = len(differences)
+                        
+                        report_lines.append(f"  {comp_method}:")
+                        report_lines.append(f"    Improved:  {improved}/{total} files ({100*improved/total:.1f}%)")
+                        report_lines.append(f"    Degraded:  {degraded}/{total} files ({100*degraded/total:.1f}%)")
+                        report_lines.append(f"    Unchanged: {unchanged}/{total} files ({100*unchanged/total:.1f}%)")
+        
+        report_lines.append("\n" + "=" * 120)
+        
         # Performance by noise category
         report_lines.append("\nPERFORMANCE BY NOISE CATEGORY:")
         report_lines.append("-" * 120)
@@ -664,7 +749,7 @@ if __name__ == "__main__":
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep_multi_snr4"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep_multi_snr6"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
