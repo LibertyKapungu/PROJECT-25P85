@@ -23,7 +23,7 @@ from utils.audio_dataset_loader import (
     preprocess_audio
 )
 from dsp_algorithms.mband_btrnaming import mband
-from dsp_algorithms.Add_small_noise_wiener_as import wiener_filter_with_residual
+from dsp_algorithms.wiener_GTCRN import wiener_filter
 from deep_learning.TinyDenoiser import TinyDenoiser
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
@@ -56,7 +56,7 @@ results_dir_snr.mkdir(parents=True, exist_ok=True)
 
 # Step 2: Apply Wiener filtering (using causal processing)
 print("\n2. Applying causal Wiener filtering...")
-enh_speech, enh_fs = wiener_filter_with_residual(
+enh_speech, enh_fs = wiener_filter(
     noisy_audio=enhanced_waveform.squeeze(),
     fs=enhanced_fs,
     mu=0.98,

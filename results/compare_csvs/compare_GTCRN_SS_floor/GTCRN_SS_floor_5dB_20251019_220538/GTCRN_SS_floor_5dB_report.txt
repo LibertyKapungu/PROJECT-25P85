@@ -1,0 +1,214 @@
+========================================================================================================================
+EXPERIMENT: GTCRN_SS_FLOOR_5DB
+MULTI-METHOD AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Baseline_Noisy, Wiener_Filter, Spectral_Subtraction, GTCRN_baseline, GTCRN_SS, GTCRN_SS_floor0_02
+Baseline method: Baseline_Noisy
+Number of common files: 12
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\compare_GTCRN_SS_floor\GTCRN_SS_floor_5dB_20251019_220538
+========================================================================================================================
+
+AVERAGE METRIC VALUES:
+------------------------------------------------------------------------------------------------------------------------
+         Metric  Baseline_Noisy  Wiener_Filter  Spectral_Subtraction  GTCRN_baseline  GTCRN_SS  GTCRN_SS_floor0_02
+           PESQ          1.3990         1.3572                1.3377          1.7413    1.6494              1.6528
+         SI_SDR          9.9993         8.2223                7.5666         11.4720   10.6726             10.6932
+           STOI          0.7459         0.6894                0.6933          0.7258    0.7113              0.7137
+DNSMOS_p808_mos          2.8632         2.6776                2.7284          3.2097    3.2262              3.2431
+ DNSMOS_mos_sig          4.0710         3.1023                3.5034          3.5316    3.5561              3.6592
+ DNSMOS_mos_bak          2.4300         2.2979                2.3845          3.5685    3.6645              3.8081
+ DNSMOS_mos_ovr          2.7256         2.1378                2.3809          2.9533    3.0037              3.1308
+
+
+IMPROVEMENT OVER BASELINE:
+Format: Value |(Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+         Metric Baseline_Noisy Wiener_Filter_Value Wiener_Filter_Change Wiener_Filter_% Spectral_Subtraction_Value Spectral_Subtraction_Change Spectral_Subtraction_% GTCRN_baseline_Value GTCRN_baseline_Change GTCRN_baseline_% GTCRN_SS_Value GTCRN_SS_Change GTCRN_SS_% GTCRN_SS_floor0_02_Value GTCRN_SS_floor0_02_Change GTCRN_SS_floor0_02_%
+           PESQ         1.3990              1.3572              -0.0418          -2.99%                     1.3377                     -0.0613                 -4.38%               1.7413               +0.3423          +24.47%         1.6494         +0.2504    +17.90%                   1.6528                   +0.2538              +18.14%
+         SI_SDR         9.9993              8.2223              -1.7770         -17.77%                     7.5666                     -2.4327                -24.33%              11.4720               +1.4727          +14.73%        10.6726         +0.6733     +6.73%                  10.6932                   +0.6939               +6.94%
+           STOI         0.7459              0.6894              -0.0565          -7.57%                     0.6933                     -0.0526                 -7.05%               0.7258               -0.0201           -2.69%         0.7113         -0.0346     -4.64%                   0.7137                   -0.0322               -4.32%
+DNSMOS_p808_mos         2.8632              2.6776              -0.1856          -6.48%                     2.7284                     -0.1348                 -4.71%               3.2097               +0.3465          +12.10%         3.2262         +0.3630    +12.68%                   3.2431                   +0.3799              +13.27%
+ DNSMOS_mos_sig         4.0710              3.1023              -0.9687         -23.80%                     3.5034                     -0.5676                -13.94%               3.5316               -0.5394          -13.25%         3.5561         -0.5149    -12.65%                   3.6592                   -0.4118              -10.12%
+ DNSMOS_mos_bak         2.4300              2.2979              -0.1321          -5.44%                     2.3845                     -0.0455                 -1.87%               3.5685               +1.1385          +46.85%         3.6645         +1.2345    +50.80%                   3.8081                   +1.3781              +56.71%
+ DNSMOS_mos_ovr         2.7256              2.1378              -0.5878         -21.57%                     2.3809                     -0.3447                -12.65%               2.9533               +0.2277           +8.35%         3.0037         +0.2781    +10.20%                   3.1308                   +0.4052              +14.87%
+
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+PESQ (Range: -0.5 to 4.5):
+  Wiener_Filter:
+    Improved:  5/12 files (41.7%)
+    Degraded:  7/12 files (58.3%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  5/12 files (41.7%)
+    Degraded:  7/12 files (58.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  Wiener_Filter:
+    Improved:  1/12 files (8.3%)
+    Degraded:  11/12 files (91.7%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  0/12 files (0.0%)
+    Degraded:  12/12 files (100.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+STOI (Range: 0 to 1):
+  Wiener_Filter:
+    Improved:  1/12 files (8.3%)
+    Degraded:  11/12 files (91.7%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  1/12 files (8.3%)
+    Degraded:  11/12 files (91.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  Wiener_Filter:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  Wiener_Filter:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  Wiener_Filter:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  Wiener_Filter:
+    Improved:  1/12 files (8.3%)
+    Degraded:  11/12 files (91.7%)
+    Unchanged: 0/12 files (0.0%)
+  Spectral_Subtraction:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_floor0_02:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+
+
+PERFORMANCE BY NOISE CATEGORY (Hardest Cases):
+------------------------------------------------------------------------------------------------------------------------
+Noise_Category         Metric Baseline_Noisy   Wiener_Filter Spectral_Subtraction  GTCRN_baseline        GTCRN_SS GTCRN_SS_floor0_02
+    Babble/SSN           PESQ          1.372  1.536 (+0.164)       1.459 (+0.087)  1.592 (+0.220)  1.507 (+0.135)     1.933 (+0.561)
+    Babble/SSN         SI_SDR          9.995 11.117 (+1.122)       9.157 (-0.837)  9.456 (-0.539)  8.860 (-1.135)    12.835 (+2.840)
+    Babble/SSN           STOI          0.702  0.720 (+0.018)       0.725 (+0.022)  0.681 (-0.021)  0.666 (-0.036)     0.733 (+0.031)
+    Babble/SSN DNSMOS_mos_ovr          2.843  2.385 (-0.458)       2.706 (-0.138)  2.931 (+0.088)  2.746 (-0.097)     3.314 (+0.471)
+    Stationary           PESQ          1.354  1.276 (-0.078)       1.263 (-0.091)  1.886 (+0.532)  1.818 (+0.464)     1.470 (+0.116)
+    Stationary         SI_SDR         10.002  7.519 (-2.483)       7.147 (-2.855) 12.611 (+2.609) 11.030 (+1.028)     8.081 (-1.921)
+    Stationary           STOI          0.770  0.694 (-0.076)       0.690 (-0.080)  0.744 (-0.026)  0.719 (-0.050)     0.666 (-0.103)
+    Stationary DNSMOS_mos_ovr          2.842  1.997 (-0.845)       2.132 (-0.710)  3.188 (+0.346)  3.370 (+0.528)     2.934 (+0.092)
+        Street           PESQ          1.289  1.346 (+0.057)       1.308 (+0.019)  1.587 (+0.298)  1.404 (+0.115)     1.475 (+0.186)
+        Street         SI_SDR         10.003  8.922 (-1.080)       7.909 (-2.094) 11.440 (+1.437) 10.772 (+0.770)    10.731 (+0.729)
+        Street           STOI          0.771  0.680 (-0.091)       0.689 (-0.082)  0.737 (-0.034)  0.722 (-0.048)     0.725 (-0.045)
+        Street DNSMOS_mos_ovr          2.832  1.774 (-1.058)       2.205 (-0.627)  2.436 (-0.396)  2.564 (-0.268)     2.632 (-0.200)
+         Train           PESQ          1.481  1.339 (-0.142)       1.346 (-0.135)  1.776 (+0.295)  1.703 (+0.223)     1.722 (+0.241)
+         Train         SI_SDR          9.998  7.207 (-2.791)       7.045 (-2.953) 11.608 (+1.610) 11.143 (+1.145)    11.389 (+1.391)
+         Train           STOI          0.739  0.678 (-0.061)       0.685 (-0.055)  0.728 (-0.011)  0.720 (-0.019)     0.730 (-0.010)
+         Train DNSMOS_mos_ovr          2.566  2.269 (-0.297)       2.471 (-0.095)  3.028 (+0.462)  3.063 (+0.496)     3.375 (+0.809)
+
+========================================================================================================================

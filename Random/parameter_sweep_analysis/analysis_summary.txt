@@ -1,0 +1,26 @@
+
+PARAMETER SWEEP ANALYSIS SUMMARY
+================================================================================
+
+Total Configurations Tested: 4320
+Successful Runs: 4320 (100.0%)
+
+BEST CONFIGURATION (Weighted Score):
+  Freq_spacing: linear
+  Nband: 6
+  FRMSZ_ms: 20
+  OVLP: 75
+  Floor: 0.0100
+  
+  PESQ: 2.2106
+  STOI: 0.9304
+  SI-SDR: 14.79 dB
+  DNSMOS: 2.2608
+
+PARAMETER INSIGHTS:
+
+  Best Freq_spacing: linear (avg weighted score: 0.6525)
+  Best Nband: 4 (avg weighted score: 0.6506)
+  Best Floor: 0.01 (avg weighted score: 0.6448)
+
+All results saved to: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\parameter_sweep_analysis
