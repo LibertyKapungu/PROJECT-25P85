@@ -5,13 +5,15 @@ from pathlib import Path
 import seaborn as sns
 from datetime import datetime
 
+# Set global font sizes to 18
 plt.rcParams.update({
     "figure.dpi": 300,
-    "font.size": 17,
-    "axes.labelsize": 17,
-    "xtick.labelsize": 17,
-    "ytick.labelsize": 17,
-    "legend.fontsize": 17,
+    "font.size": 18,
+    "axes.labelsize": 18,
+    "axes.titlesize": 20,
+    "xtick.labelsize": 16,
+    "ytick.labelsize": 16,
+    "legend.fontsize": 16,
 })
 
 class MultiSNRAudioEnhancementComparator:
@@ -234,9 +236,85 @@ class MultiSNRAudioEnhancementComparator:
         
         return pd.DataFrame(results)
     
+    def generate_text_report(self):
+        """Generate comprehensive text report similar to the example format."""
+        report_lines = []
+        report_lines.append("=" * 120)
+        report_lines.append(f"EXPERIMENT: {self.experiment_name.upper()}")
+        report_lines.append("MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT")
+        report_lines.append("=" * 120)
+        report_lines.append(f"Methods compared: {', '.join(self.method_names)}")
+        report_lines.append(f"SNR levels analyzed: {', '.join([f'{snr}dB' for snr in self.snr_levels])}")
+        
+        # Get total number of files per SNR
+        for snr in self.snr_levels:
+            if len(self.df_merged[snr]) > 0:
+                report_lines.append(f"Number of files at {snr}dB: {len(self.df_merged[snr])}")
+        
+        report_lines.append(f"Output folder: {self.output_folder}")
+        report_lines.append("=" * 120)
+        report_lines.append("")
+        
+        # Average metrics for each SNR level
+        report_lines.append("AVERAGE METRIC VALUES BY SNR LEVEL:")
+        report_lines.append("-" * 120)
+        
+        for snr in self.snr_levels:
+            report_lines.append(f"\n>>> SNR = {snr}dB <<<")
+            if len(self.df_merged[snr]) == 0:
+                report_lines.append("  No data available")
+                continue
+            
+            for metric in self.metrics:
+                line = f"  {metric:>20s}:  "
+                for method_name in self.method_names:
+                    method_col = f'{metric}_{method_name}'
+                    if method_col in self.df_merged[snr].columns:
+                        avg_val = self.df_merged[snr][method_col].mean()
+                        line += f"{method_name}={avg_val:.4f}  "
+                report_lines.append(line)
+        
+        report_lines.append("\n" + "=" * 120)
+        
+        # Performance by noise category
+        report_lines.append("\nPERFORMANCE BY NOISE CATEGORY:")
+        report_lines.append("-" * 120)
+        
+        # Get all categories
+        all_categories = set()
+        for snr in self.snr_levels:
+            if 'noise_category' in self.df_merged[snr].columns:
+                all_categories.update(self.df_merged[snr]['noise_category'].unique())
+        
+        for category in sorted(all_categories):
+            report_lines.append(f"\n>>> {category} <<<")
+            for metric in ['PESQ', 'SI_SDR', 'STOI', 'DNSMOS_mos_ovr']:
+                report_lines.append(f"  {metric}:")
+                for snr in self.snr_levels:
+                    if len(self.df_merged[snr]) == 0:
+                        continue
+                    if 'noise_category' not in self.df_merged[snr].columns:
+                        continue
+                    
+                    cat_data = self.df_merged[snr][self.df_merged[snr]['noise_category'] == category]
+                    if len(cat_data) == 0:
+                        continue
+                    
+                    line = f"    {snr}dB: "
+                    for method_name in self.method_names:
+                        method_col = f'{metric}_{method_name}'
+                        if method_col in cat_data.columns:
+                            avg_val = cat_data[method_col].mean()
+                            line += f"{method_name}={avg_val:.3f}  "
+                    report_lines.append(line)
+        
+        report_lines.append("\n" + "=" * 120)
+        
+        return "\n".join(report_lines)
+    
     def plot_amalgamated_snr_comparison(self, figsize=(20, 14)):
         """
-        Create comprehensive plot showing performance across all SNR levels.
+        Create comprehensive plot showing performance across all SNR levels (LINE GRAPH).
         One subplot for each key metric.
         """
         key_metrics = ['PESQ', 'SI_SDR', 'STOI', 'DNSMOS_p808_mos']
@@ -263,27 +341,91 @@ class MultiSNRAudioEnhancementComparator:
                     # Use modulo to handle more than 8 methods gracefully
                     color_idx = i % len(self.colors)
                     ax.plot(snr_values, metric_values, 
-                           marker='o', linewidth=2.5, markersize=8,
+                           marker='o', linewidth=3, markersize=10,
                            label=method_name, color=self.colors[color_idx], alpha=0.8)
                     
                     # Add value labels
                     for snr, val in zip(snr_values, metric_values):
                         ax.annotate(f'{val:.3f}', 
                                    xy=(snr, val), 
-                                   xytext=(0, 5),
+                                   xytext=(0, 8),
                                    textcoords='offset points',
                                    ha='center', va='bottom',
-                                   fontsize=7, fontweight='bold')
+                                   fontsize=14, fontweight='bold')
             
-            ax.set_xlabel('SNR (dB)', fontsize=11, fontweight='bold')
-            ax.set_ylabel(f'{metric} Score', fontsize=11, fontweight='bold')
-            ax.set_title(f'{metric} Performance Across SNR Levels', fontsize=12, fontweight='bold')
-            ax.legend(loc='best', fontsize=9)
+            ax.set_xlabel('SNR (dB)', fontsize=18, fontweight='bold')
+            ax.set_ylabel(f'{metric} Score', fontsize=18, fontweight='bold')
+            ax.set_title(f'{metric} Performance Across SNR Levels', fontsize=20, fontweight='bold')
+            ax.legend(loc='best', fontsize=16)
             ax.grid(True, alpha=0.3, linestyle='--')
             ax.set_xticks(self.snr_levels)
         
         plt.suptitle(f'{self.experiment_name}: Performance Across SNR Levels', 
-                     fontsize=16, fontweight='bold', y=0.995)
+                     fontsize=22, fontweight='bold', y=0.995)
+        plt.tight_layout()
+        
+        return fig
+    
+    def plot_amalgamated_snr_bar_comparison(self, figsize=(22, 14)):
+        """
+        Create BAR CHART version showing performance across all SNR levels.
+        One subplot for each key metric - emphasizes discrete SNR levels.
+        """
+        key_metrics = ['PESQ', 'SI_SDR', 'STOI', 'DNSMOS_p808_mos']
+        
+        fig, axes = plt.subplots(2, 2, figsize=figsize)
+        axes = axes.flatten()
+        
+        for idx, metric in enumerate(key_metrics):
+            ax = axes[idx]
+            
+            num_methods = len(self.method_names)
+            num_snrs = len(self.snr_levels)
+            width = 0.15  # Skinny bars
+            x_pos = np.arange(num_snrs)
+            
+            for i, method_name in enumerate(self.method_names):
+                metric_values = []
+                
+                for snr in self.snr_levels:
+                    method_col = f'{metric}_{method_name}'
+                    
+                    if len(self.df_merged[snr]) > 0 and method_col in self.df_merged[snr].columns:
+                        avg_value = self.df_merged[snr][method_col].mean()
+                        metric_values.append(avg_value)
+                    else:
+                        metric_values.append(0)
+                
+                if metric_values:
+                    color_idx = i % len(self.colors)
+                    offset = (i - num_methods/2 + 0.5) * width
+                    bars = ax.bar(x_pos + offset, metric_values, width,
+                                 label=method_name, 
+                                 color=self.colors[color_idx], 
+                                 alpha=0.85,
+                                 edgecolor='black',
+                                 linewidth=1.5)
+                    
+                    # Add value labels on bars
+                    for bar, val in zip(bars, metric_values):
+                        if val != 0:
+                            height = bar.get_height()
+                            ax.text(bar.get_x() + bar.get_width()/2., height,
+                                   f'{val:.3f}',
+                                   ha='center', va='bottom',
+                                   fontsize=12, fontweight='bold')
+            
+            ax.set_xlabel('SNR (dB)', fontsize=18, fontweight='bold')
+            ax.set_ylabel(f'{metric} Score', fontsize=18, fontweight='bold')
+            ax.set_title(f'{metric} Performance Across SNR Levels', fontsize=20, fontweight='bold')
+            ax.set_xticks(x_pos)
+            ax.set_xticklabels([f'{snr}' for snr in self.snr_levels])
+            ax.legend(loc='best', fontsize=16)
+            ax.grid(axis='y', alpha=0.3, linestyle='--')
+            ax.set_axisbelow(True)
+        
+        plt.suptitle(f'{self.experiment_name}: Performance Across SNR Levels (Bar Chart)', 
+                     fontsize=22, fontweight='bold', y=0.995)
         plt.tight_layout()
         
         return fig
@@ -339,9 +481,9 @@ class MultiSNRAudioEnhancementComparator:
             
             # Set ticks and labels
             ax.set_xticks(np.arange(len(self.snr_levels)))
-            ax.set_xticklabels([f'{snr}dB' for snr in self.snr_levels])
+            ax.set_xticklabels([f'{snr}dB' for snr in self.snr_levels], fontsize=16)
             ax.set_yticks(np.arange(len(categories)))
-            ax.set_yticklabels(categories)
+            ax.set_yticklabels(categories, fontsize=16)
             
             # Add text annotations
             for i in range(len(categories)):
@@ -349,19 +491,19 @@ class MultiSNRAudioEnhancementComparator:
                     if not np.isnan(data_matrix[i, j]):
                         text = ax.text(j, i, f'{data_matrix[i, j]:.3f}',
                                       ha="center", va="center", color="black",
-                                      fontsize=8, fontweight='bold')
+                                      fontsize=14, fontweight='bold')
             
-            ax.set_title(f'{method_name}', fontsize=11, fontweight='bold')
-            ax.set_xlabel('SNR Level', fontsize=10)
+            ax.set_title(f'{method_name}', fontsize=18, fontweight='bold')
+            ax.set_xlabel('SNR Level', fontsize=16)
             
             if idx == 0:
-                ax.set_ylabel('Noise Category', fontsize=10)
+                ax.set_ylabel('Noise Category', fontsize=16)
             
             # Add colorbar
             plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
         
         plt.suptitle(f'{metric} Performance: SNR vs Noise Category', 
-                     fontsize=14, fontweight='bold', y=0.98)
+                     fontsize=20, fontweight='bold', y=0.98)
         plt.tight_layout()
         
         return fig
@@ -389,7 +531,7 @@ class MultiSNRAudioEnhancementComparator:
         self._plot_metric_group(ax3, group3, f'DNSMOS Metrics Comparison (SNR={snr}dB)', snr)
         
         plt.suptitle(f'{self.experiment_name}: Multi-Method Comparison at {snr}dB', 
-                     fontsize=16, fontweight='bold', y=0.995)
+                     fontsize=22, fontweight='bold', y=0.995)
         
         return fig
     
@@ -417,7 +559,7 @@ class MultiSNRAudioEnhancementComparator:
         
         for i, (method_name, method_data) in enumerate(zip(self.method_names, all_data)):
             offset = (i - num_methods/2 + 0.5) * width
-            color_idx = i % len(self.colors)  # Handle more than 8 methods
+            color_idx = i % len(self.colors)
             bars = ax.bar(x_pos + offset, method_data, width, 
                          label=method_name, 
                          color=self.colors[color_idx], 
@@ -430,15 +572,15 @@ class MultiSNRAudioEnhancementComparator:
                     ax.text(bar.get_x() + bar.get_width()/2., height,
                            f'{height:.3f}',
                            ha='center', va='bottom', 
-                           fontsize=7 if num_methods > 3 else 9, 
+                           fontsize=14 if num_methods > 3 else 16, 
                            fontweight='bold')
         
-        ax.set_xlabel('Metrics', fontsize=11, fontweight='bold')
-        ax.set_ylabel('Average Value', fontsize=11, fontweight='bold')
-        ax.set_title(title, fontsize=12, fontweight='bold')
+        ax.set_xlabel('Metrics', fontsize=18, fontweight='bold')
+        ax.set_ylabel('Average Value', fontsize=18, fontweight='bold')
+        ax.set_title(title, fontsize=20, fontweight='bold')
         ax.set_xticks(x_pos)
         ax.set_xticklabels(metrics, rotation=0, ha='center')
-        ax.legend(loc='upper left', fontsize=9, ncol=2 if num_methods > 3 else 1)
+        ax.legend(loc='upper left', fontsize=16, ncol=2 if num_methods > 3 else 1)
         ax.grid(axis='y', alpha=0.3, linestyle='--')
         ax.set_axisbelow(True)
     
@@ -454,14 +596,28 @@ class MultiSNRAudioEnhancementComparator:
         amalgamated_table.to_csv(amalg_path, index=False)
         print(f"✓ Amalgamated table: {amalg_path}")
         
-        # 2. Amalgamated SNR comparison plot
+        # 2. Text report
+        text_report = self.generate_text_report()
+        report_path = self.output_folder / f"{self.experiment_name}_REPORT.txt"
+        with open(report_path, 'w') as f:
+            f.write(text_report)
+        print(f"✓ Text report: {report_path}")
+        
+        # 3. Amalgamated SNR comparison plot (LINE GRAPH)
         fig_amalg = self.plot_amalgamated_snr_comparison()
-        amalg_plot_path = self.output_folder / f"{self.experiment_name}_amalgamated_snr_comparison.png"
+        amalg_plot_path = self.output_folder / f"{self.experiment_name}_amalgamated_snr_LINE.png"
         fig_amalg.savefig(amalg_plot_path, dpi=300, bbox_inches='tight')
         plt.close(fig_amalg)
-        print(f"✓ Amalgamated SNR plot: {amalg_plot_path}")
+        print(f"✓ Amalgamated SNR plot (line): {amalg_plot_path}")
         
-        # 3. Heatmaps for key metrics
+        # 4. Amalgamated SNR comparison plot (BAR CHART)
+        fig_bar_amalg = self.plot_amalgamated_snr_bar_comparison()
+        bar_amalg_plot_path = self.output_folder / f"{self.experiment_name}_amalgamated_snr_BAR.png"
+        fig_bar_amalg.savefig(bar_amalg_plot_path, dpi=300, bbox_inches='tight')
+        plt.close(fig_bar_amalg)
+        print(f"✓ Amalgamated SNR plot (bar): {bar_amalg_plot_path}")
+        
+        # 5. Heatmaps for key metrics
         for metric in ['PESQ', 'SI_SDR', 'STOI']:
             fig_heat = self.plot_snr_noise_category_heatmap(metric=metric)
             if fig_heat is not None:
@@ -470,7 +626,7 @@ class MultiSNRAudioEnhancementComparator:
                 plt.close(fig_heat)
                 print(f"✓ Heatmap ({metric}): {heat_path}")
         
-        # 4. Individual SNR level plots and tables
+        # 6. Individual SNR level plots and tables
         for snr in self.snr_levels:
             print(f"\n  Processing SNR {snr}dB...")
             
