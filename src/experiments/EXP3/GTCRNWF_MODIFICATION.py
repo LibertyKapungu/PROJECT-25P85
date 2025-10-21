@@ -74,7 +74,7 @@ ckpt = torch.load(ckpt_path, map_location=device)
 gtcrn_model.load_state_dict(ckpt['model'])
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'gtcrn_processed_outputs' / 'GTCRN_MWF_output' 
-results_dir = repo_root / 'results' / 'EXP3' / 'GTCRN' / 'GTCRN_MWF_eta08'
+results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b_GTCRN_WF_ss'
 
 # Load test datasets
 print("Loading EARS test dataset...")

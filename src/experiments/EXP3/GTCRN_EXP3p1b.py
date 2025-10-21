@@ -41,7 +41,7 @@ sys.path.insert(0, str(repo_root / "src"))
 gtcrn_path = repo_root / "src" / "deep_learning" / "gtcrn_model" 
 sys.path.insert(0, str(gtcrn_path))
 
-results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b_wovad9'
+results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b_GTCRN_SS_pp_8ms_V0_f08'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -142,8 +142,8 @@ print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
 paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
-# snr_dB_range = [-5, 0, 5, 10, 15]
-snr_dB_range = [5]
+snr_dB_range = [-5, 0, 5, 10, 15]
+# snr_dB_range = [5]
 
 for snr_dB in snr_dB_range:
 
@@ -195,7 +195,7 @@ for snr_dB in snr_dB_range:
             fs=processing_sr,
             Nband=4,
             Freq_spacing='linear',
-            FRMSZ=20,
+            FRMSZ=8,
             OVLP=75,
             AVRGING=1,
             Noisefr=1,
