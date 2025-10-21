@@ -1,0 +1,158 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_5DB
+MULTI-METHOD AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Baseline_Noisy, GTCRN_baseline, SS_GTCRN_n4_ov75_fr25_fl07_v1_lin, WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,
+Baseline method: Baseline_Noisy
+Number of common files: 12
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep\GTCRNs_5dB_20251021_100902
+========================================================================================================================
+
+AVERAGE METRIC VALUES:
+------------------------------------------------------------------------------------------------------------------------
+         Metric  Baseline_Noisy  GTCRN_baseline  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,
+           PESQ          1.3990          1.7413                             1.7234                                  1.6795
+         SI_SDR          9.9993         11.4720                            11.1201                                 11.4015
+           STOI          0.7459          0.7258                             0.7262                                  0.7232
+DNSMOS_p808_mos          2.8632          3.2097                             3.2155                                  3.2286
+ DNSMOS_mos_sig          4.0710          3.5316                             3.7685                                  3.5894
+ DNSMOS_mos_bak          2.4300          3.5685                             3.7819                                  3.7052
+ DNSMOS_mos_ovr          2.7256          2.9533                             3.2075                                  3.0729
+
+
+IMPROVEMENT OVER BASELINE:
+Format: Value |(Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+         Metric Baseline_Noisy GTCRN_baseline_Value GTCRN_baseline_Change GTCRN_baseline_% SS_GTCRN_n4_ov75_fr25_fl07_v1_lin_Value SS_GTCRN_n4_ov75_fr25_fl07_v1_lin_Change SS_GTCRN_n4_ov75_fr25_fl07_v1_lin_% WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,_Value WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,_Change WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,_%
+           PESQ         1.3990               1.7413               +0.3423          +24.47%                                  1.7234                                  +0.3244                             +23.19%                                       1.6795                                       +0.2805                                  +20.05%
+         SI_SDR         9.9993              11.4720               +1.4727          +14.73%                                 11.1201                                  +1.1208                             +11.21%                                      11.4015                                       +1.4022                                  +14.02%
+           STOI         0.7459               0.7258               -0.0201           -2.69%                                  0.7262                                  -0.0197                              -2.64%                                       0.7232                                       -0.0227                                   -3.04%
+DNSMOS_p808_mos         2.8632               3.2097               +0.3465          +12.10%                                  3.2155                                  +0.3523                             +12.30%                                       3.2286                                       +0.3654                                  +12.76%
+ DNSMOS_mos_sig         4.0710               3.5316               -0.5394          -13.25%                                  3.7685                                  -0.3025                              -7.43%                                       3.5894                                       -0.4816                                  -11.83%
+ DNSMOS_mos_bak         2.4300               3.5685               +1.1385          +46.85%                                  3.7819                                  +1.3519                             +55.63%                                       3.7052                                       +1.2752                                  +52.48%
+ DNSMOS_mos_ovr         2.7256               2.9533               +0.2277           +8.35%                                  3.2075                                  +0.4819                             +17.68%                                       3.0729                                       +0.3473                                  +12.74%
+
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN_baseline:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN_baseline:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  SS_GTCRN_n4_ov75_fr25_fl07_v1_lin:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+  WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+
+
+PERFORMANCE BY NOISE CATEGORY (Hardest Cases):
+------------------------------------------------------------------------------------------------------------------------
+Noise_Category         Metric Baseline_Noisy  GTCRN_baseline SS_GTCRN_n4_ov75_fr25_fl07_v1_lin WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,
+        Babble           PESQ          1.520  1.704 (+0.184)                    2.286 (+0.765)                         2.112 (+0.591)
+        Babble         SI_SDR          9.984 10.570 (+0.587)                   11.974 (+1.990)                        12.490 (+2.506)
+        Babble           STOI          0.715  0.724 (+0.009)                    0.764 (+0.050)                         0.765 (+0.050)
+        Babble DNSMOS_mos_ovr          2.838  2.928 (+0.090)                    3.100 (+0.262)                         3.027 (+0.189)
+    Stationary           PESQ          1.322  1.784 (+0.463)                    1.575 (+0.254)                         1.541 (+0.219)
+    Stationary         SI_SDR         10.003 11.543 (+1.540)                   10.438 (+0.436)                        10.844 (+0.841)
+    Stationary           STOI          0.750  0.718 (-0.032)                    0.702 (-0.048)                         0.700 (-0.050)
+    Stationary DNSMOS_mos_ovr          2.844  3.125 (+0.281)                    2.962 (+0.119)                         2.797 (-0.047)
+        Street           PESQ          1.289  1.587 (+0.298)                    1.608 (+0.319)                         1.540 (+0.251)
+        Street         SI_SDR         10.003 11.440 (+1.437)                   10.789 (+0.787)                        10.852 (+0.849)
+        Street           STOI          0.771  0.737 (-0.034)                    0.736 (-0.034)                         0.728 (-0.042)
+        Street DNSMOS_mos_ovr          2.832  2.436 (-0.396)                    2.887 (+0.055)                         2.701 (-0.131)
+         Train           PESQ          1.481  1.776 (+0.295)                    1.775 (+0.295)                         1.760 (+0.279)
+         Train         SI_SDR          9.998 11.608 (+1.610)                   11.627 (+1.629)                        11.850 (+1.852)
+         Train           STOI          0.739  0.728 (-0.011)                    0.734 (-0.005)                         0.731 (-0.008)
+         Train DNSMOS_mos_ovr          2.566  3.028 (+0.462)                    3.553 (+0.987)                         3.452 (+0.886)
+
+========================================================================================================================

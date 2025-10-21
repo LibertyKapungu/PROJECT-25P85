@@ -585,16 +585,18 @@ if __name__ == "__main__":
         # 'Spectral_Subtraction': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP1\\spectral\\SS_EXP1p1b\\SS_EXP1p1b_merged_5dB.csv",
         'GTCRN_baseline': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1a\\GTCRN_NOIZEUS_EARS_[5]dB.csv",
         # 'GTCRN_SS': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b\\GTCRN_SS_NOIZEUS_EARS_[5]dB.csv",
-        'SS_GTCRN': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1c\\SS_GTCRN_[5]dB.csv",
-        'GTCRN_SS_wovad_lowerfloor': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad9\\GTCRN_SS_TEST2_[5]dB.csv",
-        'GTCRN_WF': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF\\GTCRN_MWF_merged_[5]dB.csv",
-        'GTCRN_WF_eta08_25ms': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF_eta08\\GTCRN_MWF_merged_[5]dB.csv",
+        # 'SS_GTCRN': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1c\\SS_GTCRN_[5]dB.csv",
+        'SS_GTCRN_n4_ov75_fr8_fl08_v0_lin': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\\GTCRN_SS_TEST2_[5]dB.csv",
+        # 'GTCRN_SS_wovad_lowerfloor': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_wovad9\\GTCRN_SS_TEST2_[5]dB.csv",
+        # 'GTCRN_WF': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF\\GTCRN_MWF_merged_[5]dB.csv",
+        # 'GTCRN_WF_eta08_25ms': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\GTCRN\\GTCRN_MWF_eta08\\GTCRN_MWF_merged_[5]dB.csv",
+        'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15,': "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP3\\EXP3p1b_GTCRN_WF_ss\\GTCRN_MWF_merged_[5]dB.csv",
         
         # Add up to 6 total methods
     }
     
     # Set output folder (will create subdirectories)
-    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csvs\\compare_GTCRNS_hybrids_wwovad8_20ms"
+    output_folder = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\compare_csvs\\poster_prep"
     
     # Create comparator with experiment name
     comparator = MultiAudioEnhancementComparator(
