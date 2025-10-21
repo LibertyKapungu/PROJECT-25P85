@@ -1,0 +1,131 @@
+================================================================================
+SAVING RESULTS
+================================================================================
+
+SWEEP COMPLETE in 6.13 hours (367.5 minutes)
+Results saved to: /home/25p85/Gabi/PROJECT-25P85/results/GTCRN_SS_SWEEP_IMPROVED
+
+================================================================================
+DETAILED ANALYSIS
+================================================================================
+
+Total successful tests: 8,000
+Total failed tests: 0
+Success rate: 100.0%
+
+================================================================================
+OVERALL IMPROVEMENT STATISTICS
+================================================================================
+
+PESQ:
+  Mean improvement: +0.0004 ± 0.0718
+  Median improvement: +0.0053
+  % configs better than GTCRN: 58.6%
+
+STOI:
+  Mean improvement: -0.0049 ± 0.0054
+  Median improvement: -0.0035
+  % configs better than GTCRN: 9.5%
+
+SI_SDR:
+  Mean improvement: -0.6737 ± 0.9068
+  Median improvement: -0.3431
+  % configs better than GTCRN: 9.8%
+
+================================================================================
+PARAMETER IMPACT ANALYSIS
+================================================================================
+
+FLOOR:
+      Weighted_Score            PESQ    STOI PESQ_improvement
+                mean     std    mean    mean             mean
+FLOOR                                                        
+0.002         0.5783  0.0882  1.6833  0.7199          -0.0420
+0.100         0.5835  0.0893  1.7182  0.7233          -0.0072
+0.300         0.5868  0.0898  1.7390  0.7259           0.0136
+0.500         0.5880  0.0898  1.7446  0.7271           0.0192
+0.800         0.5884  0.0896  1.7439  0.7280           0.0185
+
+FRMSZ:
+      Weighted_Score            PESQ    STOI PESQ_improvement
+                mean     std    mean    mean             mean
+FRMSZ                                                        
+8              0.584  0.0894  1.7220  0.7237          -0.0034
+20             0.586  0.0894  1.7296  0.7260           0.0042
+
+Nband:
+      Weighted_Score            PESQ    STOI PESQ_improvement
+                mean     std    mean    mean             mean
+Nband                                                        
+4              0.585  0.0894  1.7258  0.7248           0.0004
+8              0.585  0.0894  1.7258  0.7248           0.0004
+
+AVRGING:
+        Weighted_Score            PESQ    STOI PESQ_improvement
+                  mean     std    mean    mean             mean
+AVRGING                                                        
+1                0.585  0.0894  1.7258  0.7248           0.0004
+
+Noisefr:
+        Weighted_Score            PESQ    STOI PESQ_improvement
+                  mean     std    mean    mean             mean
+Noisefr                                                        
+1               0.5848  0.0894  1.7249  0.7246          -0.0005
+3               0.5852  0.0894  1.7267  0.7251           0.0013
+
+VAD:
+    Weighted_Score            PESQ    STOI PESQ_improvement
+              mean     std    mean    mean             mean
+VAD                                                        
+0           0.5842  0.0895  1.7249  0.7234          -0.0005
+1           0.5858  0.0893  1.7267  0.7263           0.0013
+
+================================================================================
+BEST CONFIGURATION PER SNR LEVEL
+================================================================================
+
+SNR = -5 dB:
+  FLOOR=0.800, FRMSZ=8ms, Nband=4, AVRGING=1, Noisefr=3, VAD=1
+  PESQ: 1.3721 (+0.0135)
+  STOI: 0.7468 (-0.0031)
+  SI-SDR: 6.03 dB
+
+SNR = 0 dB:
+  FLOOR=0.500, FRMSZ=8ms, Nband=4, AVRGING=1, Noisefr=3, VAD=1
+  PESQ: 1.5854 (+0.0171)
+  STOI: 0.8222 (-0.0032)
+  SI-SDR: 8.92 dB
+
+SNR = 5 dB:
+  FLOOR=0.500, FRMSZ=8ms, Nband=8, AVRGING=1, Noisefr=3, VAD=0
+  PESQ: 1.9933 (+0.0469)
+  STOI: 0.8382 (-0.0036)
+  SI-SDR: 11.31 dB
+
+SNR = 10 dB:
+  FLOOR=0.800, FRMSZ=8ms, Nband=8, AVRGING=1, Noisefr=1, VAD=1
+  PESQ: 2.3249 (+0.0335)
+  STOI: 0.8893 (-0.0011)
+  SI-SDR: 15.52 dB
+
+SNR = 15 dB:
+  FLOOR=0.800, FRMSZ=8ms, Nband=8, AVRGING=1, Noisefr=3, VAD=1
+  PESQ: 2.6101 (+0.0371)
+  STOI: 0.9197 (-0.0015)
+  SI-SDR: 18.24 dB
+
+================================================================================
+UNIVERSAL BEST CONFIGURATION (all SNRs)
+================================================================================
+
+Based on highest weighted score:
+  FLOOR=0.800, FRMSZ=8ms, Nband=8, AVRGING=1, Noisefr=3, VAD=1
+  PESQ: 2.6101, STOI: 0.9197
+
+Most robust configuration (best average):
+  FLOOR=0.800, FRMSZ=20ms, Nband=4, AVRGING=1, Noisefr=3, VAD=0
+  Avg PESQ: 1.7497, Avg STOI: 0.7286
+
+================================================================================
+Analysis complete. Files saved to: /home/25p85/Gabi/PROJECT-25P85/results/GTCRN_SS_SWEEP_IMPROVED
+================================================================================

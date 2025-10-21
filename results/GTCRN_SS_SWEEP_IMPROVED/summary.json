@@ -1,0 +1,21 @@
+{
+  "total_tests": 8000,
+  "mean_pesq_improvement": 0.00041772951185703276,
+  "mean_stoi_improvement": -0.004942333225160837,
+  "best_overall_config": {
+    "FLOOR": 0.8,
+    "FRMSZ": 8,
+    "Nband": 8,
+    "AVRGING": 1,
+    "Noisefr": 3,
+    "VAD": 1
+  },
+  "most_robust_config": {
+    "FLOOR": 0.8,
+    "FRMSZ": 20.0,
+    "Nband": 4.0,
+    "AVRGING": 1.0,
+    "Noisefr": 3.0,
+    "VAD": 0.0
+  }
+}
