@@ -1,0 +1,891 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, GTCRN, GTCRN_SS, GTCRN_SS_vad1, GTCRN_SS_vad1_incrthrsh
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 13
+Number of files at 0dB: 13
+Number of files at 5dB: 12
+Number of files at 10dB: 13
+Number of files at 15dB: 11
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep_multi_snr_sstests\GTCRNs_Multi_SNR_20251022_215114
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0751  GTCRN=1.2394  GTCRN_SS=1.2706  GTCRN_SS_vad1=1.2675  GTCRN_SS_vad1_incrthrsh=1.2684  
+                SI_SDR:  Noisy=-5.0132  GTCRN=3.8175  GTCRN_SS=4.6096  GTCRN_SS_vad1=4.6360  GTCRN_SS_vad1_incrthrsh=4.6608  
+                  STOI:  Noisy=0.5692  GTCRN=0.5839  GTCRN_SS=0.5930  GTCRN_SS_vad1=0.5936  GTCRN_SS_vad1_incrthrsh=0.5933  
+       DNSMOS_p808_mos:  Noisy=2.4054  GTCRN=2.7985  GTCRN_SS=2.7943  GTCRN_SS_vad1=2.8135  GTCRN_SS_vad1_incrthrsh=2.8230  
+        DNSMOS_mos_sig:  Noisy=3.5547  GTCRN=2.2821  GTCRN_SS=2.5285  GTCRN_SS_vad1=2.5663  GTCRN_SS_vad1_incrthrsh=2.5722  
+        DNSMOS_mos_bak:  Noisy=1.6786  GTCRN=3.2563  GTCRN_SS=3.3921  GTCRN_SS_vad1=3.3656  GTCRN_SS_vad1_incrthrsh=3.3806  
+        DNSMOS_mos_ovr:  Noisy=1.9776  GTCRN=1.9900  GTCRN_SS=2.2055  GTCRN_SS_vad1=2.2245  GTCRN_SS_vad1_incrthrsh=2.2366  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.1086  GTCRN=1.4197  GTCRN_SS=1.4850  GTCRN_SS_vad1=1.4832  GTCRN_SS_vad1_incrthrsh=1.4843  
+                SI_SDR:  Noisy=-0.0328  GTCRN=7.5701  GTCRN_SS=7.6497  GTCRN_SS_vad1=7.7366  GTCRN_SS_vad1_incrthrsh=7.7365  
+                  STOI:  Noisy=0.6387  GTCRN=0.6607  GTCRN_SS=0.6633  GTCRN_SS_vad1=0.6636  GTCRN_SS_vad1_incrthrsh=0.6639  
+       DNSMOS_p808_mos:  Noisy=2.5219  GTCRN=2.9849  GTCRN_SS=3.0176  GTCRN_SS_vad1=3.0160  GTCRN_SS_vad1_incrthrsh=3.0244  
+        DNSMOS_mos_sig:  Noisy=3.8728  GTCRN=2.9035  GTCRN_SS=3.1765  GTCRN_SS_vad1=3.2103  GTCRN_SS_vad1_incrthrsh=3.1951  
+        DNSMOS_mos_bak:  Noisy=1.9375  GTCRN=3.4157  GTCRN_SS=3.4720  GTCRN_SS_vad1=3.4700  GTCRN_SS_vad1_incrthrsh=3.4626  
+        DNSMOS_mos_ovr:  Noisy=2.3044  GTCRN=2.4802  GTCRN_SS=2.6687  GTCRN_SS_vad1=2.6940  GTCRN_SS_vad1_incrthrsh=2.6783  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.2038  GTCRN=1.7413  GTCRN_SS=1.7425  GTCRN_SS_vad1=1.7280  GTCRN_SS_vad1_incrthrsh=1.7231  
+                SI_SDR:  Noisy=4.9972  GTCRN=11.4720  GTCRN_SS=11.2791  GTCRN_SS_vad1=11.4514  GTCRN_SS_vad1_incrthrsh=11.4719  
+                  STOI:  Noisy=0.6961  GTCRN=0.7258  GTCRN_SS=0.7249  GTCRN_SS_vad1=0.7256  GTCRN_SS_vad1_incrthrsh=0.7265  
+       DNSMOS_p808_mos:  Noisy=2.6909  GTCRN=3.2097  GTCRN_SS=3.2079  GTCRN_SS_vad1=3.2136  GTCRN_SS_vad1_incrthrsh=3.2105  
+        DNSMOS_mos_sig:  Noisy=4.0610  GTCRN=3.5316  GTCRN_SS=3.5967  GTCRN_SS_vad1=3.6031  GTCRN_SS_vad1_incrthrsh=3.6188  
+        DNSMOS_mos_bak:  Noisy=2.2032  GTCRN=3.5685  GTCRN_SS=3.7765  GTCRN_SS_vad1=3.6927  GTCRN_SS_vad1_incrthrsh=3.7132  
+        DNSMOS_mos_ovr:  Noisy=2.5446  GTCRN=2.9533  GTCRN_SS=3.0958  GTCRN_SS_vad1=3.0695  GTCRN_SS_vad1_incrthrsh=3.0909  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3882  GTCRN=2.0438  GTCRN_SS=2.0739  GTCRN_SS_vad1=2.0773  GTCRN_SS_vad1_incrthrsh=2.0630  
+                SI_SDR:  Noisy=9.9995  GTCRN=14.5717  GTCRN_SS=14.0301  GTCRN_SS_vad1=14.2134  GTCRN_SS_vad1_incrthrsh=14.2645  
+                  STOI:  Noisy=0.7539  GTCRN=0.7754  GTCRN_SS=0.7726  GTCRN_SS_vad1=0.7730  GTCRN_SS_vad1_incrthrsh=0.7731  
+       DNSMOS_p808_mos:  Noisy=2.8637  GTCRN=3.3136  GTCRN_SS=3.3111  GTCRN_SS_vad1=3.3292  GTCRN_SS_vad1_incrthrsh=3.3359  
+        DNSMOS_mos_sig:  Noisy=4.0771  GTCRN=3.8657  GTCRN_SS=3.9089  GTCRN_SS_vad1=3.9454  GTCRN_SS_vad1_incrthrsh=3.9537  
+        DNSMOS_mos_bak:  Noisy=2.3650  GTCRN=3.7111  GTCRN_SS=3.7448  GTCRN_SS_vad1=3.8030  GTCRN_SS_vad1_incrthrsh=3.8062  
+        DNSMOS_mos_ovr:  Noisy=2.6548  GTCRN=3.2509  GTCRN_SS=3.3134  GTCRN_SS_vad1=3.3735  GTCRN_SS_vad1_incrthrsh=3.3821  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.7284  GTCRN=2.3784  GTCRN_SS=2.4954  GTCRN_SS_vad1=2.4934  GTCRN_SS_vad1_incrthrsh=2.4811  
+                SI_SDR:  Noisy=14.9983  GTCRN=18.4455  GTCRN_SS=17.5328  GTCRN_SS_vad1=17.6678  GTCRN_SS_vad1_incrthrsh=17.7128  
+                  STOI:  Noisy=0.7911  GTCRN=0.8091  GTCRN_SS=0.8050  GTCRN_SS_vad1=0.8057  GTCRN_SS_vad1_incrthrsh=0.8056  
+       DNSMOS_p808_mos:  Noisy=2.9952  GTCRN=3.4446  GTCRN_SS=3.4332  GTCRN_SS_vad1=3.4415  GTCRN_SS_vad1_incrthrsh=3.4385  
+        DNSMOS_mos_sig:  Noisy=4.0568  GTCRN=4.0531  GTCRN_SS=4.0770  GTCRN_SS_vad1=4.0798  GTCRN_SS_vad1_incrthrsh=4.1095  
+        DNSMOS_mos_bak:  Noisy=2.6250  GTCRN=3.8715  GTCRN_SS=3.9319  GTCRN_SS_vad1=3.9596  GTCRN_SS_vad1_incrthrsh=3.9468  
+        DNSMOS_mos_ovr:  Noisy=2.8061  GTCRN=3.4574  GTCRN_SS=3.5152  GTCRN_SS_vad1=3.5323  GTCRN_SS_vad1_incrthrsh=3.5495  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0751  |  GTCRN=1.2394 (+0.1642, +15.27%)  |  GTCRN_SS=1.2706 (+0.1954, +18.18%)  |  GTCRN_SS_vad1=1.2675 (+0.1924, +17.89%)  |  GTCRN_SS_vad1_incrthrsh=1.2684 (+0.1932, +17.97%)
+                SI_SDR: Noisy=-5.0132  |  GTCRN=3.8175 (+8.8307, +176.15%)  |  GTCRN_SS=4.6096 (+9.6227, +191.95%)  |  GTCRN_SS_vad1=4.6360 (+9.6492, +192.48%)  |  GTCRN_SS_vad1_incrthrsh=4.6608 (+9.6740, +192.97%)
+                  STOI: Noisy=0.5692  |  GTCRN=0.5839 (+0.0147, +2.58%)  |  GTCRN_SS=0.5930 (+0.0238, +4.18%)  |  GTCRN_SS_vad1=0.5936 (+0.0245, +4.30%)  |  GTCRN_SS_vad1_incrthrsh=0.5933 (+0.0241, +4.24%)
+       DNSMOS_p808_mos: Noisy=2.4054  |  GTCRN=2.7985 (+0.3931, +16.34%)  |  GTCRN_SS=2.7943 (+0.3889, +16.17%)  |  GTCRN_SS_vad1=2.8135 (+0.4081, +16.97%)  |  GTCRN_SS_vad1_incrthrsh=2.8230 (+0.4176, +17.36%)
+        DNSMOS_mos_sig: Noisy=3.5547  |  GTCRN=2.2821 (-1.2725, -35.80%)  |  GTCRN_SS=2.5285 (-1.0262, -28.87%)  |  GTCRN_SS_vad1=2.5663 (-0.9884, -27.80%)  |  GTCRN_SS_vad1_incrthrsh=2.5722 (-0.9824, -27.64%)
+        DNSMOS_mos_bak: Noisy=1.6786  |  GTCRN=3.2563 (+1.5777, +93.99%)  |  GTCRN_SS=3.3921 (+1.7135, +102.08%)  |  GTCRN_SS_vad1=3.3656 (+1.6870, +100.50%)  |  GTCRN_SS_vad1_incrthrsh=3.3806 (+1.7020, +101.39%)
+        DNSMOS_mos_ovr: Noisy=1.9776  |  GTCRN=1.9900 (+0.0124, +0.63%)  |  GTCRN_SS=2.2055 (+0.2279, +11.52%)  |  GTCRN_SS_vad1=2.2245 (+0.2468, +12.48%)  |  GTCRN_SS_vad1_incrthrsh=2.2366 (+0.2590, +13.10%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.1086  |  GTCRN=1.4197 (+0.3111, +28.06%)  |  GTCRN_SS=1.4850 (+0.3764, +33.95%)  |  GTCRN_SS_vad1=1.4832 (+0.3745, +33.78%)  |  GTCRN_SS_vad1_incrthrsh=1.4843 (+0.3756, +33.88%)
+                SI_SDR: Noisy=-0.0328  |  GTCRN=7.5701 (+7.6029, +23194.20%)  |  GTCRN_SS=7.6497 (+7.6824, +23436.96%)  |  GTCRN_SS_vad1=7.7366 (+7.7694, +23702.32%)  |  GTCRN_SS_vad1_incrthrsh=7.7365 (+7.7693, +23701.82%)
+                  STOI: Noisy=0.6387  |  GTCRN=0.6607 (+0.0220, +3.45%)  |  GTCRN_SS=0.6633 (+0.0246, +3.85%)  |  GTCRN_SS_vad1=0.6636 (+0.0249, +3.90%)  |  GTCRN_SS_vad1_incrthrsh=0.6639 (+0.0253, +3.95%)
+       DNSMOS_p808_mos: Noisy=2.5219  |  GTCRN=2.9849 (+0.4631, +18.36%)  |  GTCRN_SS=3.0176 (+0.4958, +19.66%)  |  GTCRN_SS_vad1=3.0160 (+0.4941, +19.59%)  |  GTCRN_SS_vad1_incrthrsh=3.0244 (+0.5025, +19.93%)
+        DNSMOS_mos_sig: Noisy=3.8728  |  GTCRN=2.9035 (-0.9693, -25.03%)  |  GTCRN_SS=3.1765 (-0.6963, -17.98%)  |  GTCRN_SS_vad1=3.2103 (-0.6624, -17.11%)  |  GTCRN_SS_vad1_incrthrsh=3.1951 (-0.6777, -17.50%)
+        DNSMOS_mos_bak: Noisy=1.9375  |  GTCRN=3.4157 (+1.4782, +76.29%)  |  GTCRN_SS=3.4720 (+1.5345, +79.20%)  |  GTCRN_SS_vad1=3.4700 (+1.5325, +79.09%)  |  GTCRN_SS_vad1_incrthrsh=3.4626 (+1.5251, +78.71%)
+        DNSMOS_mos_ovr: Noisy=2.3044  |  GTCRN=2.4802 (+0.1758, +7.63%)  |  GTCRN_SS=2.6687 (+0.3643, +15.81%)  |  GTCRN_SS_vad1=2.6940 (+0.3896, +16.91%)  |  GTCRN_SS_vad1_incrthrsh=2.6783 (+0.3739, +16.23%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.2038  |  GTCRN=1.7413 (+0.5375, +44.65%)  |  GTCRN_SS=1.7425 (+0.5386, +44.74%)  |  GTCRN_SS_vad1=1.7280 (+0.5242, +43.54%)  |  GTCRN_SS_vad1_incrthrsh=1.7231 (+0.5192, +43.13%)
+                SI_SDR: Noisy=4.9972  |  GTCRN=11.4720 (+6.4748, +129.57%)  |  GTCRN_SS=11.2791 (+6.2819, +125.71%)  |  GTCRN_SS_vad1=11.4514 (+6.4543, +129.16%)  |  GTCRN_SS_vad1_incrthrsh=11.4719 (+6.4747, +129.57%)
+                  STOI: Noisy=0.6961  |  GTCRN=0.7258 (+0.0297, +4.27%)  |  GTCRN_SS=0.7249 (+0.0288, +4.14%)  |  GTCRN_SS_vad1=0.7256 (+0.0295, +4.24%)  |  GTCRN_SS_vad1_incrthrsh=0.7265 (+0.0304, +4.37%)
+       DNSMOS_p808_mos: Noisy=2.6909  |  GTCRN=3.2097 (+0.5188, +19.28%)  |  GTCRN_SS=3.2079 (+0.5170, +19.21%)  |  GTCRN_SS_vad1=3.2136 (+0.5227, +19.43%)  |  GTCRN_SS_vad1_incrthrsh=3.2105 (+0.5196, +19.31%)
+        DNSMOS_mos_sig: Noisy=4.0610  |  GTCRN=3.5316 (-0.5294, -13.04%)  |  GTCRN_SS=3.5967 (-0.4644, -11.44%)  |  GTCRN_SS_vad1=3.6031 (-0.4579, -11.28%)  |  GTCRN_SS_vad1_incrthrsh=3.6188 (-0.4422, -10.89%)
+        DNSMOS_mos_bak: Noisy=2.2032  |  GTCRN=3.5685 (+1.3653, +61.97%)  |  GTCRN_SS=3.7765 (+1.5733, +71.41%)  |  GTCRN_SS_vad1=3.6927 (+1.4895, +67.61%)  |  GTCRN_SS_vad1_incrthrsh=3.7132 (+1.5100, +68.54%)
+        DNSMOS_mos_ovr: Noisy=2.5446  |  GTCRN=2.9533 (+0.4087, +16.06%)  |  GTCRN_SS=3.0958 (+0.5512, +21.66%)  |  GTCRN_SS_vad1=3.0695 (+0.5249, +20.63%)  |  GTCRN_SS_vad1_incrthrsh=3.0909 (+0.5463, +21.47%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3882  |  GTCRN=2.0438 (+0.6556, +47.22%)  |  GTCRN_SS=2.0739 (+0.6857, +49.39%)  |  GTCRN_SS_vad1=2.0773 (+0.6890, +49.63%)  |  GTCRN_SS_vad1_incrthrsh=2.0630 (+0.6747, +48.60%)
+                SI_SDR: Noisy=9.9995  |  GTCRN=14.5717 (+4.5722, +45.72%)  |  GTCRN_SS=14.0301 (+4.0306, +40.31%)  |  GTCRN_SS_vad1=14.2134 (+4.2138, +42.14%)  |  GTCRN_SS_vad1_incrthrsh=14.2645 (+4.2650, +42.65%)
+                  STOI: Noisy=0.7539  |  GTCRN=0.7754 (+0.0216, +2.86%)  |  GTCRN_SS=0.7726 (+0.0187, +2.48%)  |  GTCRN_SS_vad1=0.7730 (+0.0191, +2.54%)  |  GTCRN_SS_vad1_incrthrsh=0.7731 (+0.0192, +2.55%)
+       DNSMOS_p808_mos: Noisy=2.8637  |  GTCRN=3.3136 (+0.4499, +15.71%)  |  GTCRN_SS=3.3111 (+0.4474, +15.62%)  |  GTCRN_SS_vad1=3.3292 (+0.4655, +16.25%)  |  GTCRN_SS_vad1_incrthrsh=3.3359 (+0.4722, +16.49%)
+        DNSMOS_mos_sig: Noisy=4.0771  |  GTCRN=3.8657 (-0.2115, -5.19%)  |  GTCRN_SS=3.9089 (-0.1682, -4.13%)  |  GTCRN_SS_vad1=3.9454 (-0.1317, -3.23%)  |  GTCRN_SS_vad1_incrthrsh=3.9537 (-0.1235, -3.03%)
+        DNSMOS_mos_bak: Noisy=2.3650  |  GTCRN=3.7111 (+1.3461, +56.92%)  |  GTCRN_SS=3.7448 (+1.3798, +58.34%)  |  GTCRN_SS_vad1=3.8030 (+1.4380, +60.80%)  |  GTCRN_SS_vad1_incrthrsh=3.8062 (+1.4412, +60.94%)
+        DNSMOS_mos_ovr: Noisy=2.6548  |  GTCRN=3.2509 (+0.5961, +22.45%)  |  GTCRN_SS=3.3134 (+0.6586, +24.81%)  |  GTCRN_SS_vad1=3.3735 (+0.7187, +27.07%)  |  GTCRN_SS_vad1_incrthrsh=3.3821 (+0.7273, +27.40%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.7284  |  GTCRN=2.3784 (+0.6500, +37.61%)  |  GTCRN_SS=2.4954 (+0.7670, +44.38%)  |  GTCRN_SS_vad1=2.4934 (+0.7650, +44.26%)  |  GTCRN_SS_vad1_incrthrsh=2.4811 (+0.7527, +43.55%)
+                SI_SDR: Noisy=14.9983  |  GTCRN=18.4455 (+3.4472, +22.98%)  |  GTCRN_SS=17.5328 (+2.5345, +16.90%)  |  GTCRN_SS_vad1=17.6678 (+2.6695, +17.80%)  |  GTCRN_SS_vad1_incrthrsh=17.7128 (+2.7146, +18.10%)
+                  STOI: Noisy=0.7911  |  GTCRN=0.8091 (+0.0180, +2.28%)  |  GTCRN_SS=0.8050 (+0.0139, +1.76%)  |  GTCRN_SS_vad1=0.8057 (+0.0146, +1.84%)  |  GTCRN_SS_vad1_incrthrsh=0.8056 (+0.0145, +1.83%)
+       DNSMOS_p808_mos: Noisy=2.9952  |  GTCRN=3.4446 (+0.4494, +15.00%)  |  GTCRN_SS=3.4332 (+0.4380, +14.62%)  |  GTCRN_SS_vad1=3.4415 (+0.4463, +14.90%)  |  GTCRN_SS_vad1_incrthrsh=3.4385 (+0.4433, +14.80%)
+        DNSMOS_mos_sig: Noisy=4.0568  |  GTCRN=4.0531 (-0.0037, -0.09%)  |  GTCRN_SS=4.0770 (+0.0202, +0.50%)  |  GTCRN_SS_vad1=4.0798 (+0.0230, +0.57%)  |  GTCRN_SS_vad1_incrthrsh=4.1095 (+0.0527, +1.30%)
+        DNSMOS_mos_bak: Noisy=2.6250  |  GTCRN=3.8715 (+1.2466, +47.49%)  |  GTCRN_SS=3.9319 (+1.3069, +49.79%)  |  GTCRN_SS_vad1=3.9596 (+1.3346, +50.84%)  |  GTCRN_SS_vad1_incrthrsh=3.9468 (+1.3219, +50.36%)
+        DNSMOS_mos_ovr: Noisy=2.8061  |  GTCRN=3.4574 (+0.6513, +23.21%)  |  GTCRN_SS=3.5152 (+0.7091, +25.27%)  |  GTCRN_SS_vad1=3.5323 (+0.7262, +25.88%)  |  GTCRN_SS_vad1_incrthrsh=3.5495 (+0.7434, +26.49%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  10/13 files (76.9%)
+    Degraded:  3/13 files (23.1%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  6/13 files (46.2%)
+    Degraded:  7/13 files (53.8%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  1/13 files (7.7%)
+    Degraded:  12/13 files (92.3%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  1/13 files (7.7%)
+    Degraded:  12/13 files (92.3%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  1/13 files (7.7%)
+    Degraded:  12/13 files (92.3%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  7/13 files (53.8%)
+    Degraded:  6/13 files (46.2%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  8/11 files (72.7%)
+    Degraded:  3/11 files (27.3%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  8/11 files (72.7%)
+    Degraded:  3/11 files (27.3%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  8/11 files (72.7%)
+    Degraded:  3/11 files (27.3%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  9/11 files (81.8%)
+    Degraded:  2/11 files (18.2%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  9/11 files (81.8%)
+    Degraded:  2/11 files (18.2%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  9/11 files (81.8%)
+    Degraded:  2/11 files (18.2%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  6/11 files (54.5%)
+    Degraded:  5/11 files (45.5%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  5/11 files (45.5%)
+    Degraded:  6/11 files (54.5%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  5/11 files (45.5%)
+    Degraded:  6/11 files (54.5%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  6/11 files (54.5%)
+    Degraded:  5/11 files (45.5%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  GTCRN_SS_vad1_incrthrsh:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.050  GTCRN=1.202  GTCRN_SS=1.178  GTCRN_SS_vad1=1.178  GTCRN_SS_vad1_incrthrsh=1.179  
+    0dB: Noisy=1.073  GTCRN=1.400  GTCRN_SS=1.300  GTCRN_SS_vad1=1.300  GTCRN_SS_vad1_incrthrsh=1.303  
+    5dB: Noisy=1.136  GTCRN=1.919  GTCRN_SS=1.595  GTCRN_SS_vad1=1.577  GTCRN_SS_vad1_incrthrsh=1.579  
+    10dB: Noisy=1.275  GTCRN=1.964  GTCRN_SS=1.867  GTCRN_SS_vad1=1.876  GTCRN_SS_vad1_incrthrsh=1.872  
+  SI_SDR:
+    -5dB: Noisy=-5.038  GTCRN=2.698  GTCRN_SS=2.295  GTCRN_SS_vad1=2.303  GTCRN_SS_vad1_incrthrsh=2.389  
+    0dB: Noisy=-0.020  GTCRN=6.110  GTCRN_SS=5.283  GTCRN_SS_vad1=5.283  GTCRN_SS_vad1_incrthrsh=5.376  
+    5dB: Noisy=5.014  GTCRN=12.423  GTCRN_SS=10.713  GTCRN_SS_vad1=11.084  GTCRN_SS_vad1_incrthrsh=11.069  
+    10dB: Noisy=10.001  GTCRN=11.924  GTCRN_SS=12.249  GTCRN_SS_vad1=12.229  GTCRN_SS_vad1_incrthrsh=12.198  
+  STOI:
+    -5dB: Noisy=0.517  GTCRN=0.559  GTCRN_SS=0.554  GTCRN_SS_vad1=0.555  GTCRN_SS_vad1_incrthrsh=0.555  
+    0dB: Noisy=0.606  GTCRN=0.664  GTCRN_SS=0.639  GTCRN_SS_vad1=0.639  GTCRN_SS_vad1_incrthrsh=0.640  
+    5dB: Noisy=0.673  GTCRN=0.722  GTCRN_SS=0.689  GTCRN_SS_vad1=0.693  GTCRN_SS_vad1_incrthrsh=0.692  
+    10dB: Noisy=0.753  GTCRN=0.799  GTCRN_SS=0.772  GTCRN_SS_vad1=0.773  GTCRN_SS_vad1_incrthrsh=0.772  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.721  GTCRN=1.819  GTCRN_SS=1.664  GTCRN_SS_vad1=1.633  GTCRN_SS_vad1_incrthrsh=1.649  
+    0dB: Noisy=1.866  GTCRN=2.577  GTCRN_SS=2.583  GTCRN_SS_vad1=2.573  GTCRN_SS_vad1_incrthrsh=2.500  
+    5dB: Noisy=2.395  GTCRN=3.561  GTCRN_SS=3.461  GTCRN_SS_vad1=3.401  GTCRN_SS_vad1_incrthrsh=3.395  
+    10dB: Noisy=2.462  GTCRN=3.315  GTCRN_SS=3.446  GTCRN_SS_vad1=3.442  GTCRN_SS_vad1_incrthrsh=3.471  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  GTCRN=1.479  GTCRN_SS=1.642  GTCRN_SS_vad1=1.636  GTCRN_SS_vad1_incrthrsh=1.633  
+    0dB: Noisy=1.265  GTCRN=1.715  GTCRN_SS=2.034  GTCRN_SS_vad1=2.028  GTCRN_SS_vad1_incrthrsh=2.041  
+    5dB: Noisy=1.348  GTCRN=2.020  GTCRN_SS=2.437  GTCRN_SS_vad1=2.275  GTCRN_SS_vad1_incrthrsh=2.259  
+    10dB: Noisy=1.567  GTCRN=2.448  GTCRN_SS=2.939  GTCRN_SS_vad1=2.972  GTCRN_SS_vad1_incrthrsh=2.972  
+    15dB: Noisy=2.167  GTCRN=2.830  GTCRN_SS=3.082  GTCRN_SS_vad1=3.116  GTCRN_SS_vad1_incrthrsh=3.102  
+  SI_SDR:
+    -5dB: Noisy=-5.047  GTCRN=4.870  GTCRN_SS=7.757  GTCRN_SS_vad1=7.788  GTCRN_SS_vad1_incrthrsh=7.777  
+    0dB: Noisy=-0.018  GTCRN=8.683  GTCRN_SS=10.651  GTCRN_SS_vad1=10.770  GTCRN_SS_vad1_incrthrsh=10.708  
+    5dB: Noisy=4.987  GTCRN=13.903  GTCRN_SS=13.300  GTCRN_SS_vad1=13.578  GTCRN_SS_vad1_incrthrsh=13.483  
+    10dB: Noisy=9.999  GTCRN=17.266  GTCRN_SS=16.324  GTCRN_SS_vad1=16.469  GTCRN_SS_vad1_incrthrsh=16.468  
+    15dB: Noisy=14.995  GTCRN=20.250  GTCRN_SS=19.041  GTCRN_SS_vad1=19.242  GTCRN_SS_vad1_incrthrsh=19.167  
+  STOI:
+    -5dB: Noisy=0.429  GTCRN=0.426  GTCRN_SS=0.493  GTCRN_SS_vad1=0.495  GTCRN_SS_vad1_incrthrsh=0.493  
+    0dB: Noisy=0.465  GTCRN=0.487  GTCRN_SS=0.542  GTCRN_SS_vad1=0.544  GTCRN_SS_vad1_incrthrsh=0.546  
+    5dB: Noisy=0.501  GTCRN=0.533  GTCRN_SS=0.577  GTCRN_SS_vad1=0.578  GTCRN_SS_vad1_incrthrsh=0.580  
+    10dB: Noisy=0.534  GTCRN=0.588  GTCRN_SS=0.593  GTCRN_SS_vad1=0.589  GTCRN_SS_vad1_incrthrsh=0.589  
+    15dB: Noisy=0.555  GTCRN=0.612  GTCRN_SS=0.613  GTCRN_SS_vad1=0.614  GTCRN_SS_vad1_incrthrsh=0.610  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  GTCRN=2.097  GTCRN_SS=2.265  GTCRN_SS_vad1=2.330  GTCRN_SS_vad1_incrthrsh=2.319  
+    0dB: Noisy=2.325  GTCRN=1.996  GTCRN_SS=3.272  GTCRN_SS_vad1=3.262  GTCRN_SS_vad1_incrthrsh=3.267  
+    5dB: Noisy=2.657  GTCRN=2.983  GTCRN_SS=3.598  GTCRN_SS_vad1=3.410  GTCRN_SS_vad1_incrthrsh=3.528  
+    10dB: Noisy=2.808  GTCRN=3.255  GTCRN_SS=3.210  GTCRN_SS_vad1=3.421  GTCRN_SS_vad1_incrthrsh=3.421  
+    15dB: Noisy=2.839  GTCRN=3.142  GTCRN_SS=3.494  GTCRN_SS_vad1=3.419  GTCRN_SS_vad1_incrthrsh=3.506  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  GTCRN=1.171  GTCRN_SS=1.358  GTCRN_SS_vad1=1.346  GTCRN_SS_vad1_incrthrsh=1.347  
+    0dB: Noisy=1.114  GTCRN=1.291  GTCRN_SS=1.625  GTCRN_SS_vad1=1.615  GTCRN_SS_vad1_incrthrsh=1.613  
+    5dB: Noisy=1.222  GTCRN=1.577  GTCRN_SS=1.942  GTCRN_SS_vad1=1.928  GTCRN_SS_vad1_incrthrsh=1.919  
+    10dB: Noisy=1.436  GTCRN=1.933  GTCRN_SS=2.262  GTCRN_SS_vad1=2.254  GTCRN_SS_vad1_incrthrsh=2.253  
+    15dB: Noisy=1.765  GTCRN=2.286  GTCRN_SS=2.580  GTCRN_SS_vad1=2.583  GTCRN_SS_vad1_incrthrsh=2.585  
+  SI_SDR:
+    -5dB: Noisy=-5.016  GTCRN=2.500  GTCRN_SS=7.262  GTCRN_SS_vad1=7.270  GTCRN_SS_vad1_incrthrsh=7.269  
+    0dB: Noisy=-0.017  GTCRN=6.217  GTCRN_SS=10.303  GTCRN_SS_vad1=10.437  GTCRN_SS_vad1_incrthrsh=10.419  
+    5dB: Noisy=5.011  GTCRN=9.762  GTCRN_SS=12.815  GTCRN_SS_vad1=12.925  GTCRN_SS_vad1_incrthrsh=13.101  
+    10dB: Noisy=10.002  GTCRN=14.098  GTCRN_SS=15.389  GTCRN_SS_vad1=15.786  GTCRN_SS_vad1_incrthrsh=15.704  
+    15dB: Noisy=14.999  GTCRN=17.953  GTCRN_SS=18.101  GTCRN_SS_vad1=18.289  GTCRN_SS_vad1_incrthrsh=18.159  
+  STOI:
+    -5dB: Noisy=0.602  GTCRN=0.530  GTCRN_SS=0.622  GTCRN_SS_vad1=0.623  GTCRN_SS_vad1_incrthrsh=0.623  
+    0dB: Noisy=0.661  GTCRN=0.614  GTCRN_SS=0.685  GTCRN_SS_vad1=0.685  GTCRN_SS_vad1_incrthrsh=0.685  
+    5dB: Noisy=0.715  GTCRN=0.700  GTCRN_SS=0.743  GTCRN_SS_vad1=0.742  GTCRN_SS_vad1_incrthrsh=0.744  
+    10dB: Noisy=0.771  GTCRN=0.758  GTCRN_SS=0.791  GTCRN_SS_vad1=0.792  GTCRN_SS_vad1_incrthrsh=0.792  
+    15dB: Noisy=0.805  GTCRN=0.804  GTCRN_SS=0.826  GTCRN_SS_vad1=0.827  GTCRN_SS_vad1_incrthrsh=0.827  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  GTCRN=1.740  GTCRN_SS=2.486  GTCRN_SS_vad1=2.468  GTCRN_SS_vad1_incrthrsh=2.482  
+    0dB: Noisy=2.429  GTCRN=1.987  GTCRN_SS=2.663  GTCRN_SS_vad1=2.673  GTCRN_SS_vad1_incrthrsh=2.678  
+    5dB: Noisy=2.769  GTCRN=2.586  GTCRN_SS=3.034  GTCRN_SS_vad1=3.011  GTCRN_SS_vad1_incrthrsh=3.008  
+    10dB: Noisy=2.817  GTCRN=3.075  GTCRN_SS=3.293  GTCRN_SS_vad1=3.416  GTCRN_SS_vad1_incrthrsh=3.398  
+    15dB: Noisy=2.904  GTCRN=3.312  GTCRN_SS=3.385  GTCRN_SS_vad1=3.495  GTCRN_SS_vad1_incrthrsh=3.537  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  GTCRN=1.209  GTCRN_SS=1.228  GTCRN_SS_vad1=1.226  GTCRN_SS_vad1_incrthrsh=1.228  
+    0dB: Noisy=1.116  GTCRN=1.385  GTCRN_SS=1.386  GTCRN_SS_vad1=1.389  GTCRN_SS_vad1_incrthrsh=1.389  
+    5dB: Noisy=1.217  GTCRN=1.566  GTCRN_SS=1.677  GTCRN_SS_vad1=1.675  GTCRN_SS_vad1_incrthrsh=1.674  
+    10dB: Noisy=1.399  GTCRN=1.994  GTCRN_SS=2.003  GTCRN_SS_vad1=2.001  GTCRN_SS_vad1_incrthrsh=1.984  
+    15dB: Noisy=1.700  GTCRN=2.343  GTCRN_SS=2.340  GTCRN_SS_vad1=2.341  GTCRN_SS_vad1_incrthrsh=2.323  
+  SI_SDR:
+    -5dB: Noisy=-5.044  GTCRN=3.855  GTCRN_SS=4.183  GTCRN_SS_vad1=4.220  GTCRN_SS_vad1_incrthrsh=4.221  
+    0dB: Noisy=-0.041  GTCRN=8.732  GTCRN_SS=7.076  GTCRN_SS_vad1=7.104  GTCRN_SS_vad1_incrthrsh=7.104  
+    5dB: Noisy=5.003  GTCRN=10.892  GTCRN_SS=11.519  GTCRN_SS_vad1=11.519  GTCRN_SS_vad1_incrthrsh=11.468  
+    10dB: Noisy=10.007  GTCRN=14.490  GTCRN_SS=14.149  GTCRN_SS_vad1=14.266  GTCRN_SS_vad1_incrthrsh=14.314  
+    15dB: Noisy=15.001  GTCRN=17.976  GTCRN_SS=17.037  GTCRN_SS_vad1=17.039  GTCRN_SS_vad1_incrthrsh=16.801  
+  STOI:
+    -5dB: Noisy=0.552  GTCRN=0.597  GTCRN_SS=0.593  GTCRN_SS_vad1=0.593  GTCRN_SS_vad1_incrthrsh=0.594  
+    0dB: Noisy=0.639  GTCRN=0.702  GTCRN_SS=0.674  GTCRN_SS_vad1=0.676  GTCRN_SS_vad1_incrthrsh=0.676  
+    5dB: Noisy=0.709  GTCRN=0.752  GTCRN_SS=0.752  GTCRN_SS_vad1=0.752  GTCRN_SS_vad1_incrthrsh=0.754  
+    10dB: Noisy=0.783  GTCRN=0.812  GTCRN_SS=0.807  GTCRN_SS_vad1=0.810  GTCRN_SS_vad1_incrthrsh=0.809  
+    15dB: Noisy=0.832  GTCRN=0.853  GTCRN_SS=0.839  GTCRN_SS_vad1=0.839  GTCRN_SS_vad1_incrthrsh=0.840  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  GTCRN=1.921  GTCRN_SS=1.963  GTCRN_SS_vad1=2.028  GTCRN_SS_vad1_incrthrsh=2.035  
+    0dB: Noisy=2.392  GTCRN=2.827  GTCRN_SS=2.408  GTCRN_SS_vad1=2.470  GTCRN_SS_vad1_incrthrsh=2.466  
+    5dB: Noisy=2.492  GTCRN=2.835  GTCRN_SS=2.987  GTCRN_SS_vad1=2.964  GTCRN_SS_vad1_incrthrsh=3.051  
+    10dB: Noisy=2.693  GTCRN=3.273  GTCRN_SS=3.205  GTCRN_SS_vad1=3.244  GTCRN_SS_vad1_incrthrsh=3.237  
+    15dB: Noisy=3.030  GTCRN=3.609  GTCRN_SS=3.528  GTCRN_SS_vad1=3.520  GTCRN_SS_vad1_incrthrsh=3.483  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  GTCRN=1.260  GTCRN_SS=1.198  GTCRN_SS_vad1=1.199  GTCRN_SS_vad1_incrthrsh=1.200  
+    0dB: Noisy=1.086  GTCRN=1.460  GTCRN_SS=1.405  GTCRN_SS_vad1=1.406  GTCRN_SS_vad1_incrthrsh=1.406  
+    5dB: Noisy=1.172  GTCRN=1.819  GTCRN_SS=1.540  GTCRN_SS_vad1=1.550  GTCRN_SS_vad1_incrthrsh=1.547  
+    10dB: Noisy=1.365  GTCRN=2.081  GTCRN_SS=1.900  GTCRN_SS_vad1=1.903  GTCRN_SS_vad1_incrthrsh=1.875  
+    15dB: Noisy=1.630  GTCRN=2.358  GTCRN_SS=2.390  GTCRN_SS_vad1=2.376  GTCRN_SS_vad1_incrthrsh=2.358  
+  SI_SDR:
+    -5dB: Noisy=-4.982  GTCRN=4.830  GTCRN_SS=3.486  GTCRN_SS_vad1=3.525  GTCRN_SS_vad1_incrthrsh=3.557  
+    0dB: Noisy=-0.047  GTCRN=8.278  GTCRN_SS=6.634  GTCRN_SS_vad1=6.744  GTCRN_SS_vad1_incrthrsh=6.730  
+    5dB: Noisy=4.985  GTCRN=12.054  GTCRN_SS=9.970  GTCRN_SS_vad1=10.188  GTCRN_SS_vad1_incrthrsh=10.175  
+    10dB: Noisy=9.995  GTCRN=15.409  GTCRN_SS=13.421  GTCRN_SS_vad1=13.591  GTCRN_SS_vad1_incrthrsh=13.767  
+    15dB: Noisy=14.998  GTCRN=18.568  GTCRN_SS=17.088  GTCRN_SS_vad1=17.232  GTCRN_SS_vad1_incrthrsh=17.519  
+  STOI:
+    -5dB: Noisy=0.605  GTCRN=0.653  GTCRN_SS=0.611  GTCRN_SS_vad1=0.611  GTCRN_SS_vad1_incrthrsh=0.610  
+    0dB: Noisy=0.673  GTCRN=0.705  GTCRN_SS=0.680  GTCRN_SS_vad1=0.680  GTCRN_SS_vad1_incrthrsh=0.680  
+    5dB: Noisy=0.723  GTCRN=0.770  GTCRN_SS=0.740  GTCRN_SS_vad1=0.741  GTCRN_SS_vad1_incrthrsh=0.741  
+    10dB: Noisy=0.776  GTCRN=0.799  GTCRN_SS=0.784  GTCRN_SS_vad1=0.783  GTCRN_SS_vad1_incrthrsh=0.784  
+    15dB: Noisy=0.814  GTCRN=0.834  GTCRN_SS=0.818  GTCRN_SS_vad1=0.818  GTCRN_SS_vad1_incrthrsh=0.818  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  GTCRN=2.215  GTCRN_SS=2.339  GTCRN_SS_vad1=2.372  GTCRN_SS_vad1_incrthrsh=2.389  
+    0dB: Noisy=2.366  GTCRN=2.696  GTCRN_SS=2.690  GTCRN_SS_vad1=2.731  GTCRN_SS_vad1_incrthrsh=2.717  
+    5dB: Noisy=2.439  GTCRN=3.094  GTCRN_SS=3.003  GTCRN_SS_vad1=3.013  GTCRN_SS_vad1_incrthrsh=3.008  
+    10dB: Noisy=2.589  GTCRN=3.321  GTCRN_SS=3.337  GTCRN_SS_vad1=3.363  GTCRN_SS_vad1_incrthrsh=3.387  
+    15dB: Noisy=2.651  GTCRN=3.547  GTCRN_SS=3.592  GTCRN_SS_vad1=3.582  GTCRN_SS_vad1_incrthrsh=3.592  
+
+========================================================================================================================

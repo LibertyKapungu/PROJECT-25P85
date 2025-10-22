@@ -41,7 +41,7 @@ sys.path.insert(0, str(repo_root / "src"))
 gtcrn_path = repo_root / "src" / "deep_learning" / "gtcrn_model" 
 sys.path.insert(0, str(gtcrn_path))
 
-results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b_GTCRN_SS_pp_8ms_V0_f08'
+results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b'/'EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -200,7 +200,7 @@ for snr_dB in snr_dB_range:
             AVRGING=1,
             Noisefr=1,
             FLOOR=0.8,
-            VAD=0,
+            VAD=1,
         )
 
         # Step 5: Compute and save metrics
