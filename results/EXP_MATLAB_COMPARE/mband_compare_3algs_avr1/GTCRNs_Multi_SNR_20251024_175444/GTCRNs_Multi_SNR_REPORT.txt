@@ -1,0 +1,1087 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, specsub, ss_rdc, mband_lin_avr1, mband_log_avr1, mband_mel_avr1
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_compare_3algs_avr1\GTCRNs_Multi_SNR_20251024_175444
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  specsub=1.0830  ss_rdc=1.0712  mband_lin_avr1=1.1162  mband_log_avr1=1.1059  mband_mel_avr1=1.1123  
+                SI_SDR:  Noisy=-4.9899  specsub=-1.7911  ss_rdc=-3.4778  mband_lin_avr1=-0.5988  mband_log_avr1=-0.2501  mband_mel_avr1=-0.3566  
+                  STOI:  Noisy=0.5866  specsub=0.4809  ss_rdc=0.5486  mband_lin_avr1=0.5877  mband_log_avr1=0.5933  mband_mel_avr1=0.5878  
+       DNSMOS_p808_mos:  Noisy=2.4363  specsub=2.3110  ss_rdc=2.4785  mband_lin_avr1=2.5480  mband_log_avr1=2.5539  mband_mel_avr1=2.5604  
+        DNSMOS_mos_sig:  Noisy=3.5517  specsub=1.4917  ss_rdc=2.8912  mband_lin_avr1=3.6856  mband_log_avr1=3.7636  mband_mel_avr1=3.6746  
+        DNSMOS_mos_bak:  Noisy=1.6733  specsub=2.4644  ss_rdc=1.9787  mband_lin_avr1=2.0799  mband_log_avr1=2.1171  mband_mel_avr1=2.0734  
+        DNSMOS_mos_ovr:  Noisy=1.9706  specsub=1.3682  ss_rdc=1.8768  mband_lin_avr1=2.3191  mband_log_avr1=2.3783  mband_mel_avr1=2.2969  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  specsub=1.1444  ss_rdc=1.1203  mband_lin_avr1=1.2139  mband_log_avr1=1.2207  mband_mel_avr1=1.2195  
+                SI_SDR:  Noisy=-0.0263  specsub=2.9735  ss_rdc=2.0513  mband_lin_avr1=4.4193  mband_log_avr1=4.5448  mband_mel_avr1=4.2041  
+                  STOI:  Noisy=0.6549  specsub=0.5772  ss_rdc=0.6258  mband_lin_avr1=0.6617  mband_log_avr1=0.6597  mband_mel_avr1=0.6593  
+       DNSMOS_p808_mos:  Noisy=2.5694  specsub=2.3687  ss_rdc=2.5699  mband_lin_avr1=2.6875  mband_log_avr1=2.6909  mband_mel_avr1=2.6722  
+        DNSMOS_mos_sig:  Noisy=3.8877  specsub=1.9922  ss_rdc=3.1763  mband_lin_avr1=3.5832  mband_log_avr1=3.7385  mband_mel_avr1=3.7527  
+        DNSMOS_mos_bak:  Noisy=1.9030  specsub=2.4548  ss_rdc=2.1202  mband_lin_avr1=2.1954  mband_log_avr1=2.2541  mband_mel_avr1=2.2078  
+        DNSMOS_mos_ovr:  Noisy=2.2631  specsub=1.5602  ss_rdc=2.0459  mband_lin_avr1=2.3075  mband_log_avr1=2.4276  mband_mel_avr1=2.4021  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  specsub=1.2715  ss_rdc=1.2163  mband_lin_avr1=1.4013  mband_log_avr1=1.4143  mband_mel_avr1=1.4013  
+                SI_SDR:  Noisy=4.9955  specsub=7.6350  ss_rdc=6.8147  mband_lin_avr1=8.3258  mband_log_avr1=8.1340  mband_mel_avr1=8.0847  
+                  STOI:  Noisy=0.7153  specsub=0.6780  ss_rdc=0.6979  mband_lin_avr1=0.7239  mband_log_avr1=0.7190  mband_mel_avr1=0.7215  
+       DNSMOS_p808_mos:  Noisy=2.7331  specsub=2.4702  ss_rdc=2.6688  mband_lin_avr1=2.7795  mband_log_avr1=2.8141  mband_mel_avr1=2.8260  
+        DNSMOS_mos_sig:  Noisy=3.9827  specsub=2.2979  ss_rdc=3.3017  mband_lin_avr1=3.7546  mband_log_avr1=3.7846  mband_mel_avr1=3.8696  
+        DNSMOS_mos_bak:  Noisy=2.1026  specsub=2.5155  ss_rdc=2.4074  mband_lin_avr1=2.4143  mband_log_avr1=2.4350  mband_mel_avr1=2.4241  
+        DNSMOS_mos_ovr:  Noisy=2.4361  specsub=1.7586  ss_rdc=2.2833  mband_lin_avr1=2.5193  mband_log_avr1=2.5393  mband_mel_avr1=2.6053  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  specsub=1.5087  ss_rdc=1.4324  mband_lin_avr1=1.6420  mband_log_avr1=1.6909  mband_mel_avr1=1.6590  
+                SI_SDR:  Noisy=9.9991  specsub=12.0617  ss_rdc=11.0010  mband_lin_avr1=11.5108  mband_log_avr1=11.3432  mband_mel_avr1=11.3988  
+                  STOI:  Noisy=0.7740  specsub=0.7510  ss_rdc=0.7605  mband_lin_avr1=0.7780  mband_log_avr1=0.7746  mband_mel_avr1=0.7765  
+       DNSMOS_p808_mos:  Noisy=2.9111  specsub=2.6743  ss_rdc=2.7891  mband_lin_avr1=2.9114  mband_log_avr1=2.9619  mband_mel_avr1=2.9001  
+        DNSMOS_mos_sig:  Noisy=4.0784  specsub=2.8452  ss_rdc=3.5066  mband_lin_avr1=3.8729  mband_log_avr1=3.8935  mband_mel_avr1=3.8634  
+        DNSMOS_mos_bak:  Noisy=2.3277  specsub=2.5738  ss_rdc=2.5478  mband_lin_avr1=2.5688  mband_log_avr1=2.6391  mband_mel_avr1=2.5670  
+        DNSMOS_mos_ovr:  Noisy=2.6382  specsub=2.0847  ss_rdc=2.4394  mband_lin_avr1=2.6781  mband_log_avr1=2.7389  mband_mel_avr1=2.6710  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  specsub=1.8521  ss_rdc=1.7564  mband_lin_avr1=2.0225  mband_log_avr1=2.0299  mband_mel_avr1=1.9835  
+                SI_SDR:  Noisy=14.9989  specsub=15.9470  ss_rdc=14.6751  mband_lin_avr1=13.6753  mband_log_avr1=13.5566  mband_mel_avr1=13.3345  
+                  STOI:  Noisy=0.8137  specsub=0.7998  ss_rdc=0.8075  mband_lin_avr1=0.8150  mband_log_avr1=0.8111  mband_mel_avr1=0.8147  
+       DNSMOS_p808_mos:  Noisy=3.0481  specsub=2.9181  ss_rdc=2.9788  mband_lin_avr1=3.0678  mband_log_avr1=3.0761  mband_mel_avr1=3.0720  
+        DNSMOS_mos_sig:  Noisy=4.0454  specsub=3.3772  ss_rdc=3.7756  mband_lin_avr1=3.9658  mband_log_avr1=3.9800  mband_mel_avr1=4.0196  
+        DNSMOS_mos_bak:  Noisy=2.5180  specsub=2.6550  ss_rdc=2.9342  mband_lin_avr1=2.8934  mband_log_avr1=2.9363  mband_mel_avr1=2.8951  
+        DNSMOS_mos_ovr:  Noisy=2.7482  specsub=2.4515  ss_rdc=2.8178  mband_lin_avr1=2.9388  mband_log_avr1=2.9583  mband_mel_avr1=2.9668  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  specsub=1.0830 (+0.0173, +1.62%)  |  ss_rdc=1.0712 (+0.0054, +0.51%)  |  mband_lin_avr1=1.1162 (+0.0504, +4.73%)  |  mband_log_avr1=1.1059 (+0.0402, +3.77%)  |  mband_mel_avr1=1.1123 (+0.0465, +4.36%)
+                SI_SDR: Noisy=-4.9899  |  specsub=-1.7911 (+3.1988, +64.11%)  |  ss_rdc=-3.4778 (+1.5121, +30.30%)  |  mband_lin_avr1=-0.5988 (+4.3911, +88.00%)  |  mband_log_avr1=-0.2501 (+4.7398, +94.99%)  |  mband_mel_avr1=-0.3566 (+4.6333, +92.85%)
+                  STOI: Noisy=0.5866  |  specsub=0.4809 (-0.1057, -18.02%)  |  ss_rdc=0.5486 (-0.0380, -6.48%)  |  mband_lin_avr1=0.5877 (+0.0012, +0.20%)  |  mband_log_avr1=0.5933 (+0.0067, +1.14%)  |  mband_mel_avr1=0.5878 (+0.0012, +0.21%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  specsub=2.3110 (-0.1252, -5.14%)  |  ss_rdc=2.4785 (+0.0423, +1.74%)  |  mband_lin_avr1=2.5480 (+0.1117, +4.59%)  |  mband_log_avr1=2.5539 (+0.1177, +4.83%)  |  mband_mel_avr1=2.5604 (+0.1241, +5.09%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  specsub=1.4917 (-2.0600, -58.00%)  |  ss_rdc=2.8912 (-0.6605, -18.60%)  |  mband_lin_avr1=3.6856 (+0.1339, +3.77%)  |  mband_log_avr1=3.7636 (+0.2119, +5.97%)  |  mband_mel_avr1=3.6746 (+0.1229, +3.46%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  specsub=2.4644 (+0.7911, +47.28%)  |  ss_rdc=1.9787 (+0.3054, +18.25%)  |  mband_lin_avr1=2.0799 (+0.4066, +24.30%)  |  mband_log_avr1=2.1171 (+0.4437, +26.52%)  |  mband_mel_avr1=2.0734 (+0.4001, +23.91%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  specsub=1.3682 (-0.6024, -30.57%)  |  ss_rdc=1.8768 (-0.0938, -4.76%)  |  mband_lin_avr1=2.3191 (+0.3485, +17.68%)  |  mband_log_avr1=2.3783 (+0.4077, +20.69%)  |  mband_mel_avr1=2.2969 (+0.3263, +16.56%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  specsub=1.1444 (+0.0507, +4.63%)  |  ss_rdc=1.1203 (+0.0265, +2.43%)  |  mband_lin_avr1=1.2139 (+0.1202, +10.99%)  |  mband_log_avr1=1.2207 (+0.1270, +11.61%)  |  mband_mel_avr1=1.2195 (+0.1258, +11.50%)
+                SI_SDR: Noisy=-0.0263  |  specsub=2.9735 (+2.9997, +11423.51%)  |  ss_rdc=2.0513 (+2.0775, +7911.57%)  |  mband_lin_avr1=4.4193 (+4.4456, +16929.64%)  |  mband_log_avr1=4.5448 (+4.5711, +17407.54%)  |  mband_mel_avr1=4.2041 (+4.2304, +16110.02%)
+                  STOI: Noisy=0.6549  |  specsub=0.5772 (-0.0778, -11.87%)  |  ss_rdc=0.6258 (-0.0291, -4.44%)  |  mband_lin_avr1=0.6617 (+0.0068, +1.04%)  |  mband_log_avr1=0.6597 (+0.0048, +0.73%)  |  mband_mel_avr1=0.6593 (+0.0044, +0.67%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  specsub=2.3687 (-0.2007, -7.81%)  |  ss_rdc=2.5699 (+0.0006, +0.02%)  |  mband_lin_avr1=2.6875 (+0.1181, +4.60%)  |  mband_log_avr1=2.6909 (+0.1216, +4.73%)  |  mband_mel_avr1=2.6722 (+0.1029, +4.00%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  specsub=1.9922 (-1.8955, -48.76%)  |  ss_rdc=3.1763 (-0.7114, -18.30%)  |  mband_lin_avr1=3.5832 (-0.3045, -7.83%)  |  mband_log_avr1=3.7385 (-0.1492, -3.84%)  |  mband_mel_avr1=3.7527 (-0.1350, -3.47%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  specsub=2.4548 (+0.5518, +29.00%)  |  ss_rdc=2.1202 (+0.2172, +11.41%)  |  mband_lin_avr1=2.1954 (+0.2925, +15.37%)  |  mband_log_avr1=2.2541 (+0.3511, +18.45%)  |  mband_mel_avr1=2.2078 (+0.3048, +16.02%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  specsub=1.5602 (-0.7028, -31.06%)  |  ss_rdc=2.0459 (-0.2171, -9.59%)  |  mband_lin_avr1=2.3075 (+0.0444, +1.96%)  |  mband_log_avr1=2.4276 (+0.1646, +7.27%)  |  mband_mel_avr1=2.4021 (+0.1390, +6.14%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  specsub=1.2715 (+0.0982, +8.37%)  |  ss_rdc=1.2163 (+0.0430, +3.67%)  |  mband_lin_avr1=1.4013 (+0.2280, +19.44%)  |  mband_log_avr1=1.4143 (+0.2410, +20.54%)  |  mband_mel_avr1=1.4013 (+0.2280, +19.44%)
+                SI_SDR: Noisy=4.9955  |  specsub=7.6350 (+2.6395, +52.84%)  |  ss_rdc=6.8147 (+1.8192, +36.42%)  |  mband_lin_avr1=8.3258 (+3.3302, +66.66%)  |  mband_log_avr1=8.1340 (+3.1384, +62.82%)  |  mband_mel_avr1=8.0847 (+3.0891, +61.84%)
+                  STOI: Noisy=0.7153  |  specsub=0.6780 (-0.0373, -5.21%)  |  ss_rdc=0.6979 (-0.0173, -2.42%)  |  mband_lin_avr1=0.7239 (+0.0087, +1.22%)  |  mband_log_avr1=0.7190 (+0.0037, +0.52%)  |  mband_mel_avr1=0.7215 (+0.0063, +0.88%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  specsub=2.4702 (-0.2629, -9.62%)  |  ss_rdc=2.6688 (-0.0643, -2.35%)  |  mband_lin_avr1=2.7795 (+0.0464, +1.70%)  |  mband_log_avr1=2.8141 (+0.0809, +2.96%)  |  mband_mel_avr1=2.8260 (+0.0929, +3.40%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  specsub=2.2979 (-1.6848, -42.30%)  |  ss_rdc=3.3017 (-0.6810, -17.10%)  |  mband_lin_avr1=3.7546 (-0.2281, -5.73%)  |  mband_log_avr1=3.7846 (-0.1981, -4.97%)  |  mband_mel_avr1=3.8696 (-0.1131, -2.84%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  specsub=2.5155 (+0.4128, +19.63%)  |  ss_rdc=2.4074 (+0.3047, +14.49%)  |  mband_lin_avr1=2.4143 (+0.3116, +14.82%)  |  mband_log_avr1=2.4350 (+0.3323, +15.81%)  |  mband_mel_avr1=2.4241 (+0.3215, +15.29%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  specsub=1.7586 (-0.6775, -27.81%)  |  ss_rdc=2.2833 (-0.1528, -6.27%)  |  mband_lin_avr1=2.5193 (+0.0832, +3.41%)  |  mband_log_avr1=2.5393 (+0.1032, +4.23%)  |  mband_mel_avr1=2.6053 (+0.1691, +6.94%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  specsub=1.5087 (+0.1641, +12.20%)  |  ss_rdc=1.4324 (+0.0878, +6.53%)  |  mband_lin_avr1=1.6420 (+0.2974, +22.11%)  |  mband_log_avr1=1.6909 (+0.3463, +25.75%)  |  mband_mel_avr1=1.6590 (+0.3143, +23.37%)
+                SI_SDR: Noisy=9.9991  |  specsub=12.0617 (+2.0626, +20.63%)  |  ss_rdc=11.0010 (+1.0019, +10.02%)  |  mband_lin_avr1=11.5108 (+1.5117, +15.12%)  |  mband_log_avr1=11.3432 (+1.3440, +13.44%)  |  mband_mel_avr1=11.3988 (+1.3997, +14.00%)
+                  STOI: Noisy=0.7740  |  specsub=0.7510 (-0.0230, -2.97%)  |  ss_rdc=0.7605 (-0.0135, -1.74%)  |  mband_lin_avr1=0.7780 (+0.0040, +0.52%)  |  mband_log_avr1=0.7746 (+0.0006, +0.08%)  |  mband_mel_avr1=0.7765 (+0.0025, +0.32%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  specsub=2.6743 (-0.2368, -8.13%)  |  ss_rdc=2.7891 (-0.1220, -4.19%)  |  mband_lin_avr1=2.9114 (+0.0003, +0.01%)  |  mband_log_avr1=2.9619 (+0.0508, +1.75%)  |  mband_mel_avr1=2.9001 (-0.0110, -0.38%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  specsub=2.8452 (-1.2333, -30.24%)  |  ss_rdc=3.5066 (-0.5718, -14.02%)  |  mband_lin_avr1=3.8729 (-0.2055, -5.04%)  |  mband_log_avr1=3.8935 (-0.1849, -4.53%)  |  mband_mel_avr1=3.8634 (-0.2150, -5.27%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  specsub=2.5738 (+0.2460, +10.57%)  |  ss_rdc=2.5478 (+0.2200, +9.45%)  |  mband_lin_avr1=2.5688 (+0.2411, +10.36%)  |  mband_log_avr1=2.6391 (+0.3113, +13.37%)  |  mband_mel_avr1=2.5670 (+0.2393, +10.28%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  specsub=2.0847 (-0.5535, -20.98%)  |  ss_rdc=2.4394 (-0.1988, -7.54%)  |  mband_lin_avr1=2.6781 (+0.0398, +1.51%)  |  mband_log_avr1=2.7389 (+0.1007, +3.82%)  |  mband_mel_avr1=2.6710 (+0.0328, +1.24%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  specsub=1.8521 (+0.2053, +12.47%)  |  ss_rdc=1.7564 (+0.1096, +6.65%)  |  mband_lin_avr1=2.0225 (+0.3756, +22.81%)  |  mband_log_avr1=2.0299 (+0.3830, +23.26%)  |  mband_mel_avr1=1.9835 (+0.3367, +20.44%)
+                SI_SDR: Noisy=14.9989  |  specsub=15.9470 (+0.9481, +6.32%)  |  ss_rdc=14.6751 (-0.3238, -2.16%)  |  mband_lin_avr1=13.6753 (-1.3236, -8.82%)  |  mband_log_avr1=13.5566 (-1.4423, -9.62%)  |  mband_mel_avr1=13.3345 (-1.6644, -11.10%)
+                  STOI: Noisy=0.8137  |  specsub=0.7998 (-0.0139, -1.71%)  |  ss_rdc=0.8075 (-0.0062, -0.76%)  |  mband_lin_avr1=0.8150 (+0.0013, +0.16%)  |  mband_log_avr1=0.8111 (-0.0026, -0.32%)  |  mband_mel_avr1=0.8147 (+0.0010, +0.12%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  specsub=2.9181 (-0.1300, -4.27%)  |  ss_rdc=2.9788 (-0.0693, -2.27%)  |  mband_lin_avr1=3.0678 (+0.0197, +0.65%)  |  mband_log_avr1=3.0761 (+0.0280, +0.92%)  |  mband_mel_avr1=3.0720 (+0.0239, +0.78%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  specsub=3.3772 (-0.6682, -16.52%)  |  ss_rdc=3.7756 (-0.2698, -6.67%)  |  mband_lin_avr1=3.9658 (-0.0796, -1.97%)  |  mband_log_avr1=3.9800 (-0.0654, -1.62%)  |  mband_mel_avr1=4.0196 (-0.0258, -0.64%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  specsub=2.6550 (+0.1370, +5.44%)  |  ss_rdc=2.9342 (+0.4162, +16.53%)  |  mband_lin_avr1=2.8934 (+0.3754, +14.91%)  |  mband_log_avr1=2.9363 (+0.4184, +16.61%)  |  mband_mel_avr1=2.8951 (+0.3771, +14.98%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  specsub=2.4515 (-0.2967, -10.80%)  |  ss_rdc=2.8178 (+0.0696, +2.53%)  |  mband_lin_avr1=2.9388 (+0.1906, +6.93%)  |  mband_log_avr1=2.9583 (+0.2101, +7.64%)  |  mband_mel_avr1=2.9668 (+0.2186, +7.96%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_lin_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_log_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  specsub=1.056  ss_rdc=1.069  mband_lin_avr1=1.074  mband_log_avr1=1.101  mband_mel_avr1=1.105  
+    0dB: Noisy=1.067  specsub=1.103  ss_rdc=1.098  mband_lin_avr1=1.158  mband_log_avr1=1.250  mband_mel_avr1=1.160  
+    5dB: Noisy=1.118  specsub=1.184  ss_rdc=1.180  mband_lin_avr1=1.314  mband_log_avr1=1.267  mband_mel_avr1=1.291  
+    10dB: Noisy=1.257  specsub=1.438  ss_rdc=1.371  mband_lin_avr1=1.581  mband_log_avr1=1.582  mband_mel_avr1=1.494  
+    15dB: Noisy=1.563  specsub=1.909  ss_rdc=1.693  mband_lin_avr1=1.988  mband_log_avr1=1.951  mband_mel_avr1=1.974  
+  SI_SDR:
+    -5dB: Noisy=-4.823  specsub=-4.290  ss_rdc=-4.000  mband_lin_avr1=-2.832  mband_log_avr1=-2.803  mband_mel_avr1=-1.969  
+    0dB: Noisy=-0.062  specsub=1.745  ss_rdc=1.566  mband_lin_avr1=2.948  mband_log_avr1=2.308  mband_mel_avr1=2.327  
+    5dB: Noisy=4.983  specsub=5.994  ss_rdc=6.450  mband_lin_avr1=6.979  mband_log_avr1=5.689  mband_mel_avr1=7.089  
+    10dB: Noisy=10.006  specsub=10.242  ss_rdc=10.641  mband_lin_avr1=10.924  mband_log_avr1=11.119  mband_mel_avr1=10.851  
+    15dB: Noisy=15.011  specsub=14.472  ss_rdc=14.315  mband_lin_avr1=13.161  mband_log_avr1=12.872  mband_mel_avr1=13.189  
+  STOI:
+    -5dB: Noisy=0.578  specsub=0.416  ss_rdc=0.577  mband_lin_avr1=0.568  mband_log_avr1=0.581  mband_mel_avr1=0.586  
+    0dB: Noisy=0.666  specsub=0.545  ss_rdc=0.653  mband_lin_avr1=0.662  mband_log_avr1=0.667  mband_mel_avr1=0.661  
+    5dB: Noisy=0.747  specsub=0.685  ss_rdc=0.761  mband_lin_avr1=0.751  mband_log_avr1=0.744  mband_mel_avr1=0.750  
+    10dB: Noisy=0.818  specsub=0.784  ss_rdc=0.834  mband_lin_avr1=0.824  mband_log_avr1=0.819  mband_mel_avr1=0.823  
+    15dB: Noisy=0.871  specsub=0.861  ss_rdc=0.877  mband_lin_avr1=0.867  mband_log_avr1=0.869  mband_mel_avr1=0.874  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  specsub=1.357  ss_rdc=1.863  mband_lin_avr1=2.421  mband_log_avr1=2.501  mband_mel_avr1=2.264  
+    0dB: Noisy=2.516  specsub=1.349  ss_rdc=1.814  mband_lin_avr1=1.883  mband_log_avr1=2.390  mband_mel_avr1=2.401  
+    5dB: Noisy=2.776  specsub=1.518  ss_rdc=2.196  mband_lin_avr1=2.225  mband_log_avr1=2.340  mband_mel_avr1=2.590  
+    10dB: Noisy=2.872  specsub=1.883  ss_rdc=2.507  mband_lin_avr1=2.338  mband_log_avr1=2.459  mband_mel_avr1=2.525  
+    15dB: Noisy=2.879  specsub=2.398  ss_rdc=2.927  mband_lin_avr1=2.438  mband_log_avr1=2.420  mband_mel_avr1=2.928  
+
+>>> Car <<<
+  PESQ:
+    -5dB: Noisy=1.053  specsub=1.074  ss_rdc=1.062  mband_lin_avr1=1.124  mband_log_avr1=1.123  mband_mel_avr1=1.122  
+    0dB: Noisy=1.077  specsub=1.138  ss_rdc=1.113  mband_lin_avr1=1.241  mband_log_avr1=1.268  mband_mel_avr1=1.244  
+    5dB: Noisy=1.152  specsub=1.280  ss_rdc=1.245  mband_lin_avr1=1.487  mband_log_avr1=1.522  mband_mel_avr1=1.443  
+    10dB: Noisy=1.324  specsub=1.495  ss_rdc=1.475  mband_lin_avr1=1.686  mband_log_avr1=1.837  mband_mel_avr1=1.748  
+    15dB: Noisy=1.635  specsub=1.820  ss_rdc=1.849  mband_lin_avr1=2.072  mband_log_avr1=2.152  mband_mel_avr1=2.031  
+  SI_SDR:
+    -5dB: Noisy=-4.980  specsub=-0.889  ss_rdc=-1.397  mband_lin_avr1=3.280  mband_log_avr1=2.993  mband_mel_avr1=3.158  
+    0dB: Noisy=0.013  specsub=4.618  ss_rdc=3.664  mband_lin_avr1=6.833  mband_log_avr1=6.818  mband_mel_avr1=6.783  
+    5dB: Noisy=4.994  specsub=8.781  ss_rdc=8.112  mband_lin_avr1=10.412  mband_log_avr1=9.796  mband_mel_avr1=10.110  
+    10dB: Noisy=10.002  specsub=12.915  ss_rdc=12.428  mband_lin_avr1=12.805  mband_log_avr1=12.850  mband_mel_avr1=12.775  
+    15dB: Noisy=14.997  specsub=16.537  ss_rdc=16.003  mband_lin_avr1=14.586  mband_log_avr1=14.638  mband_mel_avr1=14.406  
+  STOI:
+    -5dB: Noisy=0.654  specsub=0.525  ss_rdc=0.631  mband_lin_avr1=0.655  mband_log_avr1=0.658  mband_mel_avr1=0.657  
+    0dB: Noisy=0.705  specsub=0.613  ss_rdc=0.666  mband_lin_avr1=0.707  mband_log_avr1=0.707  mband_mel_avr1=0.709  
+    5dB: Noisy=0.750  specsub=0.693  ss_rdc=0.730  mband_lin_avr1=0.764  mband_log_avr1=0.749  mband_mel_avr1=0.751  
+    10dB: Noisy=0.797  specsub=0.764  ss_rdc=0.785  mband_lin_avr1=0.810  mband_log_avr1=0.798  mband_mel_avr1=0.806  
+    15dB: Noisy=0.830  specsub=0.805  ss_rdc=0.830  mband_lin_avr1=0.837  mband_log_avr1=0.832  mband_mel_avr1=0.835  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.276  specsub=1.283  ss_rdc=1.981  mband_lin_avr1=2.400  mband_log_avr1=2.589  mband_mel_avr1=2.583  
+    0dB: Noisy=2.507  specsub=1.476  ss_rdc=2.029  mband_lin_avr1=2.415  mband_log_avr1=2.626  mband_mel_avr1=2.442  
+    5dB: Noisy=2.471  specsub=1.748  ss_rdc=2.240  mband_lin_avr1=2.833  mband_log_avr1=2.751  mband_mel_avr1=2.665  
+    10dB: Noisy=2.755  specsub=2.155  ss_rdc=2.537  mband_lin_avr1=2.870  mband_log_avr1=3.183  mband_mel_avr1=2.878  
+    15dB: Noisy=2.913  specsub=2.711  ss_rdc=3.059  mband_lin_avr1=3.348  mband_log_avr1=3.324  mband_mel_avr1=3.400  
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.043  specsub=1.048  ss_rdc=1.043  mband_lin_avr1=1.066  mband_log_avr1=1.061  mband_mel_avr1=1.062  
+    0dB: Noisy=1.062  specsub=1.085  ss_rdc=1.060  mband_lin_avr1=1.121  mband_log_avr1=1.116  mband_mel_avr1=1.120  
+    5dB: Noisy=1.116  specsub=1.181  ss_rdc=1.113  mband_lin_avr1=1.234  mband_log_avr1=1.274  mband_mel_avr1=1.235  
+    10dB: Noisy=1.233  specsub=1.308  ss_rdc=1.237  mband_lin_avr1=1.461  mband_log_avr1=1.492  mband_mel_avr1=1.480  
+    15dB: Noisy=1.491  specsub=1.628  ss_rdc=1.482  mband_lin_avr1=1.831  mband_log_avr1=1.811  mband_mel_avr1=1.761  
+  SI_SDR:
+    -5dB: Noisy=-4.988  specsub=-3.985  ss_rdc=-4.834  mband_lin_avr1=-2.109  mband_log_avr1=-3.000  mband_mel_avr1=-2.618  
+    0dB: Noisy=-0.023  specsub=2.394  ss_rdc=1.181  mband_lin_avr1=2.912  mband_log_avr1=2.659  mband_mel_avr1=2.599  
+    5dB: Noisy=4.999  specsub=7.502  ss_rdc=5.700  mband_lin_avr1=7.235  mband_log_avr1=7.756  mband_mel_avr1=7.091  
+    10dB: Noisy=9.995  specsub=12.123  ss_rdc=10.114  mband_lin_avr1=11.057  mband_log_avr1=10.826  mband_mel_avr1=10.942  
+    15dB: Noisy=14.999  specsub=16.513  ss_rdc=14.195  mband_lin_avr1=13.548  mband_log_avr1=13.434  mband_mel_avr1=13.162  
+  STOI:
+    -5dB: Noisy=0.565  specsub=0.471  ss_rdc=0.509  mband_lin_avr1=0.573  mband_log_avr1=0.578  mband_mel_avr1=0.571  
+    0dB: Noisy=0.645  specsub=0.578  ss_rdc=0.599  mband_lin_avr1=0.661  mband_log_avr1=0.653  mband_mel_avr1=0.659  
+    5dB: Noisy=0.726  specsub=0.702  ss_rdc=0.696  mband_lin_avr1=0.724  mband_log_avr1=0.733  mband_mel_avr1=0.728  
+    10dB: Noisy=0.795  specsub=0.775  ss_rdc=0.767  mband_lin_avr1=0.797  mband_log_avr1=0.796  mband_mel_avr1=0.791  
+    15dB: Noisy=0.842  specsub=0.834  ss_rdc=0.826  mband_lin_avr1=0.838  mband_log_avr1=0.838  mband_mel_avr1=0.842  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.706  specsub=1.421  ss_rdc=1.620  mband_lin_avr1=1.992  mband_log_avr1=1.928  mband_mel_avr1=2.001  
+    0dB: Noisy=1.800  specsub=1.441  ss_rdc=1.693  mband_lin_avr1=1.987  mband_log_avr1=1.995  mband_mel_avr1=2.059  
+    5dB: Noisy=2.079  specsub=1.568  ss_rdc=1.902  mband_lin_avr1=1.999  mband_log_avr1=2.176  mband_mel_avr1=2.211  
+    10dB: Noisy=2.408  specsub=1.866  ss_rdc=2.109  mband_lin_avr1=2.296  mband_log_avr1=2.302  mband_mel_avr1=2.223  
+    15dB: Noisy=2.496  specsub=2.219  ss_rdc=2.374  mband_lin_avr1=2.377  mband_log_avr1=2.479  mband_mel_avr1=2.460  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  specsub=1.153  ss_rdc=1.187  mband_lin_avr1=1.263  mband_log_avr1=1.184  mband_mel_avr1=1.279  
+    0dB: Noisy=1.265  specsub=1.269  ss_rdc=1.270  mband_lin_avr1=1.387  mband_log_avr1=1.474  mband_mel_avr1=1.325  
+    5dB: Noisy=1.348  specsub=1.435  ss_rdc=1.353  mband_lin_avr1=1.599  mband_log_avr1=1.654  mband_mel_avr1=1.556  
+    10dB: Noisy=1.567  specsub=2.088  ss_rdc=1.639  mband_lin_avr1=1.809  mband_log_avr1=1.830  mband_mel_avr1=1.749  
+    15dB: Noisy=2.167  specsub=2.361  ss_rdc=1.846  mband_lin_avr1=2.239  mband_log_avr1=2.528  mband_mel_avr1=2.515  
+  SI_SDR:
+    -5dB: Noisy=-5.047  specsub=-2.759  ss_rdc=-5.440  mband_lin_avr1=0.230  mband_log_avr1=0.777  mband_mel_avr1=-1.364  
+    0dB: Noisy=-0.018  specsub=2.128  ss_rdc=1.124  mband_lin_avr1=5.889  mband_log_avr1=6.756  mband_mel_avr1=6.185  
+    5dB: Noisy=4.987  specsub=8.314  ss_rdc=6.183  mband_lin_avr1=9.897  mband_log_avr1=8.624  mband_mel_avr1=9.208  
+    10dB: Noisy=9.999  specsub=12.514  ss_rdc=10.560  mband_lin_avr1=12.139  mband_log_avr1=12.371  mband_mel_avr1=11.978  
+    15dB: Noisy=14.995  specsub=15.710  ss_rdc=13.935  mband_lin_avr1=14.164  mband_log_avr1=13.622  mband_mel_avr1=14.132  
+  STOI:
+    -5dB: Noisy=0.429  specsub=0.355  ss_rdc=0.369  mband_lin_avr1=0.423  mband_log_avr1=0.441  mband_mel_avr1=0.426  
+    0dB: Noisy=0.465  specsub=0.416  ss_rdc=0.493  mband_lin_avr1=0.482  mband_log_avr1=0.476  mband_mel_avr1=0.465  
+    5dB: Noisy=0.501  specsub=0.511  ss_rdc=0.508  mband_lin_avr1=0.520  mband_log_avr1=0.508  mband_mel_avr1=0.516  
+    10dB: Noisy=0.534  specsub=0.545  ss_rdc=0.539  mband_lin_avr1=0.533  mband_log_avr1=0.543  mband_mel_avr1=0.543  
+    15dB: Noisy=0.555  specsub=0.547  ss_rdc=0.596  mband_lin_avr1=0.586  mband_log_avr1=0.562  mband_mel_avr1=0.574  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  specsub=1.292  ss_rdc=2.266  mband_lin_avr1=2.593  mband_log_avr1=2.696  mband_mel_avr1=2.483  
+    0dB: Noisy=2.325  specsub=1.476  ss_rdc=2.764  mband_lin_avr1=2.804  mband_log_avr1=2.760  mband_mel_avr1=2.713  
+    5dB: Noisy=2.657  specsub=1.772  ss_rdc=2.940  mband_lin_avr1=2.813  mband_log_avr1=3.091  mband_mel_avr1=3.222  
+    10dB: Noisy=2.808  specsub=2.068  ss_rdc=2.927  mband_lin_avr1=3.069  mband_log_avr1=3.451  mband_mel_avr1=3.211  
+    15dB: Noisy=2.839  specsub=2.228  ss_rdc=3.175  mband_lin_avr1=3.381  mband_log_avr1=3.491  mband_mel_avr1=3.448  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  specsub=1.113  ss_rdc=1.087  mband_lin_avr1=1.172  mband_log_avr1=1.154  mband_mel_avr1=1.172  
+    0dB: Noisy=1.114  specsub=1.211  ss_rdc=1.152  mband_lin_avr1=1.317  mband_log_avr1=1.319  mband_mel_avr1=1.354  
+    5dB: Noisy=1.222  specsub=1.367  ss_rdc=1.289  mband_lin_avr1=1.600  mband_log_avr1=1.584  mband_mel_avr1=1.602  
+    10dB: Noisy=1.436  specsub=1.658  ss_rdc=1.588  mband_lin_avr1=1.945  mband_log_avr1=1.904  mband_mel_avr1=1.929  
+    15dB: Noisy=1.765  specsub=2.045  ss_rdc=1.957  mband_lin_avr1=2.310  mband_log_avr1=2.301  mband_mel_avr1=2.292  
+  SI_SDR:
+    -5dB: Noisy=-5.016  specsub=0.643  ss_rdc=-1.556  mband_lin_avr1=2.639  mband_log_avr1=2.259  mband_mel_avr1=2.942  
+    0dB: Noisy=-0.017  specsub=4.923  ss_rdc=3.740  mband_lin_avr1=7.157  mband_log_avr1=6.743  mband_mel_avr1=7.212  
+    5dB: Noisy=5.011  specsub=9.271  ss_rdc=8.225  mband_lin_avr1=10.060  mband_log_avr1=9.625  mband_mel_avr1=9.909  
+    10dB: Noisy=10.002  specsub=13.106  ss_rdc=12.228  mband_lin_avr1=12.239  mband_log_avr1=11.685  mband_mel_avr1=11.987  
+    15dB: Noisy=14.999  specsub=16.598  ss_rdc=15.641  mband_lin_avr1=13.756  mband_log_avr1=13.558  mband_mel_avr1=13.421  
+  STOI:
+    -5dB: Noisy=0.602  specsub=0.507  ss_rdc=0.581  mband_lin_avr1=0.618  mband_log_avr1=0.610  mband_mel_avr1=0.615  
+    0dB: Noisy=0.661  specsub=0.576  ss_rdc=0.633  mband_lin_avr1=0.675  mband_log_avr1=0.668  mband_mel_avr1=0.676  
+    5dB: Noisy=0.715  specsub=0.673  ss_rdc=0.690  mband_lin_avr1=0.728  mband_log_avr1=0.718  mband_mel_avr1=0.724  
+    10dB: Noisy=0.771  specsub=0.739  ss_rdc=0.750  mband_lin_avr1=0.769  mband_log_avr1=0.767  mband_mel_avr1=0.770  
+    15dB: Noisy=0.805  specsub=0.792  ss_rdc=0.796  mband_lin_avr1=0.805  mband_log_avr1=0.799  mband_mel_avr1=0.799  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  specsub=1.411  ss_rdc=2.158  mband_lin_avr1=2.697  mband_log_avr1=2.763  mband_mel_avr1=2.583  
+    0dB: Noisy=2.429  specsub=1.652  ss_rdc=2.337  mband_lin_avr1=2.808  mband_log_avr1=2.893  mband_mel_avr1=2.784  
+    5dB: Noisy=2.769  specsub=1.847  ss_rdc=2.474  mband_lin_avr1=2.897  mband_log_avr1=2.894  mband_mel_avr1=2.904  
+    10dB: Noisy=2.817  specsub=2.168  ss_rdc=2.539  mband_lin_avr1=2.897  mband_log_avr1=2.787  mband_mel_avr1=2.933  
+    15dB: Noisy=2.904  specsub=2.430  ss_rdc=2.796  mband_lin_avr1=3.202  mband_log_avr1=3.042  mband_mel_avr1=3.103  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  specsub=1.126  ss_rdc=1.088  mband_lin_avr1=1.127  mband_log_avr1=1.122  mband_mel_avr1=1.129  
+    0dB: Noisy=1.116  specsub=1.180  ss_rdc=1.154  mband_lin_avr1=1.271  mband_log_avr1=1.243  mband_mel_avr1=1.269  
+    5dB: Noisy=1.217  specsub=1.323  ss_rdc=1.305  mband_lin_avr1=1.500  mband_log_avr1=1.473  mband_mel_avr1=1.555  
+    10dB: Noisy=1.399  specsub=1.565  ss_rdc=1.558  mband_lin_avr1=1.836  mband_log_avr1=1.798  mband_mel_avr1=1.799  
+    15dB: Noisy=1.700  specsub=1.892  ss_rdc=1.923  mband_lin_avr1=2.184  mband_log_avr1=2.176  mband_mel_avr1=2.171  
+  SI_SDR:
+    -5dB: Noisy=-5.044  specsub=-0.551  ss_rdc=-2.547  mband_lin_avr1=0.478  mband_log_avr1=-0.219  mband_mel_avr1=0.456  
+    0dB: Noisy=-0.041  specsub=3.199  ss_rdc=2.636  mband_lin_avr1=4.861  mband_log_avr1=4.518  mband_mel_avr1=4.868  
+    5dB: Noisy=5.003  specsub=7.173  ss_rdc=6.777  mband_lin_avr1=8.798  mband_log_avr1=8.409  mband_mel_avr1=8.537  
+    10dB: Noisy=10.007  specsub=11.539  ss_rdc=10.871  mband_lin_avr1=11.658  mband_log_avr1=11.166  mband_mel_avr1=11.531  
+    15dB: Noisy=15.001  specsub=14.698  ss_rdc=14.221  mband_lin_avr1=13.346  mband_log_avr1=13.141  mband_mel_avr1=13.113  
+  STOI:
+    -5dB: Noisy=0.552  specsub=0.424  ss_rdc=0.551  mband_lin_avr1=0.557  mband_log_avr1=0.563  mband_mel_avr1=0.561  
+    0dB: Noisy=0.639  specsub=0.529  ss_rdc=0.636  mband_lin_avr1=0.645  mband_log_avr1=0.647  mband_mel_avr1=0.651  
+    5dB: Noisy=0.709  specsub=0.647  ss_rdc=0.716  mband_lin_avr1=0.730  mband_log_avr1=0.719  mband_mel_avr1=0.733  
+    10dB: Noisy=0.783  specsub=0.743  ss_rdc=0.788  mband_lin_avr1=0.795  mband_log_avr1=0.786  mband_mel_avr1=0.797  
+    15dB: Noisy=0.832  specsub=0.805  ss_rdc=0.836  mband_lin_avr1=0.841  mband_log_avr1=0.831  mband_mel_avr1=0.832  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  specsub=1.135  ss_rdc=1.571  mband_lin_avr1=2.407  mband_log_avr1=2.440  mband_mel_avr1=2.222  
+    0dB: Noisy=2.392  specsub=1.290  ss_rdc=1.983  mband_lin_avr1=2.500  mband_log_avr1=2.578  mband_mel_avr1=2.452  
+    5dB: Noisy=2.492  specsub=1.584  ss_rdc=2.397  mband_lin_avr1=2.714  mband_log_avr1=2.600  mband_mel_avr1=2.751  
+    10dB: Noisy=2.693  specsub=2.090  ss_rdc=2.683  mband_lin_avr1=2.891  mband_log_avr1=2.809  mband_mel_avr1=2.797  
+    15dB: Noisy=3.030  specsub=2.516  ss_rdc=2.992  mband_lin_avr1=3.257  mband_log_avr1=3.417  mband_mel_avr1=3.102  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  specsub=1.079  ss_rdc=1.065  mband_lin_avr1=1.103  mband_log_avr1=1.091  mband_mel_avr1=1.083  
+    0dB: Noisy=1.086  specsub=1.137  ss_rdc=1.126  mband_lin_avr1=1.182  mband_log_avr1=1.173  mband_mel_avr1=1.194  
+    5dB: Noisy=1.172  specsub=1.263  ss_rdc=1.203  mband_lin_avr1=1.337  mband_log_avr1=1.346  mband_mel_avr1=1.352  
+    10dB: Noisy=1.365  specsub=1.504  ss_rdc=1.430  mband_lin_avr1=1.516  mband_log_avr1=1.626  mband_mel_avr1=1.581  
+    15dB: Noisy=1.630  specsub=1.850  ss_rdc=1.783  mband_lin_avr1=1.911  mband_log_avr1=1.871  mband_mel_avr1=1.813  
+  SI_SDR:
+    -5dB: Noisy=-4.982  specsub=-1.401  ss_rdc=-4.398  mband_lin_avr1=-3.509  mband_log_avr1=-0.659  mband_mel_avr1=-1.985  
+    0dB: Noisy=-0.047  specsub=1.722  ss_rdc=0.990  mband_lin_avr1=2.659  mband_log_avr1=3.764  mband_mel_avr1=2.171  
+    5dB: Noisy=4.985  specsub=6.476  ss_rdc=6.519  mband_lin_avr1=6.891  mband_log_avr1=6.900  mband_mel_avr1=6.562  
+    10dB: Noisy=9.995  specsub=11.344  ss_rdc=10.509  mband_lin_avr1=10.684  mband_log_avr1=10.662  mband_mel_avr1=10.617  
+    15dB: Noisy=14.998  specsub=15.478  ss_rdc=14.181  mband_lin_avr1=13.345  mband_log_avr1=13.320  mband_mel_avr1=12.771  
+  STOI:
+    -5dB: Noisy=0.605  specsub=0.509  ss_rdc=0.549  mband_lin_avr1=0.593  mband_log_avr1=0.605  mband_mel_avr1=0.591  
+    0dB: Noisy=0.673  specsub=0.614  ss_rdc=0.641  mband_lin_avr1=0.669  mband_log_avr1=0.673  mband_mel_avr1=0.661  
+    5dB: Noisy=0.723  specsub=0.692  ss_rdc=0.704  mband_lin_avr1=0.730  mband_log_avr1=0.725  mband_mel_avr1=0.726  
+    10dB: Noisy=0.776  specsub=0.764  ss_rdc=0.764  mband_lin_avr1=0.778  mband_log_avr1=0.777  mband_mel_avr1=0.777  
+    15dB: Noisy=0.814  specsub=0.803  ss_rdc=0.800  mband_lin_avr1=0.810  mband_log_avr1=0.809  mband_mel_avr1=0.814  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  specsub=1.452  ss_rdc=1.950  mband_lin_avr1=2.261  mband_log_avr1=2.359  mband_mel_avr1=2.249  
+    0dB: Noisy=2.366  specsub=1.842  ss_rdc=2.162  mband_lin_avr1=2.171  mband_log_avr1=2.343  mband_mel_avr1=2.410  
+    5dB: Noisy=2.439  specsub=2.018  ss_rdc=2.416  mband_lin_avr1=2.547  mband_log_avr1=2.469  mband_mel_avr1=2.605  
+    10dB: Noisy=2.589  specsub=2.253  ss_rdc=2.443  mband_lin_avr1=2.718  mband_log_avr1=2.766  mband_mel_avr1=2.709  
+    15dB: Noisy=2.651  specsub=2.571  ss_rdc=2.967  mband_lin_avr1=2.981  mband_log_avr1=2.986  mband_mel_avr1=2.990  
+
+========================================================================================================================
