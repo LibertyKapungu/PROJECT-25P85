@@ -31,10 +31,11 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 
 
 output_dir = repo_root / 'sound_data' / 'processed' / 'matlab_og_algs'
-results_dir = repo_root / 'results' / 'EXP1' / 'MATLAB_OG_ALGS' / 'mband_python_causal' 
+results_dir = repo_root / 'results' / 'EXP1' / 'MATLAB_OG_ALGS' / 'mband_log_og' 
 
 clean_path = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\validation_dataset\\clean_speech\\S_56_02.wav'
-enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\Processed_sounds\\mband_causal_standard_mode_BANDS6_SPACINGLINEAR_FRAME20ms.wav'
+#enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\Processed_sounds\\out_mband_avr1_not_og_log_compare.wav'
+enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\Processed_sounds\\out_mband_avr1_og_log_compare.wav'
 
 clean_waveform,  clean_fs = torchaudio.load(clean_path)
 enhanced_waveform, enhanced_fs = torchaudio.load(enhanced_speech)

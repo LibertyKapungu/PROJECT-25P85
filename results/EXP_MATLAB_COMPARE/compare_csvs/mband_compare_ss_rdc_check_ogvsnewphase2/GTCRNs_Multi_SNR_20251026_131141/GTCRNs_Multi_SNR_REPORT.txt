@@ -1,0 +1,807 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, specsub, ss_rdc, ss_rdc_og
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_compare_ss_rdc_check_ogvsnewphase\GTCRNs_Multi_SNR_20251026_131141
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  specsub=1.0830  ss_rdc=1.0735  ss_rdc_og=1.0735  
+                SI_SDR:  Noisy=-4.9899  specsub=-1.7911  ss_rdc=-3.0580  ss_rdc_og=-3.0580  
+                  STOI:  Noisy=0.5866  specsub=0.4809  ss_rdc=0.5550  ss_rdc_og=0.5550  
+       DNSMOS_p808_mos:  Noisy=2.4363  specsub=2.3110  ss_rdc=2.4842  ss_rdc_og=2.4841  
+        DNSMOS_mos_sig:  Noisy=3.5517  specsub=1.4917  ss_rdc=2.9984  ss_rdc_og=3.0055  
+        DNSMOS_mos_bak:  Noisy=1.6733  specsub=2.4644  ss_rdc=1.9756  ss_rdc_og=1.9778  
+        DNSMOS_mos_ovr:  Noisy=1.9706  specsub=1.3682  ss_rdc=1.9099  ss_rdc_og=1.9117  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  specsub=1.1444  ss_rdc=1.1116  ss_rdc_og=1.1116  
+                SI_SDR:  Noisy=-0.0263  specsub=2.9735  ss_rdc=1.9952  ss_rdc_og=1.9952  
+                  STOI:  Noisy=0.6549  specsub=0.5772  ss_rdc=0.6253  ss_rdc_og=0.6253  
+       DNSMOS_p808_mos:  Noisy=2.5694  specsub=2.3687  ss_rdc=2.5455  ss_rdc_og=2.5451  
+        DNSMOS_mos_sig:  Noisy=3.8877  specsub=1.9922  ss_rdc=3.0434  ss_rdc_og=3.0387  
+        DNSMOS_mos_bak:  Noisy=1.9030  specsub=2.4548  ss_rdc=2.1328  ss_rdc_og=2.1295  
+        DNSMOS_mos_ovr:  Noisy=2.2631  specsub=1.5602  ss_rdc=2.0064  ss_rdc_og=2.0022  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  specsub=1.2715  ss_rdc=1.2208  ss_rdc_og=1.2208  
+                SI_SDR:  Noisy=4.9955  specsub=7.6350  ss_rdc=6.7259  ss_rdc_og=6.7259  
+                  STOI:  Noisy=0.7153  specsub=0.6780  ss_rdc=0.6960  ss_rdc_og=0.6960  
+       DNSMOS_p808_mos:  Noisy=2.7331  specsub=2.4702  ss_rdc=2.6598  ss_rdc_og=2.6594  
+        DNSMOS_mos_sig:  Noisy=3.9827  specsub=2.2979  ss_rdc=3.2545  ss_rdc_og=3.2547  
+        DNSMOS_mos_bak:  Noisy=2.1026  specsub=2.5155  ss_rdc=2.3256  ss_rdc_og=2.3254  
+        DNSMOS_mos_ovr:  Noisy=2.4361  specsub=1.7586  ss_rdc=2.1781  ss_rdc_og=2.1796  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  specsub=1.5087  ss_rdc=1.4472  ss_rdc_og=1.4472  
+                SI_SDR:  Noisy=9.9991  specsub=12.0617  ss_rdc=11.0743  ss_rdc_og=11.0743  
+                  STOI:  Noisy=0.7740  specsub=0.7510  ss_rdc=0.7622  ss_rdc_og=0.7622  
+       DNSMOS_p808_mos:  Noisy=2.9111  specsub=2.6743  ss_rdc=2.7877  ss_rdc_og=2.7874  
+        DNSMOS_mos_sig:  Noisy=4.0784  specsub=2.8452  ss_rdc=3.4674  ss_rdc_og=3.4676  
+        DNSMOS_mos_bak:  Noisy=2.3277  specsub=2.5738  ss_rdc=2.6068  ss_rdc_og=2.6072  
+        DNSMOS_mos_ovr:  Noisy=2.6382  specsub=2.0847  ss_rdc=2.4491  ss_rdc_og=2.4510  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  specsub=1.8521  ss_rdc=1.7814  ss_rdc_og=1.7814  
+                SI_SDR:  Noisy=14.9989  specsub=15.9470  ss_rdc=14.7900  ss_rdc_og=14.7902  
+                  STOI:  Noisy=0.8137  specsub=0.7998  ss_rdc=0.8068  ss_rdc_og=0.8068  
+       DNSMOS_p808_mos:  Noisy=3.0481  specsub=2.9181  ss_rdc=2.9874  ss_rdc_og=2.9876  
+        DNSMOS_mos_sig:  Noisy=4.0454  specsub=3.3772  ss_rdc=3.7396  ss_rdc_og=3.7352  
+        DNSMOS_mos_bak:  Noisy=2.5180  specsub=2.6550  ss_rdc=2.9403  ss_rdc_og=2.9399  
+        DNSMOS_mos_ovr:  Noisy=2.7482  specsub=2.4515  ss_rdc=2.8082  ss_rdc_og=2.8045  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  specsub=1.0830 (+0.0173, +1.62%)  |  ss_rdc=1.0735 (+0.0077, +0.72%)  |  ss_rdc_og=1.0735 (+0.0077, +0.72%)
+                SI_SDR: Noisy=-4.9899  |  specsub=-1.7911 (+3.1988, +64.11%)  |  ss_rdc=-3.0580 (+1.9319, +38.72%)  |  ss_rdc_og=-3.0580 (+1.9319, +38.72%)
+                  STOI: Noisy=0.5866  |  specsub=0.4809 (-0.1057, -18.02%)  |  ss_rdc=0.5550 (-0.0316, -5.39%)  |  ss_rdc_og=0.5550 (-0.0316, -5.39%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  specsub=2.3110 (-0.1252, -5.14%)  |  ss_rdc=2.4842 (+0.0480, +1.97%)  |  ss_rdc_og=2.4841 (+0.0478, +1.96%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  specsub=1.4917 (-2.0600, -58.00%)  |  ss_rdc=2.9984 (-0.5532, -15.58%)  |  ss_rdc_og=3.0055 (-0.5462, -15.38%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  specsub=2.4644 (+0.7911, +47.28%)  |  ss_rdc=1.9756 (+0.3022, +18.06%)  |  ss_rdc_og=1.9778 (+0.3045, +18.20%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  specsub=1.3682 (-0.6024, -30.57%)  |  ss_rdc=1.9099 (-0.0607, -3.08%)  |  ss_rdc_og=1.9117 (-0.0589, -2.99%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  specsub=1.1444 (+0.0507, +4.63%)  |  ss_rdc=1.1116 (+0.0179, +1.63%)  |  ss_rdc_og=1.1116 (+0.0179, +1.63%)
+                SI_SDR: Noisy=-0.0263  |  specsub=2.9735 (+2.9997, +11423.51%)  |  ss_rdc=1.9952 (+2.0215, +7698.09%)  |  ss_rdc_og=1.9952 (+2.0214, +7698.08%)
+                  STOI: Noisy=0.6549  |  specsub=0.5772 (-0.0778, -11.87%)  |  ss_rdc=0.6253 (-0.0296, -4.53%)  |  ss_rdc_og=0.6253 (-0.0296, -4.53%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  specsub=2.3687 (-0.2007, -7.81%)  |  ss_rdc=2.5455 (-0.0239, -0.93%)  |  ss_rdc_og=2.5451 (-0.0242, -0.94%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  specsub=1.9922 (-1.8955, -48.76%)  |  ss_rdc=3.0434 (-0.8443, -21.72%)  |  ss_rdc_og=3.0387 (-0.8490, -21.84%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  specsub=2.4548 (+0.5518, +29.00%)  |  ss_rdc=2.1328 (+0.2298, +12.08%)  |  ss_rdc_og=2.1295 (+0.2265, +11.90%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  specsub=1.5602 (-0.7028, -31.06%)  |  ss_rdc=2.0064 (-0.2566, -11.34%)  |  ss_rdc_og=2.0022 (-0.2608, -11.53%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  specsub=1.2715 (+0.0982, +8.37%)  |  ss_rdc=1.2208 (+0.0476, +4.05%)  |  ss_rdc_og=1.2208 (+0.0476, +4.05%)
+                SI_SDR: Noisy=4.9955  |  specsub=7.6350 (+2.6395, +52.84%)  |  ss_rdc=6.7259 (+1.7303, +34.64%)  |  ss_rdc_og=6.7259 (+1.7304, +34.64%)
+                  STOI: Noisy=0.7153  |  specsub=0.6780 (-0.0373, -5.21%)  |  ss_rdc=0.6960 (-0.0192, -2.69%)  |  ss_rdc_og=0.6960 (-0.0192, -2.69%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  specsub=2.4702 (-0.2629, -9.62%)  |  ss_rdc=2.6598 (-0.0733, -2.68%)  |  ss_rdc_og=2.6594 (-0.0737, -2.70%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  specsub=2.2979 (-1.6848, -42.30%)  |  ss_rdc=3.2545 (-0.7282, -18.28%)  |  ss_rdc_og=3.2547 (-0.7280, -18.28%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  specsub=2.5155 (+0.4128, +19.63%)  |  ss_rdc=2.3256 (+0.2230, +10.60%)  |  ss_rdc_og=2.3254 (+0.2227, +10.59%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  specsub=1.7586 (-0.6775, -27.81%)  |  ss_rdc=2.1781 (-0.2581, -10.59%)  |  ss_rdc_og=2.1796 (-0.2565, -10.53%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  specsub=1.5087 (+0.1641, +12.20%)  |  ss_rdc=1.4472 (+0.1026, +7.63%)  |  ss_rdc_og=1.4472 (+0.1026, +7.63%)
+                SI_SDR: Noisy=9.9991  |  specsub=12.0617 (+2.0626, +20.63%)  |  ss_rdc=11.0743 (+1.0751, +10.75%)  |  ss_rdc_og=11.0743 (+1.0751, +10.75%)
+                  STOI: Noisy=0.7740  |  specsub=0.7510 (-0.0230, -2.97%)  |  ss_rdc=0.7622 (-0.0118, -1.52%)  |  ss_rdc_og=0.7622 (-0.0118, -1.52%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  specsub=2.6743 (-0.2368, -8.13%)  |  ss_rdc=2.7877 (-0.1234, -4.24%)  |  ss_rdc_og=2.7874 (-0.1237, -4.25%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  specsub=2.8452 (-1.2333, -30.24%)  |  ss_rdc=3.4674 (-0.6110, -14.98%)  |  ss_rdc_og=3.4676 (-0.6108, -14.98%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  specsub=2.5738 (+0.2460, +10.57%)  |  ss_rdc=2.6068 (+0.2791, +11.99%)  |  ss_rdc_og=2.6072 (+0.2795, +12.01%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  specsub=2.0847 (-0.5535, -20.98%)  |  ss_rdc=2.4491 (-0.1891, -7.17%)  |  ss_rdc_og=2.4510 (-0.1872, -7.10%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  specsub=1.8521 (+0.2053, +12.47%)  |  ss_rdc=1.7814 (+0.1346, +8.17%)  |  ss_rdc_og=1.7814 (+0.1346, +8.17%)
+                SI_SDR: Noisy=14.9989  |  specsub=15.9470 (+0.9481, +6.32%)  |  ss_rdc=14.7900 (-0.2089, -1.39%)  |  ss_rdc_og=14.7902 (-0.2087, -1.39%)
+                  STOI: Noisy=0.8137  |  specsub=0.7998 (-0.0139, -1.71%)  |  ss_rdc=0.8068 (-0.0070, -0.86%)  |  ss_rdc_og=0.8068 (-0.0070, -0.86%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  specsub=2.9181 (-0.1300, -4.27%)  |  ss_rdc=2.9874 (-0.0607, -1.99%)  |  ss_rdc_og=2.9876 (-0.0605, -1.98%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  specsub=3.3772 (-0.6682, -16.52%)  |  ss_rdc=3.7396 (-0.3058, -7.56%)  |  ss_rdc_og=3.7352 (-0.3102, -7.67%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  specsub=2.6550 (+0.1370, +5.44%)  |  ss_rdc=2.9403 (+0.4224, +16.77%)  |  ss_rdc_og=2.9399 (+0.4219, +16.76%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  specsub=2.4515 (-0.2967, -10.80%)  |  ss_rdc=2.8082 (+0.0600, +2.18%)  |  ss_rdc_og=2.8045 (+0.0563, +2.05%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  specsub:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  specsub:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  specsub:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  specsub:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  specsub:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  specsub:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  ss_rdc_og:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  specsub=1.056  ss_rdc=1.056  ss_rdc_og=1.056  
+    0dB: Noisy=1.067  specsub=1.103  ss_rdc=1.087  ss_rdc_og=1.087  
+    5dB: Noisy=1.118  specsub=1.184  ss_rdc=1.184  ss_rdc_og=1.184  
+    10dB: Noisy=1.257  specsub=1.438  ss_rdc=1.381  ss_rdc_og=1.381  
+    15dB: Noisy=1.563  specsub=1.909  ss_rdc=1.738  ss_rdc_og=1.738  
+  SI_SDR:
+    -5dB: Noisy=-4.823  specsub=-4.290  ss_rdc=-3.408  ss_rdc_og=-3.408  
+    0dB: Noisy=-0.062  specsub=1.745  ss_rdc=1.580  ss_rdc_og=1.580  
+    5dB: Noisy=4.983  specsub=5.994  ss_rdc=6.463  ss_rdc_og=6.463  
+    10dB: Noisy=10.006  specsub=10.242  ss_rdc=10.724  ss_rdc_og=10.725  
+    15dB: Noisy=15.011  specsub=14.472  ss_rdc=14.277  ss_rdc_og=14.278  
+  STOI:
+    -5dB: Noisy=0.578  specsub=0.416  ss_rdc=0.573  ss_rdc_og=0.573  
+    0dB: Noisy=0.666  specsub=0.545  ss_rdc=0.669  ss_rdc_og=0.669  
+    5dB: Noisy=0.747  specsub=0.685  ss_rdc=0.757  ss_rdc_og=0.757  
+    10dB: Noisy=0.818  specsub=0.784  ss_rdc=0.821  ss_rdc_og=0.821  
+    15dB: Noisy=0.871  specsub=0.861  ss_rdc=0.880  ss_rdc_og=0.880  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  specsub=1.357  ss_rdc=2.103  ss_rdc_og=2.110  
+    0dB: Noisy=2.516  specsub=1.349  ss_rdc=1.903  ss_rdc_og=1.912  
+    5dB: Noisy=2.776  specsub=1.518  ss_rdc=1.950  ss_rdc_og=1.956  
+    10dB: Noisy=2.872  specsub=1.883  ss_rdc=2.380  ss_rdc_og=2.380  
+    15dB: Noisy=2.879  specsub=2.398  ss_rdc=2.690  ss_rdc_og=2.694  
+
+>>> Car <<<
+  PESQ:
+    -5dB: Noisy=1.053  specsub=1.074  ss_rdc=1.067  ss_rdc_og=1.067  
+    0dB: Noisy=1.077  specsub=1.138  ss_rdc=1.112  ss_rdc_og=1.112  
+    5dB: Noisy=1.152  specsub=1.280  ss_rdc=1.235  ss_rdc_og=1.235  
+    10dB: Noisy=1.324  specsub=1.495  ss_rdc=1.476  ss_rdc_og=1.476  
+    15dB: Noisy=1.635  specsub=1.820  ss_rdc=1.839  ss_rdc_og=1.839  
+  SI_SDR:
+    -5dB: Noisy=-4.980  specsub=-0.889  ss_rdc=-1.223  ss_rdc_og=-1.223  
+    0dB: Noisy=0.013  specsub=4.618  ss_rdc=3.692  ss_rdc_og=3.692  
+    5dB: Noisy=4.994  specsub=8.781  ss_rdc=8.298  ss_rdc_og=8.298  
+    10dB: Noisy=10.002  specsub=12.915  ss_rdc=12.436  ss_rdc_og=12.436  
+    15dB: Noisy=14.997  specsub=16.537  ss_rdc=15.943  ss_rdc_og=15.943  
+  STOI:
+    -5dB: Noisy=0.654  specsub=0.525  ss_rdc=0.619  ss_rdc_og=0.619  
+    0dB: Noisy=0.705  specsub=0.613  ss_rdc=0.691  ss_rdc_og=0.691  
+    5dB: Noisy=0.750  specsub=0.693  ss_rdc=0.726  ss_rdc_og=0.726  
+    10dB: Noisy=0.797  specsub=0.764  ss_rdc=0.777  ss_rdc_og=0.777  
+    15dB: Noisy=0.830  specsub=0.805  ss_rdc=0.829  ss_rdc_og=0.829  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.276  specsub=1.283  ss_rdc=1.969  ss_rdc_og=1.974  
+    0dB: Noisy=2.507  specsub=1.476  ss_rdc=2.071  ss_rdc_og=2.067  
+    5dB: Noisy=2.471  specsub=1.748  ss_rdc=2.133  ss_rdc_og=2.141  
+    10dB: Noisy=2.755  specsub=2.155  ss_rdc=2.414  ss_rdc_og=2.418  
+    15dB: Noisy=2.913  specsub=2.711  ss_rdc=3.047  ss_rdc_og=3.044  
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.043  specsub=1.048  ss_rdc=1.041  ss_rdc_og=1.041  
+    0dB: Noisy=1.062  specsub=1.085  ss_rdc=1.061  ss_rdc_og=1.061  
+    5dB: Noisy=1.116  specsub=1.181  ss_rdc=1.120  ss_rdc_og=1.120  
+    10dB: Noisy=1.233  specsub=1.308  ss_rdc=1.263  ss_rdc_og=1.263  
+    15dB: Noisy=1.491  specsub=1.628  ss_rdc=1.541  ss_rdc_og=1.541  
+  SI_SDR:
+    -5dB: Noisy=-4.988  specsub=-3.985  ss_rdc=-4.774  ss_rdc_og=-4.774  
+    0dB: Noisy=-0.023  specsub=2.394  ss_rdc=0.783  ss_rdc_og=0.783  
+    5dB: Noisy=4.999  specsub=7.502  ss_rdc=5.836  ss_rdc_og=5.836  
+    10dB: Noisy=9.995  specsub=12.123  ss_rdc=10.375  ss_rdc_og=10.375  
+    15dB: Noisy=14.999  specsub=16.513  ss_rdc=14.448  ss_rdc_og=14.448  
+  STOI:
+    -5dB: Noisy=0.565  specsub=0.471  ss_rdc=0.524  ss_rdc_og=0.524  
+    0dB: Noisy=0.645  specsub=0.578  ss_rdc=0.600  ss_rdc_og=0.600  
+    5dB: Noisy=0.726  specsub=0.702  ss_rdc=0.689  ss_rdc_og=0.689  
+    10dB: Noisy=0.795  specsub=0.775  ss_rdc=0.773  ss_rdc_og=0.773  
+    15dB: Noisy=0.842  specsub=0.834  ss_rdc=0.827  ss_rdc_og=0.827  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.706  specsub=1.421  ss_rdc=1.607  ss_rdc_og=1.612  
+    0dB: Noisy=1.800  specsub=1.441  ss_rdc=1.728  ss_rdc_og=1.726  
+    5dB: Noisy=2.079  specsub=1.568  ss_rdc=1.940  ss_rdc_og=1.945  
+    10dB: Noisy=2.408  specsub=1.866  ss_rdc=2.149  ss_rdc_og=2.150  
+    15dB: Noisy=2.496  specsub=2.219  ss_rdc=2.485  ss_rdc_og=2.483  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  specsub=1.153  ss_rdc=1.130  ss_rdc_og=1.130  
+    0dB: Noisy=1.265  specsub=1.269  ss_rdc=1.253  ss_rdc_og=1.253  
+    5dB: Noisy=1.348  specsub=1.435  ss_rdc=1.381  ss_rdc_og=1.381  
+    10dB: Noisy=1.567  specsub=2.088  ss_rdc=1.618  ss_rdc_og=1.618  
+    15dB: Noisy=2.167  specsub=2.361  ss_rdc=2.331  ss_rdc_og=2.331  
+  SI_SDR:
+    -5dB: Noisy=-5.047  specsub=-2.759  ss_rdc=-4.124  ss_rdc_og=-4.124  
+    0dB: Noisy=-0.018  specsub=2.128  ss_rdc=0.719  ss_rdc_og=0.719  
+    5dB: Noisy=4.987  specsub=8.314  ss_rdc=6.077  ss_rdc_og=6.077  
+    10dB: Noisy=9.999  specsub=12.514  ss_rdc=10.811  ss_rdc_og=10.811  
+    15dB: Noisy=14.995  specsub=15.710  ss_rdc=14.894  ss_rdc_og=14.894  
+  STOI:
+    -5dB: Noisy=0.429  specsub=0.355  ss_rdc=0.426  ss_rdc_og=0.426  
+    0dB: Noisy=0.465  specsub=0.416  ss_rdc=0.425  ss_rdc_og=0.425  
+    5dB: Noisy=0.501  specsub=0.511  ss_rdc=0.505  ss_rdc_og=0.505  
+    10dB: Noisy=0.534  specsub=0.545  ss_rdc=0.545  ss_rdc_og=0.545  
+    15dB: Noisy=0.555  specsub=0.547  ss_rdc=0.566  ss_rdc_og=0.566  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  specsub=1.292  ss_rdc=2.144  ss_rdc_og=2.136  
+    0dB: Noisy=2.325  specsub=1.476  ss_rdc=2.488  ss_rdc_og=2.492  
+    5dB: Noisy=2.657  specsub=1.772  ss_rdc=2.651  ss_rdc_og=2.634  
+    10dB: Noisy=2.808  specsub=2.068  ss_rdc=2.711  ss_rdc_og=2.712  
+    15dB: Noisy=2.839  specsub=2.228  ss_rdc=3.163  ss_rdc_og=3.129  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  specsub=1.113  ss_rdc=1.087  ss_rdc_og=1.087  
+    0dB: Noisy=1.114  specsub=1.211  ss_rdc=1.152  ss_rdc_og=1.152  
+    5dB: Noisy=1.222  specsub=1.367  ss_rdc=1.303  ss_rdc_og=1.303  
+    10dB: Noisy=1.436  specsub=1.658  ss_rdc=1.571  ss_rdc_og=1.571  
+    15dB: Noisy=1.765  specsub=2.045  ss_rdc=1.937  ss_rdc_og=1.937  
+  SI_SDR:
+    -5dB: Noisy=-5.016  specsub=0.643  ss_rdc=-1.446  ss_rdc_og=-1.446  
+    0dB: Noisy=-0.017  specsub=4.923  ss_rdc=3.650  ss_rdc_og=3.650  
+    5dB: Noisy=5.011  specsub=9.271  ss_rdc=8.250  ss_rdc_og=8.249  
+    10dB: Noisy=10.002  specsub=13.106  ss_rdc=12.207  ss_rdc_og=12.207  
+    15dB: Noisy=14.999  specsub=16.598  ss_rdc=15.779  ss_rdc_og=15.779  
+  STOI:
+    -5dB: Noisy=0.602  specsub=0.507  ss_rdc=0.578  ss_rdc_og=0.578  
+    0dB: Noisy=0.661  specsub=0.576  ss_rdc=0.640  ss_rdc_og=0.640  
+    5dB: Noisy=0.715  specsub=0.673  ss_rdc=0.687  ss_rdc_og=0.687  
+    10dB: Noisy=0.771  specsub=0.739  ss_rdc=0.760  ss_rdc_og=0.760  
+    15dB: Noisy=0.805  specsub=0.792  ss_rdc=0.792  ss_rdc_og=0.792  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  specsub=1.411  ss_rdc=2.232  ss_rdc_og=2.232  
+    0dB: Noisy=2.429  specsub=1.652  ss_rdc=2.245  ss_rdc_og=2.249  
+    5dB: Noisy=2.769  specsub=1.847  ss_rdc=2.257  ss_rdc_og=2.256  
+    10dB: Noisy=2.817  specsub=2.168  ss_rdc=2.447  ss_rdc_og=2.444  
+    15dB: Noisy=2.904  specsub=2.430  ss_rdc=2.755  ss_rdc_og=2.774  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  specsub=1.126  ss_rdc=1.135  ss_rdc_og=1.135  
+    0dB: Noisy=1.116  specsub=1.180  ss_rdc=1.155  ss_rdc_og=1.155  
+    5dB: Noisy=1.217  specsub=1.323  ss_rdc=1.287  ss_rdc_og=1.287  
+    10dB: Noisy=1.399  specsub=1.565  ss_rdc=1.556  ss_rdc_og=1.556  
+    15dB: Noisy=1.700  specsub=1.892  ss_rdc=1.907  ss_rdc_og=1.907  
+  SI_SDR:
+    -5dB: Noisy=-5.044  specsub=-0.551  ss_rdc=-2.537  ss_rdc_og=-2.537  
+    0dB: Noisy=-0.041  specsub=3.199  ss_rdc=2.505  ss_rdc_og=2.505  
+    5dB: Noisy=5.003  specsub=7.173  ss_rdc=6.765  ss_rdc_og=6.766  
+    10dB: Noisy=10.007  specsub=11.539  ss_rdc=10.588  ss_rdc_og=10.588  
+    15dB: Noisy=15.001  specsub=14.698  ss_rdc=14.026  ss_rdc_og=14.026  
+  STOI:
+    -5dB: Noisy=0.552  specsub=0.424  ss_rdc=0.555  ss_rdc_og=0.555  
+    0dB: Noisy=0.639  specsub=0.529  ss_rdc=0.641  ss_rdc_og=0.641  
+    5dB: Noisy=0.709  specsub=0.647  ss_rdc=0.705  ss_rdc_og=0.705  
+    10dB: Noisy=0.783  specsub=0.743  ss_rdc=0.786  ss_rdc_og=0.786  
+    15dB: Noisy=0.832  specsub=0.805  ss_rdc=0.836  ss_rdc_og=0.836  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  specsub=1.135  ss_rdc=1.687  ss_rdc_og=1.669  
+    0dB: Noisy=2.392  specsub=1.290  ss_rdc=2.008  ss_rdc_og=1.992  
+    5dB: Noisy=2.492  specsub=1.584  ss_rdc=2.485  ss_rdc_og=2.480  
+    10dB: Noisy=2.693  specsub=2.090  ss_rdc=2.690  ss_rdc_og=2.699  
+    15dB: Noisy=3.030  specsub=2.516  ss_rdc=3.089  ss_rdc_og=3.066  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  specsub=1.079  ss_rdc=1.069  ss_rdc_og=1.069  
+    0dB: Noisy=1.086  specsub=1.137  ss_rdc=1.097  ss_rdc_og=1.097  
+    5dB: Noisy=1.172  specsub=1.263  ss_rdc=1.212  ss_rdc_og=1.212  
+    10dB: Noisy=1.365  specsub=1.504  ss_rdc=1.475  ss_rdc_og=1.475  
+    15dB: Noisy=1.630  specsub=1.850  ss_rdc=1.742  ss_rdc_og=1.742  
+  SI_SDR:
+    -5dB: Noisy=-4.982  specsub=-1.401  ss_rdc=-3.335  ss_rdc_og=-3.335  
+    0dB: Noisy=-0.047  specsub=1.722  ss_rdc=1.330  ss_rdc_og=1.330  
+    5dB: Noisy=4.985  specsub=6.476  ss_rdc=5.925  ss_rdc_og=5.926  
+    10dB: Noisy=9.995  specsub=11.344  ss_rdc=10.594  ss_rdc_og=10.594  
+    15dB: Noisy=14.998  specsub=15.478  ss_rdc=14.234  ss_rdc_og=14.235  
+  STOI:
+    -5dB: Noisy=0.605  specsub=0.509  ss_rdc=0.555  ss_rdc_og=0.555  
+    0dB: Noisy=0.673  specsub=0.614  ss_rdc=0.627  ss_rdc_og=0.627  
+    5dB: Noisy=0.723  specsub=0.692  ss_rdc=0.713  ss_rdc_og=0.713  
+    10dB: Noisy=0.776  specsub=0.764  ss_rdc=0.766  ss_rdc_og=0.766  
+    15dB: Noisy=0.814  specsub=0.803  ss_rdc=0.804  ss_rdc_og=0.804  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  specsub=1.452  ss_rdc=1.988  ss_rdc_og=1.994  
+    0dB: Noisy=2.366  specsub=1.842  ss_rdc=2.027  ss_rdc_og=2.016  
+    5dB: Noisy=2.439  specsub=2.018  ss_rdc=2.224  ss_rdc_og=2.225  
+    10dB: Noisy=2.589  specsub=2.253  ss_rdc=2.637  ss_rdc_og=2.639  
+    15dB: Noisy=2.651  specsub=2.571  ss_rdc=2.860  ss_rdc_og=2.853  
+
+========================================================================================================================
