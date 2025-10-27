@@ -30,7 +30,7 @@ sys.path.insert(0, str(repo_root / "src"))
 
 # --- Define Base Directories ---
 # Base directory for all results of this Python mband test
-results_dir_base = repo_root / 'results' / 'EXP1' / 'spectral' / 'SS_EXP1p1b_AVRGING_causal_ogweights'
+results_dir_base = repo_root / 'results' / 'EXP1' / 'spectral' / 'SS_EXP1p1b' / 'AVRGING'/ 'xmagsm_change'
 # If want a separate output dir for audio if plan to save it
 # output_dir_base = repo_root / 'sound_data' / 'processed' / 'spectral_processed_outputs' / 'EXP1p1a_Python_mband'
 
@@ -53,30 +53,30 @@ from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
 EXPERIMENT_CONFIGS = [
     # --- MBAND (AVRGING=1) ---
     {
-        'name': 'mband_py_N6_lin',
+        'name': 'mband_py_N6_lin_AVR1',
         'params': {'Nband': 6, 'Freq_spacing': 'linear', 'AVRGING': 1, 'Noisefr': 6}
     },
     {
-        'name': 'mband_py_N6_log',
+        'name': 'mband_py_N6_log_AVR1',
         'params': {'Nband': 6, 'Freq_spacing': 'log', 'AVRGING': 1, 'Noisefr': 6}
     },
     {
-        'name': 'mband_py_N6_mel',
+        'name': 'mband_py_N6_mel_AVR1',
         'params': {'Nband': 6, 'Freq_spacing': 'mel', 'AVRGING': 1, 'Noisefr': 6}
     },
     # --- MBAND (Causal, AVRGING=0) ---
-    # {
-    #     'name': 'mband_py_N6_lin_AVR0_8',
-    #     'params': {'Nband': 6, 'Freq_spacing': 'linear', 'AVRGING': 0, 'Noisefr': 6}
-    # },
-    # {
-    #     'name': 'mband_py_N6_log_AVR0_8',
-    #     'params': {'Nband': 6, 'Freq_spacing': 'log', 'AVRGING': 0, 'Noisefr': 6}
-    # },
-    # {
-    #     'name': 'mband_py_N6_mel_AVR0_8',
-    #     'params': {'Nband': 6, 'Freq_spacing': 'mel', 'AVRGING': 0, 'Noisefr': 6}
-    # },
+    {
+        'name': 'mband_py_N6_lin_AVR0_8',
+        'params': {'Nband': 6, 'Freq_spacing': 'linear', 'AVRGING': 0, 'Noisefr': 6}
+    },
+    {
+        'name': 'mband_py_N6_log_AVR0_8',
+        'params': {'Nband': 6, 'Freq_spacing': 'log', 'AVRGING': 0, 'Noisefr': 6}
+    },
+    {
+        'name': 'mband_py_N6_mel_AVR0_8',
+        'params': {'Nband': 6, 'Freq_spacing': 'mel', 'AVRGING': 0, 'Noisefr': 6}
+    },
 ]
 
 # Shared parameters (MATLAB defaults)

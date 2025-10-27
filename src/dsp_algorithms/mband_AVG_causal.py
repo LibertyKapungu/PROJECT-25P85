@@ -354,61 +354,6 @@ def mband(
         nframes = 0
         print("Warning: No frames generated - audio too short")
  
-    # if AVRGING:
-    #     # Smooth the input spectrum (this part is causal and can stay)
-    #     filtb = [0.9, 0.1]
-    #     x_magsm = np.zeros_like(x_mag)
-    #     x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
-
-    #     for i in range(1, nframes):
-    #         x_tmp1 = np.concatenate([x_mag[frmelen - ovlplen:, i - 1], x_mag[:, i]])
-    #         x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
-    #         x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
-
-    #     # NON-CAUSAL weighted spectral estimate (uses future frames)
-    #     Wn2, Wn1, W0, W1, W2 = 0.09, 0.25, 0.32, 0.25, 0.09 
-        
-    #     # Create a copy to avoid overwriting during computation
-    #     x_magsm_filtered = x_magsm.copy()
-        
-    #     # Frame 1 (index 0): uses current + 2 future frames
-    #     if nframes >= 3:
-    #         x_magsm_filtered[:, 0] = (W0 * x_magsm[:, 0] + 
-    #                                 W1 * x_magsm[:, 1] + 
-    #                                 W2 * x_magsm[:, 2])
-        
-    #     # Frame 2 (index 1): uses 1 past + current + 2 future frames
-    #     if nframes >= 4:
-    #         x_magsm_filtered[:, 1] = (Wn1 * x_magsm[:, 0] + 
-    #                                 W0 * x_magsm[:, 1] + 
-    #                                 W1 * x_magsm[:, 2] + 
-    #                                 W2 * x_magsm[:, 3])
-        
-    #     # Middle frames: full 5-tap filter (2 past + current + 2 future)
-    #     for i in range(2, nframes - 2):
-    #         x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + 
-    #                                 Wn1 * x_magsm[:, i - 1] + 
-    #                                 W0 * x_magsm[:, i] + 
-    #                                 W1 * x_magsm[:, i + 1] + 
-    #                                 W2 * x_magsm[:, i + 2])
-        
-    #     # Second-to-last frame (index nframes-2)
-    #     if nframes >= 3:
-    #         x_magsm_filtered[:, nframes - 2] = (Wn2 * x_magsm[:, nframes - 4] + 
-    #                                             Wn1 * x_magsm[:, nframes - 3] + 
-    #                                             W0 * x_magsm[:, nframes - 2] + 
-    #                                             W1 * x_magsm[:, nframes - 1])
-        
-    #     # Last frame (index nframes-1)
-    #     if nframes >= 2:
-    #         x_magsm_filtered[:, nframes - 1] = (Wn2 * x_magsm[:, nframes - 3] + 
-    #                                             Wn1 * x_magsm[:, nframes - 2] + 
-    #                                             W0 * x_magsm[:, nframes - 1])
-        
-    #     x_magsm = x_magsm_filtered
-    # else:
-    #     x_magsm = x_mag 
-
         # Smooth the input spectrum
     if AVRGING:             
         filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
@@ -422,10 +367,25 @@ def mband(
 
         # Weighted spectral estimate 
         Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66 # Sum = 1.0  # originally 0.09, 0.25, 0.66 for histry emphasis   Wn2, Wn1, Wn0 = 0.15, 0.35, 0.50 balaced 0.12, 0.30, 0.58 
+        x_magsm_filtered = x_magsm.copy()  # Create a copy to avoid in-place overwriting
         if nframes > 1:
-            x_magsm[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
+            x_magsm_filtered[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
             for i in range(2, nframes):
-                x_magsm[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_magsm[:, i])  # changed  Wn0 * x_mag[:, i])  SHOULD BE x_magsm[:, i]
+                x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_magsm[:, i])  # changed  Wn0 * x_mag[:, i])  SHOULD BE x_magsm[:, i]
+        x_magsm = x_magsm_filtered  # Replace x_magsm with filtered version
+
+        # After line 248 (after x_magsm = x_magsm_filtered)
+
+        # Verify no NaN/Inf values
+        assert not np.any(np.isnan(x_magsm)), "NaN detected in x_magsm"
+        assert not np.any(np.isinf(x_magsm)), "Inf detected in x_magsm"
+
+        # Check spectral continuity (frame-to-frame variance should be lower)
+        if nframes > 1:
+            frame_diff = np.diff(x_magsm, axis=1)  # Difference between consecutive frames
+            continuity_metric = np.mean(np.abs(frame_diff))
+            print(f"Spectral continuity metric: {continuity_metric:.6f}")
+            # Lower is better (smoother transitions)
     else:
         x_magsm = x_mag
 
@@ -540,3 +500,39 @@ def mband(
     return enhanced_tensor, fs
 
 #mband('C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/noisy_speech/sp21_station_sn0.wav', 16000, output_dir='C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/Random/Matlab2025Files/SS/mband_python_', output_file='sp21_station_sn0.wav', input_name='sp21_station_sn0', Nband=4, Freq_spacing='log', FRMSZ=20, OVLP=50, AVRGING=1, Noisefr=1, FLOOR=0.002, VAD=1)
+if __name__ == "__main__":
+
+    TARGET_SR = 16000
+    TARGET_SNR_DB = 5
+    OUTPUT_DIR = "C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\results\\EXP2\\spectral\\NOISE_ESTIMATION"
+
+    torch.manual_seed(42)
+
+    clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
+    #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
+    #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\noisy_input.wav")
+    noise_path = enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\noisy_speech\\sp21_station_sn5.wav'
+
+    noisy_tensor, noisy_fs = torchaudio.load(noise_path)
+
+    # print("Preparing audio data pair...")
+    #noisy_tensor, clean_tensor, noise_tensor, fs = prepare_audio_data(clean_path, noise_path, TARGET_SR, TARGET_SNR_DB)
+
+    print(f"Data pair created at {TARGET_SNR_DB} dB SNR.")
+    print("-" * 30)
+
+    mband(
+        noisy_audio=noisy_tensor,
+        fs=noisy_fs,
+        output_dir=OUTPUT_DIR,
+        output_file="mband_causal.wav",
+        input_name="standard_mode",
+        Nband=6,
+        Freq_spacing='linear',
+        FRMSZ=20,
+        OVLP=50,
+        AVRGING=1,
+        Noisefr=6,
+        FLOOR=0.002,
+        VAD=1,
+    )
