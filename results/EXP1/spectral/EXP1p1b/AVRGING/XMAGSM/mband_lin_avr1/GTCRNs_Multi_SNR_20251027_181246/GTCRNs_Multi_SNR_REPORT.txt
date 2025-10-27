@@ -1,0 +1,807 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, mband_py_lin_avr1, mband_py_lin_causal_ogw_avr1, mband_py_lin_causal_avr1
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\EXP1p1b\AVRGING\XMAGSM\mband_lin_avr1\GTCRNs_Multi_SNR_20251027_181246
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  mband_py_lin_avr1=1.1117  mband_py_lin_causal_ogw_avr1=1.1085  mband_py_lin_causal_avr1=1.1078  
+                SI_SDR:  Noisy=-4.9899  mband_py_lin_avr1=0.0649  mband_py_lin_causal_ogw_avr1=-0.0777  mband_py_lin_causal_avr1=-0.5691  
+                  STOI:  Noisy=0.5866  mband_py_lin_avr1=0.5968  mband_py_lin_causal_ogw_avr1=0.5862  mband_py_lin_causal_avr1=0.5829  
+       DNSMOS_p808_mos:  Noisy=2.4363  mband_py_lin_avr1=2.5739  mband_py_lin_causal_ogw_avr1=2.6428  mband_py_lin_causal_avr1=2.6118  
+        DNSMOS_mos_sig:  Noisy=3.5517  mband_py_lin_avr1=3.7379  mband_py_lin_causal_ogw_avr1=3.3547  mband_py_lin_causal_avr1=3.3133  
+        DNSMOS_mos_bak:  Noisy=1.6733  mband_py_lin_avr1=2.2017  mband_py_lin_causal_ogw_avr1=2.0557  mband_py_lin_causal_avr1=2.0027  
+        DNSMOS_mos_ovr:  Noisy=1.9706  mband_py_lin_avr1=2.3967  mband_py_lin_causal_ogw_avr1=2.1286  mband_py_lin_causal_avr1=2.0741  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  mband_py_lin_avr1=1.2307  mband_py_lin_causal_ogw_avr1=1.2153  mband_py_lin_causal_avr1=1.2008  
+                SI_SDR:  Noisy=-0.0263  mband_py_lin_avr1=4.8064  mband_py_lin_causal_ogw_avr1=4.5459  mband_py_lin_causal_avr1=4.1603  
+                  STOI:  Noisy=0.6549  mband_py_lin_avr1=0.6648  mband_py_lin_causal_ogw_avr1=0.6566  mband_py_lin_causal_avr1=0.6516  
+       DNSMOS_p808_mos:  Noisy=2.5694  mband_py_lin_avr1=2.6779  mband_py_lin_causal_ogw_avr1=2.7004  mband_py_lin_causal_avr1=2.6872  
+        DNSMOS_mos_sig:  Noisy=3.8877  mband_py_lin_avr1=3.6902  mband_py_lin_causal_ogw_avr1=3.4682  mband_py_lin_causal_avr1=3.3832  
+        DNSMOS_mos_bak:  Noisy=1.9030  mband_py_lin_avr1=2.3550  mband_py_lin_causal_ogw_avr1=2.2545  mband_py_lin_causal_avr1=2.1988  
+        DNSMOS_mos_ovr:  Noisy=2.2631  mband_py_lin_avr1=2.4340  mband_py_lin_causal_ogw_avr1=2.2713  mband_py_lin_causal_avr1=2.1899  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  mband_py_lin_avr1=1.4210  mband_py_lin_causal_ogw_avr1=1.3881  mband_py_lin_causal_avr1=1.4000  
+                SI_SDR:  Noisy=4.9955  mband_py_lin_avr1=8.4561  mband_py_lin_causal_ogw_avr1=8.2108  mband_py_lin_causal_avr1=8.5606  
+                  STOI:  Noisy=0.7153  mband_py_lin_avr1=0.7238  mband_py_lin_causal_ogw_avr1=0.7174  mband_py_lin_causal_avr1=0.7196  
+       DNSMOS_p808_mos:  Noisy=2.7331  mband_py_lin_avr1=2.7922  mband_py_lin_causal_ogw_avr1=2.8034  mband_py_lin_causal_avr1=2.8474  
+        DNSMOS_mos_sig:  Noisy=3.9827  mband_py_lin_avr1=3.7077  mband_py_lin_causal_ogw_avr1=3.6289  mband_py_lin_causal_avr1=3.5727  
+        DNSMOS_mos_bak:  Noisy=2.1026  mband_py_lin_avr1=2.5025  mband_py_lin_causal_ogw_avr1=2.4781  mband_py_lin_causal_avr1=2.4539  
+        DNSMOS_mos_ovr:  Noisy=2.4361  mband_py_lin_avr1=2.5347  mband_py_lin_causal_ogw_avr1=2.5020  mband_py_lin_causal_avr1=2.4543  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  mband_py_lin_avr1=1.7032  mband_py_lin_causal_ogw_avr1=1.6606  mband_py_lin_causal_avr1=1.7005  
+                SI_SDR:  Noisy=9.9991  mband_py_lin_avr1=11.7408  mband_py_lin_causal_ogw_avr1=11.6133  mband_py_lin_causal_avr1=12.2481  
+                  STOI:  Noisy=0.7740  mband_py_lin_avr1=0.7800  mband_py_lin_causal_ogw_avr1=0.7757  mband_py_lin_causal_avr1=0.7726  
+       DNSMOS_p808_mos:  Noisy=2.9111  mband_py_lin_avr1=2.9342  mband_py_lin_causal_ogw_avr1=2.9803  mband_py_lin_causal_avr1=2.9370  
+        DNSMOS_mos_sig:  Noisy=4.0784  mband_py_lin_avr1=3.9085  mband_py_lin_causal_ogw_avr1=3.9883  mband_py_lin_causal_avr1=3.7701  
+        DNSMOS_mos_bak:  Noisy=2.3277  mband_py_lin_avr1=2.7236  mband_py_lin_causal_ogw_avr1=2.7743  mband_py_lin_causal_avr1=2.6526  
+        DNSMOS_mos_ovr:  Noisy=2.6382  mband_py_lin_avr1=2.7638  mband_py_lin_causal_ogw_avr1=2.8693  mband_py_lin_causal_avr1=2.6819  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  mband_py_lin_avr1=2.0849  mband_py_lin_causal_ogw_avr1=2.0202  mband_py_lin_causal_avr1=2.0929  
+                SI_SDR:  Noisy=14.9989  mband_py_lin_avr1=14.0088  mband_py_lin_causal_ogw_avr1=13.9906  mband_py_lin_causal_avr1=14.6066  
+                  STOI:  Noisy=0.8137  mband_py_lin_avr1=0.8150  mband_py_lin_causal_ogw_avr1=0.8114  mband_py_lin_causal_avr1=0.8114  
+       DNSMOS_p808_mos:  Noisy=3.0481  mband_py_lin_avr1=3.0487  mband_py_lin_causal_ogw_avr1=3.1422  mband_py_lin_causal_avr1=3.1253  
+        DNSMOS_mos_sig:  Noisy=4.0454  mband_py_lin_avr1=3.9832  mband_py_lin_causal_ogw_avr1=4.1150  mband_py_lin_causal_avr1=3.9700  
+        DNSMOS_mos_bak:  Noisy=2.5180  mband_py_lin_avr1=3.0236  mband_py_lin_causal_ogw_avr1=3.0944  mband_py_lin_causal_avr1=2.8746  
+        DNSMOS_mos_ovr:  Noisy=2.7482  mband_py_lin_avr1=2.9809  mband_py_lin_causal_ogw_avr1=3.1268  mband_py_lin_causal_avr1=2.9099  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  mband_py_lin_avr1=1.1117 (+0.0459, +4.31%)  |  mband_py_lin_causal_ogw_avr1=1.1085 (+0.0427, +4.01%)  |  mband_py_lin_causal_avr1=1.1078 (+0.0420, +3.95%)
+                SI_SDR: Noisy=-4.9899  |  mband_py_lin_avr1=0.0649 (+5.0548, +101.30%)  |  mband_py_lin_causal_ogw_avr1=-0.0777 (+4.9122, +98.44%)  |  mband_py_lin_causal_avr1=-0.5691 (+4.4208, +88.60%)
+                  STOI: Noisy=0.5866  |  mband_py_lin_avr1=0.5968 (+0.0102, +1.74%)  |  mband_py_lin_causal_ogw_avr1=0.5862 (-0.0003, -0.06%)  |  mband_py_lin_causal_avr1=0.5829 (-0.0037, -0.63%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  mband_py_lin_avr1=2.5739 (+0.1376, +5.65%)  |  mband_py_lin_causal_ogw_avr1=2.6428 (+0.2066, +8.48%)  |  mband_py_lin_causal_avr1=2.6118 (+0.1756, +7.21%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  mband_py_lin_avr1=3.7379 (+0.1862, +5.24%)  |  mband_py_lin_causal_ogw_avr1=3.3547 (-0.1970, -5.55%)  |  mband_py_lin_causal_avr1=3.3133 (-0.2384, -6.71%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  mband_py_lin_avr1=2.2017 (+0.5284, +31.58%)  |  mband_py_lin_causal_ogw_avr1=2.0557 (+0.3823, +22.85%)  |  mband_py_lin_causal_avr1=2.0027 (+0.3293, +19.68%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  mband_py_lin_avr1=2.3967 (+0.4261, +21.62%)  |  mband_py_lin_causal_ogw_avr1=2.1286 (+0.1580, +8.02%)  |  mband_py_lin_causal_avr1=2.0741 (+0.1035, +5.25%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  mband_py_lin_avr1=1.2307 (+0.1370, +12.53%)  |  mband_py_lin_causal_ogw_avr1=1.2153 (+0.1216, +11.12%)  |  mband_py_lin_causal_avr1=1.2008 (+0.1071, +9.79%)
+                SI_SDR: Noisy=-0.0263  |  mband_py_lin_avr1=4.8064 (+4.8327, +18403.81%)  |  mband_py_lin_causal_ogw_avr1=4.5459 (+4.5721, +17411.63%)  |  mband_py_lin_causal_avr1=4.1603 (+4.1865, +15943.18%)
+                  STOI: Noisy=0.6549  |  mband_py_lin_avr1=0.6648 (+0.0099, +1.51%)  |  mband_py_lin_causal_ogw_avr1=0.6566 (+0.0017, +0.26%)  |  mband_py_lin_causal_avr1=0.6516 (-0.0033, -0.50%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  mband_py_lin_avr1=2.6779 (+0.1085, +4.22%)  |  mband_py_lin_causal_ogw_avr1=2.7004 (+0.1311, +5.10%)  |  mband_py_lin_causal_avr1=2.6872 (+0.1179, +4.59%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  mband_py_lin_avr1=3.6902 (-0.1975, -5.08%)  |  mband_py_lin_causal_ogw_avr1=3.4682 (-0.4195, -10.79%)  |  mband_py_lin_causal_avr1=3.3832 (-0.5045, -12.98%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  mband_py_lin_avr1=2.3550 (+0.4520, +23.75%)  |  mband_py_lin_causal_ogw_avr1=2.2545 (+0.3515, +18.47%)  |  mband_py_lin_causal_avr1=2.1988 (+0.2958, +15.55%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  mband_py_lin_avr1=2.4340 (+0.1710, +7.56%)  |  mband_py_lin_causal_ogw_avr1=2.2713 (+0.0083, +0.37%)  |  mband_py_lin_causal_avr1=2.1899 (-0.0732, -3.23%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  mband_py_lin_avr1=1.4210 (+0.2477, +21.11%)  |  mband_py_lin_causal_ogw_avr1=1.3881 (+0.2148, +18.31%)  |  mband_py_lin_causal_avr1=1.4000 (+0.2267, +19.32%)
+                SI_SDR: Noisy=4.9955  |  mband_py_lin_avr1=8.4561 (+3.4605, +69.27%)  |  mband_py_lin_causal_ogw_avr1=8.2108 (+3.2153, +64.36%)  |  mband_py_lin_causal_avr1=8.5606 (+3.5650, +71.36%)
+                  STOI: Noisy=0.7153  |  mband_py_lin_avr1=0.7238 (+0.0086, +1.20%)  |  mband_py_lin_causal_ogw_avr1=0.7174 (+0.0021, +0.30%)  |  mband_py_lin_causal_avr1=0.7196 (+0.0044, +0.61%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  mband_py_lin_avr1=2.7922 (+0.0591, +2.16%)  |  mband_py_lin_causal_ogw_avr1=2.8034 (+0.0703, +2.57%)  |  mband_py_lin_causal_avr1=2.8474 (+0.1143, +4.18%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  mband_py_lin_avr1=3.7077 (-0.2750, -6.90%)  |  mband_py_lin_causal_ogw_avr1=3.6289 (-0.3538, -8.88%)  |  mband_py_lin_causal_avr1=3.5727 (-0.4100, -10.29%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  mband_py_lin_avr1=2.5025 (+0.3999, +19.02%)  |  mband_py_lin_causal_ogw_avr1=2.4781 (+0.3755, +17.86%)  |  mband_py_lin_causal_avr1=2.4539 (+0.3512, +16.70%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  mband_py_lin_avr1=2.5347 (+0.0986, +4.05%)  |  mband_py_lin_causal_ogw_avr1=2.5020 (+0.0659, +2.71%)  |  mband_py_lin_causal_avr1=2.4543 (+0.0182, +0.75%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  mband_py_lin_avr1=1.7032 (+0.3585, +26.66%)  |  mband_py_lin_causal_ogw_avr1=1.6606 (+0.3160, +23.50%)  |  mband_py_lin_causal_avr1=1.7005 (+0.3558, +26.46%)
+                SI_SDR: Noisy=9.9991  |  mband_py_lin_avr1=11.7408 (+1.7417, +17.42%)  |  mband_py_lin_causal_ogw_avr1=11.6133 (+1.6142, +16.14%)  |  mband_py_lin_causal_avr1=12.2481 (+2.2490, +22.49%)
+                  STOI: Noisy=0.7740  |  mband_py_lin_avr1=0.7800 (+0.0061, +0.78%)  |  mband_py_lin_causal_ogw_avr1=0.7757 (+0.0017, +0.23%)  |  mband_py_lin_causal_avr1=0.7726 (-0.0013, -0.17%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  mband_py_lin_avr1=2.9342 (+0.0232, +0.80%)  |  mband_py_lin_causal_ogw_avr1=2.9803 (+0.0692, +2.38%)  |  mband_py_lin_causal_avr1=2.9370 (+0.0259, +0.89%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  mband_py_lin_avr1=3.9085 (-0.1699, -4.17%)  |  mband_py_lin_causal_ogw_avr1=3.9883 (-0.0902, -2.21%)  |  mband_py_lin_causal_avr1=3.7701 (-0.3083, -7.56%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  mband_py_lin_avr1=2.7236 (+0.3959, +17.01%)  |  mband_py_lin_causal_ogw_avr1=2.7743 (+0.4465, +19.18%)  |  mband_py_lin_causal_avr1=2.6526 (+0.3248, +13.96%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  mband_py_lin_avr1=2.7638 (+0.1255, +4.76%)  |  mband_py_lin_causal_ogw_avr1=2.8693 (+0.2311, +8.76%)  |  mband_py_lin_causal_avr1=2.6819 (+0.0436, +1.65%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  mband_py_lin_avr1=2.0849 (+0.4381, +26.60%)  |  mband_py_lin_causal_ogw_avr1=2.0202 (+0.3733, +22.67%)  |  mband_py_lin_causal_avr1=2.0929 (+0.4461, +27.09%)
+                SI_SDR: Noisy=14.9989  |  mband_py_lin_avr1=14.0088 (-0.9900, -6.60%)  |  mband_py_lin_causal_ogw_avr1=13.9906 (-1.0083, -6.72%)  |  mband_py_lin_causal_avr1=14.6066 (-0.3923, -2.62%)
+                  STOI: Noisy=0.8137  |  mband_py_lin_avr1=0.8150 (+0.0013, +0.16%)  |  mband_py_lin_causal_ogw_avr1=0.8114 (-0.0023, -0.29%)  |  mband_py_lin_causal_avr1=0.8114 (-0.0023, -0.29%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  mband_py_lin_avr1=3.0487 (+0.0006, +0.02%)  |  mband_py_lin_causal_ogw_avr1=3.1422 (+0.0941, +3.09%)  |  mband_py_lin_causal_avr1=3.1253 (+0.0771, +2.53%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  mband_py_lin_avr1=3.9832 (-0.0621, -1.54%)  |  mband_py_lin_causal_ogw_avr1=4.1150 (+0.0697, +1.72%)  |  mband_py_lin_causal_avr1=3.9700 (-0.0753, -1.86%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  mband_py_lin_avr1=3.0236 (+0.5056, +20.08%)  |  mband_py_lin_causal_ogw_avr1=3.0944 (+0.5764, +22.89%)  |  mband_py_lin_causal_avr1=2.8746 (+0.3566, +14.16%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  mband_py_lin_avr1=2.9809 (+0.2327, +8.47%)  |  mband_py_lin_causal_ogw_avr1=3.1268 (+0.3786, +13.78%)  |  mband_py_lin_causal_avr1=2.9099 (+0.1617, +5.89%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_lin_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_lin_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_lin_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_lin_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_lin_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_ogw_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_lin_causal_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_py_lin_avr1=1.093  mband_py_lin_causal_ogw_avr1=1.098  mband_py_lin_causal_avr1=1.098  
+    0dB: Noisy=1.067  mband_py_lin_avr1=1.235  mband_py_lin_causal_ogw_avr1=1.165  mband_py_lin_causal_avr1=1.223  
+    5dB: Noisy=1.118  mband_py_lin_avr1=1.313  mband_py_lin_causal_ogw_avr1=1.308  mband_py_lin_causal_avr1=1.440  
+    10dB: Noisy=1.257  mband_py_lin_avr1=1.624  mband_py_lin_causal_ogw_avr1=1.590  mband_py_lin_causal_avr1=1.765  
+    15dB: Noisy=1.563  mband_py_lin_avr1=2.022  mband_py_lin_causal_ogw_avr1=2.050  mband_py_lin_causal_avr1=2.210  
+  SI_SDR:
+    -5dB: Noisy=-4.823  mband_py_lin_avr1=-2.766  mband_py_lin_causal_ogw_avr1=-2.586  mband_py_lin_causal_avr1=1.544  
+    0dB: Noisy=-0.062  mband_py_lin_avr1=2.593  mband_py_lin_causal_ogw_avr1=2.267  mband_py_lin_causal_avr1=5.548  
+    5dB: Noisy=4.983  mband_py_lin_avr1=6.430  mband_py_lin_causal_ogw_avr1=6.693  mband_py_lin_causal_avr1=8.942  
+    10dB: Noisy=10.006  mband_py_lin_avr1=11.542  mband_py_lin_causal_ogw_avr1=11.124  mband_py_lin_causal_avr1=11.904  
+    15dB: Noisy=15.011  mband_py_lin_avr1=13.503  mband_py_lin_causal_ogw_avr1=12.991  mband_py_lin_causal_avr1=14.244  
+  STOI:
+    -5dB: Noisy=0.578  mband_py_lin_avr1=0.579  mband_py_lin_causal_ogw_avr1=0.565  mband_py_lin_causal_avr1=0.702  
+    0dB: Noisy=0.666  mband_py_lin_avr1=0.667  mband_py_lin_causal_ogw_avr1=0.652  mband_py_lin_causal_avr1=0.754  
+    5dB: Noisy=0.747  mband_py_lin_avr1=0.743  mband_py_lin_causal_ogw_avr1=0.738  mband_py_lin_causal_avr1=0.811  
+    10dB: Noisy=0.818  mband_py_lin_avr1=0.826  mband_py_lin_causal_ogw_avr1=0.819  mband_py_lin_causal_avr1=0.869  
+    15dB: Noisy=0.871  mband_py_lin_avr1=0.875  mband_py_lin_causal_ogw_avr1=0.868  mband_py_lin_causal_avr1=0.908  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  mband_py_lin_avr1=2.336  mband_py_lin_causal_ogw_avr1=1.921  mband_py_lin_causal_avr1=2.366  
+    0dB: Noisy=2.516  mband_py_lin_avr1=2.556  mband_py_lin_causal_ogw_avr1=1.931  mband_py_lin_causal_avr1=2.217  
+    5dB: Noisy=2.776  mband_py_lin_avr1=2.606  mband_py_lin_causal_ogw_avr1=2.431  mband_py_lin_causal_avr1=2.470  
+    10dB: Noisy=2.872  mband_py_lin_avr1=2.488  mband_py_lin_causal_ogw_avr1=2.661  mband_py_lin_causal_avr1=2.825  
+    15dB: Noisy=2.879  mband_py_lin_avr1=2.229  mband_py_lin_causal_ogw_avr1=2.840  mband_py_lin_causal_avr1=3.457  
+
+>>> Car <<<
+  PESQ:
+    -5dB: Noisy=1.053  mband_py_lin_avr1=1.127  mband_py_lin_causal_ogw_avr1=1.117  mband_py_lin_causal_avr1=1.098  
+    0dB: Noisy=1.077  mband_py_lin_avr1=1.269  mband_py_lin_causal_ogw_avr1=1.238  mband_py_lin_causal_avr1=1.171  
+    5dB: Noisy=1.152  mband_py_lin_avr1=1.530  mband_py_lin_causal_ogw_avr1=1.469  mband_py_lin_causal_avr1=1.380  
+    10dB: Noisy=1.324  mband_py_lin_avr1=1.808  mband_py_lin_causal_ogw_avr1=1.732  mband_py_lin_causal_avr1=1.598  
+    15dB: Noisy=1.635  mband_py_lin_avr1=2.166  mband_py_lin_causal_ogw_avr1=2.063  mband_py_lin_causal_avr1=1.970  
+  SI_SDR:
+    -5dB: Noisy=-4.980  mband_py_lin_avr1=3.047  mband_py_lin_causal_ogw_avr1=2.604  mband_py_lin_causal_avr1=0.428  
+    0dB: Noisy=0.013  mband_py_lin_avr1=7.267  mband_py_lin_causal_ogw_avr1=6.814  mband_py_lin_causal_avr1=4.289  
+    5dB: Noisy=4.994  mband_py_lin_avr1=10.717  mband_py_lin_causal_ogw_avr1=10.315  mband_py_lin_causal_avr1=8.819  
+    10dB: Noisy=10.002  mband_py_lin_avr1=13.500  mband_py_lin_causal_ogw_avr1=13.200  mband_py_lin_causal_avr1=12.237  
+    15dB: Noisy=14.997  mband_py_lin_avr1=15.236  mband_py_lin_causal_ogw_avr1=15.084  mband_py_lin_causal_avr1=14.707  
+  STOI:
+    -5dB: Noisy=0.654  mband_py_lin_avr1=0.658  mband_py_lin_causal_ogw_avr1=0.648  mband_py_lin_causal_avr1=0.626  
+    0dB: Noisy=0.705  mband_py_lin_avr1=0.714  mband_py_lin_causal_ogw_avr1=0.706  mband_py_lin_causal_avr1=0.683  
+    5dB: Noisy=0.750  mband_py_lin_avr1=0.756  mband_py_lin_causal_ogw_avr1=0.749  mband_py_lin_causal_avr1=0.740  
+    10dB: Noisy=0.797  mband_py_lin_avr1=0.805  mband_py_lin_causal_ogw_avr1=0.800  mband_py_lin_causal_avr1=0.794  
+    15dB: Noisy=0.830  mband_py_lin_avr1=0.837  mband_py_lin_causal_ogw_avr1=0.834  mband_py_lin_causal_avr1=0.816  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.276  mband_py_lin_avr1=2.606  mband_py_lin_causal_ogw_avr1=2.380  mband_py_lin_causal_avr1=2.101  
+    0dB: Noisy=2.507  mband_py_lin_avr1=2.574  mband_py_lin_causal_ogw_avr1=2.510  mband_py_lin_causal_avr1=2.269  
+    5dB: Noisy=2.471  mband_py_lin_avr1=2.620  mband_py_lin_causal_ogw_avr1=2.671  mband_py_lin_causal_avr1=2.623  
+    10dB: Noisy=2.755  mband_py_lin_avr1=3.160  mband_py_lin_causal_ogw_avr1=3.158  mband_py_lin_causal_avr1=2.686  
+    15dB: Noisy=2.913  mband_py_lin_avr1=3.268  mband_py_lin_causal_ogw_avr1=3.629  mband_py_lin_causal_avr1=3.142  
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.043  mband_py_lin_avr1=1.061  mband_py_lin_causal_ogw_avr1=1.060  mband_py_lin_causal_avr1=1.078  
+    0dB: Noisy=1.062  mband_py_lin_avr1=1.117  mband_py_lin_causal_ogw_avr1=1.113  mband_py_lin_causal_avr1=1.131  
+    5dB: Noisy=1.116  mband_py_lin_avr1=1.279  mband_py_lin_causal_ogw_avr1=1.250  mband_py_lin_causal_avr1=1.280  
+    10dB: Noisy=1.233  mband_py_lin_avr1=1.520  mband_py_lin_causal_ogw_avr1=1.488  mband_py_lin_causal_avr1=1.497  
+    15dB: Noisy=1.491  mband_py_lin_avr1=1.860  mband_py_lin_causal_ogw_avr1=1.783  mband_py_lin_causal_avr1=1.850  
+  SI_SDR:
+    -5dB: Noisy=-4.988  mband_py_lin_avr1=-2.829  mband_py_lin_causal_ogw_avr1=-2.803  mband_py_lin_causal_avr1=-1.564  
+    0dB: Noisy=-0.023  mband_py_lin_avr1=2.914  mband_py_lin_causal_ogw_avr1=2.726  mband_py_lin_causal_avr1=4.157  
+    5dB: Noisy=4.999  mband_py_lin_avr1=7.910  mband_py_lin_causal_ogw_avr1=7.643  mband_py_lin_causal_avr1=8.376  
+    10dB: Noisy=9.995  mband_py_lin_avr1=11.173  mband_py_lin_causal_ogw_avr1=11.279  mband_py_lin_causal_avr1=12.273  
+    15dB: Noisy=14.999  mband_py_lin_avr1=13.764  mband_py_lin_causal_ogw_avr1=14.018  mband_py_lin_causal_avr1=14.868  
+  STOI:
+    -5dB: Noisy=0.565  mband_py_lin_avr1=0.580  mband_py_lin_causal_ogw_avr1=0.560  mband_py_lin_causal_avr1=0.561  
+    0dB: Noisy=0.645  mband_py_lin_avr1=0.656  mband_py_lin_causal_ogw_avr1=0.642  mband_py_lin_causal_avr1=0.641  
+    5dB: Noisy=0.726  mband_py_lin_avr1=0.737  mband_py_lin_causal_ogw_avr1=0.727  mband_py_lin_causal_avr1=0.728  
+    10dB: Noisy=0.795  mband_py_lin_avr1=0.801  mband_py_lin_causal_ogw_avr1=0.797  mband_py_lin_causal_avr1=0.784  
+    15dB: Noisy=0.842  mband_py_lin_avr1=0.843  mband_py_lin_causal_ogw_avr1=0.837  mband_py_lin_causal_avr1=0.834  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.706  mband_py_lin_avr1=1.981  mband_py_lin_causal_ogw_avr1=1.724  mband_py_lin_causal_avr1=1.768  
+    0dB: Noisy=1.800  mband_py_lin_avr1=1.997  mband_py_lin_causal_ogw_avr1=1.831  mband_py_lin_causal_avr1=1.884  
+    5dB: Noisy=2.079  mband_py_lin_avr1=2.158  mband_py_lin_causal_ogw_avr1=2.184  mband_py_lin_causal_avr1=2.223  
+    10dB: Noisy=2.408  mband_py_lin_avr1=2.376  mband_py_lin_causal_ogw_avr1=2.423  mband_py_lin_causal_avr1=2.335  
+    15dB: Noisy=2.496  mband_py_lin_avr1=2.539  mband_py_lin_causal_ogw_avr1=2.694  mband_py_lin_causal_avr1=2.611  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  mband_py_lin_avr1=1.175  mband_py_lin_causal_ogw_avr1=1.164  mband_py_lin_causal_avr1=1.212  
+    0dB: Noisy=1.265  mband_py_lin_avr1=1.473  mband_py_lin_causal_ogw_avr1=1.462  mband_py_lin_causal_avr1=1.253  
+    5dB: Noisy=1.348  mband_py_lin_avr1=1.595  mband_py_lin_causal_ogw_avr1=1.585  mband_py_lin_causal_avr1=1.565  
+    10dB: Noisy=1.567  mband_py_lin_avr1=1.747  mband_py_lin_causal_ogw_avr1=1.737  mband_py_lin_causal_avr1=2.023  
+    15dB: Noisy=2.167  mband_py_lin_avr1=2.612  mband_py_lin_causal_ogw_avr1=2.570  mband_py_lin_causal_avr1=2.248  
+  SI_SDR:
+    -5dB: Noisy=-5.047  mband_py_lin_avr1=1.016  mband_py_lin_causal_ogw_avr1=0.496  mband_py_lin_causal_avr1=-3.023  
+    0dB: Noisy=-0.018  mband_py_lin_avr1=6.329  mband_py_lin_causal_ogw_avr1=6.122  mband_py_lin_causal_avr1=1.186  
+    5dB: Noisy=4.987  mband_py_lin_avr1=8.661  mband_py_lin_causal_ogw_avr1=8.751  mband_py_lin_causal_avr1=7.588  
+    10dB: Noisy=9.999  mband_py_lin_avr1=12.532  mband_py_lin_causal_ogw_avr1=12.764  mband_py_lin_causal_avr1=12.233  
+    15dB: Noisy=14.995  mband_py_lin_avr1=14.051  mband_py_lin_causal_ogw_avr1=14.397  mband_py_lin_causal_avr1=13.754  
+  STOI:
+    -5dB: Noisy=0.429  mband_py_lin_avr1=0.448  mband_py_lin_causal_ogw_avr1=0.441  mband_py_lin_causal_avr1=0.410  
+    0dB: Noisy=0.465  mband_py_lin_avr1=0.483  mband_py_lin_causal_ogw_avr1=0.483  mband_py_lin_causal_avr1=0.471  
+    5dB: Noisy=0.501  mband_py_lin_avr1=0.513  mband_py_lin_causal_ogw_avr1=0.511  mband_py_lin_causal_avr1=0.511  
+    10dB: Noisy=0.534  mband_py_lin_avr1=0.548  mband_py_lin_causal_ogw_avr1=0.546  mband_py_lin_causal_avr1=0.519  
+    15dB: Noisy=0.555  mband_py_lin_avr1=0.565  mband_py_lin_causal_ogw_avr1=0.564  mband_py_lin_causal_avr1=0.556  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  mband_py_lin_avr1=2.874  mband_py_lin_causal_ogw_avr1=2.670  mband_py_lin_causal_avr1=2.035  
+    0dB: Noisy=2.325  mband_py_lin_avr1=3.048  mband_py_lin_causal_ogw_avr1=2.859  mband_py_lin_causal_avr1=2.204  
+    5dB: Noisy=2.657  mband_py_lin_avr1=3.134  mband_py_lin_causal_ogw_avr1=3.167  mband_py_lin_causal_avr1=2.462  
+    10dB: Noisy=2.808  mband_py_lin_avr1=3.395  mband_py_lin_causal_ogw_avr1=3.301  mband_py_lin_causal_avr1=2.708  
+    15dB: Noisy=2.839  mband_py_lin_avr1=3.335  mband_py_lin_causal_ogw_avr1=3.380  mband_py_lin_causal_avr1=2.549  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  mband_py_lin_avr1=1.176  mband_py_lin_causal_ogw_avr1=1.176  mband_py_lin_causal_avr1=1.087  
+    0dB: Noisy=1.114  mband_py_lin_avr1=1.360  mband_py_lin_causal_ogw_avr1=1.346  mband_py_lin_causal_avr1=1.191  
+    5dB: Noisy=1.222  mband_py_lin_avr1=1.596  mband_py_lin_causal_ogw_avr1=1.566  mband_py_lin_causal_avr1=1.419  
+    10dB: Noisy=1.436  mband_py_lin_avr1=1.954  mband_py_lin_causal_ogw_avr1=1.905  mband_py_lin_causal_avr1=1.757  
+    15dB: Noisy=1.765  mband_py_lin_avr1=2.373  mband_py_lin_causal_ogw_avr1=2.284  mband_py_lin_causal_avr1=2.220  
+  SI_SDR:
+    -5dB: Noisy=-5.016  mband_py_lin_avr1=3.077  mband_py_lin_causal_ogw_avr1=3.450  mband_py_lin_causal_avr1=0.787  
+    0dB: Noisy=-0.017  mband_py_lin_avr1=7.422  mband_py_lin_causal_ogw_avr1=7.234  mband_py_lin_causal_avr1=5.187  
+    5dB: Noisy=5.011  mband_py_lin_avr1=10.138  mband_py_lin_causal_ogw_avr1=10.101  mband_py_lin_causal_avr1=8.929  
+    10dB: Noisy=10.002  mband_py_lin_avr1=12.469  mband_py_lin_causal_ogw_avr1=12.344  mband_py_lin_causal_avr1=12.450  
+    15dB: Noisy=14.999  mband_py_lin_avr1=14.199  mband_py_lin_causal_ogw_avr1=14.246  mband_py_lin_causal_avr1=15.011  
+  STOI:
+    -5dB: Noisy=0.602  mband_py_lin_avr1=0.619  mband_py_lin_causal_ogw_avr1=0.617  mband_py_lin_causal_avr1=0.537  
+    0dB: Noisy=0.661  mband_py_lin_avr1=0.677  mband_py_lin_causal_ogw_avr1=0.673  mband_py_lin_causal_avr1=0.601  
+    5dB: Noisy=0.715  mband_py_lin_avr1=0.725  mband_py_lin_causal_ogw_avr1=0.721  mband_py_lin_causal_avr1=0.675  
+    10dB: Noisy=0.771  mband_py_lin_avr1=0.773  mband_py_lin_causal_ogw_avr1=0.772  mband_py_lin_causal_avr1=0.743  
+    15dB: Noisy=0.805  mband_py_lin_avr1=0.804  mband_py_lin_causal_ogw_avr1=0.802  mband_py_lin_causal_avr1=0.786  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  mband_py_lin_avr1=2.693  mband_py_lin_causal_ogw_avr1=2.495  mband_py_lin_causal_avr1=1.934  
+    0dB: Noisy=2.429  mband_py_lin_avr1=2.963  mband_py_lin_causal_ogw_avr1=2.760  mband_py_lin_causal_avr1=2.060  
+    5dB: Noisy=2.769  mband_py_lin_avr1=2.894  mband_py_lin_causal_ogw_avr1=2.741  mband_py_lin_causal_avr1=2.321  
+    10dB: Noisy=2.817  mband_py_lin_avr1=2.863  mband_py_lin_causal_ogw_avr1=2.917  mband_py_lin_causal_avr1=2.614  
+    15dB: Noisy=2.904  mband_py_lin_avr1=3.186  mband_py_lin_causal_ogw_avr1=3.265  mband_py_lin_causal_avr1=2.730  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  mband_py_lin_avr1=1.136  mband_py_lin_causal_ogw_avr1=1.130  mband_py_lin_causal_avr1=1.116  
+    0dB: Noisy=1.116  mband_py_lin_avr1=1.289  mband_py_lin_causal_ogw_avr1=1.287  mband_py_lin_causal_avr1=1.174  
+    5dB: Noisy=1.217  mband_py_lin_avr1=1.509  mband_py_lin_causal_ogw_avr1=1.473  mband_py_lin_causal_avr1=1.383  
+    10dB: Noisy=1.399  mband_py_lin_avr1=1.841  mband_py_lin_causal_ogw_avr1=1.814  mband_py_lin_causal_avr1=1.756  
+    15dB: Noisy=1.700  mband_py_lin_avr1=2.275  mband_py_lin_causal_ogw_avr1=2.243  mband_py_lin_causal_avr1=2.092  
+  SI_SDR:
+    -5dB: Noisy=-5.044  mband_py_lin_avr1=0.704  mband_py_lin_causal_ogw_avr1=-0.040  mband_py_lin_causal_avr1=-2.707  
+    0dB: Noisy=-0.041  mband_py_lin_avr1=5.459  mband_py_lin_causal_ogw_avr1=5.254  mband_py_lin_causal_avr1=1.953  
+    5dB: Noisy=5.003  mband_py_lin_avr1=9.068  mband_py_lin_causal_ogw_avr1=8.573  mband_py_lin_causal_avr1=6.855  
+    10dB: Noisy=10.007  mband_py_lin_avr1=11.681  mband_py_lin_causal_ogw_avr1=11.325  mband_py_lin_causal_avr1=10.694  
+    15dB: Noisy=15.001  mband_py_lin_avr1=13.760  mband_py_lin_causal_ogw_avr1=13.437  mband_py_lin_causal_avr1=13.245  
+  STOI:
+    -5dB: Noisy=0.552  mband_py_lin_avr1=0.567  mband_py_lin_causal_ogw_avr1=0.557  mband_py_lin_causal_avr1=0.582  
+    0dB: Noisy=0.639  mband_py_lin_avr1=0.656  mband_py_lin_causal_ogw_avr1=0.650  mband_py_lin_causal_avr1=0.647  
+    5dB: Noisy=0.709  mband_py_lin_avr1=0.727  mband_py_lin_causal_ogw_avr1=0.720  mband_py_lin_causal_avr1=0.729  
+    10dB: Noisy=0.783  mband_py_lin_avr1=0.795  mband_py_lin_causal_ogw_avr1=0.789  mband_py_lin_causal_avr1=0.798  
+    15dB: Noisy=0.832  mband_py_lin_avr1=0.838  mband_py_lin_causal_ogw_avr1=0.833  mband_py_lin_causal_avr1=0.829  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  mband_py_lin_avr1=2.388  mband_py_lin_causal_ogw_avr1=1.895  mband_py_lin_causal_avr1=2.372  
+    0dB: Noisy=2.392  mband_py_lin_avr1=2.558  mband_py_lin_causal_ogw_avr1=2.339  mband_py_lin_causal_avr1=2.472  
+    5dB: Noisy=2.492  mband_py_lin_avr1=2.697  mband_py_lin_causal_ogw_avr1=2.575  mband_py_lin_causal_avr1=2.706  
+    10dB: Noisy=2.693  mband_py_lin_avr1=2.894  mband_py_lin_causal_ogw_avr1=2.977  mband_py_lin_causal_avr1=3.062  
+    15dB: Noisy=3.030  mband_py_lin_avr1=3.492  mband_py_lin_causal_ogw_avr1=3.481  mband_py_lin_causal_avr1=3.268  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_py_lin_avr1=1.096  mband_py_lin_causal_ogw_avr1=1.093  mband_py_lin_causal_avr1=1.134  
+    0dB: Noisy=1.086  mband_py_lin_avr1=1.172  mband_py_lin_causal_ogw_avr1=1.157  mband_py_lin_causal_avr1=1.291  
+    5dB: Noisy=1.172  mband_py_lin_avr1=1.344  mband_py_lin_causal_ogw_avr1=1.314  mband_py_lin_causal_avr1=1.487  
+    10dB: Noisy=1.365  mband_py_lin_avr1=1.625  mband_py_lin_causal_ogw_avr1=1.581  mband_py_lin_causal_avr1=1.831  
+    15dB: Noisy=1.630  mband_py_lin_avr1=1.920  mband_py_lin_causal_ogw_avr1=1.868  mband_py_lin_causal_avr1=2.280  
+  SI_SDR:
+    -5dB: Noisy=-4.982  mband_py_lin_avr1=-0.518  mband_py_lin_causal_ogw_avr1=-0.706  mband_py_lin_causal_avr1=-0.063  
+    0dB: Noisy=-0.047  mband_py_lin_avr1=3.529  mband_py_lin_causal_ogw_avr1=3.250  mband_py_lin_causal_avr1=4.671  
+    5dB: Noisy=4.985  mband_py_lin_avr1=6.756  mband_py_lin_causal_ogw_avr1=6.432  mband_py_lin_causal_avr1=9.170  
+    10dB: Noisy=9.995  mband_py_lin_avr1=10.721  mband_py_lin_causal_ogw_avr1=10.540  mband_py_lin_causal_avr1=12.802  
+    15dB: Noisy=14.998  mband_py_lin_avr1=13.596  mband_py_lin_causal_ogw_avr1=13.494  mband_py_lin_causal_avr1=14.830  
+  STOI:
+    -5dB: Noisy=0.605  mband_py_lin_avr1=0.609  mband_py_lin_causal_ogw_avr1=0.602  mband_py_lin_causal_avr1=0.617  
+    0dB: Noisy=0.673  mband_py_lin_avr1=0.676  mband_py_lin_causal_ogw_avr1=0.670  mband_py_lin_causal_avr1=0.691  
+    5dB: Noisy=0.723  mband_py_lin_avr1=0.728  mband_py_lin_causal_ogw_avr1=0.723  mband_py_lin_causal_avr1=0.745  
+    10dB: Noisy=0.776  mband_py_lin_avr1=0.779  mband_py_lin_causal_ogw_avr1=0.775  mband_py_lin_causal_avr1=0.787  
+    15dB: Noisy=0.814  mband_py_lin_avr1=0.810  mband_py_lin_causal_ogw_avr1=0.807  mband_py_lin_causal_avr1=0.826  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  mband_py_lin_avr1=2.429  mband_py_lin_causal_ogw_avr1=2.189  mband_py_lin_causal_avr1=2.279  
+    0dB: Noisy=2.366  mband_py_lin_avr1=2.272  mband_py_lin_causal_ogw_avr1=2.199  mband_py_lin_causal_avr1=2.405  
+    5dB: Noisy=2.439  mband_py_lin_avr1=2.446  mband_py_lin_causal_ogw_avr1=2.428  mband_py_lin_causal_avr1=2.559  
+    10dB: Noisy=2.589  mband_py_lin_avr1=2.730  mband_py_lin_causal_ogw_avr1=3.026  mband_py_lin_causal_avr1=2.881  
+    15dB: Noisy=2.651  mband_py_lin_avr1=3.003  mband_py_lin_causal_ogw_avr1=3.040  mband_py_lin_causal_avr1=2.996  
+
+========================================================================================================================

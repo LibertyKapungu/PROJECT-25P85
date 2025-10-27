@@ -105,108 +105,6 @@ def mel(N, low, high):
     
     return lower, center, upper
 
-def frame(sdata, window, frmshift, offset=0, trunc=0):
-    """Frame signal into overlapping windows
-    
-    This function places sampled data in vector sdata into a matrix of
-    frame data.  The input sampled data sdata must be a vector.  The
-    window is a windowing vector (eg, hamming) applied to each frame of
-    sampled data and must be specified, because it defines the length
-    of each frame in samples.  The optional frmshift parameter
-    specifies the number of samples to shift between frames, and if not
-    specified defaults to the window size (which implies no overlap).
-    The optional offset specifies the offset from the first sample to
-    be used for processing.  If not specified, it is set to 0, which
-    means that the first sample of the sdata is the first sample of the
-    frame data.  The value of offset can be negative, in which case
-    initial padding of 0 samples is done.  The optional argument trunc
-    is a flag that specifies that sample data at the end should be 
-    truncated so that the last frame contains only valid data from the
-    samples and no zero padding is done at the end of the sample data
-    to fill a frame.  This means some sample data at the end will be
-    lost.  The default is not to truncate, but to pad with zero
-    samples until all sample data is represented in a frame at the end.
-    
-    """
-
-    if sdata.ndim != 1:
-        raise ValueError("frame: sdata must be a 1D vector")
-    if window.ndim != 1:
-        raise ValueError("frame: window must be a 1D vector")
-
-    sdata = np.array(sdata).flatten()
-    ndata = len(sdata)
-    window = np.array(window).flatten()
-    nwind = len(window)
-    
-    if frmshift <= 0:
-        raise ValueError('frame: shift must be positive')
-    
-    # Apply offset
-    if offset > 0:
-        sdata = sdata[offset:max(offset, ndata)]
-        ndata = len(sdata)
-    elif offset < 0:
-        sdata = np.concatenate([np.zeros(abs(offset)), sdata])
-        ndata = len(sdata)
-    
-    # Determine number of frames
-    if trunc:
-        nframes = int(np.floor((ndata - nwind) / frmshift + 1))
-    else:
-        nframes = int(np.ceil(ndata / frmshift))
-    
-    # Frame the data
-    tdata = np.zeros((nwind, nframes))
-    dowind = not np.all(window == 1)
-    ixstrt = 0
-    fstart = []
-
-    for frm in range(nframes):
-        ixend = min(ndata, ixstrt + nwind)
-        ixlen = ixend - ixstrt
-        tdata[:ixlen, frm] = sdata[ixstrt:ixstrt + ixlen]
-        fstart.append(ixstrt)
-        ixstrt += frmshift
-
-    if offset != 0:
-        fstart = [i + offset for i in fstart]
-    
-    # Apply window
-    if dowind:
-        fdata = tdata * window.reshape(-1, 1)
-    else:
-        fdata = tdata
-
-    return fdata, fstart
-
-def calculate_delta_factors(lobin, hibin, fs, Nband, fftl):
-    """
-    Calculate frequency-dependent delta factors based on Loizou Eq. 5.62.
-    Parameters:
-    - lobin: array-like, lower FFT bin indices for each band (not used here but kept for interface consistency)
-    - hibin: array-like, upper FFT bin indices for each band
-    - fs: sampling frequency in Hz
-    - Nband: number of frequency bands
-    - fftl: FFT length
-
-    Returns:
-    - delta_factors: NumPy array of shape (Nband,) with delta values per band
-    """
-    hibin = np.array(hibin) # Ensure hibin is a NumPy array for vectorized operations
-    upper_freq_hz = hibin * fs / (2 * fftl) # Convert FFT bin indices to frequency in Hz using Nyquist scaling
-
-    # Apply Loizou's rule:
-    # - 1.0 for f <= 1000 Hz
-    # - 2.5 for 1000 < f <= (fs/2 - 1000)
-    # - 1.5 for f > (fs/2 - 1000)
-    delta_factors = np.where(
-        upper_freq_hz <= 1000,
-        1.0,
-        np.where(upper_freq_hz <= (fs / 2 - 1000), 2.5, 1.5)
-    )
-    return delta_factors
-
 def mband(
         noisy_audio: torch.Tensor,
         fs: int,
@@ -366,15 +264,13 @@ def mband(
             x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 
         # Weighted spectral estimate 
-        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66 # Sum = 1.0  # originally 0.09, 0.25, 0.66 for histry emphasis   Wn2, Wn1, Wn0 = 0.15, 0.35, 0.50 balaced 0.12, 0.30, 0.58 
+        Wn2, Wn1, Wn0 = 0.12, 0.30, 0.58  # Sum = 1.0  # originally 0.09, 0.25, 0.66 for history emphasis   Wn2, Wn1, Wn0 = 0.15, 0.35, 0.50 balaced 0.12, 0.30, 0.58 
         x_magsm_filtered = x_magsm.copy()  # Create a copy to avoid in-place overwriting
         if nframes > 1:
             x_magsm_filtered[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
             for i in range(2, nframes):
                 x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_magsm[:, i])  # changed  Wn0 * x_mag[:, i])  SHOULD BE x_magsm[:, i]
         x_magsm = x_magsm_filtered  # Replace x_magsm with filtered version
-
-        # After line 248 (after x_magsm = x_magsm_filtered)
 
         # Verify no NaN/Inf values
         assert not np.any(np.isnan(x_magsm)), "NaN detected in x_magsm"
