@@ -44,7 +44,7 @@ class MultiSNRAudioEnhancementComparator:
         
         if len(self.method_names) < 2:
             raise ValueError("Must provide at least 2 methods for comparison")
-        if len(self.method_names) > 8:
+        if len(self.method_names) > 14:
             raise ValueError("Maximum 8 methods can be compared")
         
         # Setup output folder
@@ -748,19 +748,33 @@ if __name__ == "__main__":
         # 'GTCRN_SS_delta': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_WF_ss\GTCRN_MWF_merged_[{snr}]dB.csv",
         # 'GTCRN_WF': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
-        'specsub': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\specsub\specsub_[{snr}]dB_MERGED.csv",
+        
+        
+        #'specsub': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\specsub\specsub_[{snr}]dB_MERGED.csv",
         #'ss_rdc': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\ss_rdc\ss_rdc_[{snr}]dB_MERGED.csv",
-        'ss_rdc_og': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\ss_rdc_og\ss_rdc_og_[{snr}]dB_MERGED.csv",
-        'mband_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR0\mband_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        'mband_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR1\mband_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_log_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR0\mband_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        'mband_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR1\mband_N6_log_AVR1_[{snr}]dB_MERGED.csv",
+        #'ss_rdc_og': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\ss_rdc_og\ss_rdc_og_[{snr}]dB_MERGED.csv",
+        
+        # MATLAB 
+        # 'mband_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR0\mband_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
+        # 'mband_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR1\mband_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_log_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR0\mband_N6_log_AVR0_[{snr}]dB_MERGED.csv",
+        #'mband_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR1\mband_N6_log_AVR1_[{snr}]dB_MERGED.csv",
         'mband_mel_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR0\mband_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
         'mband_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR1\mband_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
+
+        # Python transalation mband
+        #'mband_py_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
+        # 'mband_py_lin_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
+        # 'mband_py_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR0_8\mband_py_N6_log_AVR0_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
+        'mband_py_mel_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR0_8\mband_py_N6_mel_AVR0_8_[{snr}]dB_MERGED.csv",
+        'mband_py_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
+
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_compare_all_algs"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\EXP1p1a\mband_av10_mel_8"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(

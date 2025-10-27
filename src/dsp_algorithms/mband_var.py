@@ -264,7 +264,7 @@ def mband(
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
 
         for i in range(1, n_frames):
-            x_tmp1 = np.concatenate([x_mag[frame_samples - overla_samples :, i - 1], x_mag[:, i]])
+            x_tmp1 = np.concatenate([x_mag[frame_samples - overla_samples :, i - 1], x_mag[:, i]])  # Spelling error overlap
             x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
             x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 

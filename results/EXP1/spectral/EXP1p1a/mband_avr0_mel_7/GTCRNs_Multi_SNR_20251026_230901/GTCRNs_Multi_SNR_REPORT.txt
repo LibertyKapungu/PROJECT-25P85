@@ -1,0 +1,667 @@
+========================================================================================================================
+EXPERIMENT: GTCRNS_MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, mband_mel_avr0, mband_py_mel_avr0_7
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\EXP1p1a\mband_avr0_mel_7\GTCRNs_Multi_SNR_20251026_230901
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  mband_mel_avr0=1.1064  mband_py_mel_avr0_7=1.1100  
+                SI_SDR:  Noisy=-4.9899  mband_mel_avr0=-0.7418  mband_py_mel_avr0_7=-0.7875  
+                  STOI:  Noisy=0.5866  mband_mel_avr0=0.5748  mband_py_mel_avr0_7=0.5755  
+       DNSMOS_p808_mos:  Noisy=2.4363  mband_mel_avr0=2.5481  mband_py_mel_avr0_7=2.6271  
+        DNSMOS_mos_sig:  Noisy=3.5517  mband_mel_avr0=3.0306  mband_py_mel_avr0_7=3.0422  
+        DNSMOS_mos_bak:  Noisy=1.6733  mband_mel_avr0=1.8218  mband_py_mel_avr0_7=1.8919  
+        DNSMOS_mos_ovr:  Noisy=1.9706  mband_mel_avr0=1.8397  mband_py_mel_avr0_7=1.8869  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  mband_mel_avr0=1.1834  mband_py_mel_avr0_7=1.1923  
+                SI_SDR:  Noisy=-0.0263  mband_mel_avr0=3.9957  mband_py_mel_avr0_7=4.0819  
+                  STOI:  Noisy=0.6549  mband_mel_avr0=0.6477  mband_py_mel_avr0_7=0.6475  
+       DNSMOS_p808_mos:  Noisy=2.5694  mband_mel_avr0=2.6204  mband_py_mel_avr0_7=2.6949  
+        DNSMOS_mos_sig:  Noisy=3.8877  mband_mel_avr0=3.1264  mband_py_mel_avr0_7=3.1340  
+        DNSMOS_mos_bak:  Noisy=1.9030  mband_mel_avr0=2.0459  mband_py_mel_avr0_7=2.0226  
+        DNSMOS_mos_ovr:  Noisy=2.2631  mband_mel_avr0=1.9877  mband_py_mel_avr0_7=1.9953  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  mband_mel_avr0=1.3532  mband_py_mel_avr0_7=1.3683  
+                SI_SDR:  Noisy=4.9955  mband_mel_avr0=8.4379  mband_py_mel_avr0_7=8.4369  
+                  STOI:  Noisy=0.7153  mband_mel_avr0=0.7201  mband_py_mel_avr0_7=0.7195  
+       DNSMOS_p808_mos:  Noisy=2.7331  mband_mel_avr0=2.7243  mband_py_mel_avr0_7=2.7438  
+        DNSMOS_mos_sig:  Noisy=3.9827  mband_mel_avr0=3.2987  mband_py_mel_avr0_7=3.1311  
+        DNSMOS_mos_bak:  Noisy=2.1026  mband_mel_avr0=2.1608  mband_py_mel_avr0_7=2.2170  
+        DNSMOS_mos_ovr:  Noisy=2.4361  mband_mel_avr0=2.1722  mband_py_mel_avr0_7=2.0838  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  mband_mel_avr0=1.6101  mband_py_mel_avr0_7=1.6465  
+                SI_SDR:  Noisy=9.9991  mband_mel_avr0=12.0428  mband_py_mel_avr0_7=12.4722  
+                  STOI:  Noisy=0.7740  mband_mel_avr0=0.7759  mband_py_mel_avr0_7=0.7770  
+       DNSMOS_p808_mos:  Noisy=2.9111  mband_mel_avr0=2.8542  mband_py_mel_avr0_7=2.8773  
+        DNSMOS_mos_sig:  Noisy=4.0784  mband_mel_avr0=3.5216  mband_py_mel_avr0_7=3.3600  
+        DNSMOS_mos_bak:  Noisy=2.3277  mband_mel_avr0=2.3366  mband_py_mel_avr0_7=2.4001  
+        DNSMOS_mos_ovr:  Noisy=2.6382  mband_mel_avr0=2.3742  mband_py_mel_avr0_7=2.3402  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  mband_mel_avr0=1.9785  mband_py_mel_avr0_7=1.9889  
+                SI_SDR:  Noisy=14.9989  mband_mel_avr0=15.4862  mband_py_mel_avr0_7=15.5276  
+                  STOI:  Noisy=0.8137  mband_mel_avr0=0.8187  mband_py_mel_avr0_7=0.8199  
+       DNSMOS_p808_mos:  Noisy=3.0481  mband_mel_avr0=3.0204  mband_py_mel_avr0_7=3.0672  
+        DNSMOS_mos_sig:  Noisy=4.0454  mband_mel_avr0=3.7436  mband_py_mel_avr0_7=3.7273  
+        DNSMOS_mos_bak:  Noisy=2.5180  mband_mel_avr0=2.6215  mband_py_mel_avr0_7=2.7272  
+        DNSMOS_mos_ovr:  Noisy=2.7482  mband_mel_avr0=2.6701  mband_py_mel_avr0_7=2.7246  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  mband_mel_avr0=1.1064 (+0.0406, +3.81%)  |  mband_py_mel_avr0_7=1.1100 (+0.0443, +4.16%)
+                SI_SDR: Noisy=-4.9899  |  mband_mel_avr0=-0.7418 (+4.2481, +85.13%)  |  mband_py_mel_avr0_7=-0.7875 (+4.2024, +84.22%)
+                  STOI: Noisy=0.5866  |  mband_mel_avr0=0.5748 (-0.0117, -2.00%)  |  mband_py_mel_avr0_7=0.5755 (-0.0111, -1.89%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  mband_mel_avr0=2.5481 (+0.1119, +4.59%)  |  mband_py_mel_avr0_7=2.6271 (+0.1908, +7.83%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  mband_mel_avr0=3.0306 (-0.5211, -14.67%)  |  mband_py_mel_avr0_7=3.0422 (-0.5094, -14.34%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  mband_mel_avr0=1.8218 (+0.1484, +8.87%)  |  mband_py_mel_avr0_7=1.8919 (+0.2186, +13.06%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  mband_mel_avr0=1.8397 (-0.1309, -6.64%)  |  mband_py_mel_avr0_7=1.8869 (-0.0837, -4.25%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  mband_mel_avr0=1.1834 (+0.0897, +8.20%)  |  mband_py_mel_avr0_7=1.1923 (+0.0986, +9.02%)
+                SI_SDR: Noisy=-0.0263  |  mband_mel_avr0=3.9957 (+4.0220, +15316.39%)  |  mband_py_mel_avr0_7=4.0819 (+4.1082, +15644.70%)
+                  STOI: Noisy=0.6549  |  mband_mel_avr0=0.6477 (-0.0072, -1.10%)  |  mband_py_mel_avr0_7=0.6475 (-0.0074, -1.14%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  mband_mel_avr0=2.6204 (+0.0510, +1.98%)  |  mband_py_mel_avr0_7=2.6949 (+0.1256, +4.89%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  mband_mel_avr0=3.1264 (-0.7612, -19.58%)  |  mband_py_mel_avr0_7=3.1340 (-0.7537, -19.39%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  mband_mel_avr0=2.0459 (+0.1429, +7.51%)  |  mband_py_mel_avr0_7=2.0226 (+0.1197, +6.29%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  mband_mel_avr0=1.9877 (-0.2753, -12.17%)  |  mband_py_mel_avr0_7=1.9953 (-0.2677, -11.83%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  mband_mel_avr0=1.3532 (+0.1799, +15.33%)  |  mband_py_mel_avr0_7=1.3683 (+0.1950, +16.62%)
+                SI_SDR: Noisy=4.9955  |  mband_mel_avr0=8.4379 (+3.4424, +68.91%)  |  mband_py_mel_avr0_7=8.4369 (+3.4413, +68.89%)
+                  STOI: Noisy=0.7153  |  mband_mel_avr0=0.7201 (+0.0049, +0.68%)  |  mband_py_mel_avr0_7=0.7195 (+0.0042, +0.59%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  mband_mel_avr0=2.7243 (-0.0088, -0.32%)  |  mband_py_mel_avr0_7=2.7438 (+0.0107, +0.39%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  mband_mel_avr0=3.2987 (-0.6840, -17.17%)  |  mband_py_mel_avr0_7=3.1311 (-0.8516, -21.38%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  mband_mel_avr0=2.1608 (+0.0581, +2.77%)  |  mband_py_mel_avr0_7=2.2170 (+0.1144, +5.44%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  mband_mel_avr0=2.1722 (-0.2639, -10.83%)  |  mband_py_mel_avr0_7=2.0838 (-0.3524, -14.46%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  mband_mel_avr0=1.6101 (+0.2655, +19.74%)  |  mband_py_mel_avr0_7=1.6465 (+0.3019, +22.45%)
+                SI_SDR: Noisy=9.9991  |  mband_mel_avr0=12.0428 (+2.0437, +20.44%)  |  mband_py_mel_avr0_7=12.4722 (+2.4731, +24.73%)
+                  STOI: Noisy=0.7740  |  mband_mel_avr0=0.7759 (+0.0019, +0.25%)  |  mband_py_mel_avr0_7=0.7770 (+0.0030, +0.39%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  mband_mel_avr0=2.8542 (-0.0569, -1.95%)  |  mband_py_mel_avr0_7=2.8773 (-0.0338, -1.16%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  mband_mel_avr0=3.5216 (-0.5568, -13.65%)  |  mband_py_mel_avr0_7=3.3600 (-0.7184, -17.61%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  mband_mel_avr0=2.3366 (+0.0089, +0.38%)  |  mband_py_mel_avr0_7=2.4001 (+0.0724, +3.11%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  mband_mel_avr0=2.3742 (-0.2641, -10.01%)  |  mband_py_mel_avr0_7=2.3402 (-0.2980, -11.30%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  mband_mel_avr0=1.9785 (+0.3316, +20.14%)  |  mband_py_mel_avr0_7=1.9889 (+0.3421, +20.77%)
+                SI_SDR: Noisy=14.9989  |  mband_mel_avr0=15.4862 (+0.4873, +3.25%)  |  mband_py_mel_avr0_7=15.5276 (+0.5287, +3.52%)
+                  STOI: Noisy=0.8137  |  mband_mel_avr0=0.8187 (+0.0049, +0.60%)  |  mband_py_mel_avr0_7=0.8199 (+0.0061, +0.75%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  mband_mel_avr0=3.0204 (-0.0278, -0.91%)  |  mband_py_mel_avr0_7=3.0672 (+0.0190, +0.62%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  mband_mel_avr0=3.7436 (-0.3017, -7.46%)  |  mband_py_mel_avr0_7=3.7273 (-0.3180, -7.86%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  mband_mel_avr0=2.6215 (+0.1035, +4.11%)  |  mband_py_mel_avr0_7=2.7272 (+0.2092, +8.31%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  mband_mel_avr0=2.6701 (-0.0781, -2.84%)  |  mband_py_mel_avr0_7=2.7246 (-0.0236, -0.86%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_mel_avr0:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_mel_avr0:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_mel_avr0:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_mel_avr0:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_mel_avr0:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_mel_avr0:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_mel_avr0:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_mel_avr0:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_mel_avr0:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_mel_avr0:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_mel_avr0:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr0_7:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_mel_avr0=1.082  mband_py_mel_avr0_7=1.061  
+    0dB: Noisy=1.067  mband_mel_avr0=1.114  mband_py_mel_avr0_7=1.127  
+    5dB: Noisy=1.118  mband_mel_avr0=1.265  mband_py_mel_avr0_7=1.247  
+    10dB: Noisy=1.257  mband_mel_avr0=1.474  mband_py_mel_avr0_7=1.602  
+    15dB: Noisy=1.563  mband_mel_avr0=1.871  mband_py_mel_avr0_7=1.897  
+  SI_SDR:
+    -5dB: Noisy=-4.823  mband_mel_avr0=-3.385  mband_py_mel_avr0_7=-3.223  
+    0dB: Noisy=-0.062  mband_mel_avr0=1.710  mband_py_mel_avr0_7=1.949  
+    5dB: Noisy=4.983  mband_mel_avr0=6.857  mband_py_mel_avr0_7=7.209  
+    10dB: Noisy=10.006  mband_mel_avr0=10.889  mband_py_mel_avr0_7=11.207  
+    15dB: Noisy=15.011  mband_mel_avr0=14.588  mband_py_mel_avr0_7=14.925  
+  STOI:
+    -5dB: Noisy=0.578  mband_mel_avr0=0.542  mband_py_mel_avr0_7=0.538  
+    0dB: Noisy=0.666  mband_mel_avr0=0.628  mband_py_mel_avr0_7=0.653  
+    5dB: Noisy=0.747  mband_mel_avr0=0.743  mband_py_mel_avr0_7=0.743  
+    10dB: Noisy=0.818  mband_mel_avr0=0.827  mband_py_mel_avr0_7=0.829  
+    15dB: Noisy=0.871  mband_mel_avr0=0.875  mband_py_mel_avr0_7=0.877  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  mband_mel_avr0=1.804  mband_py_mel_avr0_7=1.702  
+    0dB: Noisy=2.516  mband_mel_avr0=1.840  mband_py_mel_avr0_7=1.829  
+    5dB: Noisy=2.776  mband_mel_avr0=2.183  mband_py_mel_avr0_7=1.675  
+    10dB: Noisy=2.872  mband_mel_avr0=2.201  mband_py_mel_avr0_7=2.258  
+    15dB: Noisy=2.879  mband_mel_avr0=2.927  mband_py_mel_avr0_7=2.793  
+
+>>> Car <<<
+  PESQ:
+    -5dB: Noisy=1.053  mband_mel_avr0=1.096  mband_py_mel_avr0_7=1.104  
+    0dB: Noisy=1.077  mband_mel_avr0=1.208  mband_py_mel_avr0_7=1.212  
+    5dB: Noisy=1.152  mband_mel_avr0=1.401  mband_py_mel_avr0_7=1.372  
+    10dB: Noisy=1.324  mband_mel_avr0=1.682  mband_py_mel_avr0_7=1.753  
+    15dB: Noisy=1.635  mband_mel_avr0=2.029  mband_py_mel_avr0_7=2.071  
+  SI_SDR:
+    -5dB: Noisy=-4.980  mband_mel_avr0=1.233  mband_py_mel_avr0_7=1.959  
+    0dB: Noisy=0.013  mband_mel_avr0=5.826  mband_py_mel_avr0_7=6.259  
+    5dB: Noisy=4.994  mband_mel_avr0=9.907  mband_py_mel_avr0_7=9.778  
+    10dB: Noisy=10.002  mband_mel_avr0=13.683  mband_py_mel_avr0_7=13.576  
+    15dB: Noisy=14.997  mband_mel_avr0=16.543  mband_py_mel_avr0_7=16.373  
+  STOI:
+    -5dB: Noisy=0.654  mband_mel_avr0=0.651  mband_py_mel_avr0_7=0.640  
+    0dB: Noisy=0.705  mband_mel_avr0=0.701  mband_py_mel_avr0_7=0.692  
+    5dB: Noisy=0.750  mband_mel_avr0=0.756  mband_py_mel_avr0_7=0.750  
+    10dB: Noisy=0.797  mband_mel_avr0=0.797  mband_py_mel_avr0_7=0.793  
+    15dB: Noisy=0.830  mband_mel_avr0=0.836  mband_py_mel_avr0_7=0.838  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.276  mband_mel_avr0=1.847  mband_py_mel_avr0_7=1.812  
+    0dB: Noisy=2.507  mband_mel_avr0=2.075  mband_py_mel_avr0_7=2.049  
+    5dB: Noisy=2.471  mband_mel_avr0=2.230  mband_py_mel_avr0_7=1.879  
+    10dB: Noisy=2.755  mband_mel_avr0=2.545  mband_py_mel_avr0_7=2.382  
+    15dB: Noisy=2.913  mband_mel_avr0=2.808  mband_py_mel_avr0_7=3.008  
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.043  mband_mel_avr0=1.056  mband_py_mel_avr0_7=1.064  
+    0dB: Noisy=1.062  mband_mel_avr0=1.097  mband_py_mel_avr0_7=1.109  
+    5dB: Noisy=1.116  mband_mel_avr0=1.196  mband_py_mel_avr0_7=1.223  
+    10dB: Noisy=1.233  mband_mel_avr0=1.425  mband_py_mel_avr0_7=1.443  
+    15dB: Noisy=1.491  mband_mel_avr0=1.737  mband_py_mel_avr0_7=1.746  
+  SI_SDR:
+    -5dB: Noisy=-4.988  mband_mel_avr0=-2.303  mband_py_mel_avr0_7=-2.379  
+    0dB: Noisy=-0.023  mband_mel_avr0=2.612  mband_py_mel_avr0_7=3.021  
+    5dB: Noisy=4.999  mband_mel_avr0=7.680  mband_py_mel_avr0_7=7.659  
+    10dB: Noisy=9.995  mband_mel_avr0=11.723  mband_py_mel_avr0_7=12.251  
+    15dB: Noisy=14.999  mband_mel_avr0=15.589  mband_py_mel_avr0_7=15.614  
+  STOI:
+    -5dB: Noisy=0.565  mband_mel_avr0=0.538  mband_py_mel_avr0_7=0.551  
+    0dB: Noisy=0.645  mband_mel_avr0=0.639  mband_py_mel_avr0_7=0.640  
+    5dB: Noisy=0.726  mband_mel_avr0=0.726  mband_py_mel_avr0_7=0.729  
+    10dB: Noisy=0.795  mband_mel_avr0=0.792  mband_py_mel_avr0_7=0.797  
+    15dB: Noisy=0.842  mband_mel_avr0=0.843  mband_py_mel_avr0_7=0.845  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.706  mband_mel_avr0=1.544  mband_py_mel_avr0_7=1.691  
+    0dB: Noisy=1.800  mband_mel_avr0=1.654  mband_py_mel_avr0_7=1.777  
+    5dB: Noisy=2.079  mband_mel_avr0=1.838  mband_py_mel_avr0_7=1.882  
+    10dB: Noisy=2.408  mband_mel_avr0=1.960  mband_py_mel_avr0_7=1.911  
+    15dB: Noisy=2.496  mband_mel_avr0=2.211  mband_py_mel_avr0_7=2.273  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  mband_mel_avr0=1.237  mband_py_mel_avr0_7=1.256  
+    0dB: Noisy=1.265  mband_mel_avr0=1.284  mband_py_mel_avr0_7=1.420  
+    5dB: Noisy=1.348  mband_mel_avr0=1.490  mband_py_mel_avr0_7=1.481  
+    10dB: Noisy=1.567  mband_mel_avr0=1.754  mband_py_mel_avr0_7=1.744  
+    15dB: Noisy=2.167  mband_mel_avr0=2.221  mband_py_mel_avr0_7=2.088  
+  SI_SDR:
+    -5dB: Noisy=-5.047  mband_mel_avr0=-0.577  mband_py_mel_avr0_7=-2.160  
+    0dB: Noisy=-0.018  mband_mel_avr0=3.966  mband_py_mel_avr0_7=2.953  
+    5dB: Noisy=4.987  mband_mel_avr0=9.751  mband_py_mel_avr0_7=8.930  
+    10dB: Noisy=9.999  mband_mel_avr0=12.329  mband_py_mel_avr0_7=12.450  
+    15dB: Noisy=14.995  mband_mel_avr0=16.429  mband_py_mel_avr0_7=16.388  
+  STOI:
+    -5dB: Noisy=0.429  mband_mel_avr0=0.424  mband_py_mel_avr0_7=0.424  
+    0dB: Noisy=0.465  mband_mel_avr0=0.483  mband_py_mel_avr0_7=0.480  
+    5dB: Noisy=0.501  mband_mel_avr0=0.529  mband_py_mel_avr0_7=0.495  
+    10dB: Noisy=0.534  mband_mel_avr0=0.564  mband_py_mel_avr0_7=0.537  
+    15dB: Noisy=0.555  mband_mel_avr0=0.591  mband_py_mel_avr0_7=0.583  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  mband_mel_avr0=1.945  mband_py_mel_avr0_7=2.271  
+    0dB: Noisy=2.325  mband_mel_avr0=2.358  mband_py_mel_avr0_7=2.279  
+    5dB: Noisy=2.657  mband_mel_avr0=2.797  mband_py_mel_avr0_7=2.347  
+    10dB: Noisy=2.808  mband_mel_avr0=2.650  mband_py_mel_avr0_7=2.354  
+    15dB: Noisy=2.839  mband_mel_avr0=3.033  mband_py_mel_avr0_7=2.630  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  mband_mel_avr0=1.184  mband_py_mel_avr0_7=1.168  
+    0dB: Noisy=1.114  mband_mel_avr0=1.323  mband_py_mel_avr0_7=1.290  
+    5dB: Noisy=1.222  mband_mel_avr0=1.555  mband_py_mel_avr0_7=1.595  
+    10dB: Noisy=1.436  mband_mel_avr0=1.843  mband_py_mel_avr0_7=1.905  
+    15dB: Noisy=1.765  mband_mel_avr0=2.324  mband_py_mel_avr0_7=2.305  
+  SI_SDR:
+    -5dB: Noisy=-5.016  mband_mel_avr0=3.554  mband_py_mel_avr0_7=3.063  
+    0dB: Noisy=-0.017  mband_mel_avr0=7.181  mband_py_mel_avr0_7=7.312  
+    5dB: Noisy=5.011  mband_mel_avr0=11.090  mband_py_mel_avr0_7=10.983  
+    10dB: Noisy=10.002  mband_mel_avr0=13.522  mband_py_mel_avr0_7=13.929  
+    15dB: Noisy=14.999  mband_mel_avr0=16.455  mband_py_mel_avr0_7=16.138  
+  STOI:
+    -5dB: Noisy=0.602  mband_mel_avr0=0.612  mband_py_mel_avr0_7=0.614  
+    0dB: Noisy=0.661  mband_mel_avr0=0.668  mband_py_mel_avr0_7=0.666  
+    5dB: Noisy=0.715  mband_mel_avr0=0.730  mband_py_mel_avr0_7=0.731  
+    10dB: Noisy=0.771  mband_mel_avr0=0.772  mband_py_mel_avr0_7=0.773  
+    15dB: Noisy=0.805  mband_mel_avr0=0.812  mband_py_mel_avr0_7=0.811  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  mband_mel_avr0=2.489  mband_py_mel_avr0_7=2.459  
+    0dB: Noisy=2.429  mband_mel_avr0=2.490  mband_py_mel_avr0_7=2.381  
+    5dB: Noisy=2.769  mband_mel_avr0=2.461  mband_py_mel_avr0_7=2.428  
+    10dB: Noisy=2.817  mband_mel_avr0=2.442  mband_py_mel_avr0_7=2.629  
+    15dB: Noisy=2.904  mband_mel_avr0=2.917  mband_py_mel_avr0_7=3.163  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  mband_mel_avr0=1.135  mband_py_mel_avr0_7=1.139  
+    0dB: Noisy=1.116  mband_mel_avr0=1.238  mband_py_mel_avr0_7=1.249  
+    5dB: Noisy=1.217  mband_mel_avr0=1.461  mband_py_mel_avr0_7=1.490  
+    10dB: Noisy=1.399  mband_mel_avr0=1.774  mband_py_mel_avr0_7=1.821  
+    15dB: Noisy=1.700  mband_mel_avr0=2.200  mband_py_mel_avr0_7=2.235  
+  SI_SDR:
+    -5dB: Noisy=-5.044  mband_mel_avr0=-0.536  mband_py_mel_avr0_7=-0.250  
+    0dB: Noisy=-0.041  mband_mel_avr0=4.472  mband_py_mel_avr0_7=4.563  
+    5dB: Noisy=5.003  mband_mel_avr0=8.991  mband_py_mel_avr0_7=9.048  
+    10dB: Noisy=10.007  mband_mel_avr0=11.933  mband_py_mel_avr0_7=12.049  
+    15dB: Noisy=15.001  mband_mel_avr0=14.760  mband_py_mel_avr0_7=14.817  
+  STOI:
+    -5dB: Noisy=0.552  mband_mel_avr0=0.537  mband_py_mel_avr0_7=0.538  
+    0dB: Noisy=0.639  mband_mel_avr0=0.634  mband_py_mel_avr0_7=0.635  
+    5dB: Noisy=0.709  mband_mel_avr0=0.722  mband_py_mel_avr0_7=0.731  
+    10dB: Noisy=0.783  mband_mel_avr0=0.789  mband_py_mel_avr0_7=0.787  
+    15dB: Noisy=0.832  mband_mel_avr0=0.839  mband_py_mel_avr0_7=0.844  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  mband_mel_avr0=1.503  mband_py_mel_avr0_7=1.478  
+    0dB: Noisy=2.392  mband_mel_avr0=1.849  mband_py_mel_avr0_7=1.932  
+    5dB: Noisy=2.492  mband_mel_avr0=2.384  mband_py_mel_avr0_7=2.289  
+    10dB: Noisy=2.693  mband_mel_avr0=2.712  mband_py_mel_avr0_7=2.819  
+    15dB: Noisy=3.030  mband_mel_avr0=2.889  mband_py_mel_avr0_7=3.092  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_mel_avr0=1.084  mband_py_mel_avr0_7=1.094  
+    0dB: Noisy=1.086  mband_mel_avr0=1.144  mband_py_mel_avr0_7=1.150  
+    5dB: Noisy=1.172  mband_mel_avr0=1.308  mband_py_mel_avr0_7=1.329  
+    10dB: Noisy=1.365  mband_mel_avr0=1.545  mband_py_mel_avr0_7=1.550  
+    15dB: Noisy=1.630  mband_mel_avr0=1.866  mband_py_mel_avr0_7=1.893  
+  SI_SDR:
+    -5dB: Noisy=-4.982  mband_mel_avr0=-2.529  mband_py_mel_avr0_7=-2.608  
+    0dB: Noisy=-0.047  mband_mel_avr0=2.642  mband_py_mel_avr0_7=2.359  
+    5dB: Noisy=4.985  mband_mel_avr0=6.556  mband_py_mel_avr0_7=6.785  
+    10dB: Noisy=9.995  mband_mel_avr0=10.708  mband_py_mel_avr0_7=11.584  
+    15dB: Noisy=14.998  mband_mel_avr0=14.449  mband_py_mel_avr0_7=14.801  
+  STOI:
+    -5dB: Noisy=0.605  mband_mel_avr0=0.595  mband_py_mel_avr0_7=0.592  
+    0dB: Noisy=0.673  mband_mel_avr0=0.655  mband_py_mel_avr0_7=0.655  
+    5dB: Noisy=0.723  mband_mel_avr0=0.719  mband_py_mel_avr0_7=0.720  
+    10dB: Noisy=0.776  mband_mel_avr0=0.776  mband_py_mel_avr0_7=0.783  
+    15dB: Noisy=0.814  mband_mel_avr0=0.814  mband_py_mel_avr0_7=0.816  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  mband_mel_avr0=1.862  mband_py_mel_avr0_7=1.908  
+    0dB: Noisy=2.366  mband_mel_avr0=1.979  mband_py_mel_avr0_7=1.952  
+    5dB: Noisy=2.439  mband_mel_avr0=2.087  mband_py_mel_avr0_7=2.149  
+    10dB: Noisy=2.589  mband_mel_avr0=2.489  mband_py_mel_avr0_7=2.393  
+    15dB: Noisy=2.651  mband_mel_avr0=2.687  mband_py_mel_avr0_7=2.601  
+
+========================================================================================================================
