@@ -66,15 +66,15 @@ EXPERIMENT_CONFIGS = [
     },
     # --- MBAND (Causal, AVRGING=0) ---
     {
-        'name': 'mband_py_N6_lin_AVR0_8',
+        'name': 'mband_py_N6_lin_AVR0',
         'params': {'Nband': 6, 'Freq_spacing': 'linear', 'AVRGING': 0, 'Noisefr': 6}
     },
     {
-        'name': 'mband_py_N6_log_AVR0_8',
+        'name': 'mband_py_N6_log_AVR0',
         'params': {'Nband': 6, 'Freq_spacing': 'log', 'AVRGING': 0, 'Noisefr': 6}
     },
     {
-        'name': 'mband_py_N6_mel_AVR0_8',
+        'name': 'mband_py_N6_mel_AVR0',
         'params': {'Nband': 6, 'Freq_spacing': 'mel', 'AVRGING': 0, 'Noisefr': 6}
     },
 ]
