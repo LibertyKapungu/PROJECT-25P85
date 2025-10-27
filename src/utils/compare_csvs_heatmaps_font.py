@@ -759,22 +759,44 @@ if __name__ == "__main__":
         # 'mband_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR1\mband_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_log_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR0\mband_N6_log_AVR0_[{snr}]dB_MERGED.csv",
         #'mband_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR1\mband_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_mel_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR0\mband_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-        'mband_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR1\mband_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_mel_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR0\mband_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
+        #'mband_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR1\mband_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
 
         # Python transalation mband
         #'mband_py_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        # 'mband_py_lin_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
-        # 'mband_py_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_lin_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
         #'mband_py_log_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR0_8\mband_py_N6_log_AVR0_8_[{snr}]dB_MERGED.csv",
         #'mband_py_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
         'mband_py_mel_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR0_8\mband_py_N6_mel_AVR0_8_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
+
+
+        # Python mband causal AVRGING
+        #'mband_py_lin_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
+
+        # Python mband causal AVRGING OG weights
+        #'mband_py_lin_causal_ogw_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_causal_ogw_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_causal_ogw_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
+
+        # DELTAS
+        # AVRGING = 1
+        #'mband_py_lin_deltas_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_deltas_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_deltas': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
+
+        # AVRGING = 0
+        #'mband_py_lin_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
+        'mband_py_mel_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
 
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\EXP1p1a\mband_av10_mel_8"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\EXP1p1b\mband_mel_deltas_avr0"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
