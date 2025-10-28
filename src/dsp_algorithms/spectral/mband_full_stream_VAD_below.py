@@ -196,6 +196,7 @@ def mband(
          
         sample_pos += cmmnlen  # Advance by hop size (cmmnlen)  
 
+
         #  IIR SMOOTHING (CAUSAL)
         if AVRGING: 
             if frame_idx == 0:
@@ -214,6 +215,7 @@ def mband(
             else: 
                 frame_final = frame_smoothed.copy()
         else:
+            frame_smoothed = frame_mag.copy()
             frame_final = frame_mag.copy()  
 
         # ===== VAD AFTER 3-TAP =====
