@@ -213,152 +213,160 @@ def mband(
 
     n_spect = np.sqrt(noise_pow / Noisefr).reshape(-1, 1)
 
-    # Initialize frame-by-frame processing
-    x_mag_frames = []  # Store magnitude spectra for each frame
-    x_ph_frames = []   # Store phase spectra for each frame
-    frame_count = 0
+
+    # ============ STREAMING INITIALIZATION ============
+    # State variables for causal processing
+    prev_mag = None
+    prev_prev_smoothed_mag = None
+    prev_smoothed_mag = None
+    n_current = n_spect.squeeze()  # Current noise estimate
+    
+    # Circular output buffers
+    out_buffer = np.zeros(frmelen)
+    win_sum_buffer = np.zeros(frmelen)
+    output_samples = []  # Collect output chunks
+    
+    # IIR filter coefficients
+    filtb = np.array([0.9, 0.1])
+    
+    # Frame counter
+    frame_idx = 0
     
     # Process audio frame by frame with overlap
     sample_pos = 0
     while sample_pos + frmelen <= len(noisy_speech):
-        # Step 1: Extract current frame
+    # Extract and FFT current frame
         current_frame = noisy_speech[sample_pos:sample_pos + frmelen]
-        
-        # Step 2: Apply window function
         windowed_frame = current_frame * win
-        
-        # Step 3: Single-frame FFT (instead of batch FFT)
         frame_fft = fft(windowed_frame, fftl)
         frame_mag = np.abs(frame_fft)
-        frame_ph = np.angle(frame_fft)
-        
-        # Step 4: Store results
-        x_mag_frames.append(frame_mag)
-        x_ph_frames.append(frame_ph)
-        
-        # Step 5: Advance by hop size (cmmnlen) for proper overlap
-        sample_pos += cmmnlen  # NOT frmelen - this creates overlap
-        frame_count += 1
-        
-    # Convert lists to matrices (same format as original batch method)
-    if x_mag_frames:
-        x_mag = np.array(x_mag_frames).T  # Shape: (fftl, nframes)
-        x_ph = np.array(x_ph_frames).T    # Shape: (fftl, nframes)
-        nframes = len(x_mag_frames)
-    else:
-        # Handle edge case of very short audio
-        x_mag = np.array([]).reshape(fftl, 0)
-        x_ph = np.array([]).reshape(fftl, 0)
-        nframes = 0
-        print("Warning: No frames generated - audio too short")
- 
-        # Smooth the input spectrum
-    if AVRGING:             
-        filtb = [0.9, 0.1]  # This defines the coefficients of a first-order IIR low-pass filter used for temporal smoothing of the magnitude spectrum. This filter smooths the spectrum by blending the current and previous values: 0.9 weight on the previous value 0.1 weight on the current value
-        x_magsm = np.zeros_like(x_mag)
-        x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
+        frame_phase = np.angle(frame_fft)
+         
+        sample_pos += cmmnlen  # Advance by hop size (cmmnlen)  
 
-        for i in range(1, nframes):
-            x_tmp1 = np.concatenate([x_mag[frmelen - ovlplen:, i - 1], x_mag[:, i]])
-            x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
-            x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
-
-        # Weighted spectral estimate 
-        Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0  # originally 0.09, 0.25, 0.66 for history emphasis   Wn2, Wn1, Wn0 = 0.15, 0.35, 0.50 balaced 0.12, 0.30, 0.58 
-        x_magsm_filtered = x_magsm.copy()  # Create a copy to avoid in-place overwriting
-        if nframes > 1:
-            x_magsm_filtered[:, 1] = Wn1 * x_magsm[:, 0] +Wn0 * x_magsm[:, 1]
-            for i in range(2, nframes):
-                x_magsm_filtered[:, i] = (Wn2 * x_magsm[:, i - 2] + Wn1 * x_magsm[:, i - 1] + Wn0 * x_magsm[:, i])  # changed  Wn0 * x_mag[:, i])  SHOULD BE x_magsm[:, i]
-        x_magsm = x_magsm_filtered  # Replace x_magsm with filtered version
-
-        # Verify no NaN/Inf values
-        assert not np.any(np.isnan(x_magsm)), "NaN detected in x_magsm"
-        assert not np.any(np.isinf(x_magsm)), "Inf detected in x_magsm"
-
-        # Check spectral continuity (frame-to-frame variance should be lower)
-        if nframes > 1:
-            frame_diff = np.diff(x_magsm, axis=1)  # Difference between consecutive frames
-            continuity_metric = np.mean(np.abs(frame_diff))
-            print(f"Spectral continuity metric: {continuity_metric:.6f}")
-            # Lower is better (smoother transitions)
-    else:
-        x_magsm = x_mag
-
-    # Noise update during silence frames    
-    if VAD:
-        # Expand n_spect to match number of frames BEFORE calling noiseupdt
-        n_spect_expanded = np.tile(n_spect, (1, nframes))
-        n_spect, state = noiseupdt(x_magsm, n_spect_expanded, cmmnlen, nframes)
-    else:
-        # Replicate noise spectrum for all frames (no VAD)   
-        n_spect = np.repeat(n_spect, nframes, axis=1)
-   
-    # Calculate segmental SNR in each band
-    
-    SNR_x = np.zeros((Nband, nframes))
-
-    for i in range(Nband):
-        if i < Nband - 1:
-            start = lobin[i]
-            stop = hibin[i] + 1
+        #  IIR SMOOTHING (CAUSAL)
+        if AVRGING: 
+            if frame_idx == 0:
+                frame_smoothed = scipy.signal.lfilter(filtb, [1], frame_mag)
+            else: 
+                overlap_region = prev_mag[frmelen-ovlplen:]
+                x_tmp = np.concatenate([overlap_region,frame_mag])
+                x_tmp_filtered = scipy.signal.lfilter(filtb, [1], x_tmp)
+                frame_smoothed = x_tmp_filtered[-len(frame_mag):]
         else:
-            start = lobin[i]
-            stop = fftl // 2 + 1  # Nyquist bin
+            frame_smoothed = frame_mag.copy()  
 
-        for j in range(nframes):
-            signal_power = np.linalg.norm(x_magsm[start:stop, j], 2) ** 2
-            noise_power = np.linalg.norm(n_spect[start:stop, j], 2) ** 2
-            SNR_x[i, j] = 10 * np.log10(signal_power / (noise_power + 1e-10))
+        # VAD and Noise Update 
+        if VAD:               
+            x_var = frame_smoothed**2
+            n_var = n_current**2
+            rti = x_var/(n_var + 1e-10) - np.log10(x_var/(n_var+1e-10))-1
+            judgevalue = np.mean(rti)
 
-    beta_x = berouti(SNR_x)
-        
-    # ---------- START SUBTRACTION PROCEDURE --------------------------
-    sub_speech_x = np.zeros((fftl // 2 + 1, nframes))
+            threshold = 0.4 if frame_idx == 0 else 0.45
 
-    # delta_factors = calculate_delta_factors(lobin, hibin, fs, Nband, fftl) 
-   
-    for i in range(Nband):
-        start = lobin[i]
-        stop = hibin[i] + 1
-        
-        for j in range(nframes):
-            n_spec_sq = n_spect[start:stop, j] ** 2
-            # sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * delta_factors[i]
-            if i == 0:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq
-            elif i == Nband - 1:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 1.5
+            if judgevalue > threshold:  # SPEECH
+                n_updated = n_current.copy()
+            else: # SILENCE
+                n_updated = np.sqrt(0.9*n_current**2 + 0.1*frame_smoothed**2)
+            n_current=n_updated
+        else:
+            n_updated = n_current.copy()
+
+        # WEIGHTED AVERAGING (CAUSAL)
+        if AVRGING and frame_idx >= 2:
+            # Calculate broadband SNR
+            total_signal_power = np.sum(frame_smoothed**2)
+            total_noise_power = np.sum(n_updated**2)
+            frame_snr_db = 10*np.log10(total_signal_power/(total_noise_power + 1e-10))
+
+            # Use original weights by default (best overall performance) 
+            Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66  # Sum = 1.0  # originally 0.09, 0.25, 0.66 for history emphasis   Wn2, Wn1, Wn0 = 0.15, 0.35, 0.50 balaced 0.12, 0.30, 0.58 
+            # Only use conservative weights in VERY low SNR
+            if frame_snr_db < -3.0:
+                Wn2, Wn1, Wn0 = 0.12, 0.30, 0.58
+            frame_final = Wn2 * prev_prev_smoothed_mag + Wn1 * prev_smoothed_mag + Wn0 * frame_smoothed
+        elif AVRGING and frame_idx == 1:
+            frame_final = 0.30 * prev_smoothed_mag + 0.70 * frame_smoothed # 2 tap filter
+        else: 
+            frame_final = frame_smoothed.copy()
+
+        # SPECTRAL SUBTRACTION (PER-BAND)
+        enhanced_mag_frame = np.zeros(fftl // 2+1)
+
+        for band_idx in range(Nband):
+            start = lobin[band_idx]
+            stop = hibin[band_idx] + 1 if band_idx < Nband-1 else fftl // 2+1
+
+            signal_power = np.linalg.norm(frame_final[start:stop], 2) ** 2
+            noise_power = np.linalg.norm(n_updated[start:stop], 2) ** 2
+            snr_band = 10 * np.log10(signal_power / (noise_power + 1e-10))
+
+            # Beta (over-subtraction factor)
+            if -5.0 <= snr_band <= 20.0:
+                beta = 4.0 - snr_band * 3.0 / 20.0
+            elif snr_band < -5.0:
+                beta = 4.75
             else:
-                sub_speech = x_magsm[start:stop, j] ** 2 - beta_x[i, j] * n_spec_sq * 2.5
-            z = np.where(sub_speech < 0)[0]
-            if z.size > 0:
-                sub_speech[z] = FLOOR * x_magsm[start:stop, j][z] ** 2
-            if i < Nband-1:
-                sub_speech = sub_speech + 0.05 * x_magsm[start:stop, j] ** 2
+                beta = 1.0
+
+            # Delta (frequency-dependent)
+            if band_idx == 0:
+                delta = 1.0
+            elif band_idx == Nband - 1:
+                delta = 1.5
             else:
-                sub_speech = sub_speech + 0.01 * x_magsm[start:stop, j] ** 2
-            sub_speech_x[start:stop, j] += sub_speech
+                delta = 2.5
+        
+            sub_speech = frame_final[start:stop] ** 2 - beta* n_updated[start:stop]**2 * delta
+            sub_speech = np.maximum(sub_speech, FLOOR*frame_final[start:stop]**2)
 
-    # Reconstruct whole spectrum
-    enhanced_mag = np.sqrt(np.maximum(sub_speech_x, 0))
-    enhanced_spectrum = np.zeros((fftl, nframes), dtype=np.complex128)
-    enhanced_spectrum[:fftl // 2 + 1, :] = enhanced_mag * np.exp(1j * x_ph[:fftl // 2 + 1, :])
-    enhanced_spectrum[fftl // 2 + 1:, :] = np.conj(np.flipud(enhanced_spectrum[1:fftl // 2, :]))
-    y1_ifft = ifft(enhanced_spectrum, axis=0)
-    y1_r = np.real(y1_ifft)
+            # Residual 
+            if band_idx < Nband-1:
+                sub_speech += 0.05 * frame_final[start:stop] ** 2
+            else:
+                sub_speech += 0.01 * frame_final[start:stop] ** 2
+            
+            enhanced_mag_frame[start:stop] = np.sqrt(sub_speech)
+           
 
-    # Overlap-add (standard)
-    out = np.zeros((nframes - 1) * cmmnlen + frmelen)
-    win_sum = np.zeros_like(out)
-    for i in range(nframes):
-        start = i * cmmnlen
-        out[start:start + frmelen] += y1_r[:frmelen, i]
-        win_sum[start:start + frmelen] += win
-    out /= (win_sum + 1e-8)
+        # ===== RECONSTRUCT SPECTRUM & IFFT =====
+        enhanced_spectrum_frame = np.zeros(fftl, dtype=np.complex128)
+        enhanced_spectrum_frame[:fftl // 2 + 1] = enhanced_mag_frame * np.exp(1j * frame_phase[:fftl // 2 + 1])
+        enhanced_spectrum_frame[fftl // 2 + 1:] = np.conj(np.flipud(enhanced_spectrum_frame[1:fftl // 2]))
+        
+        y_frame = ifft(enhanced_spectrum_frame).real
 
-        # Trim to original length and normalize
-    out = out[:len(noisy_speech)]
+        # ===== WOLA SYNTHESIS (CIRCULAR BUFFER) =====
+
+        out_buffer += y_frame[:frmelen]*win
+        win_sum_buffer += win
+
+        # Output first 'cmmnlen' samples (ready for playback)
+        output_chunk = out_buffer[:cmmnlen]/(win_sum_buffer[:cmmnlen]+1e-8)
+        output_samples.extend(output_chunk)
+
+        # Shift circular buffer
+        out_buffer = np.roll(out_buffer,-cmmnlen)
+        out_buffer[-cmmnlen:] = 0 # Zero out entire tail region
+
+        win_sum_buffer = np.roll(win_sum_buffer, -cmmnlen) 
+        win_sum_buffer[-cmmnlen:] = 0
+
+        #  ===== UPDATE STATE FOR NEXT FRAME =====
+        prev_mag = frame_mag.copy()
+        prev_prev_smoothed_mag = prev_smoothed_mag
+        prev_smoothed_mag = frame_smoothed.copy()
+        frame_idx += 1
+
+    # ============ FLUSH REMAINING SAMPLES ============
+    if np.any(win_sum_buffer > 1e-8):
+        final_chunk = out_buffer / (win_sum_buffer + 1e-8)
+        valid_idx = np.where(win_sum_buffer > 1e-8)[0]
+        if len(valid_idx) > 0:
+            output_samples.extend(final_chunk[:valid_idx[-1] + 1])
+    
+    out = np.array(output_samples)
 
     # Normalize to prevent clipping
     max_amplitude = np.max(np.abs(out))

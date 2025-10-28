@@ -818,19 +818,23 @@ if __name__ == "__main__":
 
         # XMAGSM in stream with OG weights Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66
         # AVRGING =1 
-        #'mband_py_lin_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
+        'mband_py_lin_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_py_log_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
 
         # AVRGING =0 
         #'mband_py_lin_stream_avr0_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
         #'mband_py_log_stream_avr0_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_stream_avr0_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
 
+        # XMAGSM in stream with circular buffer 
+        # AVRGING =1 
+        'mband_py_lin_circular_stream_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
+
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\EXP1p1b\AVRGING\stream_xmgasm_check\mband_mel3"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\EXP1p1b\stream\circular_buffer"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
