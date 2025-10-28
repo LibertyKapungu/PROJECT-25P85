@@ -385,7 +385,7 @@ if __name__ == "__main__":
         Freq_spacing='linear',
         FRMSZ=20,
         OVLP=50,
-        AVRGING=1,
+        AVRGING=0,
         Noisefr=6,
         FLOOR=0.002,
         VAD=1,
