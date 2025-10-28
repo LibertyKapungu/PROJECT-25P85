@@ -286,7 +286,7 @@ def mband(
         # ===== WOLA SYNTHESIS (CIRCULAR BUFFER) =====
 
         out_buffer += y_frame[:frmelen]*win
-        win_sum_buffer += win
+        win_sum_buffer += win**2
 
         # Output first 'cmmnlen' samples (ready for playback)
         output_chunk = out_buffer[:cmmnlen]/(win_sum_buffer[:cmmnlen]+1e-8)
