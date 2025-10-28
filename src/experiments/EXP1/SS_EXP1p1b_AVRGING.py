@@ -42,7 +42,7 @@ from utils.audio_dataset_loader import (
     preprocess_audio
 )
 
-from dsp_algorithms.mband_AVG_causal_stream import mband
+from dsp_algorithms.spectral.mband_AVG_causal_stream import mband
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 from utils.delete_csvs import delete_csvs_in_directory as delete_csvs

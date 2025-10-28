@@ -22,7 +22,7 @@ from utils.audio_dataset_loader import (
     create_audio_pairs,
     preprocess_audio
 )
-from dsp_algorithms.mband_btrnaming import mband
+from dsp_algorithms.spectral.mband_btrnaming import mband
 from dsp_algorithms.wiener_GTCRN import wiener_filter
 from deep_learning.TinyDenoiser import TinyDenoiser
 from utils.generate_and_save_spectrogram import generate_and_save_spectrogram
