@@ -30,7 +30,7 @@ sys.path.insert(0, str(repo_root / "src"))
 
 # --- Define Base Directories ---
 # Base directory for all results of this Python mband test
-results_dir_base = repo_root / 'results' / 'EXP1' / 'spectral' / 'SS_EXP1p1b' / 'stream'/ 'stream_circ_buffer_og_wts' 
+results_dir_base = repo_root / 'results' / 'EXP1' / 'spectral' / 'SS_EXP1p1b' / 'stream'/ 'stream_circ_buffer_vad_below' 
 # If want a separate output dir for audio if plan to save it
 # output_dir_base = repo_root / 'sound_data' / 'processed' / 'spectral_processed_outputs' / 'EXP1p1a_Python_mband'
 
@@ -42,7 +42,8 @@ from utils.audio_dataset_loader import (
     preprocess_audio
 )
 
-from dsp_algorithms.spectral.mband_full_stream_og_wts  import mband
+# from dsp_algorithms.spectral.mband_full_stream_og_wts  import mband
+from dsp_algorithms.spectral.mband_full_stream_VAD_below  import mband
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
