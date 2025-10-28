@@ -13,4 +13,4 @@ source ~/.bashrc
 conda activate py312
 
 # Run your Python script
-python /home/25p85/Gabi/PROJECT-25P85/src/experiments/EXP1/SS_EXP1p1b_AVRGING.py
+python /home/25p85/Gabi/PROJECT-25P85/src/experiments/EXP1/SS_EXP1p1b_stream.py
