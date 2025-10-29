@@ -1,0 +1,2 @@
+Phase,Test_ID,Freq_spacing,Nband,FRMSZ_ms,OVLP,Averaging,Noisefr,Floor,VAD,Noise_File,Noise_Category,Clean_File,SNR_dB,PESQ,STOI,SI_SDR,DNSMOS_mos_ovr,DNSMOS_mos_sig,DNSMOS_mos_bak,Status,composite_score
+1,P1_linear_15dB_PC F,linear,8,20,75,1,1,0.3,1,PC Fan Noise.wav,Stationary,emo_contentment_sentences.wav,15,3.227628231048584,0.8765408992767334,17.619218826293945,4.042617975639553,4.326226857490388,4.639932602930456,Success,2.0520845651626587

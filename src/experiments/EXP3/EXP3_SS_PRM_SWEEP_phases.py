@@ -599,9 +599,24 @@ for cat in df_all[df_all['Phase'] == 2]['Noise_Category'].unique():
     else:
         print(f"      (Conservative floor needed - preserves speech dynamics)")
 
-# # Phase 3 insights
-# print("\n3. FINE-TUNING (Phase 3):")
-# if len(df_all[df_all['Phase'] == 3]) > 0:
-#     best_nband = df_all[df_all['Phase'] == 3].groupby('Nband')['PESQ'].mean().idxmax()
-#     best_frame = df_all[df_all['Phase'] == 3].groupby('FRMSZ_ms')['PESQ'].mean().idxmax()
-#     best_noisefr = df_all[df_all['Phase'] == 3].groupby('Noisefr')['PESQ'].mean
+# Phase 3 insights
+print("\n3. FINE-TUNING (Phase 3):")
+if len(df_all[df_all['Phase'] == 3]) > 0:
+    best_nband = df_all[df_all['Phase'] == 3].groupby('Nband')['PESQ'].mean().idxmax()
+    best_frame = df_all[df_all['Phase'] == 3].groupby('FRMSZ_ms')['PESQ'].mean().idxmax()
+    best_noisefr = df_all[df_all['Phase'] == 3].groupby('Noisefr')['PESQ'].mean().idxmax()
+    print(f"   → Optimal Nband: {int(best_nband)} bands")
+    print(f"   → Optimal Frame Size: {int(best_frame)} ms")
+    print(f"   → Optimal Noisefr: {int(best_noisefr)} frames")
+
+
+print(f"\n{'='*100}")
+print("EFFICIENCY ACHIEVEMENTS")
+print(f"{'='*100}")
+print(f"✓ Runtime: {total_time/3600:.2f} hours ")
+
+
+print(f"\n{'='*100}")
+print(f"Results saved to: {results_dir}")
+print(f"Run the analysis script on: complete_3phase_results.csv")
+print(f"{'='*100}")
