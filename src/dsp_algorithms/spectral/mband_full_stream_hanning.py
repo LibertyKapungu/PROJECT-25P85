@@ -147,6 +147,9 @@ def mband(
 
     # Calculate Hanning window (better for WOLA at 50% overlap)
     win = np.sqrt(np.hanning(frmelen))  # np.sqrt() keeps it power-complementary
+    U = np.sum(win**2) / frmelen  # Normalization factor (~0.375 for sqrt(hanning))
+
+    # print(f"Window normalization factor U = {U:.4f}")
 
     # Estimate noise magnitude for first 'Noisefr' frames
     noise_pow = np.zeros(fftl)
@@ -316,10 +319,38 @@ def mband(
 
     # ===== VERIFY WOLA NORMALIZATION (DEBUG) =====
     # Uncomment to check if windows are power-complementary
-    U = np.sum(win**2) / frmelen
-    expected_energy = np.sum(noisy_speech**2)
-    actual_energy = np.sum(out**2)
-    print(f"Energy ratio: {actual_energy / expected_energy:.4f} (should be ~1.0)")
+    # U = np.sum(win**2) / frmelen
+    # expected_energy = np.sum(noisy_speech**2)
+    # actual_energy = np.sum(out**2)
+    # print(f"Energy ratio: {actual_energy / expected_energy:.4f} (should be ~1.0)")
+
+
+    # ============ DIAGNOSTIC: Verify WOLA Normalization ============
+    # print("\n=== WOLA Quality Check ===")
+    # print(f"Window normalization factor U = {U:.4f}")
+
+    # # Check win_sum_buffer values (should be ~1.0 in steady-state)
+    # test_winsum = np.zeros(frmelen)
+    # for i in range(3):  # Simulate 3 overlapping frames
+    #     test_winsum[i*cmmnlen:min((i*cmmnlen)+frmelen, len(test_winsum))] += win[:min(frmelen, len(test_winsum)-i*cmmnlen)]**2
+
+    # valid_region = test_winsum[cmmnlen:-cmmnlen]  # Avoid edges
+    # if len(valid_region) > 0:
+    #     print(f"Overlap win_sum in steady state:")
+    #     print(f"  Min:  {valid_region.min():.6f}")
+    #     print(f"  Max:  {valid_region.max():.6f}")  
+    #     print(f"  Mean: {valid_region.mean():.6f}")
+    #     print(f"  Expected: ~1.0 for perfect reconstruction")
+
+    # # Check overall energy preservation
+    # energy_in = np.sum(noisy_speech**2)
+    # energy_out = np.sum(out**2)
+    # energy_ratio = energy_out / energy_in
+    # print(f"\nEnergy preservation:")
+    # print(f"  Input energy:  {energy_in:.2e}")
+    # print(f"  Output energy: {energy_out:.2e}")
+    # print(f"  Ratio: {energy_ratio:.4f}")
+    # print(f"  Expected: 0.75-0.95 (noise removal)")
 
     # Normalize to prevent clipping
     max_amplitude = np.max(np.abs(out))
