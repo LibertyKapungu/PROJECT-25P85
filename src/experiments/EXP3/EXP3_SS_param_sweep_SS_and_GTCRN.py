@@ -39,7 +39,7 @@ PROCESSING_MODE = "standalone"  # Options: "standalone" or "hybrid"
 # --- Parameter Grid (Mode-Adaptive) ---
 if PROCESSING_MODE == "standalone":
     PARAM_GRID = {
-        'Freq_spacing': ['linear', 'log', 'mel'],      # Skip mel
+        'Freq_spacing': ['log'],      # Skip mel  ['linear', 'log', 'mel'], 
         'Nband': [4, 6, 8, 16],                     # Test band count
         'FRMSZ': [8, 20],                       # Latency vs quality
         'OVLP': [50, 75],                       # Standard vs smooth
