@@ -18,7 +18,8 @@ plt.rcParams['font.size'] = 10
 # CONFIGURATION
 # ====================================
 # UPDATE THIS PATH to your sweep results CSV
-CSV_FILE = r"path/to/gtcrn_ss_parameter_sweep_results.csv"
+# CSV_FILE = r"path/to/gtcrn_ss_parameter_sweep_results.csv"
+CSV_FILE = r"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP/hybrid/sweep_summary_hybrid.csv"
 OUTPUT_DIR = Path("parameter_sweep_analysis")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -170,7 +171,7 @@ print("GENERATING VISUALIZATIONS")
 print("="*100)
 
 # 1. Box plots by parameter
-for param in ['Freq_spacing', 'Nband', 'FRMSZ_ms', 'OVLP', 'Floor', 'Noisefr']:
+for param in ['Freq_spacing', 'Nband', 'FRMSZ_ms', 'OVLP']:
     fig, axes = plt.subplots(2, 2, figsize=(16, 10))
     fig.suptitle(f'Impact of {param} on Speech Enhancement Metrics', 
                  fontsize=16, fontweight='bold')
@@ -184,11 +185,8 @@ for param in ['Freq_spacing', 'Nband', 'FRMSZ_ms', 'OVLP', 'Floor', 'Noisefr']:
     
     for metric, ax, ylabel in metrics_plot:
         df_plot = df_success.copy()
-        if param in ['Nband', 'FRMSZ_ms', 'OVLP', 'Noisefr']:
+        if param in ['Nband', 'FRMSZ_ms', 'OVLP']:
             df_plot[param] = df_plot[param].astype(str)
-        elif param == 'Floor':
-            # Format floor values nicely
-            df_plot[param] = df_plot[param].apply(lambda x: f"{x:.3f}")
         
         sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
         ax.set_title(ylabel, fontsize=12, fontweight='bold')
@@ -262,46 +260,6 @@ for idx, (metric, ax) in enumerate(zip(['PESQ', 'STOI', 'SI_SDR', 'DNSMOS_mos_ov
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'heatmap_frame_vs_overlap.png', dpi=300, bbox_inches='tight')
 print(f"✓ Saved: heatmap_frame_vs_overlap.png")
-plt.close()
-
-# 4b. CRITICAL: Heatmap FLOOR vs Noise Category
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.suptitle('CRITICAL: Floor Parameter × Noise Category', 
-             fontsize=16, fontweight='bold')
-
-for idx, (metric, ax) in enumerate(zip(['PESQ', 'STOI', 'SI_SDR', 'DNSMOS_mos_ovr'], 
-                                        axes.flat)):
-    pivot = df_success.pivot_table(values=metric, index='Noise_Category', 
-                                     columns='Floor', aggfunc='mean')
-    sns.heatmap(pivot, annot=True, fmt='.3f', cmap='RdYlGn', ax=ax, 
-                cbar_kws={'label': metric})
-    ax.set_title(f'{metric}', fontsize=12, fontweight='bold')
-    ax.set_xlabel('Floor Parameter', fontsize=11)
-    ax.set_ylabel('Noise Category', fontsize=11)
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'heatmap_CRITICAL_floor_vs_noise.png', dpi=300, bbox_inches='tight')
-print(f"✓ Saved: heatmap_CRITICAL_floor_vs_noise.png")
-plt.close()
-
-# 4c. Heatmap: Noisefr vs Noise Category
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.suptitle('Noisefr Parameter × Noise Category', 
-             fontsize=16, fontweight='bold')
-
-for idx, (metric, ax) in enumerate(zip(['PESQ', 'STOI', 'SI_SDR', 'DNSMOS_mos_ovr'], 
-                                        axes.flat)):
-    pivot = df_success.pivot_table(values=metric, index='Noise_Category', 
-                                     columns='Noisefr', aggfunc='mean')
-    sns.heatmap(pivot, annot=True, fmt='.3f', cmap='RdYlGn', ax=ax, 
-                cbar_kws={'label': metric})
-    ax.set_title(f'{metric}', fontsize=12, fontweight='bold')
-    ax.set_xlabel('Noise Frames', fontsize=11)
-    ax.set_ylabel('Noise Category', fontsize=11)
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'heatmap_noisefr_vs_noise.png', dpi=300, bbox_inches='tight')
-print(f"✓ Saved: heatmap_noisefr_vs_noise.png")
 plt.close()
 
 # 5. Metric distributions
@@ -434,14 +392,6 @@ for category in df_success['Noise_Category'].unique():
     cat_avg = df_success[df_success['Noise_Category'] == category]['PESQ'].mean()
     summary_report += f"\n  {category}: {cat_avg:.3f}"
 
-# Add best floor by noise category
-summary_report += "\n\nRECOMMENDED FLOOR BY NOISE TYPE:"
-for category in df_success['Noise_Category'].unique():
-    cat_data = df_success[df_success['Noise_Category'] == category]
-    best_floor = cat_data.groupby('Floor')['Weighted_Score'].mean().idxmax()
-    best_score = cat_data.groupby('Floor')['Weighted_Score'].mean().max()
-    summary_report += f"\n  {category}: Floor={best_floor} (score: {best_score:.4f})"
-
 summary_report += f"\n\nAll results saved to: {OUTPUT_DIR.absolute()}\n"
 
 print("\n" + summary_report)
@@ -463,8 +413,6 @@ print("    - best_overall_configuration.csv")
 print("  Visualizations:")
 print("    - boxplot_*.png (parameter effects)")
 print("    - heatmap_*.png (parameter interactions)")
-print("    - heatmap_CRITICAL_floor_vs_noise.png (MOST IMPORTANT)")
-print("    - heatmap_noisefr_vs_noise.png")
 print("    - performance_by_noise_category.png")
 print("    - metric_distributions.png")
 print("    - pesq_vs_stoi_scatter.png")
