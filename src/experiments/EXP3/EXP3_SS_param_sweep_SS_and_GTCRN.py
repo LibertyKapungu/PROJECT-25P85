@@ -34,7 +34,7 @@ random.seed(SEED)
 np.random.seed(SEED)
 
 # --- Processing Mode ---
-PROCESSING_MODE = "standalone"  # Options: "standalone" or "hybrid"
+PROCESSING_MODE = "hybrid"  # Options: "standalone" or "hybrid"
 
 # --- Parameter Grid (Mode-Adaptive) ---
 if PROCESSING_MODE == "standalone":
@@ -49,12 +49,12 @@ if PROCESSING_MODE == "standalone":
     
 elif PROCESSING_MODE == "hybrid":
     PARAM_GRID = {
-        'Freq_spacing': ['linear', 'log'],      # Both useful
-        'Nband': [4, 6],                        # Minimal processing
+        'Freq_spacing': ['linear', 'log', 'mel'],      # Both useful
+        'Nband': [4,8],                        # Minimal processing
         'FRMSZ': [8, 20],                       # Match GTCRN frame
         'OVLP': [50, 75],                       # Smooth blending
-        'Noisefr': [1,3],      # Low latency
-        'FLOOR': [0.01, 0.1, 0.3, 0.5, 0.8],  # CRITICAL: High floor!
+        'Noisefr': [1,2],      # Low latency
+        'FLOOR': [0.2, 0.6],  # CRITICAL: High floor!
     }
 else:
     raise ValueError(f"Invalid PROCESSING_MODE: {PROCESSING_MODE}")
@@ -182,14 +182,44 @@ print("="*80)
 print(f"PARAMETER SWEEP MODE: {PROCESSING_MODE.upper()}")
 print("="*80)
 
-print("\nLoading test datasets...")
-ears_files = load_ears_dataset(repo_root, mode="test")
-noizeus_files = load_noizeus_dataset(repo_root)
-paired_files = create_audio_pairs(noizeus_files, ears_files)
+# print("\nLoading test datasets...")
+# ears_files = load_ears_dataset(repo_root, mode="test")
+# noizeus_files = load_noizeus_dataset(repo_root)
+# paired_files = create_audio_pairs(noizeus_files, ears_files)
 
-print(f"✓ Loaded {len(ears_files)} EARS files")
-print(f"✓ Loaded {len(noizeus_files)} NOIZEUS files")
-print(f"✓ Created {len(paired_files)} audio pairs")
+# print(f"✓ Loaded {len(ears_files)} EARS files")
+# print(f"✓ Loaded {len(noizeus_files)} NOIZEUS files")
+# print(f"✓ Created {len(paired_files)} audio pairs")
+
+# ============================================================================
+# 5. DEFINE SPECIFIC FILES FOR TESTING
+# ============================================================================
+print("="*80)
+print(f"PARAMETER SWEEP MODE: {PROCESSING_MODE.upper()}")
+print("="*80)
+
+# --- Define Specific Files ---
+clean_path_relative = "sound_data/raw/EARS_DATASET/p092/emo_contentment_sentences.wav"
+noise_paths_relative = [
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/PC_Fan_Noise.wav",
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/Street_Noise_downtown.wav",
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/cafeteria_babble.wav"
+]
+
+# Construct full paths relative to repo_root
+clean_path = repo_root / clean_path_relative
+noise_paths = [repo_root / p for p in noise_paths_relative]
+
+# Verify files exist
+if not clean_path.exists():
+    raise FileNotFoundError(f"Clean file not found: {clean_path}")
+for np_path in noise_paths:
+    if not np_path.exists():
+        raise FileNotFoundError(f"Noise file not found: {np_path}")
+
+print(f"\nUsing specific clean file: {clean_path.name}")
+print(f"Using specific noise files: {[np.name for np in noise_paths]}")
+num_file_pairs = len(noise_paths) # Number of tests per SNR/config
 
 # ============================================================================
 # 6. GENERATE PARAMETER COMBINATIONS
@@ -206,9 +236,9 @@ print(f"PARAMETER GRID SUMMARY")
 print(f"{'='*80}")
 print(f"Mode: {PROCESSING_MODE}")
 print(f"Total combinations: {len(param_combinations)}")
-print(f"Files per SNR: {len(paired_files)}")
+print(f"Files per SNR: {num_file_pairs}")
 print(f"SNR levels: {len(SNR_RANGE)}")
-print(f"Total evaluations: {len(param_combinations) * len(paired_files) * len(SNR_RANGE)}")
+print(f"Total evaluations: {len(param_combinations) * num_file_pairs * len(SNR_RANGE)}")
 print(f"\nParameter ranges:")
 for key, values in PARAM_GRID.items():
     print(f"  {key}: {values}")
@@ -276,9 +306,11 @@ for config_idx, config in enumerate(param_combinations, 1):
         results_dir_snr.mkdir(parents=True, exist_ok=True)
         
         # Process each file pair
-        for file_idx, (noise_path, clean_path) in enumerate(paired_files, 1):
+        #for file_idx, (noise_path, clean_path) in enumerate(paired_files, 1):
+        # Loop through the specified noise files, using the single clean file
+        for file_idx, noise_path in enumerate(noise_paths, 1):
             participant = clean_path.parent.name
-            print(f"\nFile {file_idx}/{len(paired_files)}: {clean_path.name} + {noise_path.name}")
+            print(f"\nFile {file_idx}/{num_file_pairs}: {clean_path.name} + {noise_path.name}")
             
             # Step 1: Create noisy mixture
             try:
@@ -406,7 +438,7 @@ for config_idx, config in enumerate(param_combinations, 1):
     print(f"\n{'='*100}")
     print(f"✓ COMPLETED: {config_name}")
     print(f"  Time: {config_time:.2f}s ({config_time/60:.1f} min)")
-    print(f"  Avg per file: {config_time/(len(paired_files)*len(SNR_RANGE)):.1f}s")
+    print(f"  Avg per file: {config_time/(num_file_pairs*len(SNR_RANGE)):.1f}s")
     print(f"{'='*100}")
 
 # ============================================================================

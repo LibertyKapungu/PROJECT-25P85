@@ -16,7 +16,8 @@ plt.rcParams['figure.figsize'] = (12, 8)
 # ====================================
 # CONFIGURATION
 # ====================================
-CSV_FILE = r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\OldCSVFiles\\spectral_parameter_sweep_results7.csv"  
+# CSV_FILE = r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\OldCSVFiles\\spectral_parameter_sweep_results7.csv"  
+CSV_FILE = r"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP/hybrid/sweep_summary_hybrid.csv"
 OUTPUT_DIR = Path("parameter_sweep_analysis")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
