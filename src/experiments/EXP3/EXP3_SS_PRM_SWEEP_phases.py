@@ -65,6 +65,7 @@ CLEAN_FILE = "sound_data/raw/EARS_DATASET/p092/emo_contentment_sentences.wav"
 NOISE_FILES = [
     "sound_data/raw/NOIZEUS_NOISE_DATASET/PC Fan Noise.wav",      # Stationary (SS excels)
     "sound_data/raw/NOIZEUS_NOISE_DATASET/Street Noise_downtown.wav"       # Non-stationary realistic
+    
 ]
 
 # Full SNR range for comprehensive analysis

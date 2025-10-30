@@ -34,7 +34,7 @@ random.seed(SEED)
 np.random.seed(SEED)
 
 # --- Processing Mode ---
-PROCESSING_MODE = "standalone"  # Options: "standalone" or "hybrid"
+PROCESSING_MODE = "hybrid"  # Options: "standalone" or "hybrid"
 
 # --- Parameter Grid (Mode-Adaptive) ---
 if PROCESSING_MODE == "standalone":
@@ -49,12 +49,12 @@ if PROCESSING_MODE == "standalone":
     
 elif PROCESSING_MODE == "hybrid":
     PARAM_GRID = {
-        'Freq_spacing': ['linear', 'log', 'mel'],      # Both useful
-        'Nband': [4,8],                        # Minimal processing
-        'FRMSZ': [8, 20],                       # Match GTCRN frame
-        'OVLP': [50, 75],                       # Smooth blending
-        'Noisefr': [1,2],      # Low latency
-        'FLOOR': [0.2, 0.6],  # CRITICAL: High floor!
+        'Freq_spacing': ['mel'],      # Both useful
+        'Nband': [4,8, 16],                        # Minimal processing
+        'FRMSZ': [8,20, 25],                       # Match GTCRN frame
+        'OVLP': [25, 50, 75],                       # Smooth blending
+        'Noisefr': [1,3],      # Low latency
+        'FLOOR': [0.001, 0.3, 0.5, 0.7, 0.8],  # CRITICAL: High floor!
     }
 else:
     raise ValueError(f"Invalid PROCESSING_MODE: {PROCESSING_MODE}")
@@ -83,7 +83,7 @@ if PROCESSING_MODE == "hybrid":
     sys.path.insert(0, str(gtcrn_path))
 
 # Results directory
-results_dir_base = repo_root / 'results' / 'EXP3' / 'spectral' /'PARAM_SWEEP2' / PROCESSING_MODE
+results_dir_base = repo_root / 'results' / 'EXP3' / 'spectral' /'PARAM_SWEEP3' / PROCESSING_MODE
 results_dir_base.mkdir(parents=True, exist_ok=True)
 
 # ============================================================================
@@ -203,7 +203,9 @@ clean_path_relative = "sound_data/raw/EARS_DATASET/p092/emo_contentment_sentence
 noise_paths_relative = [
     "sound_data/raw/NOIZEUS_NOISE_DATASET/PC_Fan_Noise.wav",
     "sound_data/raw/NOIZEUS_NOISE_DATASET/Street_Noise_downtown.wav",
-    "sound_data/raw/NOIZEUS_NOISE_DATASET/cafeteria_babble.wav"
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/cafeteria_babble.wav",
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/Inside Train_1.wav",     # Train
+    "sound_data/raw/NOIZEUS_NOISE_DATASET/Construction_Trucks_Unloading.wav",  # Construction
 ]
 
 # Construct full paths relative to repo_root
