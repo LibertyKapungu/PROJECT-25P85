@@ -15,7 +15,7 @@ from typing import Dict, Optional
 # ====================================
 MODE = "hybrid"  # Options: "standalone" or "hybrid"
 # BASE_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/{MODE}")
-BASE_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/{MODE}")
+BASE_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP/{MODE}")
 OUTPUT_FILE = BASE_DIR / f"COLLATED_ALL_RESULTS_{MODE}.csv"
 
 print("="*80)
