@@ -1,0 +1,637 @@
+====================================================================================================
+BEST PARAMETERS BY SNR LEVEL
+====================================================================================================
+
+====================================================================================================
+SNR = -5 dB
+====================================================================================================
+
+Freq_spacing:
+  linear:
+    PESQ:  1.312 ± 0.164
+    STOI:  0.614 ± 0.101
+    SI-SDR: 3.99 ± 3.99 dB
+    DNSMOS: 2.276 ± 0.677
+  mel:
+    PESQ:  1.317 ± 0.166
+    STOI:  0.622 ± 0.095
+    SI-SDR: 4.02 ± 4.04 dB
+    DNSMOS: 2.268 ± 0.696
+  log:
+    PESQ:  1.315 ± 0.173
+    STOI:  0.618 ± 0.100
+    SI-SDR: 4.02 ± 4.06 dB
+    DNSMOS: 2.278 ± 0.705
+
+  → Winner (PESQ): mel
+  → Winner (STOI): mel
+
+Nband:
+  8:
+    PESQ:  1.315 ± 0.167
+    STOI:  0.617 ± 0.099
+    SI-SDR: 3.99 ± 3.93 dB
+    DNSMOS: 2.256 ± 0.721
+  4:
+    PESQ:  1.314 ± 0.167
+    STOI:  0.618 ± 0.099
+    SI-SDR: 4.03 ± 4.10 dB
+    DNSMOS: 2.292 ± 0.659
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 4
+
+FRMSZ_ms:
+  20:
+    PESQ:  1.311 ± 0.163
+    STOI:  0.617 ± 0.099
+    SI-SDR: 3.90 ± 4.00 dB
+    DNSMOS: 2.352 ± 0.721
+  8:
+    PESQ:  1.318 ± 0.171
+    STOI:  0.619 ± 0.098
+    SI-SDR: 4.12 ± 4.03 dB
+    DNSMOS: 2.196 ± 0.649
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 8
+
+OVLP:
+  50:
+    PESQ:  1.314 ± 0.175
+    STOI:  0.618 ± 0.098
+    SI-SDR: 3.89 ± 3.98 dB
+    DNSMOS: 2.333 ± 0.725
+  75:
+    PESQ:  1.314 ± 0.159
+    STOI:  0.618 ± 0.099
+    SI-SDR: 4.13 ± 4.05 dB
+    DNSMOS: 2.215 ± 0.649
+
+  → Winner (PESQ): 50
+  → Winner (STOI): 75
+
+Floor:
+  0.6:
+    PESQ:  1.320 ± 0.168
+    STOI:  0.622 ± 0.098
+    SI-SDR: 4.02 ± 4.09 dB
+    DNSMOS: 2.303 ± 0.688
+  0.2:
+    PESQ:  1.309 ± 0.166
+    STOI:  0.614 ± 0.099
+    SI-SDR: 4.00 ± 3.94 dB
+    DNSMOS: 2.245 ± 0.692
+
+  → Winner (PESQ): 0.6
+  → Winner (STOI): 0.6
+
+Noisefr:
+  1:
+    PESQ:  1.314 ± 0.167
+    STOI:  0.618 ± 0.098
+    SI-SDR: 4.01 ± 4.00 dB
+    DNSMOS: 2.274 ± 0.688
+
+  → Winner (PESQ): 1
+  → Winner (STOI): 1
+
+====================================================================================================
+BEST OVERALL CONFIG AT -5 dB:
+====================================================================================================
+
+Best by PESQ: mband_log_N4_F20_O50_FL0p6
+  Freq=log, Nband=4, Frame=20ms, Overlap=50%, Floor=0.6000, Noisefr=1
+  PESQ: 1.355 | STOI: 0.622 | SI-SDR: 4.02 dB | DNSMOS: 2.596
+
+Best by STOI: mband_log_N4_F8_O75_FL0p2
+  Freq=log, Nband=4, Frame=8ms, Overlap=75%, Floor=0.2000, Noisefr=1
+  PESQ: 1.284 | STOI: 0.634 | SI-SDR: 4.41 dB | DNSMOS: 2.271
+
+Best by Weighted Score: mband_mel_N8_F8_O75_FL0p6
+  Freq=mel, Nband=8, Frame=8ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 1.347 | STOI: 0.633 | SI-SDR: 4.32 dB | DNSMOS: 2.179 | Weighted: 0.5013
+
+====================================================================================================
+SNR = 0 dB
+====================================================================================================
+
+Freq_spacing:
+  linear:
+    PESQ:  1.539 ± 0.291
+    STOI:  0.706 ± 0.071
+    SI-SDR: 8.41 ± 2.60 dB
+    DNSMOS: 2.917 ± 0.646
+  mel:
+    PESQ:  1.538 ± 0.296
+    STOI:  0.705 ± 0.072
+    SI-SDR: 8.48 ± 2.57 dB
+    DNSMOS: 2.933 ± 0.650
+  log:
+    PESQ:  1.556 ± 0.308
+    STOI:  0.700 ± 0.074
+    SI-SDR: 8.36 ± 2.64 dB
+    DNSMOS: 2.910 ± 0.626
+
+  → Winner (PESQ): log
+  → Winner (STOI): linear
+
+Nband:
+  8:
+    PESQ:  1.544 ± 0.290
+    STOI:  0.704 ± 0.071
+    SI-SDR: 8.39 ± 2.60 dB
+    DNSMOS: 2.942 ± 0.645
+  4:
+    PESQ:  1.545 ± 0.305
+    STOI:  0.703 ± 0.073
+    SI-SDR: 8.44 ± 2.59 dB
+    DNSMOS: 2.898 ± 0.632
+
+  → Winner (PESQ): 4
+  → Winner (STOI): 8
+
+FRMSZ_ms:
+  20:
+    PESQ:  1.540 ± 0.291
+    STOI:  0.705 ± 0.072
+    SI-SDR: 8.31 ± 2.56 dB
+    DNSMOS: 2.990 ± 0.663
+  8:
+    PESQ:  1.549 ± 0.304
+    STOI:  0.703 ± 0.072
+    SI-SDR: 8.52 ± 2.62 dB
+    DNSMOS: 2.849 ± 0.606
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 20
+
+OVLP:
+  50:
+    PESQ:  1.538 ± 0.292
+    STOI:  0.701 ± 0.073
+    SI-SDR: 8.26 ± 2.55 dB
+    DNSMOS: 2.992 ± 0.677
+  75:
+    PESQ:  1.551 ± 0.303
+    STOI:  0.707 ± 0.071
+    SI-SDR: 8.57 ± 2.63 dB
+    DNSMOS: 2.848 ± 0.589
+
+  → Winner (PESQ): 75
+  → Winner (STOI): 75
+
+Floor:
+  0.6:
+    PESQ:  1.551 ± 0.301
+    STOI:  0.706 ± 0.069
+    SI-SDR: 8.46 ± 2.56 dB
+    DNSMOS: 2.924 ± 0.628
+  0.2:
+    PESQ:  1.538 ± 0.294
+    STOI:  0.701 ± 0.074
+    SI-SDR: 8.37 ± 2.63 dB
+    DNSMOS: 2.915 ± 0.649
+
+  → Winner (PESQ): 0.6
+  → Winner (STOI): 0.6
+
+Noisefr:
+  1:
+    PESQ:  1.544 ± 0.297
+    STOI:  0.704 ± 0.072
+    SI-SDR: 8.42 ± 2.59 dB
+    DNSMOS: 2.920 ± 0.637
+
+  → Winner (PESQ): 1
+  → Winner (STOI): 1
+
+====================================================================================================
+BEST OVERALL CONFIG AT 0 dB:
+====================================================================================================
+
+Best by PESQ: mband_log_N8_F8_O75_FL0p6
+  Freq=log, Nband=8, Frame=8ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 1.600 | STOI: 0.713 | SI-SDR: 8.60 dB | DNSMOS: 2.786
+
+Best by STOI: mband_linear_N8_F20_O75_FL0p6
+  Freq=linear, Nband=8, Frame=20ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 1.556 | STOI: 0.725 | SI-SDR: 8.61 dB | DNSMOS: 2.904
+
+Best by Weighted Score: mband_linear_N8_F20_O75_FL0p6
+  Freq=linear, Nband=8, Frame=20ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 1.556 | STOI: 0.725 | SI-SDR: 8.61 dB | DNSMOS: 2.904 | Weighted: 0.5683
+
+====================================================================================================
+SNR = 5 dB
+====================================================================================================
+
+Freq_spacing:
+  linear:
+    PESQ:  1.876 ± 0.374
+    STOI:  0.770 ± 0.046
+    SI-SDR: 11.77 ± 1.56 dB
+    DNSMOS: 3.479 ± 0.466
+  mel:
+    PESQ:  1.876 ± 0.368
+    STOI:  0.773 ± 0.046
+    SI-SDR: 11.87 ± 1.52 dB
+    DNSMOS: 3.475 ± 0.580
+  log:
+    PESQ:  1.865 ± 0.384
+    STOI:  0.767 ± 0.050
+    SI-SDR: 11.74 ± 1.50 dB
+    DNSMOS: 3.425 ± 0.501
+
+  → Winner (PESQ): mel
+  → Winner (STOI): mel
+
+Nband:
+  8:
+    PESQ:  1.869 ± 0.376
+    STOI:  0.770 ± 0.048
+    SI-SDR: 11.79 ± 1.55 dB
+    DNSMOS: 3.464 ± 0.526
+  4:
+    PESQ:  1.875 ± 0.372
+    STOI:  0.769 ± 0.047
+    SI-SDR: 11.81 ± 1.49 dB
+    DNSMOS: 3.456 ± 0.508
+
+  → Winner (PESQ): 4
+  → Winner (STOI): 8
+
+FRMSZ_ms:
+  20:
+    PESQ:  1.871 ± 0.373
+    STOI:  0.770 ± 0.047
+    SI-SDR: 11.58 ± 1.51 dB
+    DNSMOS: 3.546 ± 0.505
+  8:
+    PESQ:  1.874 ± 0.376
+    STOI:  0.769 ± 0.048
+    SI-SDR: 12.01 ± 1.50 dB
+    DNSMOS: 3.374 ± 0.514
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 20
+
+OVLP:
+  50:
+    PESQ:  1.856 ± 0.359
+    STOI:  0.770 ± 0.046
+    SI-SDR: 11.62 ± 1.43 dB
+    DNSMOS: 3.545 ± 0.491
+  75:
+    PESQ:  1.888 ± 0.388
+    STOI:  0.769 ± 0.048
+    SI-SDR: 11.98 ± 1.58 dB
+    DNSMOS: 3.375 ± 0.528
+
+  → Winner (PESQ): 75
+  → Winner (STOI): 50
+
+Floor:
+  0.6:
+    PESQ:  1.877 ± 0.378
+    STOI:  0.771 ± 0.048
+    SI-SDR: 11.89 ± 1.50 dB
+    DNSMOS: 3.447 ± 0.508
+  0.2:
+    PESQ:  1.867 ± 0.370
+    STOI:  0.768 ± 0.047
+    SI-SDR: 11.70 ± 1.53 dB
+    DNSMOS: 3.472 ± 0.526
+
+  → Winner (PESQ): 0.6
+  → Winner (STOI): 0.6
+
+Noisefr:
+  1:
+    PESQ:  1.872 ± 0.373
+    STOI:  0.770 ± 0.047
+    SI-SDR: 11.80 ± 1.51 dB
+    DNSMOS: 3.460 ± 0.515
+
+  → Winner (PESQ): 1
+  → Winner (STOI): 1
+
+====================================================================================================
+BEST OVERALL CONFIG AT 5 dB:
+====================================================================================================
+
+Best by PESQ: mband_mel_N8_F8_O75_FL0p2
+  Freq=mel, Nband=8, Frame=8ms, Overlap=75%, Floor=0.2000, Noisefr=1
+  PESQ: 1.956 | STOI: 0.772 | SI-SDR: 12.33 dB | DNSMOS: 3.444
+
+Best by STOI: mband_mel_N8_F8_O50_FL0p2
+  Freq=mel, Nband=8, Frame=8ms, Overlap=50%, Floor=0.2000, Noisefr=1
+  PESQ: 1.882 | STOI: 0.785 | SI-SDR: 11.94 dB | DNSMOS: 3.418
+
+Best by Weighted Score: mband_mel_N8_F20_O75_FL0p6
+  Freq=mel, Nband=8, Frame=20ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 1.925 | STOI: 0.781 | SI-SDR: 12.40 dB | DNSMOS: 3.383 | Weighted: 0.6329
+
+====================================================================================================
+SNR = 10 dB
+====================================================================================================
+
+Freq_spacing:
+  linear:
+    PESQ:  2.256 ± 0.351
+    STOI:  0.810 ± 0.034
+    SI-SDR: 14.74 ± 0.90 dB
+    DNSMOS: 3.769 ± 0.341
+  mel:
+    PESQ:  2.235 ± 0.364
+    STOI:  0.811 ± 0.033
+    SI-SDR: 14.72 ± 0.93 dB
+    DNSMOS: 3.771 ± 0.323
+  log:
+    PESQ:  2.244 ± 0.358
+    STOI:  0.811 ± 0.032
+    SI-SDR: 14.69 ± 0.86 dB
+    DNSMOS: 3.799 ± 0.301
+
+  → Winner (PESQ): linear
+  → Winner (STOI): mel
+
+Nband:
+  8:
+    PESQ:  2.244 ± 0.355
+    STOI:  0.810 ± 0.033
+    SI-SDR: 14.72 ± 0.90 dB
+    DNSMOS: 3.777 ± 0.343
+  4:
+    PESQ:  2.245 ± 0.358
+    STOI:  0.811 ± 0.033
+    SI-SDR: 14.72 ± 0.89 dB
+    DNSMOS: 3.782 ± 0.298
+
+  → Winner (PESQ): 4
+  → Winner (STOI): 4
+
+FRMSZ_ms:
+  20:
+    PESQ:  2.239 ± 0.352
+    STOI:  0.810 ± 0.033
+    SI-SDR: 14.42 ± 0.93 dB
+    DNSMOS: 3.837 ± 0.317
+  8:
+    PESQ:  2.251 ± 0.361
+    STOI:  0.811 ± 0.033
+    SI-SDR: 15.02 ± 0.75 dB
+    DNSMOS: 3.722 ± 0.314
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 8
+
+OVLP:
+  50:
+    PESQ:  2.217 ± 0.344
+    STOI:  0.811 ± 0.032
+    SI-SDR: 14.22 ± 0.74 dB
+    DNSMOS: 3.824 ± 0.346
+  75:
+    PESQ:  2.273 ± 0.367
+    STOI:  0.811 ± 0.034
+    SI-SDR: 15.22 ± 0.75 dB
+    DNSMOS: 3.736 ± 0.288
+
+  → Winner (PESQ): 75
+  → Winner (STOI): 75
+
+Floor:
+  0.6:
+    PESQ:  2.261 ± 0.349
+    STOI:  0.811 ± 0.032
+    SI-SDR: 14.96 ± 0.88 dB
+    DNSMOS: 3.782 ± 0.319
+  0.2:
+    PESQ:  2.229 ± 0.363
+    STOI:  0.810 ± 0.034
+    SI-SDR: 14.48 ± 0.84 dB
+    DNSMOS: 3.777 ± 0.324
+
+  → Winner (PESQ): 0.6
+  → Winner (STOI): 0.6
+
+Noisefr:
+  1:
+    PESQ:  2.245 ± 0.355
+    STOI:  0.811 ± 0.033
+    SI-SDR: 14.72 ± 0.89 dB
+    DNSMOS: 3.780 ± 0.320
+
+  → Winner (PESQ): 1
+  → Winner (STOI): 1
+
+====================================================================================================
+BEST OVERALL CONFIG AT 10 dB:
+====================================================================================================
+
+Best by PESQ: mband_linear_N4_F8_O75_FL0p6
+  Freq=linear, Nband=4, Frame=8ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 2.329 | STOI: 0.813 | SI-SDR: 15.65 dB | DNSMOS: 3.635
+
+Best by STOI: mband_mel_N4_F20_O50_FL0p6
+  Freq=mel, Nband=4, Frame=20ms, Overlap=50%, Floor=0.6000, Noisefr=1
+  PESQ: 2.222 | STOI: 0.820 | SI-SDR: 14.06 dB | DNSMOS: 4.063
+
+Best by Weighted Score: mband_linear_N4_F8_O75_FL0p6
+  Freq=linear, Nband=4, Frame=8ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 2.329 | STOI: 0.813 | SI-SDR: 15.65 dB | DNSMOS: 3.635 | Weighted: 0.6892
+
+====================================================================================================
+SNR = 15 dB
+====================================================================================================
+
+Freq_spacing:
+  linear:
+    PESQ:  2.637 ± 0.298
+    STOI:  0.840 ± 0.027
+    SI-SDR: 17.34 ± 1.09 dB
+    DNSMOS: 3.926 ± 0.221
+  mel:
+    PESQ:  2.631 ± 0.290
+    STOI:  0.838 ± 0.028
+    SI-SDR: 17.40 ± 1.20 dB
+    DNSMOS: 3.885 ± 0.195
+  log:
+    PESQ:  2.654 ± 0.300
+    STOI:  0.840 ± 0.028
+    SI-SDR: 17.19 ± 1.18 dB
+    DNSMOS: 3.928 ± 0.209
+
+  → Winner (PESQ): log
+  → Winner (STOI): log
+
+Nband:
+  8:
+    PESQ:  2.643 ± 0.297
+    STOI:  0.840 ± 0.027
+    SI-SDR: 17.30 ± 1.15 dB
+    DNSMOS: 3.911 ± 0.227
+  4:
+    PESQ:  2.638 ± 0.294
+    STOI:  0.839 ± 0.028
+    SI-SDR: 17.31 ± 1.16 dB
+    DNSMOS: 3.915 ± 0.188
+
+  → Winner (PESQ): 8
+  → Winner (STOI): 8
+
+FRMSZ_ms:
+  20:
+    PESQ:  2.646 ± 0.298
+    STOI:  0.840 ± 0.028
+    SI-SDR: 16.78 ± 1.17 dB
+    DNSMOS: 3.989 ± 0.199
+  8:
+    PESQ:  2.635 ± 0.293
+    STOI:  0.839 ± 0.027
+    SI-SDR: 17.84 ± 0.86 dB
+    DNSMOS: 3.836 ± 0.189
+
+  → Winner (PESQ): 20
+  → Winner (STOI): 20
+
+OVLP:
+  50:
+    PESQ:  2.592 ± 0.280
+    STOI:  0.836 ± 0.027
+    SI-SDR: 16.48 ± 0.86 dB
+    DNSMOS: 3.978 ± 0.186
+  75:
+    PESQ:  2.689 ± 0.302
+    STOI:  0.843 ± 0.027
+    SI-SDR: 18.14 ± 0.73 dB
+    DNSMOS: 3.847 ± 0.209
+
+  → Winner (PESQ): 75
+  → Winner (STOI): 75
+
+Floor:
+  0.6:
+    PESQ:  2.656 ± 0.279
+    STOI:  0.842 ± 0.027
+    SI-SDR: 17.68 ± 1.07 dB
+    DNSMOS: 3.930 ± 0.195
+  0.2:
+    PESQ:  2.625 ± 0.310
+    STOI:  0.837 ± 0.028
+    SI-SDR: 16.94 ± 1.11 dB
+    DNSMOS: 3.896 ± 0.220
+
+  → Winner (PESQ): 0.6
+  → Winner (STOI): 0.6
+
+Noisefr:
+  1:
+    PESQ:  2.641 ± 0.294
+    STOI:  0.839 ± 0.027
+    SI-SDR: 17.31 ± 1.15 dB
+    DNSMOS: 3.913 ± 0.208
+
+  → Winner (PESQ): 1
+  → Winner (STOI): 1
+
+====================================================================================================
+BEST OVERALL CONFIG AT 15 dB:
+====================================================================================================
+
+Best by PESQ: mband_linear_N8_F20_O75_FL0p6
+  Freq=linear, Nband=8, Frame=20ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 2.774 | STOI: 0.847 | SI-SDR: 18.36 dB | DNSMOS: 3.940
+
+Best by STOI: mband_linear_N8_F8_O75_FL0p6
+  Freq=linear, Nband=8, Frame=8ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 2.683 | STOI: 0.849 | SI-SDR: 18.88 dB | DNSMOS: 3.730
+
+Best by Weighted Score: mband_linear_N8_F20_O75_FL0p6
+  Freq=linear, Nband=8, Frame=20ms, Overlap=75%, Floor=0.6000, Noisefr=1
+  PESQ: 2.774 | STOI: 0.847 | SI-SDR: 18.36 dB | DNSMOS: 3.940 | Weighted: 0.7510
+
+✓ Saved: winners_by_snr.csv
+
+====================================================================================================
+GENERATING SNR-SPECIFIC VISUALIZATIONS
+====================================================================================================
+✓ Saved: parameter_winners_by_snr.png
+✓ Saved: trends_by_Freq_spacing.png
+✓ Saved: trends_by_Floor.png
+✓ Saved: trends_by_Nband.png
+✓ Saved: heatmap_pesq_by_snr_and_param.png
+
+====================================================================================================
+PARAMETER WINNER CONSISTENCY ACROSS SNR
+====================================================================================================
+
+Freq_spacing:
+  PESQ: 'mel' wins 40% of SNR levels
+        Distribution: {'mel': np.int64(2), 'log': np.int64(2), 'linear': np.int64(1)}
+  STOI: 'mel' wins 60% of SNR levels
+        Distribution: {'mel': np.int64(3), 'linear': np.int64(1), 'log': np.int64(1)}
+
+Nband:
+  PESQ: '4' wins 60% of SNR levels
+        Distribution: {np.int64(4): np.int64(3), np.int64(8): np.int64(2)}
+  STOI: '8' wins 60% of SNR levels
+        Distribution: {np.int64(8): np.int64(3), np.int64(4): np.int64(2)}
+
+FRMSZ_ms:
+  PESQ: '8' wins 80% of SNR levels
+        Distribution: {np.int64(8): np.int64(4), np.int64(20): np.int64(1)}
+  STOI: '20' wins 60% of SNR levels
+        Distribution: {np.int64(20): np.int64(3), np.int64(8): np.int64(2)}
+
+OVLP:
+  PESQ: '75' wins 80% of SNR levels
+        Distribution: {np.int64(75): np.int64(4), np.int64(50): np.int64(1)}
+  STOI: '75' wins 80% of SNR levels
+        Distribution: {np.int64(75): np.int64(4), np.int64(50): np.int64(1)}
+
+Floor:
+  PESQ: '0.6' wins 100% of SNR levels
+        Distribution: {np.float64(0.6): np.int64(5)}
+  STOI: '0.6' wins 100% of SNR levels
+        Distribution: {np.float64(0.6): np.int64(5)}
+
+Noisefr:
+  PESQ: '1' wins 100% of SNR levels
+        Distribution: {np.int64(1): np.int64(5)}
+  STOI: '1' wins 100% of SNR levels
+        Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: winner_consistency.csv
+
+====================================================================================================
+KEY INSIGHTS
+====================================================================================================
+
+1. SNR-DEPENDENT PARAMETERS (different winners at different SNRs):
+   • Freq_spacing: Winner changes across SNR levels
+     → Consider SNR-adaptive parameter selection
+
+2. SNR-INDEPENDENT PARAMETERS (consistent winner across SNRs):
+   • OVLP: '75' for PESQ, '75' for STOI
+     → Can use fixed value
+   • Floor: '0.6' for PESQ, '0.6' for STOI
+     → Can use fixed value
+   • Noisefr: '1' for PESQ, '1' for STOI
+     → Can use fixed value
+
+3. LOW SNR RECOMMENDATIONS (SNR ≤ 0 dB):
+   • Best Freq_spacing: log (avg PESQ: 1.436)
+   • Best Floor: 0.6 (avg PESQ: 1.435)
+   • Best Nband: 8 (avg PESQ: 1.430)
+
+4. HIGH SNR RECOMMENDATIONS (SNR ≥ 10 dB):
+   • Best Freq_spacing: log (avg PESQ: 2.449)
+   • Best Floor: 0.6 (avg PESQ: 2.458)
+   • Best Nband: 8 (avg PESQ: 2.444)
+
+====================================================================================================
+ANALYSIS COMPLETE!
+Results saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/snr_specific_analysis_hybrid
+============================================

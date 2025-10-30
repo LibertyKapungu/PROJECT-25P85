@@ -1,0 +1,395 @@
+
+====================================================================================================
+TOP 10 OVERALL CONFIGURATIONS
+====================================================================================================
+
+--- Top 10 by PESQ ---
+                    Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr     PESQ
+ mband_log_N8_F25_O75_FL0p001     Stationary          log      8        25    75 2.842340 0.855693 15.388040        3.842530 2.842340
+ mband_log_N4_F25_O75_FL0p001     Stationary          log      4        25    75 2.816022 0.855395 15.469340        3.831384 2.816022
+mband_log_N16_F20_O75_FL0p001     Stationary          log     16        20    75 2.805084 0.854661 15.164290        3.568765 2.805084
+ mband_log_N8_F20_O75_FL0p001     Stationary          log      8        20    75 2.802811 0.854038 15.603748        3.456855 2.802811
+mband_log_N16_F25_O75_FL0p001     Stationary          log     16        25    75 2.795902 0.852846 15.546593        3.712231 2.795902
+  mband_log_N8_F25_O75_FL0p02     Stationary          log      8        25    75 2.762942 0.856341 15.330471        3.426784 2.762942
+mband_mel_N16_F25_O75_FL0p001     Stationary          mel     16        25    75 2.750962 0.853863 16.584513        3.591814 2.750962
+ mband_mel_N8_F25_O75_FL0p001     Stationary          mel      8        25    75 2.747454 0.860788 15.902191        3.691270 2.747454
+ mband_log_N4_F20_O75_FL0p001     Stationary          log      4        20    75 2.745069 0.848520 15.877548        3.514769 2.745069
+ mband_log_N16_F20_O75_FL0p02     Stationary          log     16        20    75 2.731784 0.857475 15.554974        3.362005 2.731784
+
+--- Top 10 by STOI ---
+                       Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr     STOI
+    mband_mel_N4_F25_O75_FL0p001     Stationary          mel      4        25    75 2.703901 0.862548 15.669319        3.802801 0.862548
+ mband_linear_N4_F20_O75_FL0p001     Stationary       linear      4        20    75 2.652328 0.861091 16.317408        3.627005 0.861091
+  mband_linear_N8_F25_O75_FL0p02     Stationary       linear      8        25    75 2.576918 0.860877 15.972842        3.692381 0.860877
+    mband_mel_N8_F25_O75_FL0p001     Stationary          mel      8        25    75 2.747454 0.860788 15.902191        3.691270 0.860788
+     mband_mel_N4_F25_O75_FL0p02     Stationary          mel      4        25    75 2.608539 0.859972 16.541126        3.413532 0.859972
+ mband_linear_N16_F20_O75_FL0p02     Stationary       linear     16        20    75 2.661558 0.859616 16.076982        3.600586 0.859616
+      mband_log_N4_F20_O75_FL0p2     Stationary          log      4        20    75 2.313984 0.859351 16.627016        3.371172 0.859351
+     mband_mel_N8_F25_O75_FL0p02     Stationary          mel      8        25    75 2.705556 0.858636 16.493258        3.507713 0.858636
+  mband_linear_N4_F20_O75_FL0p02     Stationary       linear      4        20    75 2.573811 0.858072 16.163368        3.725718 0.858072
+mband_linear_N16_F25_O75_FL0p001     Stationary       linear     16        25    75 2.612847 0.857752 15.898500        3.775525 0.857752
+
+--- Top 10 by SI_SDR ---
+                     Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr    SI_SDR
+    mband_mel_N4_F20_O75_FL0p2     Stationary          mel      4        20    75 2.272420 0.847711 16.969078        3.532874 16.969078
+mband_linear_N16_F20_O75_FL0p2     Stationary       linear     16        20    75 2.288587 0.848310 16.961418        3.420424 16.961418
+ mband_linear_N4_F20_O75_FL0p2     Stationary       linear      4        20    75 2.299531 0.854826 16.912512        3.414588 16.912512
+ mband_linear_N8_F20_O75_FL0p2     Stationary       linear      8        20    75 2.296395 0.857459 16.898386        3.219988 16.898386
+    mband_mel_N8_F20_O75_FL0p2     Stationary          mel      8        20    75 2.308532 0.847382 16.870285        3.327760 16.870285
+    mband_mel_N8_F25_O75_FL0p2     Stationary          mel      8        25    75 2.301651 0.845357 16.864491        3.430802 16.864491
+   mband_mel_N16_F25_O75_FL0p2     Stationary          mel     16        25    75 2.327132 0.853357 16.839361        3.488855 16.839361
+ mband_linear_N4_F25_O75_FL0p2     Stationary       linear      4        25    75 2.261182 0.848749 16.792156        3.344475 16.792156
+   mband_mel_N16_F20_O75_FL0p2     Stationary          mel     16        20    75 2.313867 0.850729 16.761305        3.241341 16.761305
+   mband_log_N16_F25_O75_FL0p2     Stationary          log     16        25    75 2.321768 0.849174 16.749100        3.442465 16.749100
+
+--- Top 10 by DNSMOS_mos_ovr ---
+                       Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr  DNSMOS_mos_ovr
+    mband_log_N8_F25_O25_FL0p001     Stationary          log      8        25    25 2.131693 0.834429 11.077262        4.109156        4.109156
+    mband_mel_N16_F20_O25_FL0p02     Stationary          mel     16        20    25 2.274765 0.841454 12.158284        4.098988        4.098988
+   mband_mel_N16_F25_O50_FL0p001         Street          mel     16        25    50 2.322735 0.804249 13.215934        4.063369        4.063369
+    mband_log_N4_F25_O50_FL0p001     Stationary          log      4        25    50 2.624681 0.848069 13.652583        4.062847        4.062847
+ mband_linear_N8_F25_O25_FL0p001     Stationary       linear      8        25    25 2.120345 0.837051 11.090685        4.048067        4.048067
+mband_linear_N16_F25_O25_FL0p001     Stationary       linear     16        25    25 2.128124 0.832005 11.238609        4.047978        4.047978
+     mband_mel_N4_F20_O50_FL0p02     Stationary          mel      4        20    50 2.532068 0.853826 14.659680        4.017767        4.017767
+    mband_log_N16_F20_O50_FL0p02     Stationary          log     16        20    50 2.617301 0.847445 14.650940        3.997913        3.997913
+  mband_linear_N8_F20_O25_FL0p02     Stationary       linear      8        20    25 2.208140 0.845008 12.253789        3.993051        3.993051
+ mband_linear_N8_F20_O25_FL0p001     Stationary       linear      8        20    25 2.258167 0.845913 12.064319        3.986853        3.986853
+
+--- Top 10 by Weighted_Score ---
+                    Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr  Weighted_Score
+ mband_log_N8_F25_O75_FL0p001     Stationary          log      8        25    75 2.842340 0.855693 15.388040        3.842530        0.762081
+ mband_log_N4_F25_O75_FL0p001     Stationary          log      4        25    75 2.816022 0.855395 15.469340        3.831384        0.759300
+mband_log_N16_F20_O75_FL0p001     Stationary          log     16        20    75 2.805084 0.854661 15.164290        3.568765        0.757839
+ mband_log_N8_F20_O75_FL0p001     Stationary          log      8        20    75 2.802811 0.854038 15.603748        3.456855        0.757300
+mband_log_N16_F25_O75_FL0p001     Stationary          log     16        25    75 2.795902 0.852846 15.546593        3.712231        0.756013
+ mband_mel_N8_F25_O75_FL0p001     Stationary          mel      8        25    75 2.747454 0.860788 15.902191        3.691270        0.755140
+  mband_log_N8_F25_O75_FL0p02     Stationary          log      8        25    75 2.762942 0.856341 15.330471        3.426784        0.754465
+mband_mel_N16_F25_O75_FL0p001     Stationary          mel     16        25    75 2.750962 0.853863 16.584513        3.591814        0.752028
+ mband_log_N16_F20_O75_FL0p02     Stationary          log     16        20    75 2.731784 0.857475 15.554974        3.362005        0.751916
+ mband_mel_N4_F25_O75_FL0p001     Stationary          mel      4        25    75 2.703901 0.862548 15.669319        3.802801        0.751664
+
+====================================================================================================
+BEST CONFIGURATIONS BY NOISE CATEGORY
+====================================================================================================
+
+====================================================================================================
+Category: Stationary
+====================================================================================================
+
+Best PESQ: 2.8423
+  Config: Freq=log, Nband=8, Frame=25ms, Overlap=75%
+
+Best STOI: 0.8625
+  Config: Freq=mel, Nband=4, Frame=25ms, Overlap=75%
+
+Best SI_SDR: 16.9691
+  Config: Freq=mel, Nband=4, Frame=20ms, Overlap=75%
+
+Best Weighted_Score: 0.7621
+  Config: Freq=log, Nband=8, Frame=25ms, Overlap=75%
+
+====================================================================================================
+Category: Street
+====================================================================================================
+
+Best PESQ: 2.4992
+  Config: Freq=log, Nband=16, Frame=20ms, Overlap=75%
+
+Best STOI: 0.8303
+  Config: Freq=linear, Nband=8, Frame=20ms, Overlap=75%
+
+Best SI_SDR: 16.4177
+  Config: Freq=mel, Nband=16, Frame=20ms, Overlap=75%
+
+Best Weighted_Score: 0.7083
+  Config: Freq=linear, Nband=8, Frame=20ms, Overlap=75%
+
+====================================================================================================
+Category: Babble
+====================================================================================================
+
+Best PESQ: 2.4080
+  Config: Freq=mel, Nband=16, Frame=20ms, Overlap=75%
+
+Best STOI: 0.8106
+  Config: Freq=linear, Nband=4, Frame=8ms, Overlap=75%
+
+Best SI_SDR: 16.2078
+  Config: Freq=mel, Nband=16, Frame=20ms, Overlap=75%
+
+Best Weighted_Score: 0.6902
+  Config: Freq=mel, Nband=16, Frame=25ms, Overlap=75%
+
+====================================================================================================
+AVERAGE METRICS BY PARAMETER VALUE
+====================================================================================================
+
+================================================================================
+Parameter: Freq_spacing
+================================================================================
+                PESQ                            STOI  ... DNSMOS_mos_ovr Weighted_Score                        
+                mean     std     min     max    mean  ...            max           mean     std     min     max
+Freq_spacing                                          ...                                                      
+linear        1.5442  0.4081  1.0724  2.7256  0.7217  ...         4.0481         0.5653  0.0824  0.4072  0.7487
+log           1.5603  0.4209  1.0701  2.8423  0.7181  ...         4.1092         0.5651  0.0830  0.4062  0.7621
+mel           1.5501  0.4133  1.0691  2.7510  0.7205  ...         4.0990         0.5653  0.0826  0.4020  0.7551
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: Nband
+================================================================================
+         PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+         mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+Nband                                                  ...                                                              
+4      1.5441  0.4049  1.0701  2.8160  0.7199  0.0922  ...         0.9958  4.0628         0.5644  0.0819  0.4020  0.7593
+8      1.5534  0.4161  1.0709  2.8423  0.7207  0.0921  ...         1.0316  4.1092         0.5657  0.0829  0.4062  0.7621
+16     1.5572  0.4214  1.0691  2.8051  0.7197  0.0913  ...         1.1276  4.0990         0.5656  0.0831  0.4072  0.7578
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: FRMSZ_ms
+================================================================================
+            PESQ                            STOI  ... DNSMOS_mos_ovr Weighted_Score                        
+            mean     std     min     max    mean  ...            max           mean     std     min     max
+FRMSZ_ms                                          ...                                                      
+8         1.5158  0.3863  1.0734  2.5273  0.7164  ...         3.9128         0.5598  0.0806  0.4020  0.7294
+20        1.5776  0.4301  1.0755  2.8051  0.7224  ...         4.0990         0.5689  0.0841  0.4062  0.7578
+25        1.5613  0.4224  1.0691  2.8423  0.7216  ...         4.1092         0.5669  0.0829  0.4086  0.7621
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: OVLP
+================================================================================
+        PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+        mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+OVLP                                                  ...                                                              
+25    1.4837  0.3366  1.0691  2.2780  0.7162  0.0897  ...         1.0328  4.1092         0.5565  0.0746  0.4020  0.6988
+50    1.5824  0.4351  1.0745  2.6816  0.7219  0.0915  ...         0.9958  4.0634         0.5692  0.0846  0.4078  0.7433
+75    1.5886  0.4529  1.0741  2.8423  0.7222  0.0942  ...         1.0412  3.8425         0.5700  0.0875  0.4062  0.7621
+
+[3 rows x 20 columns]
+
+====================================================================================================
+GENERATING VISUALIZATIONS
+====================================================================================================
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_Freq_spacing.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_Nband.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_FRMSZ_ms.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_OVLP.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_Floor.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:194: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x=param, y=metric, ax=ax, palette='Set2')
+✓ Saved: boxplot_Noisefr.png
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:216: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_success, x='Noise_Category', y=metric, ax=ax, palette='Set1')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:216: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_success, x='Noise_Category', y=metric, ax=ax, palette='Set1')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:216: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_success, x='Noise_Category', y=metric, ax=ax, palette='Set1')
+/home/25p85/Gabi/PROJECT-25P85/src/utils/analyze_parameter_sweep.py:216: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_success, x='Noise_Category', y=metric, ax=ax, palette='Set1')
+✓ Saved: performance_by_noise_category.png
+✓ Saved: heatmap_freq_vs_nband.png
+✓ Saved: heatmap_frame_vs_overlap.png
+✓ Saved: heatmap_CRITICAL_floor_vs_noise.png
+✓ Saved: heatmap_noisefr_vs_noise.png
+✓ Saved: metric_distributions.png
+✓ Saved: pesq_vs_stoi_scatter.png
+✓ Saved: avg_metrics_by_freq_spacing.png
+
+====================================================================================================
+BEST OVERALL CONFIGURATION (Weighted Score)
+====================================================================================================
+
+Configuration:
+  Config ID: mband_log_N8_F25_O75_FL0p001
+  Freq_spacing: log
+  Nband: 8
+  Frame Size: 25 ms
+  Overlap: 75%
+
+Metrics:
+  PESQ: 2.8423
+  STOI: 0.8557
+  SI-SDR: 15.39 dB
+  DNSMOS Overall: 3.8425
+  Weighted Score: 0.7621
+
+
+PARAMETER SWEEP ANALYSIS SUMMARY
+====================================================================================================
+
+Dataset Statistics:
+  Total configurations: 243
+  Total tests: 3645
+  Successful tests: 3645 (100.0%)
+  Noise categories: Stationary, Street, Babble
+
+Overall Performance (mean ± std):
+  PESQ: 1.552 ± 0.414
+  STOI: 0.720 ± 0.092
+  SI-SDR: 7.44 ± 5.75 dB
+  DNSMOS: 2.728 ± 0.601
+
+BEST OVERALL CONFIGURATION:
+  Frequency Spacing: log
+  Number of Bands: 8
+  Frame Size: 25 ms
+  Overlap: 75%
+  
+  Performance:
+    PESQ: 2.8423
+    STOI: 0.8557
+    SI-SDR: 15.39 dB
+    DNSMOS: 3.8425
+    Weighted Score: 0.7621
+
+PARAMETER INSIGHTS:
+
+  Best Freq_spacing: mel (avg weighted score: 0.5653)
+  Best Nband: 8 (avg weighted score: 0.5657)
+  Best FRMSZ_ms: 20 (avg weighted score: 0.5689)
+  Best OVLP: 75 (avg weighted score: 0.5700)
+
+PERFORMANCE BY NOISE CATEGORY (avg PESQ):
+  Stationary: 1.644
+  Street: 1.517
+  Babble: 1.494
+
+RECOMMENDED FLOOR BY NOISE TYPE:
+  Stationary: Floor=0.001 (score: 0.6133)
+  Street: Floor=0.001 (score: 0.5576)
+  Babble: Floor=0.02 (score: 0.5355)
