@@ -1,0 +1,97 @@
+
+====================================================================================================
+3-PHASE PARAMETER SWEEP - COMPREHENSIVE ANALYSIS REPORT
+====================================================================================================
+
+EXPERIMENT OVERVIEW:
+  Total Tests: 162
+  Successful Tests: 162 (100.0%)
+  Phase 1 (Freq Spacing): 30 tests
+  Phase 2 (Floor Optim): 60 tests
+  Phase 3 (Fine-tuning): 72 tests
+
+====================================================================================================
+PHASE 1 INSIGHTS: FREQUENCY SPACING
+====================================================================================================
+
+Overall Performance (averaged across all SNRs and noises):
+
+MEL:
+  PESQ: 2.102 ± 0.630
+  STOI: 0.774 ± 0.087
+  SI-SDR: 12.38 ± 4.37 dB
+LOG:
+  PESQ: 2.132 ± 0.631
+  STOI: 0.781 ± 0.085
+  SI-SDR: 12.26 ± 4.41 dB
+LINEAR:
+  PESQ: 2.113 ± 0.629
+  STOI: 0.784 ± 0.082
+  SI-SDR: 12.46 ± 4.20 dB
+
+KEY FINDING: SNR-Dependent Performance
+  LOG performs better at: Low SNR (-5 to 0 dB)
+  LINEAR performs better at: High SNR (10 to 15 dB)
+  MEL: Generally underperforms (eliminated)
+
+====================================================================================================
+PHASE 2 INSIGHTS: FLOOR OPTIMIZATION
+====================================================================================================
+
+Optimal Floor Values by Noise Type:
+  Stationary: Floor = 0.8 (aggressive OK - predictable noise)
+  Street: Floor = 0.3 (conservative - preserves speech dynamics)
+
+KEY FINDING: Noise-Specific Floor Tuning Required
+  Stationary noise: Can use lower floor (0.002-0.1)
+  Non-stationary noise: Needs higher floor (0.3-0.8)
+  Reason: GTCRN residual noise varies by noise type
+
+====================================================================================================
+PHASE 3 INSIGHTS: FINE-TUNING
+====================================================================================================
+
+Optimal Parameter Values:
+  Nband: 4 bands
+  Frame Size: 20 ms
+  Noisefr: 1 frames
+
+====================================================================================================
+FINAL RECOMMENDATIONS
+====================================================================================================
+
+BEST OVERALL CONFIGURATION:
+  Frequency Spacing: linear
+  Nband: 8
+  Frame Size: 20 ms
+  Overlap: 75%
+  Noisefr: 1
+  Floor: 0.3
+
+Performance (vs noisy baseline assumed 0 improvement):
+  PESQ: 3.228
+  STOI: 0.877
+  SI-SDR: 17.62 dB
+  DNSMOS: 4.043
+
+ADAPTIVE SYSTEM DESIGN RECOMMENDATION:
+  1. Estimate SNR of input signal
+  2. Classify noise type (stationary vs non-stationary)
+  3. Select frequency spacing:
+     - SNR < 5 dB: Use LOG
+     - SNR ≥ 5 dB: Use LINEAR
+  4. Select floor parameter:
+     - Stationary noise: Lower floor (0.002-0.1)
+     - Non-stationary noise: Higher floor (0.3-0.8)
+
+====================================================================================================
+FUTURE WORK
+====================================================================================================
+  • Test with more diverse noises (cafeteria, babble, car)
+  • Validate with multiple speakers and languages
+  • Implement adaptive SNR estimation
+  • Implement adaptive noise type classification
+  • Real-time streaming optimization
+  • Combination with other post-processing techniques
+
+====================================================================================================

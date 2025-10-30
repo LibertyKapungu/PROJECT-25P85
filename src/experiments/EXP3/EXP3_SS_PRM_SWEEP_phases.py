@@ -613,12 +613,6 @@ if len(df_all[df_all['Phase'] == 3]) > 0:
 print(f"\n{'='*100}")
 print("EFFICIENCY ACHIEVEMENTS")
 print(f"{'='*100}")
-print(f"✓ Strategic 3-phase approach: Eliminated poor configs early")
-print(f"✓ Focused on most impactful parameters first")
-print(f"✓ Full SNR coverage for comprehensive analysis")
-print(f"✓ Total tests: ~126 ")
-print(f"✓ Runtime: {total_time/3600:.2f} hours ")
-
 print(f"\n{'='*100}")
 print(f"Results saved to: {results_dir}")
 print(f"Run the analysis script on: complete_3phase_results.csv")
