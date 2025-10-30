@@ -1,0 +1,7 @@
+Parameter,PESQ_Most_Common,PESQ_Consistency_%,STOI_Most_Common,STOI_Consistency_%
+Freq_spacing,log,100.0,linear,100.0
+Nband,16,60.0,8,80.0
+FRMSZ_ms,20,100.0,20,60.0
+OVLP,50,60.0,75,60.0
+Floor,0.001,100.0,0.2,100.0
+Noisefr,1,100.0,1,100.0
