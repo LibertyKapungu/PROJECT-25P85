@@ -18,9 +18,9 @@ plt.rcParams['font.size'] = 10
 # CONFIGURATION
 # ====================================
 # UPDATE THIS PATH to your collated results CSV
-MODE = "standalone"  # or "hybrid"
-CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/parameter_sweep_analysis_{MODE}")
+MODE = "hybrid"  # or "hybrid"
+CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/COLLATED_ALL_RESULTS_{MODE}.csv"
+OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/parameter_sweep_analysis_{MODE}")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 print("="*100)

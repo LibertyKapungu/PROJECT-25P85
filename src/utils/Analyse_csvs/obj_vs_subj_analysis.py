@@ -20,13 +20,13 @@ plt.rcParams['font.size'] = 10
 # ====================================
 # CONFIGURATION
 # ====================================
-MODE = "standalone"
+MODE = "hybrid"
 
 current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
-CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP2" / f"COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP2" / f"snr_specific_analysis_{MODE}_subj_vs_obj_weighted_pesq"
+CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"COLLATED_ALL_RESULTS_{MODE}.csv"
+OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"snr_specific_analysis_{MODE}_subj_vs_obj_weighted_pesq"
 # CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP2" / MODE / f"COLLATED_ALL_RESULTS_{MODE}.csv"
 # OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP2" / f"snr_specific_analysis_{MODE}_subj_vs_obj"
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
