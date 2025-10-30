@@ -1,0 +1,18 @@
+Parameter ranges:
+  Freq_spacing: ['linear', 'log', 'mel']
+  Nband: [np.int64(4), np.int64(8), np.int64(16)]
+  FRMSZ_ms: [np.int64(8), np.int64(20), np.int64(25)]
+  OVLP: [np.int64(25), np.int64(50), np.int64(75)]
+  Floor: [np.float64(0.001), np.float64(0.3), np.float64(0.5), np.float64(0.7), np.float64(0.8)]
+  Noisefr: [np.int64(1)]
+
+Samples per configuration:
+  Min: 25
+  Max: 25
+  Mean: 25.0
+
+Metric statistics (all data):
+  PESQ: 1.790 ± 0.481
+  STOI: 0.741 ± 0.092
+  SI_SDR: 10.423 ± 4.753
+  DNSMOS_mos_ovr: 3.306 ± 0.755
