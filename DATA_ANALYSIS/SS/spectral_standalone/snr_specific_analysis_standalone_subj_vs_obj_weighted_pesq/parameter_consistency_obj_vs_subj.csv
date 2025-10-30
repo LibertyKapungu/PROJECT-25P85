@@ -1,0 +1,7 @@
+Parameter,Obj_Most_Common,Obj_Consistency_%,Subj_Most_Common,Subj_Consistency_%,Agreement_%
+Freq_spacing,linear,40.0,log,40.0,40.0
+Nband,8,60.0,16,40.0,40.0
+FRMSZ_ms,20,100.0,25,100.0,0.0
+OVLP,50,60.0,25,100.0,0.0
+Floor,0.001,80.0,0.2,80.0,20.0
+Noisefr,1,100.0,1,100.0,100.0

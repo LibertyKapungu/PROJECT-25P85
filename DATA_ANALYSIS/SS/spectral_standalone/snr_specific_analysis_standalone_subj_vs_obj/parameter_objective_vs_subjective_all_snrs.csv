@@ -1,0 +1,7 @@
+Parameter,Best_Objective,Objective_Score,Best_Subjective,Subjective_Score,Agrees
+Freq_spacing,linear,0.5715,linear,0.5464,True
+Nband,8,0.5713,16,0.5464,False
+FRMSZ_ms,20,0.5746,25,0.5702,False
+OVLP,75,0.5805,25,0.5598,False
+Floor,0.001,0.5759,0.2,0.5664,False
+Noisefr,1,0.5706,1,0.5456,True
