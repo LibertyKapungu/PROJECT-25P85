@@ -696,32 +696,32 @@ class MultiSNRAudioEnhancementComparator:
         print(f"✓ Amalgamated SNR plot (line): {amalg_plot_path}")
         
         # 4. Amalgamated SNR comparison plot (BAR CHART)
-        # fig_bar_amalg = self.plot_amalgamated_snr_bar_comparison()
-        # bar_amalg_plot_path = self.output_folder / f"{self.experiment_name}_amalgamated_snr_BAR.png"
-        # fig_bar_amalg.savefig(bar_amalg_plot_path, dpi=300, bbox_inches='tight')
-        # plt.close(fig_bar_amalg)
-        # print(f"✓ Amalgamated SNR plot (bar): {bar_amalg_plot_path}")
+        fig_bar_amalg = self.plot_amalgamated_snr_bar_comparison()
+        bar_amalg_plot_path = self.output_folder / f"{self.experiment_name}_amalgamated_snr_BAR.png"
+        fig_bar_amalg.savefig(bar_amalg_plot_path, dpi=300, bbox_inches='tight')
+        plt.close(fig_bar_amalg)
+        print(f"✓ Amalgamated SNR plot (bar): {bar_amalg_plot_path}")
         
         # 5. Heatmaps for key metrics
-        # for metric in ['PESQ', 'SI_SDR', 'STOI']:
-        #     fig_heat = self.plot_snr_noise_category_heatmap(metric=metric)
-        #     if fig_heat is not None:
-        #         heat_path = self.output_folder / f"{self.experiment_name}_heatmap_{metric}.png"
-        #         fig_heat.savefig(heat_path, dpi=300, bbox_inches='tight')
-        #         plt.close(fig_heat)
-        #         print(f"✓ Heatmap ({metric}): {heat_path}")
+        for metric in ['PESQ', 'SI_SDR', 'STOI']:
+            fig_heat = self.plot_snr_noise_category_heatmap(metric=metric)
+            if fig_heat is not None:
+                heat_path = self.output_folder / f"{self.experiment_name}_heatmap_{metric}.png"
+                fig_heat.savefig(heat_path, dpi=300, bbox_inches='tight')
+                plt.close(fig_heat)
+                print(f"✓ Heatmap ({metric}): {heat_path}")
         
         # 6. Individual SNR level plots and tables
         for snr in self.snr_levels:
             print(f"\n  Processing SNR {snr}dB...")
             
-            # Bar chart for this SNR
-            # fig_bar = self.plot_snr_bar_comparison(snr)
-            # if fig_bar is not None:
-            #     bar_path = self.output_folder / f"{self.experiment_name}_bar_{snr}dB.png"
-            #     fig_bar.savefig(bar_path, dpi=300, bbox_inches='tight')
-            #     plt.close(fig_bar)
-            #     print(f"    ✓ Bar chart: {bar_path}")
+            #Bar chart for this SNR
+            fig_bar = self.plot_snr_bar_comparison(snr)
+            if fig_bar is not None:
+                bar_path = self.output_folder / f"{self.experiment_name}_bar_{snr}dB.png"
+                fig_bar.savefig(bar_path, dpi=300, bbox_inches='tight')
+                plt.close(fig_bar)
+                print(f"    ✓ Bar chart: {bar_path}")
             
             # Detailed data for this SNR
             if len(self.df_merged[snr]) > 0:
@@ -742,12 +742,12 @@ if __name__ == "__main__":
     # Define CSV file templates with {snr} placeholder
     csv_files_template = {
         'Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
-        # 'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
+        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
         # 'GTCRN_SS': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_vad1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_delta': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_WF_ss\GTCRN_MWF_merged_[{snr}]dB.csv",
-        # 'GTCRN_WF': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
+        'GTCRN_WF': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
 
 
         # Python transalation mband
@@ -756,7 +756,7 @@ if __name__ == "__main__":
         #'mband_py_lin_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
         #'mband_py_lin_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
         #'mband_py_log_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR0_8\mband_py_N6_log_AVR0_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
+        'mband_py_log_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR0_8\mband_py_N6_mel_AVR0_8_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
 
@@ -848,12 +848,12 @@ if __name__ == "__main__":
         # AVRGING =1 
         #'mband_py_lin_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_py_log_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
 
         # AVRGING =0 
         #'mband_py_lin_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
         #'mband_py_log_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
 
         # Moved VAD below AVRGING so accepts a smoother frames for noise updates
         # ----------------mband_full_stream_VAD_below.py---------------- 
@@ -872,18 +872,26 @@ if __name__ == "__main__":
         # AVRGING = 1 
         #'mband_py_lin_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_py_log_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
 
         # AVRGING = 0 
         #'mband_py_lin_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
         #'mband_py_log_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        'mband_py_mel_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
+        #'mband_py_mel_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
+
+
+        # Optimized ss_standalone 
+        # Log, 20ms, 50% ovlp, floor 0.001, noisefr 1, Nband = 8  
+        # --------mband_full_stream_hanning.py---------------
+        # AVRGING = 1 
+        'mband_py_log_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_log_AVR1\mband_py_N8_log_AVR1_[{snr}]dB_MERGED.csv",
+        'mband_py_lin_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_lin_AVR1\mband_py_N8_lin_AVR1_[{snr}]dB_MERGED.csv",
 
 
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\hanning\mel_avr10"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\optimal_SS\lin"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
