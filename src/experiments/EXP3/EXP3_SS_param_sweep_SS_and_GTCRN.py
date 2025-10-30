@@ -34,17 +34,17 @@ random.seed(SEED)
 np.random.seed(SEED)
 
 # --- Processing Mode ---
-PROCESSING_MODE = "hybrid"  # Options: "standalone" or "hybrid"
+PROCESSING_MODE = "standalone"  # Options: "standalone" or "hybrid"
 
 # --- Parameter Grid (Mode-Adaptive) ---
 if PROCESSING_MODE == "standalone":
     PARAM_GRID = {
-        'Freq_spacing': ['log'],      # Skip mel  ['linear', 'log', 'mel'], 
-        'Nband': [4, 6, 8, 16],                     # Test band count
-        'FRMSZ': [8, 20],                       # Latency vs quality
-        'OVLP': [50, 75],                       # Standard vs smooth
+        'Freq_spacing': ['linear', 'log', 'mel'],      # Skip mel  ['linear', 'log', 'mel'], 
+        'Nband': [4, 8, 16],                     # Test band count
+        'FRMSZ': [8, 20, 25],                       # Latency vs quality
+        'OVLP': [25, 50, 75],                       # Standard vs smooth
         'Noisefr': [1,3],      # Low latency
-        'FLOOR': [0.001, 0.02],          # Aggressive noise removal
+        'FLOOR': [0.001, 0.02, 0.2],          # Aggressive noise removal
     }
     
 elif PROCESSING_MODE == "hybrid":
@@ -83,7 +83,7 @@ if PROCESSING_MODE == "hybrid":
     sys.path.insert(0, str(gtcrn_path))
 
 # Results directory
-results_dir_base = repo_root / 'results' / 'EXP3' / 'spectral' /'PARAM_SWEEP' / PROCESSING_MODE
+results_dir_base = repo_root / 'results' / 'EXP3' / 'spectral' /'PARAM_SWEEP2' / PROCESSING_MODE
 results_dir_base.mkdir(parents=True, exist_ok=True)
 
 # ============================================================================
