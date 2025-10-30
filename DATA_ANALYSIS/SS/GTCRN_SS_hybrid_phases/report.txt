@@ -1,0 +1,122 @@
+--- Speech Enhancement Metrics ---
+PESQ: 2.138
+STOI: 0.815
+SI-SDR: 15.28 dB
+DNSMOS Overall: 3.532
+------------------------------------
+  ✓ PESQ=2.138
+
+Phase 3 complete: 9.0 min
+
+====================================================================================================      
+SWEEP COMPLETE!
+====================================================================================================      
+Total time: 14.1 min (0.24 hours)
+Phases executed: (0, 1, 2, 3)
+  Phase 1: 2.1 min
+  Phase 2: 3.0 min
+  Phase 3: 9.0 min
+
+====================================================================================================      
+BEST OVERALL CONFIGURATION
+====================================================================================================      
+
+Configuration:
+  Frequency Spacing: linear
+  Nband: 8
+  Frame Size: 20 ms
+  Overlap: 75%
+  Noisefr: 1
+  Floor: 0.3
+
+Performance:
+  PESQ: 3.228
+  STOI: 0.877
+  SI-SDR: 17.62 dB
+  DNSMOS: 4.043
+  Composite Score: 2.052
+  Found in Phase: 1
+
+====================================================================================================      
+CRITICAL INSIGHTS FROM YOUR RESULTS
+====================================================================================================      
+
+1. FREQUENCY SPACING ANALYSIS:
+
+   MEL:
+     Overall PESQ: 2.110 (std: 0.603)
+     Overall STOI: 0.786
+     Robustness (SI-SDR std): 4.46 dB
+     Low SNR (≤0dB): PESQ=1.584
+     High SNR (≥10dB): PESQ=2.618
+
+   LOG:
+     Overall PESQ: 2.077 (std: 0.516)
+     Overall STOI: 0.790
+     Robustness (SI-SDR std): 3.33 dB
+     Low SNR (≤0dB): PESQ=1.646
+     High SNR (≥10dB): PESQ=2.509
+
+   LINEAR:
+     Overall PESQ: 2.055 (std: 0.509)
+     Overall STOI: 0.790
+     Robustness (SI-SDR std): 3.30 dB
+     Low SNR (≤0dB): PESQ=1.616
+     High SNR (≥10dB): PESQ=2.509
+
+2. FLOOR PARAMETER ANALYSIS:
+
+   Optimal Floor by Noise Type:
+
+   Stationary:
+     Best Floor: 0.5 (PESQ: 2.241)
+     Worst Floor: 0.002 (PESQ: 2.170)
+     Impact: 0.071 PESQ points
+       INSIGHT: High floor optimal for stationary!
+         → GTCRN already removes stationary noise well
+         → SS with low floor causes over-suppression
+
+   Street:
+     Best Floor: 0.6 (PESQ: 1.664)
+     Worst Floor: 0.002 (PESQ: 1.517)
+     Impact: 0.147 PESQ points
+
+3. PARAMETER IMPACT RANKING:
+
+   Parameters ranked by impact on PESQ:
+     1. Freq_spacing: 0.0714 (std of group means)
+     2. Floor: 0.0600 (std of group means)
+     3. Noisefr: 0.0306 (std of group means)
+     4. FRMSZ_ms: 0.0261 (std of group means)
+     5. Nband: 0.0052 (std of group means)
+
+====================================================================================================      
+RECOMMENDATIONS & TRADEOFFS
+====================================================================================================      
+
+CONFIGURATION OPTIONS:
+
+1. BEST OVERALL (Balanced Performance):
+   Config: linear | N=8 | Frame=20ms | Floor=0.3
+   PESQ: 3.228 | STOI: 0.877
+   Use when: General purpose, unknown noise type
+
+2. BEST FOR LOW SNR (≤0 dB):
+   Config: log | N=4 | Frame=20ms | Floor=0.6
+   PESQ: 2.139 @ 0dB
+   Use when: Very noisy conditions, need maximum noise reduction
+
+3. BEST FOR HIGH SNR (≥10 dB):
+   Config: linear | N=8 | Frame=20ms | Floor=0.3
+   PESQ: 3.228 @ 15dB
+   Use when: Clean audio, need maximum quality preservation
+
+4. BEST FOR STATIONARY NOISE:
+   Config: linear | N=8 | Frame=20ms | Floor=0.3
+   PESQ: 3.228
+   Use when: Fan noise, HVAC, steady background hum
+
+5. BEST FOR NON-STATIONARY NOISE:
+   Config: log | N=8 | Frame=20ms | Floor=0.3
+   PESQ: 2.599
+   Use when: Street, traffic, construction, babble

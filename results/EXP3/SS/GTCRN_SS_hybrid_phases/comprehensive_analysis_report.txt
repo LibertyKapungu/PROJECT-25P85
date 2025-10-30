@@ -1,0 +1,278 @@
+====================================================================================================
+3-PHASE PARAMETER SWEEP ANALYSIS
+====================================================================================================
+
+Loading results...
+✓ Loaded 478 total tests, 478 successful
+
+Phase 1 tests: 78
+Phase 2 tests: 112
+Phase 3 tests: 288
+
+====================================================================================================      
+PHASE 1 ANALYSIS: FREQUENCY SPACING
+====================================================================================================      
+✓ Saved: phase1_freq_spacing_vs_snr.png
+✓ Saved: phase1_freq_spacing_by_noise.png
+
+Phase 1 Summary (Average across all conditions):
+               PESQ          STOI         SI_SDR        DNSMOS_mos_ovr       
+               mean    std   mean    std    mean    std           mean    std
+Freq_spacing
+linear        2.055  0.509  0.790  0.058  12.196  3.300          3.473  0.597
+log           2.077  0.516  0.790  0.059  11.974  3.330          3.437  0.616
+mel           2.110  0.603  0.786  0.070  12.217  4.458          3.457  0.540
+
+Crossover Analysis (where log beats linear):
+
+PESQ:
+  SNR -5dB: LOG wins by 0.034
+  SNR 0dB: LOG wins by 0.029
+  SNR 5dB: LOG wins by 0.038
+  SNR 10dB: LOG wins by 0.008
+  SNR 15dB: LINEAR wins by 0.044
+
+SI_SDR:
+  SNR -5dB: LINEAR wins by 0.081
+  SNR 0dB: LINEAR wins by 0.348
+  SNR 5dB: LOG wins by 0.062
+  SNR 10dB: LINEAR wins by 0.447
+  SNR 15dB: LINEAR wins by 0.019
+
+====================================================================================================      
+DETAILED PERFORMANCE AT EACH SNR LEVEL
+====================================================================================================      
+
+================================================================================
+SNR = -5 dB
+================================================================================
+
+MEL:
+  PESQ:  1.423 ± 0.276
+  STOI:  0.693 ± 0.053
+  SI-SDR: 6.48 ± 3.30 dB
+  DNSMOS: 2.697 ± 0.312
+
+LOG:
+  PESQ:  1.467 ± 0.402
+  STOI:  0.680 ± 0.092
+  SI-SDR: 6.03 ± 3.84 dB
+  DNSMOS: 2.567 ± 0.678
+
+LINEAR:
+  PESQ:  1.433 ± 0.324
+  STOI:  0.672 ± 0.097
+  SI-SDR: 6.11 ± 4.14 dB
+  DNSMOS: 2.434 ± 0.504
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): MEL
+   Very Low SNR: All methods struggle, LOG has slight edge
+
+================================================================================
+SNR = 0 dB
+================================================================================
+
+MEL:
+  PESQ:  1.746 ± 0.462
+  STOI:  0.746 ± 0.058
+  SI-SDR: 9.41 ± 2.90 dB
+  DNSMOS: 3.143 ± 0.490
+
+LOG:
+  PESQ:  1.682 ± 0.342
+  STOI:  0.743 ± 0.047
+  SI-SDR: 9.17 ± 2.38 dB
+  DNSMOS: 2.916 ± 0.579
+
+LINEAR:
+  PESQ:  1.653 ± 0.301
+  STOI:  0.749 ± 0.045
+  SI-SDR: 9.52 ± 2.25 dB
+  DNSMOS: 3.103 ± 0.652
+
+  → Winner (PESQ): MEL
+  → Winner (STOI): LINEAR
+    Low SNR: LINEAR shows better stability
+
+================================================================================
+SNR = 5 dB
+================================================================================
+
+MEL:
+  PESQ:  2.147 ± 0.566
+  STOI:  0.803 ± 0.035
+  SI-SDR: 12.47 ± 1.39 dB
+  DNSMOS: 3.667 ± 0.167
+
+LOG:
+  PESQ:  2.075 ± 0.362
+  STOI:  0.803 ± 0.023
+  SI-SDR: 12.34 ± 1.26 dB
+  DNSMOS: 3.574 ± 0.424
+
+LINEAR:
+  PESQ:  2.037 ± 0.354
+  STOI:  0.799 ± 0.026
+  SI-SDR: 12.28 ± 1.29 dB
+  DNSMOS: 3.503 ± 0.369
+
+  → Winner (PESQ): MEL
+  → Winner (STOI): LOG
+    Mid SNR: LINEAR maintains advantage
+
+================================================================================
+SNR = 10 dB
+================================================================================
+
+MEL:
+  PESQ:  2.463 ± 0.419
+  STOI:  0.834 ± 0.027
+  SI-SDR: 15.07 ± 0.68 dB
+  DNSMOS: 3.817 ± 0.218
+
+LOG:
+  PESQ:  2.440 ± 0.400
+  STOI:  0.832 ± 0.025
+  SI-SDR: 14.53 ± 1.17 dB
+  DNSMOS: 3.876 ± 0.206
+
+LINEAR:
+  PESQ:  2.432 ± 0.344
+  STOI:  0.833 ± 0.021
+  SI-SDR: 14.98 ± 0.77 dB
+  DNSMOS: 3.904 ± 0.206
+
+  → Winner (PESQ): MEL
+  → Winner (STOI): MEL
+    High SNR: Competition is close, both preserve speech well
+
+================================================================================
+SNR = 15 dB
+================================================================================
+
+MEL:
+  PESQ:  2.773 ± 0.378
+  STOI:  0.854 ± 0.031
+  SI-SDR: 17.65 ± 0.17 dB
+  DNSMOS: 3.963 ± 0.057
+
+LOG:
+  PESQ:  2.854 ± 0.360
+  STOI:  0.858 ± 0.030
+  SI-SDR: 17.31 ± 0.71 dB
+  DNSMOS: 4.030 ± 0.095
+
+LINEAR:
+  PESQ:  2.897 ± 0.467
+  STOI:  0.860 ± 0.024
+  SI-SDR: 17.33 ± 0.41 dB
+  DNSMOS: 4.053 ± 0.014
+
+  → Winner (PESQ): LINEAR
+  → Winner (STOI): LINEAR
+    Very High SNR: LOG shows slight comeback, but differences minimal
+
+====================================================================================================      
+PHASE 2 ANALYSIS: FLOOR OPTIMIZATION
+====================================================================================================      
+✓ Saved: phase2_floor_optimization_heatmap.png
+✓ Saved: phase2_floor_parameter_curves.png
+
+Optimal Floor Values by Noise Category:
+  Stationary: Floor = 0.5 (score: 1.523)
+  Street: Floor = 0.6 (score: 1.196)
+
+====================================================================================================      
+PHASE 3 ANALYSIS: FINE-TUNING
+====================================================================================================      
+
+Phase 3 Optimal Parameters:
+  Best Nband: 16
+  Best Frame Size: 8 ms
+  Best Noisefr: 1
+
+====================================================================================================      
+OVERALL BEST CONFIGURATION
+====================================================================================================      
+
+Best Configuration (Composite Score = 2.0521):
+  Phase: 1
+  Frequency Spacing: linear
+  Nband: 8
+  Frame Size: 20 ms
+  Overlap: 75%
+  Noisefr: 1
+  Floor: 0.3
+
+Performance:
+  PESQ: 3.2276
+  STOI: 0.8765
+  SI-SDR: 17.62 dB
+  DNSMOS: 4.0426
+  Tested at: 15 dB SNR, Stationary
+
+====================================================================================================      
+3-PHASE PARAMETER SWEEP - COMPREHENSIVE ANALYSIS REPORT
+====================================================================================================      
+
+EXPERIMENT OVERVIEW:
+  Total Tests: 478
+  Successful Tests: 478 (100.0%)
+  Phase 1 (Freq Spacing): 78 tests
+  Phase 2 (Floor Optim): 112 tests
+  Phase 3 (Fine-tuning): 288 tests
+
+====================================================================================================      
+PHASE 1 INSIGHTS: FREQUENCY SPACING
+====================================================================================================      
+
+Overall Performance (averaged across all SNRs and noises):
+
+MEL:
+  PESQ: 2.110 ± 0.603
+  STOI: 0.786 ± 0.070
+  SI-SDR: 12.22 ± 4.46 dB
+LOG:
+  PESQ: 2.077 ± 0.516
+  STOI: 0.790 ± 0.059
+  SI-SDR: 11.97 ± 3.33 dB
+LINEAR:
+  PESQ: 2.055 ± 0.509
+  STOI: 0.790 ± 0.058
+  SI-SDR: 12.20 ± 3.30 dB
+
+====================================================================================================      
+PHASE 2 INSIGHTS: FLOOR OPTIMIZATION
+====================================================================================================      
+
+Optimal Floor Values by Noise Type:
+  Stationary: Floor = 0.5 (aggressive OK - predictable noise)
+  Street: Floor = 0.6 (conservative - preserves speech dynamics)
+
+====================================================================================================      
+PHASE 3 INSIGHTS: FINE-TUNING
+====================================================================================================      
+
+Optimal Parameter Values:
+  Nband: 16 bands
+  Frame Size: 8 ms
+  Noisefr: 1 frames
+
+====================================================================================================      
+FINAL RECOMMENDATIONS
+====================================================================================================      
+
+BEST OVERALL CONFIGURATION:
+  Frequency Spacing: linear
+  Nband: 8
+  Frame Size: 20 ms
+  Overlap: 75%
+  Noisefr: 1
+  Floor: 0.3
+
+Performance (vs noisy baseline assumed 0 improvement):
+  PESQ: 3.228
+  STOI: 0.877
+  SI-SDR: 17.62 dB
+  DNSMOS: 4.043
