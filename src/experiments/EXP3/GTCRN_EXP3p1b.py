@@ -194,7 +194,7 @@ for snr_dB in snr_dB_range:
             fs=processing_sr,
             Nband=4,
             Freq_spacing='log',
-            FRMSZ=25,
+            FRMSZ=20,
             OVLP=75,
             AVRGING=1,
             Noisefr=1,
