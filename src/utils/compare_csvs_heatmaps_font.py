@@ -741,9 +741,10 @@ if __name__ == "__main__":
     
     # Define CSV file templates with {snr} placeholder
     csv_files_template = {
-        'Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
-        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
-        'GTCRN_new': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRN_EXP3p2a\GTCRN_EXP3p2a_merged_[{snr}]dB.csv",
+        #'Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
+        #'GTCRN_old': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
+        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRN_EXP3p2a\GTCRN_EXP3p2a_merged_[{snr}]dB.csv",
+        #'GTCRN_that_hybrid_uses': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\test_gtcrn_alone\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'GTCRN_SS_old': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_vad1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_delta': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
@@ -871,7 +872,7 @@ if __name__ == "__main__":
         # Hanning with VAD in btwn IIR and 3 tap 
         # --------mband_full_stream_hanning.py---------------
         # AVRGING = 1 
-        'mband_py_lin_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_lin_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_py_log_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
 
@@ -895,6 +896,9 @@ if __name__ == "__main__":
         # AVRGING = 1 
         #'mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\objective\GTCRN_SS_TEST2_[{snr}]dB.csv",
         'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_mel_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\mel_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        'mband_py_lin_hybrid_20ms_ov50_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\lin_20ms_ov50_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        'lin_hybrid_v0_20ms_ov50_fl0p7_nf1_N4_av0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\lin_20ms_ov50_fl07_N4_v0_av0\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'mband_py_log_hybrid_V0_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_25ms_ov75_fl08_N4_v0\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'mband_py_log_hybrid_25ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_25ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N8\GTCRN_SS_TEST2_[{snr}]dB.csv",
@@ -905,7 +909,7 @@ if __name__ == "__main__":
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\ss_standalone\linN16"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\ss_tests"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
