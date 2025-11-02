@@ -5,6 +5,15 @@ from pathlib import Path
 import seaborn as sns
 from datetime import datetime
 
+plt.rcParams.update({
+    "figure.dpi": 300,
+    "font.size": 17,
+    "axes.labelsize": 17,
+    "xtick.labelsize": 17,
+    "ytick.labelsize": 17,
+    "legend.fontsize": 17,
+})
+
 class MultiSNRAudioEnhancementComparator:
     """
     Compare multiple audio enhancement methods across multiple SNR levels.
@@ -491,15 +500,15 @@ if __name__ == "__main__":
     
     # Define CSV file templates with {snr} placeholder
     csv_files_template = {
-        'Baseline_Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
-        'GTCRN_baseline': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
-        'SS_GTCRN_n4_ov75_fr8_fl08_v0_lin': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
-        'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_WF_ss\GTCRN_MWF_merged_[{snr}]dB.csv",
-        'WF_GTCRN_og': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
+        'Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
+        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
+        'GTCRN_SS': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        # 'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_WF_ss\GTCRN_MWF_merged_[{snr}]dB.csv",
+        'GTCRN_WF': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep_multi_snr2"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\poster_prep_multi_snr4"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
