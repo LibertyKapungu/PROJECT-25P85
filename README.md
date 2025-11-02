@@ -1,6 +1,6 @@
 # PROJECT-25P85
 
-This repository contains code and resources for a project focused on speech enhancement and noise reduction techniques. It includes implementations of various algorithms such as Wiener filtering, spectral subtraction, and deep learning models like GTCRN (Gated Temporal Convolutional Recurrent Network) for noise estimation and voice activity detection (VAD).
+This repository contains code and resources for a project focused on speech enhancement and noise reduction techniques. It includes implementations of various algorithms such as Wiener filtering, spectral subtraction, and deep learning models like GTCRN.
 
 The project explores different approaches to improve speech intelligibility and quality in noisy environments, utilising both traditional signal processing methods and modern machine learning techniques.
 
@@ -16,7 +16,7 @@ MATLAB is also required for running the original implementations in the `loizou_
 
 ## Directory Structure
 
-- **DATA_ANALYSIS/**: Contains Jupyter notebooks for analysing experimental results, particularly focusing on Wiener Filter (WF) experiments. Includes notebooks for different experimental phases (EXP1, EXP2, EXP3) and specific analyses like GTCRNWF_EXP3p2.
+- **DATA_ANALYSIS/**: Contains Jupyter notebooks for analysing experimental results. Includes notebooks for different experimental phases.
 
 - **loizou_matlab_code/**: Original MATLAB implementations from Loizou's work on objective metrics and spectral filtering algorithms.
   - **objective_metrics/**: Metrics for evaluating speech intelligibility and quality.
