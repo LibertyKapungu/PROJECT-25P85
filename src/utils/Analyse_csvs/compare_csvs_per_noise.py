@@ -586,7 +586,7 @@ class MultiSNRAudioEnhancementComparator:
             
             # Set ticks and labels
             ax.set_xticks(np.arange(len(self.snr_levels)))
-            ax.set_xticklabels([f'{snr}dB' for snr in self.snr_levels], fontsize=16)
+            ax.set_xticklabels([f'{snr}' for snr in self.snr_levels], fontsize=16)
             ax.set_yticks(np.arange(len(categories)))
             ax.set_yticklabels(categories, fontsize=16)
             
@@ -599,7 +599,7 @@ class MultiSNRAudioEnhancementComparator:
                                       fontsize=10)
             
             ax.set_title(f'{method_name}', fontsize=18, fontweight='bold')
-            ax.set_xlabel('SNR Level', fontsize=16)
+            ax.set_xlabel('SNR Level (dB)', fontsize=16)
             
             if idx == 0:
                 ax.set_ylabel('Noise Category', fontsize=16)

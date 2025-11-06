@@ -1,0 +1,1145 @@
+========================================================================================================================
+EXPERIMENT: MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, GTCRN, GTCRN_WF, GTCRN-SS
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\noise_check\Multi_SNR_20251106_214009
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  GTCRN=1.2372  GTCRN_WF=1.2072  GTCRN-SS=1.2425  
+                SI_SDR:  Noisy=-4.9899  GTCRN=4.1551  GTCRN_WF=4.0671  GTCRN-SS=4.1359  
+                  STOI:  Noisy=0.5866  GTCRN=0.6053  GTCRN_WF=0.5834  GTCRN-SS=0.6043  
+       DNSMOS_p808_mos:  Noisy=2.4363  GTCRN=2.8180  GTCRN_WF=2.9009  GTCRN-SS=2.8518  
+        DNSMOS_mos_sig:  Noisy=3.5517  GTCRN=2.3993  GTCRN_WF=2.5324  GTCRN-SS=2.5197  
+        DNSMOS_mos_bak:  Noisy=1.6733  GTCRN=3.3151  GTCRN_WF=3.3415  GTCRN-SS=3.3350  
+        DNSMOS_mos_ovr:  Noisy=1.9706  GTCRN=2.0878  GTCRN_WF=2.1821  GTCRN-SS=2.1674  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  GTCRN=1.4445  GTCRN_WF=1.3827  GTCRN-SS=1.4566  
+                SI_SDR:  Noisy=-0.0263  GTCRN=7.6075  GTCRN_WF=7.2992  GTCRN-SS=7.5060  
+                  STOI:  Noisy=0.6549  GTCRN=0.6772  GTCRN_WF=0.6631  GTCRN-SS=0.6763  
+       DNSMOS_p808_mos:  Noisy=2.5694  GTCRN=3.0576  GTCRN_WF=3.1293  GTCRN-SS=3.0755  
+        DNSMOS_mos_sig:  Noisy=3.8877  GTCRN=3.0390  GTCRN_WF=3.0788  GTCRN-SS=3.1502  
+        DNSMOS_mos_bak:  Noisy=1.9030  GTCRN=3.4424  GTCRN_WF=3.5126  GTCRN-SS=3.4889  
+        DNSMOS_mos_ovr:  Noisy=2.2631  GTCRN=2.5763  GTCRN_WF=2.6207  GTCRN-SS=2.6666  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  GTCRN=1.6587  GTCRN_WF=1.6035  GTCRN-SS=1.6762  
+                SI_SDR:  Noisy=4.9955  GTCRN=11.1759  GTCRN_WF=10.6039  GTCRN-SS=10.9753  
+                  STOI:  Noisy=0.7153  GTCRN=0.7471  GTCRN_WF=0.7352  GTCRN-SS=0.7461  
+       DNSMOS_p808_mos:  Noisy=2.7331  GTCRN=3.2209  GTCRN_WF=3.2742  GTCRN-SS=3.2354  
+        DNSMOS_mos_sig:  Noisy=3.9827  GTCRN=3.4324  GTCRN_WF=3.4678  GTCRN-SS=3.5122  
+        DNSMOS_mos_bak:  Noisy=2.1026  GTCRN=3.5915  GTCRN_WF=3.6751  GTCRN-SS=3.6115  
+        DNSMOS_mos_ovr:  Noisy=2.4361  GTCRN=2.9105  GTCRN_WF=2.9766  GTCRN-SS=2.9665  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  GTCRN=1.9819  GTCRN_WF=1.8980  GTCRN-SS=2.0010  
+                SI_SDR:  Noisy=9.9991  GTCRN=14.6065  GTCRN_WF=13.3957  GTCRN-SS=14.2071  
+                  STOI:  Noisy=0.7740  GTCRN=0.7944  GTCRN_WF=0.7856  GTCRN-SS=0.7933  
+       DNSMOS_p808_mos:  Noisy=2.9111  GTCRN=3.3772  GTCRN_WF=3.3996  GTCRN-SS=3.3887  
+        DNSMOS_mos_sig:  Noisy=4.0784  GTCRN=3.8664  GTCRN_WF=3.8584  GTCRN-SS=3.9228  
+        DNSMOS_mos_bak:  Noisy=2.3277  GTCRN=3.7560  GTCRN_WF=3.8814  GTCRN-SS=3.8567  
+        DNSMOS_mos_ovr:  Noisy=2.6382  GTCRN=3.2896  GTCRN_WF=3.3400  GTCRN-SS=3.3775  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  GTCRN=2.3292  GTCRN_WF=2.2476  GTCRN-SS=2.3568  
+                SI_SDR:  Noisy=14.9989  GTCRN=17.6965  GTCRN_WF=15.4331  GTCRN-SS=16.8564  
+                  STOI:  Noisy=0.8137  GTCRN=0.8305  GTCRN_WF=0.8221  GTCRN-SS=0.8292  
+       DNSMOS_p808_mos:  Noisy=3.0481  GTCRN=3.4748  GTCRN_WF=3.5000  GTCRN-SS=3.4813  
+        DNSMOS_mos_sig:  Noisy=4.0454  GTCRN=4.0371  GTCRN_WF=4.0491  GTCRN-SS=4.0960  
+        DNSMOS_mos_bak:  Noisy=2.5180  GTCRN=3.8859  GTCRN_WF=4.0104  GTCRN-SS=3.9815  
+        DNSMOS_mos_ovr:  Noisy=2.7482  GTCRN=3.4715  GTCRN_WF=3.5415  GTCRN-SS=3.5570  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  GTCRN=1.2372 (+0.1715, +16.09%)  |  GTCRN_WF=1.2072 (+0.1414, +13.27%)  |  GTCRN-SS=1.2425 (+0.1767, +16.58%)
+                SI_SDR: Noisy=-4.9899  |  GTCRN=4.1551 (+9.1450, +183.27%)  |  GTCRN_WF=4.0671 (+9.0570, +181.51%)  |  GTCRN-SS=4.1359 (+9.1258, +182.89%)
+                  STOI: Noisy=0.5866  |  GTCRN=0.6053 (+0.0188, +3.20%)  |  GTCRN_WF=0.5834 (-0.0032, -0.54%)  |  GTCRN-SS=0.6043 (+0.0177, +3.02%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  GTCRN=2.8180 (+0.3817, +15.67%)  |  GTCRN_WF=2.9009 (+0.4646, +19.07%)  |  GTCRN-SS=2.8518 (+0.4155, +17.06%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  GTCRN=2.3993 (-1.1524, -32.45%)  |  GTCRN_WF=2.5324 (-1.0193, -28.70%)  |  GTCRN-SS=2.5197 (-1.0320, -29.06%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  GTCRN=3.3151 (+1.6418, +98.12%)  |  GTCRN_WF=3.3415 (+1.6682, +99.69%)  |  GTCRN-SS=3.3350 (+1.6617, +99.30%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  GTCRN=2.0878 (+0.1172, +5.95%)  |  GTCRN_WF=2.1821 (+0.2115, +10.73%)  |  GTCRN-SS=2.1674 (+0.1968, +9.99%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  GTCRN=1.4445 (+0.3508, +32.08%)  |  GTCRN_WF=1.3827 (+0.2890, +26.43%)  |  GTCRN-SS=1.4566 (+0.3629, +33.18%)
+                SI_SDR: Noisy=-0.0263  |  GTCRN=7.6075 (+7.6338, +29071.00%)  |  GTCRN_WF=7.2992 (+7.3254, +27896.66%)  |  GTCRN-SS=7.5060 (+7.5322, +28684.30%)
+                  STOI: Noisy=0.6549  |  GTCRN=0.6772 (+0.0223, +3.41%)  |  GTCRN_WF=0.6631 (+0.0082, +1.25%)  |  GTCRN-SS=0.6763 (+0.0214, +3.26%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  GTCRN=3.0576 (+0.4882, +19.00%)  |  GTCRN_WF=3.1293 (+0.5600, +21.79%)  |  GTCRN-SS=3.0755 (+0.5062, +19.70%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  GTCRN=3.0390 (-0.8487, -21.83%)  |  GTCRN_WF=3.0788 (-0.8089, -20.81%)  |  GTCRN-SS=3.1502 (-0.7375, -18.97%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  GTCRN=3.4424 (+1.5394, +80.89%)  |  GTCRN_WF=3.5126 (+1.6096, +84.59%)  |  GTCRN-SS=3.4889 (+1.5860, +83.34%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  GTCRN=2.5763 (+0.3132, +13.84%)  |  GTCRN_WF=2.6207 (+0.3577, +15.81%)  |  GTCRN-SS=2.6666 (+0.4035, +17.83%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  GTCRN=1.6587 (+0.4854, +41.37%)  |  GTCRN_WF=1.6035 (+0.4302, +36.66%)  |  GTCRN-SS=1.6762 (+0.5029, +42.86%)
+                SI_SDR: Noisy=4.9955  |  GTCRN=11.1759 (+6.1804, +123.72%)  |  GTCRN_WF=10.6039 (+5.6084, +112.27%)  |  GTCRN-SS=10.9753 (+5.9798, +119.70%)
+                  STOI: Noisy=0.7153  |  GTCRN=0.7471 (+0.0319, +4.46%)  |  GTCRN_WF=0.7352 (+0.0200, +2.79%)  |  GTCRN-SS=0.7461 (+0.0308, +4.31%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  GTCRN=3.2209 (+0.4878, +17.85%)  |  GTCRN_WF=3.2742 (+0.5411, +19.80%)  |  GTCRN-SS=3.2354 (+0.5023, +18.38%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  GTCRN=3.4324 (-0.5503, -13.82%)  |  GTCRN_WF=3.4678 (-0.5149, -12.93%)  |  GTCRN-SS=3.5122 (-0.4705, -11.81%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  GTCRN=3.5915 (+1.4889, +70.81%)  |  GTCRN_WF=3.6751 (+1.5724, +74.78%)  |  GTCRN-SS=3.6115 (+1.5089, +71.76%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  GTCRN=2.9105 (+0.4744, +19.47%)  |  GTCRN_WF=2.9766 (+0.5405, +22.19%)  |  GTCRN-SS=2.9665 (+0.5303, +21.77%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  GTCRN=1.9819 (+0.6372, +47.39%)  |  GTCRN_WF=1.8980 (+0.5534, +41.15%)  |  GTCRN-SS=2.0010 (+0.6564, +48.81%)
+                SI_SDR: Noisy=9.9991  |  GTCRN=14.6065 (+4.6074, +46.08%)  |  GTCRN_WF=13.3957 (+3.3965, +33.97%)  |  GTCRN-SS=14.2071 (+4.2080, +42.08%)
+                  STOI: Noisy=0.7740  |  GTCRN=0.7944 (+0.0204, +2.63%)  |  GTCRN_WF=0.7856 (+0.0117, +1.51%)  |  GTCRN-SS=0.7933 (+0.0193, +2.50%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  GTCRN=3.3772 (+0.4662, +16.01%)  |  GTCRN_WF=3.3996 (+0.4886, +16.78%)  |  GTCRN-SS=3.3887 (+0.4776, +16.41%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  GTCRN=3.8664 (-0.2121, -5.20%)  |  GTCRN_WF=3.8584 (-0.2200, -5.40%)  |  GTCRN-SS=3.9228 (-0.1557, -3.82%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  GTCRN=3.7560 (+1.4283, +61.36%)  |  GTCRN_WF=3.8814 (+1.5536, +66.74%)  |  GTCRN-SS=3.8567 (+1.5289, +65.68%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  GTCRN=3.2896 (+0.6514, +24.69%)  |  GTCRN_WF=3.3400 (+0.7018, +26.60%)  |  GTCRN-SS=3.3775 (+0.7392, +28.02%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  GTCRN=2.3292 (+0.6824, +41.44%)  |  GTCRN_WF=2.2476 (+0.6008, +36.48%)  |  GTCRN-SS=2.3568 (+0.7099, +43.11%)
+                SI_SDR: Noisy=14.9989  |  GTCRN=17.6965 (+2.6976, +17.99%)  |  GTCRN_WF=15.4331 (+0.4342, +2.89%)  |  GTCRN-SS=16.8564 (+1.8575, +12.38%)
+                  STOI: Noisy=0.8137  |  GTCRN=0.8305 (+0.0168, +2.06%)  |  GTCRN_WF=0.8221 (+0.0084, +1.03%)  |  GTCRN-SS=0.8292 (+0.0154, +1.90%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  GTCRN=3.4748 (+0.4267, +14.00%)  |  GTCRN_WF=3.5000 (+0.4518, +14.82%)  |  GTCRN-SS=3.4813 (+0.4332, +14.21%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  GTCRN=4.0371 (-0.0083, -0.21%)  |  GTCRN_WF=4.0491 (+0.0037, +0.09%)  |  GTCRN-SS=4.0960 (+0.0506, +1.25%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  GTCRN=3.8859 (+1.3679, +54.33%)  |  GTCRN_WF=4.0104 (+1.4925, +59.27%)  |  GTCRN-SS=3.9815 (+1.4635, +58.12%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  GTCRN=3.4715 (+0.7233, +26.32%)  |  GTCRN_WF=3.5415 (+0.7933, +28.87%)  |  GTCRN-SS=3.5570 (+0.8088, +29.43%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN_WF:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  GTCRN-SS:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Cafeteria Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  GTCRN=1.116  GTCRN_WF=1.080  GTCRN-SS=1.120  
+    0dB: Noisy=1.067  GTCRN=1.259  GTCRN_WF=1.159  GTCRN-SS=1.246  
+    5dB: Noisy=1.118  GTCRN=1.450  GTCRN_WF=1.352  GTCRN-SS=1.457  
+    10dB: Noisy=1.257  GTCRN=1.804  GTCRN_WF=1.714  GTCRN-SS=1.806  
+    15dB: Noisy=1.563  GTCRN=2.145  GTCRN_WF=1.995  GTCRN-SS=2.158  
+  SI_SDR:
+    -5dB: Noisy=-4.823  GTCRN=-1.009  GTCRN_WF=-1.108  GTCRN-SS=-0.891  
+    0dB: Noisy=-0.062  GTCRN=4.697  GTCRN_WF=4.448  GTCRN-SS=4.747  
+    5dB: Noisy=4.983  GTCRN=10.250  GTCRN_WF=9.625  GTCRN-SS=10.092  
+    10dB: Noisy=10.006  GTCRN=14.492  GTCRN_WF=13.261  GTCRN-SS=14.139  
+    15dB: Noisy=15.011  GTCRN=17.933  GTCRN_WF=15.083  GTCRN-SS=17.116  
+  STOI:
+    -5dB: Noisy=0.578  GTCRN=0.573  GTCRN_WF=0.536  GTCRN-SS=0.571  
+    0dB: Noisy=0.666  GTCRN=0.660  GTCRN_WF=0.630  GTCRN-SS=0.658  
+    5dB: Noisy=0.747  GTCRN=0.769  GTCRN_WF=0.755  GTCRN-SS=0.766  
+    10dB: Noisy=0.818  GTCRN=0.842  GTCRN_WF=0.831  GTCRN-SS=0.840  
+    15dB: Noisy=0.871  GTCRN=0.876  GTCRN_WF=0.859  GTCRN-SS=0.874  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  GTCRN=1.715  GTCRN_WF=1.861  GTCRN-SS=1.859  
+    0dB: Noisy=2.516  GTCRN=2.107  GTCRN_WF=2.481  GTCRN-SS=2.157  
+    5dB: Noisy=2.776  GTCRN=2.800  GTCRN_WF=2.776  GTCRN-SS=2.871  
+    10dB: Noisy=2.872  GTCRN=3.198  GTCRN_WF=3.154  GTCRN-SS=3.256  
+    15dB: Noisy=2.879  GTCRN=3.880  GTCRN_WF=3.887  GTCRN-SS=3.859  
+
+>>> Car Noise 60mph <<<
+  PESQ:
+    -5dB: Noisy=1.061  GTCRN=1.220  GTCRN_WF=1.176  GTCRN-SS=1.231  
+    0dB: Noisy=1.090  GTCRN=1.516  GTCRN_WF=1.440  GTCRN-SS=1.516  
+    5dB: Noisy=1.180  GTCRN=1.840  GTCRN_WF=1.777  GTCRN-SS=1.871  
+    10dB: Noisy=1.364  GTCRN=2.005  GTCRN_WF=2.007  GTCRN-SS=2.026  
+    15dB: Noisy=1.726  GTCRN=2.382  GTCRN_WF=2.364  GTCRN-SS=2.402  
+  SI_SDR:
+    -5dB: Noisy=-4.988  GTCRN=4.988  GTCRN_WF=4.752  GTCRN-SS=5.119  
+    0dB: Noisy=0.026  GTCRN=9.106  GTCRN_WF=8.373  GTCRN-SS=9.034  
+    5dB: Noisy=5.006  GTCRN=12.411  GTCRN_WF=10.971  GTCRN-SS=12.078  
+    10dB: Noisy=10.001  GTCRN=16.203  GTCRN_WF=13.329  GTCRN-SS=15.684  
+    15dB: Noisy=14.996  GTCRN=19.815  GTCRN_WF=14.788  GTCRN-SS=18.568  
+  STOI:
+    -5dB: Noisy=0.634  GTCRN=0.642  GTCRN_WF=0.620  GTCRN-SS=0.641  
+    0dB: Noisy=0.683  GTCRN=0.686  GTCRN_WF=0.680  GTCRN-SS=0.686  
+    5dB: Noisy=0.737  GTCRN=0.774  GTCRN_WF=0.766  GTCRN-SS=0.772  
+    10dB: Noisy=0.781  GTCRN=0.816  GTCRN_WF=0.811  GTCRN-SS=0.815  
+    15dB: Noisy=0.814  GTCRN=0.844  GTCRN_WF=0.843  GTCRN-SS=0.844  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.621  GTCRN=2.558  GTCRN_WF=2.365  GTCRN-SS=2.730  
+    0dB: Noisy=2.640  GTCRN=2.733  GTCRN_WF=2.424  GTCRN-SS=2.769  
+    5dB: Noisy=2.542  GTCRN=3.090  GTCRN_WF=2.948  GTCRN-SS=3.216  
+    10dB: Noisy=2.810  GTCRN=3.517  GTCRN_WF=3.439  GTCRN-SS=3.545  
+    15dB: Noisy=2.948  GTCRN=3.515  GTCRN_WF=3.357  GTCRN-SS=3.595  
+
+>>> Car Noise Idle 40mph <<<
+  PESQ:
+    -5dB: Noisy=1.033  GTCRN=1.252  GTCRN_WF=1.271  GTCRN-SS=1.269  
+    0dB: Noisy=1.047  GTCRN=1.578  GTCRN_WF=1.607  GTCRN-SS=1.594  
+    5dB: Noisy=1.097  GTCRN=1.732  GTCRN_WF=1.750  GTCRN-SS=1.740  
+    10dB: Noisy=1.240  GTCRN=2.105  GTCRN_WF=2.095  GTCRN-SS=2.115  
+    15dB: Noisy=1.499  GTCRN=2.436  GTCRN_WF=2.476  GTCRN-SS=2.477  
+  SI_SDR:
+    -5dB: Noisy=-5.047  GTCRN=5.851  GTCRN_WF=6.009  GTCRN-SS=5.883  
+    0dB: Noisy=-0.002  GTCRN=10.000  GTCRN_WF=9.881  GTCRN-SS=9.894  
+    5dB: Noisy=5.015  GTCRN=13.476  GTCRN_WF=13.346  GTCRN-SS=13.277  
+    10dB: Noisy=10.001  GTCRN=17.167  GTCRN_WF=16.729  GTCRN-SS=16.702  
+    15dB: Noisy=14.999  GTCRN=21.358  GTCRN_WF=19.905  GTCRN-SS=20.155  
+  STOI:
+    -5dB: Noisy=0.671  GTCRN=0.667  GTCRN_WF=0.639  GTCRN-SS=0.666  
+    0dB: Noisy=0.736  GTCRN=0.733  GTCRN_WF=0.722  GTCRN-SS=0.732  
+    5dB: Noisy=0.786  GTCRN=0.790  GTCRN_WF=0.781  GTCRN-SS=0.790  
+    10dB: Noisy=0.827  GTCRN=0.838  GTCRN_WF=0.833  GTCRN-SS=0.839  
+    15dB: Noisy=0.858  GTCRN=0.877  GTCRN_WF=0.873  GTCRN-SS=0.876  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.151  GTCRN=2.306  GTCRN_WF=2.563  GTCRN-SS=2.311  
+    0dB: Noisy=2.376  GTCRN=3.072  GTCRN_WF=3.166  GTCRN-SS=3.146  
+    5dB: Noisy=2.463  GTCRN=3.341  GTCRN_WF=3.412  GTCRN-SS=3.101  
+    10dB: Noisy=2.639  GTCRN=3.376  GTCRN_WF=3.689  GTCRN-SS=3.545  
+    15dB: Noisy=3.001  GTCRN=3.695  GTCRN_WF=4.057  GTCRN-SS=3.849  
+
+>>> Car Noise Idle 60mph <<<
+  PESQ:
+    -5dB: Noisy=1.065  GTCRN=1.378  GTCRN_WF=1.331  GTCRN-SS=1.411  
+    0dB: Noisy=1.095  GTCRN=1.619  GTCRN_WF=1.559  GTCRN-SS=1.669  
+    5dB: Noisy=1.180  GTCRN=1.878  GTCRN_WF=1.843  GTCRN-SS=1.930  
+    10dB: Noisy=1.368  GTCRN=2.331  GTCRN_WF=2.298  GTCRN-SS=2.382  
+    15dB: Noisy=1.679  GTCRN=2.632  GTCRN_WF=2.670  GTCRN-SS=2.692  
+  SI_SDR:
+    -5dB: Noisy=-4.906  GTCRN=7.177  GTCRN_WF=7.384  GTCRN-SS=7.251  
+    0dB: Noisy=0.016  GTCRN=9.883  GTCRN_WF=9.801  GTCRN-SS=9.838  
+    5dB: Noisy=4.962  GTCRN=12.906  GTCRN_WF=12.684  GTCRN-SS=12.778  
+    10dB: Noisy=10.005  GTCRN=16.809  GTCRN_WF=16.001  GTCRN-SS=16.240  
+    15dB: Noisy=14.995  GTCRN=20.064  GTCRN_WF=18.448  GTCRN-SS=19.006  
+  STOI:
+    -5dB: Noisy=0.658  GTCRN=0.658  GTCRN_WF=0.629  GTCRN-SS=0.658  
+    0dB: Noisy=0.695  GTCRN=0.717  GTCRN_WF=0.686  GTCRN-SS=0.716  
+    5dB: Noisy=0.727  GTCRN=0.779  GTCRN_WF=0.746  GTCRN-SS=0.779  
+    10dB: Noisy=0.782  GTCRN=0.836  GTCRN_WF=0.819  GTCRN-SS=0.835  
+    15dB: Noisy=0.819  GTCRN=0.859  GTCRN_WF=0.845  GTCRN-SS=0.858  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.056  GTCRN=2.104  GTCRN_WF=2.012  GTCRN-SS=2.221  
+    0dB: Noisy=2.506  GTCRN=2.874  GTCRN_WF=3.243  GTCRN-SS=3.050  
+    5dB: Noisy=2.409  GTCRN=3.173  GTCRN_WF=3.522  GTCRN-SS=3.173  
+    10dB: Noisy=2.816  GTCRN=3.346  GTCRN_WF=3.437  GTCRN-SS=3.203  
+    15dB: Noisy=2.789  GTCRN=3.669  GTCRN_WF=3.849  GTCRN-SS=3.660  
+
+>>> Construction Crane Moving <<<
+  PESQ:
+    -5dB: Noisy=1.024  GTCRN=1.076  GTCRN_WF=1.062  GTCRN-SS=1.078  
+    0dB: Noisy=1.031  GTCRN=1.218  GTCRN_WF=1.179  GTCRN-SS=1.227  
+    5dB: Noisy=1.062  GTCRN=1.360  GTCRN_WF=1.301  GTCRN-SS=1.376  
+    10dB: Noisy=1.147  GTCRN=1.465  GTCRN_WF=1.329  GTCRN-SS=1.480  
+    15dB: Noisy=1.337  GTCRN=1.637  GTCRN_WF=1.556  GTCRN-SS=1.644  
+  SI_SDR:
+    -5dB: Noisy=-4.967  GTCRN=0.379  GTCRN_WF=0.345  GTCRN-SS=0.307  
+    0dB: Noisy=-0.036  GTCRN=4.996  GTCRN_WF=4.960  GTCRN-SS=4.874  
+    5dB: Noisy=4.987  GTCRN=8.628  GTCRN_WF=8.570  GTCRN-SS=8.493  
+    10dB: Noisy=9.995  GTCRN=10.702  GTCRN_WF=10.590  GTCRN-SS=10.524  
+    15dB: Noisy=14.996  GTCRN=10.153  GTCRN_WF=10.074  GTCRN-SS=10.002  
+  STOI:
+    -5dB: Noisy=0.566  GTCRN=0.520  GTCRN_WF=0.488  GTCRN-SS=0.518  
+    0dB: Noisy=0.641  GTCRN=0.627  GTCRN_WF=0.608  GTCRN-SS=0.625  
+    5dB: Noisy=0.711  GTCRN=0.711  GTCRN_WF=0.694  GTCRN-SS=0.708  
+    10dB: Noisy=0.780  GTCRN=0.766  GTCRN_WF=0.751  GTCRN-SS=0.765  
+    15dB: Noisy=0.825  GTCRN=0.808  GTCRN_WF=0.802  GTCRN-SS=0.807  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.677  GTCRN=1.890  GTCRN_WF=2.256  GTCRN-SS=1.877  
+    0dB: Noisy=1.667  GTCRN=2.045  GTCRN_WF=2.256  GTCRN-SS=2.137  
+    5dB: Noisy=1.715  GTCRN=2.996  GTCRN_WF=3.036  GTCRN-SS=3.047  
+    10dB: Noisy=2.335  GTCRN=3.274  GTCRN_WF=3.207  GTCRN-SS=3.344  
+    15dB: Noisy=2.657  GTCRN=3.551  GTCRN_WF=3.523  GTCRN-SS=3.729  
+
+>>> Construction Drilling <<<
+  PESQ:
+    -5dB: Noisy=1.038  GTCRN=1.106  GTCRN_WF=1.101  GTCRN-SS=1.108  
+    0dB: Noisy=1.051  GTCRN=1.303  GTCRN_WF=1.263  GTCRN-SS=1.319  
+    5dB: Noisy=1.089  GTCRN=1.416  GTCRN_WF=1.423  GTCRN-SS=1.444  
+    10dB: Noisy=1.190  GTCRN=1.720  GTCRN_WF=1.695  GTCRN-SS=1.763  
+    15dB: Noisy=1.448  GTCRN=2.147  GTCRN_WF=2.093  GTCRN-SS=2.193  
+  SI_SDR:
+    -5dB: Noisy=-4.902  GTCRN=1.292  GTCRN_WF=1.515  GTCRN-SS=1.225  
+    0dB: Noisy=-0.022  GTCRN=6.916  GTCRN_WF=6.827  GTCRN-SS=6.739  
+    5dB: Noisy=4.964  GTCRN=10.404  GTCRN_WF=10.315  GTCRN-SS=10.249  
+    10dB: Noisy=9.986  GTCRN=15.189  GTCRN_WF=14.728  GTCRN-SS=14.647  
+    15dB: Noisy=14.996  GTCRN=16.691  GTCRN_WF=15.925  GTCRN-SS=15.851  
+  STOI:
+    -5dB: Noisy=0.614  GTCRN=0.654  GTCRN_WF=0.609  GTCRN-SS=0.651  
+    0dB: Noisy=0.679  GTCRN=0.749  GTCRN_WF=0.728  GTCRN-SS=0.747  
+    5dB: Noisy=0.757  GTCRN=0.809  GTCRN_WF=0.807  GTCRN-SS=0.808  
+    10dB: Noisy=0.823  GTCRN=0.854  GTCRN_WF=0.852  GTCRN-SS=0.852  
+    15dB: Noisy=0.855  GTCRN=0.888  GTCRN_WF=0.889  GTCRN-SS=0.887  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.721  GTCRN=1.427  GTCRN_WF=1.884  GTCRN-SS=1.481  
+    0dB: Noisy=1.865  GTCRN=2.149  GTCRN_WF=2.132  GTCRN-SS=2.297  
+    5dB: Noisy=2.414  GTCRN=2.285  GTCRN_WF=2.487  GTCRN-SS=2.333  
+    10dB: Noisy=2.591  GTCRN=3.190  GTCRN_WF=3.298  GTCRN-SS=3.337  
+    15dB: Noisy=2.451  GTCRN=3.283  GTCRN_WF=3.405  GTCRN-SS=3.439  
+
+>>> Construction Jackhammer 1 <<<
+  PESQ:
+    -5dB: Noisy=1.056  GTCRN=1.150  GTCRN_WF=1.149  GTCRN-SS=1.152  
+    0dB: Noisy=1.080  GTCRN=1.259  GTCRN_WF=1.246  GTCRN-SS=1.259  
+    5dB: Noisy=1.142  GTCRN=1.464  GTCRN_WF=1.455  GTCRN-SS=1.471  
+    10dB: Noisy=1.280  GTCRN=1.690  GTCRN_WF=1.681  GTCRN-SS=1.699  
+    15dB: Noisy=1.483  GTCRN=1.972  GTCRN_WF=1.933  GTCRN-SS=1.981  
+  SI_SDR:
+    -5dB: Noisy=-4.994  GTCRN=3.607  GTCRN_WF=3.590  GTCRN-SS=3.446  
+    0dB: Noisy=-0.019  GTCRN=4.818  GTCRN_WF=4.799  GTCRN-SS=4.683  
+    5dB: Noisy=5.011  GTCRN=8.076  GTCRN_WF=8.057  GTCRN-SS=7.850  
+    10dB: Noisy=9.994  GTCRN=10.321  GTCRN_WF=10.295  GTCRN-SS=10.011  
+    15dB: Noisy=15.005  GTCRN=12.644  GTCRN_WF=12.601  GTCRN-SS=12.186  
+  STOI:
+    -5dB: Noisy=0.611  GTCRN=0.656  GTCRN_WF=0.652  GTCRN-SS=0.654  
+    0dB: Noisy=0.695  GTCRN=0.724  GTCRN_WF=0.716  GTCRN-SS=0.723  
+    5dB: Noisy=0.796  GTCRN=0.808  GTCRN_WF=0.807  GTCRN-SS=0.807  
+    10dB: Noisy=0.868  GTCRN=0.856  GTCRN_WF=0.855  GTCRN-SS=0.854  
+    15dB: Noisy=0.908  GTCRN=0.909  GTCRN_WF=0.908  GTCRN-SS=0.907  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.690  GTCRN=1.817  GTCRN_WF=1.908  GTCRN-SS=1.731  
+    0dB: Noisy=1.734  GTCRN=2.210  GTCRN_WF=2.295  GTCRN-SS=2.276  
+    5dB: Noisy=2.103  GTCRN=2.232  GTCRN_WF=2.232  GTCRN-SS=2.320  
+    10dB: Noisy=2.189  GTCRN=2.710  GTCRN_WF=2.813  GTCRN-SS=3.035  
+    15dB: Noisy=2.432  GTCRN=3.117  GTCRN_WF=3.163  GTCRN-SS=3.259  
+
+>>> Construction Jackhammer 2 <<<
+  PESQ:
+    -5dB: Noisy=1.058  GTCRN=1.169  GTCRN_WF=1.160  GTCRN-SS=1.171  
+    0dB: Noisy=1.080  GTCRN=1.274  GTCRN_WF=1.245  GTCRN-SS=1.274  
+    5dB: Noisy=1.151  GTCRN=1.501  GTCRN_WF=1.475  GTCRN-SS=1.511  
+    10dB: Noisy=1.283  GTCRN=1.619  GTCRN_WF=1.609  GTCRN-SS=1.633  
+    15dB: Noisy=1.580  GTCRN=1.828  GTCRN_WF=1.781  GTCRN-SS=1.851  
+  SI_SDR:
+    -5dB: Noisy=-4.993  GTCRN=3.006  GTCRN_WF=2.997  GTCRN-SS=2.938  
+    0dB: Noisy=-0.010  GTCRN=3.692  GTCRN_WF=3.676  GTCRN-SS=3.617  
+    5dB: Noisy=5.017  GTCRN=7.646  GTCRN_WF=7.631  GTCRN-SS=7.521  
+    10dB: Noisy=10.000  GTCRN=9.522  GTCRN_WF=9.497  GTCRN-SS=9.382  
+    15dB: Noisy=14.996  GTCRN=12.311  GTCRN_WF=12.265  GTCRN-SS=12.083  
+  STOI:
+    -5dB: Noisy=0.520  GTCRN=0.591  GTCRN_WF=0.585  GTCRN-SS=0.589  
+    0dB: Noisy=0.612  GTCRN=0.677  GTCRN_WF=0.673  GTCRN-SS=0.675  
+    5dB: Noisy=0.691  GTCRN=0.765  GTCRN_WF=0.765  GTCRN-SS=0.764  
+    10dB: Noisy=0.782  GTCRN=0.795  GTCRN_WF=0.795  GTCRN-SS=0.795  
+    15dB: Noisy=0.842  GTCRN=0.860  GTCRN_WF=0.858  GTCRN-SS=0.859  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.766  GTCRN=1.376  GTCRN_WF=1.503  GTCRN-SS=1.558  
+    0dB: Noisy=1.748  GTCRN=2.158  GTCRN_WF=2.135  GTCRN-SS=2.399  
+    5dB: Noisy=1.766  GTCRN=1.997  GTCRN_WF=1.852  GTCRN-SS=2.132  
+    10dB: Noisy=2.183  GTCRN=2.911  GTCRN_WF=2.917  GTCRN-SS=3.060  
+    15dB: Noisy=2.241  GTCRN=2.759  GTCRN_WF=2.664  GTCRN-SS=3.030  
+
+>>> Construction Trucks Unloading <<<
+  PESQ:
+    -5dB: Noisy=1.041  GTCRN=1.175  GTCRN_WF=1.147  GTCRN-SS=1.186  
+    0dB: Noisy=1.065  GTCRN=1.321  GTCRN_WF=1.315  GTCRN-SS=1.332  
+    5dB: Noisy=1.136  GTCRN=1.561  GTCRN_WF=1.513  GTCRN-SS=1.585  
+    10dB: Noisy=1.267  GTCRN=2.071  GTCRN_WF=1.965  GTCRN-SS=2.084  
+    15dB: Noisy=1.609  GTCRN=2.336  GTCRN_WF=2.230  GTCRN-SS=2.370  
+  SI_SDR:
+    -5dB: Noisy=-5.084  GTCRN=1.725  GTCRN_WF=1.740  GTCRN-SS=1.742  
+    0dB: Noisy=-0.029  GTCRN=7.082  GTCRN_WF=6.814  GTCRN-SS=7.035  
+    5dB: Noisy=5.014  GTCRN=11.069  GTCRN_WF=10.510  GTCRN-SS=10.914  
+    10dB: Noisy=10.001  GTCRN=15.143  GTCRN_WF=14.201  GTCRN-SS=14.902  
+    15dB: Noisy=15.003  GTCRN=18.420  GTCRN_WF=16.302  GTCRN-SS=17.858  
+  STOI:
+    -5dB: Noisy=0.515  GTCRN=0.520  GTCRN_WF=0.498  GTCRN-SS=0.520  
+    0dB: Noisy=0.600  GTCRN=0.607  GTCRN_WF=0.601  GTCRN-SS=0.606  
+    5dB: Noisy=0.673  GTCRN=0.693  GTCRN_WF=0.683  GTCRN-SS=0.692  
+    10dB: Noisy=0.723  GTCRN=0.753  GTCRN_WF=0.742  GTCRN-SS=0.751  
+    15dB: Noisy=0.779  GTCRN=0.787  GTCRN_WF=0.775  GTCRN-SS=0.786  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.676  GTCRN=1.693  GTCRN_WF=1.815  GTCRN-SS=1.805  
+    0dB: Noisy=1.984  GTCRN=2.654  GTCRN_WF=2.563  GTCRN-SS=2.780  
+    5dB: Noisy=2.395  GTCRN=3.264  GTCRN_WF=3.080  GTCRN-SS=3.367  
+    10dB: Noisy=2.741  GTCRN=3.799  GTCRN_WF=3.640  GTCRN-SS=3.862  
+    15dB: Noisy=2.698  GTCRN=3.973  GTCRN_WF=3.993  GTCRN-SS=4.019  
+
+>>> Inside Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  GTCRN=1.626  GTCRN_WF=1.637  GTCRN-SS=1.637  
+    0dB: Noisy=1.265  GTCRN=1.996  GTCRN_WF=1.942  GTCRN-SS=2.036  
+    5dB: Noisy=1.348  GTCRN=2.183  GTCRN_WF=2.305  GTCRN-SS=2.228  
+    10dB: Noisy=1.567  GTCRN=2.924  GTCRN_WF=2.767  GTCRN-SS=2.960  
+    15dB: Noisy=2.167  GTCRN=3.084  GTCRN_WF=2.947  GTCRN-SS=3.117  
+  SI_SDR:
+    -5dB: Noisy=-5.047  GTCRN=7.800  GTCRN_WF=7.677  GTCRN-SS=7.727  
+    0dB: Noisy=-0.018  GTCRN=10.817  GTCRN_WF=10.435  GTCRN-SS=10.705  
+    5dB: Noisy=4.987  GTCRN=13.754  GTCRN_WF=12.901  GTCRN-SS=13.537  
+    10dB: Noisy=9.999  GTCRN=16.850  GTCRN_WF=14.986  GTCRN-SS=16.312  
+    15dB: Noisy=14.995  GTCRN=19.924  GTCRN_WF=16.925  GTCRN-SS=18.967  
+  STOI:
+    -5dB: Noisy=0.429  GTCRN=0.495  GTCRN_WF=0.497  GTCRN-SS=0.494  
+    0dB: Noisy=0.465  GTCRN=0.543  GTCRN_WF=0.538  GTCRN-SS=0.543  
+    5dB: Noisy=0.501  GTCRN=0.584  GTCRN_WF=0.584  GTCRN-SS=0.584  
+    10dB: Noisy=0.534  GTCRN=0.592  GTCRN_WF=0.590  GTCRN-SS=0.592  
+    15dB: Noisy=0.555  GTCRN=0.621  GTCRN_WF=0.616  GTCRN-SS=0.621  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  GTCRN=2.199  GTCRN_WF=2.301  GTCRN-SS=2.300  
+    0dB: Noisy=2.325  GTCRN=3.202  GTCRN_WF=3.224  GTCRN-SS=3.350  
+    5dB: Noisy=2.657  GTCRN=3.420  GTCRN_WF=3.688  GTCRN-SS=3.544  
+    10dB: Noisy=2.808  GTCRN=3.388  GTCRN_WF=3.535  GTCRN-SS=3.480  
+    15dB: Noisy=2.839  GTCRN=3.180  GTCRN_WF=3.447  GTCRN-SS=3.292  
+
+>>> Inside Train 1 <<<
+  PESQ:
+    -5dB: Noisy=1.059  GTCRN=1.224  GTCRN_WF=1.180  GTCRN-SS=1.226  
+    0dB: Noisy=1.084  GTCRN=1.516  GTCRN_WF=1.332  GTCRN-SS=1.520  
+    5dB: Noisy=1.145  GTCRN=1.856  GTCRN_WF=1.681  GTCRN-SS=1.844  
+    10dB: Noisy=1.296  GTCRN=2.240  GTCRN_WF=2.035  GTCRN-SS=2.239  
+    15dB: Noisy=1.612  GTCRN=2.650  GTCRN_WF=2.427  GTCRN-SS=2.632  
+  SI_SDR:
+    -5dB: Noisy=-5.005  GTCRN=3.967  GTCRN_WF=3.573  GTCRN-SS=3.875  
+    0dB: Noisy=-0.042  GTCRN=8.387  GTCRN_WF=7.625  GTCRN-SS=8.298  
+    5dB: Noisy=4.994  GTCRN=11.865  GTCRN_WF=10.415  GTCRN-SS=11.645  
+    10dB: Noisy=9.986  GTCRN=15.710  GTCRN_WF=11.897  GTCRN-SS=15.182  
+    15dB: Noisy=14.999  GTCRN=19.075  GTCRN_WF=13.765  GTCRN-SS=17.951  
+  STOI:
+    -5dB: Noisy=0.598  GTCRN=0.674  GTCRN_WF=0.660  GTCRN-SS=0.671  
+    0dB: Noisy=0.682  GTCRN=0.747  GTCRN_WF=0.736  GTCRN-SS=0.745  
+    5dB: Noisy=0.754  GTCRN=0.816  GTCRN_WF=0.802  GTCRN-SS=0.813  
+    10dB: Noisy=0.815  GTCRN=0.846  GTCRN_WF=0.831  GTCRN-SS=0.843  
+    15dB: Noisy=0.851  GTCRN=0.880  GTCRN_WF=0.863  GTCRN-SS=0.877  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.984  GTCRN=2.103  GTCRN_WF=2.065  GTCRN-SS=2.131  
+    0dB: Noisy=2.625  GTCRN=2.550  GTCRN_WF=2.471  GTCRN-SS=2.594  
+    5dB: Noisy=2.633  GTCRN=3.497  GTCRN_WF=3.482  GTCRN-SS=3.555  
+    10dB: Noisy=2.692  GTCRN=3.494  GTCRN_WF=3.374  GTCRN-SS=3.491  
+    15dB: Noisy=2.801  GTCRN=3.798  GTCRN_WF=3.570  GTCRN-SS=3.851  
+
+>>> Inside Train 2 <<<
+  PESQ:
+    -5dB: Noisy=1.072  GTCRN=1.228  GTCRN_WF=1.168  GTCRN-SS=1.236  
+    0dB: Noisy=1.132  GTCRN=1.471  GTCRN_WF=1.386  GTCRN-SS=1.500  
+    5dB: Noisy=1.228  GTCRN=1.824  GTCRN_WF=1.765  GTCRN-SS=1.835  
+    10dB: Noisy=1.517  GTCRN=2.181  GTCRN_WF=2.020  GTCRN-SS=2.203  
+    15dB: Noisy=1.919  GTCRN=2.595  GTCRN_WF=2.555  GTCRN-SS=2.634  
+  SI_SDR:
+    -5dB: Noisy=-5.000  GTCRN=3.042  GTCRN_WF=2.759  GTCRN-SS=3.037  
+    0dB: Noisy=-0.082  GTCRN=8.024  GTCRN_WF=7.481  GTCRN-SS=7.975  
+    5dB: Noisy=4.945  GTCRN=12.285  GTCRN_WF=11.242  GTCRN-SS=12.093  
+    10dB: Noisy=9.997  GTCRN=15.529  GTCRN_WF=13.341  GTCRN-SS=15.135  
+    15dB: Noisy=14.995  GTCRN=19.696  GTCRN_WF=15.278  GTCRN-SS=18.650  
+  STOI:
+    -5dB: Noisy=0.638  GTCRN=0.678  GTCRN_WF=0.633  GTCRN-SS=0.678  
+    0dB: Noisy=0.697  GTCRN=0.710  GTCRN_WF=0.683  GTCRN-SS=0.709  
+    5dB: Noisy=0.743  GTCRN=0.788  GTCRN_WF=0.761  GTCRN-SS=0.787  
+    10dB: Noisy=0.790  GTCRN=0.816  GTCRN_WF=0.799  GTCRN-SS=0.815  
+    15dB: Noisy=0.822  GTCRN=0.848  GTCRN_WF=0.831  GTCRN-SS=0.845  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.133  GTCRN=2.265  GTCRN_WF=2.501  GTCRN-SS=2.362  
+    0dB: Noisy=2.358  GTCRN=2.547  GTCRN_WF=2.705  GTCRN-SS=2.621  
+    5dB: Noisy=2.361  GTCRN=2.988  GTCRN_WF=2.941  GTCRN-SS=3.126  
+    10dB: Noisy=2.193  GTCRN=3.570  GTCRN_WF=3.616  GTCRN-SS=3.610  
+    15dB: Noisy=2.634  GTCRN=3.372  GTCRN_WF=3.384  GTCRN-SS=3.497  
+
+>>> Inside Train 3 <<<
+  PESQ:
+    -5dB: Noisy=1.041  GTCRN=1.080  GTCRN_WF=1.084  GTCRN-SS=1.081  
+    0dB: Noisy=1.054  GTCRN=1.108  GTCRN_WF=1.146  GTCRN-SS=1.110  
+    5dB: Noisy=1.111  GTCRN=1.217  GTCRN_WF=1.225  GTCRN-SS=1.226  
+    10dB: Noisy=1.210  GTCRN=1.493  GTCRN_WF=1.565  GTCRN-SS=1.515  
+    15dB: Noisy=1.424  GTCRN=1.759  GTCRN_WF=1.970  GTCRN-SS=1.878  
+  SI_SDR:
+    -5dB: Noisy=-4.929  GTCRN=-0.255  GTCRN_WF=-0.248  GTCRN-SS=-0.240  
+    0dB: Noisy=-0.007  GTCRN=-0.318  GTCRN_WF=-0.316  GTCRN-SS=-0.320  
+    5dB: Noisy=5.008  GTCRN=4.347  GTCRN_WF=4.355  GTCRN-SS=4.360  
+    10dB: Noisy=9.981  GTCRN=11.425  GTCRN_WF=11.354  GTCRN-SS=11.335  
+    15dB: Noisy=14.987  GTCRN=14.824  GTCRN_WF=14.630  GTCRN-SS=14.547  
+  STOI:
+    -5dB: Noisy=0.561  GTCRN=0.397  GTCRN_WF=0.379  GTCRN-SS=0.398  
+    0dB: Noisy=0.610  GTCRN=0.451  GTCRN_WF=0.425  GTCRN-SS=0.453  
+    5dB: Noisy=0.646  GTCRN=0.564  GTCRN_WF=0.552  GTCRN-SS=0.563  
+    10dB: Noisy=0.681  GTCRN=0.634  GTCRN_WF=0.623  GTCRN-SS=0.632  
+    15dB: Noisy=0.716  GTCRN=0.672  GTCRN_WF=0.663  GTCRN-SS=0.669  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.133  GTCRN=1.577  GTCRN_WF=1.478  GTCRN-SS=1.563  
+    0dB: Noisy=2.210  GTCRN=1.982  GTCRN_WF=2.234  GTCRN-SS=2.019  
+    5dB: Noisy=2.485  GTCRN=2.186  GTCRN_WF=2.214  GTCRN-SS=2.247  
+    10dB: Noisy=2.619  GTCRN=2.469  GTCRN_WF=2.743  GTCRN-SS=2.461  
+    15dB: Noisy=2.347  GTCRN=2.793  GTCRN_WF=2.930  GTCRN-SS=2.839  
+
+>>> PC Fan Noise <<<
+  PESQ:
+    -5dB: Noisy=1.041  GTCRN=1.373  GTCRN_WF=1.325  GTCRN-SS=1.362  
+    0dB: Noisy=1.054  GTCRN=1.615  GTCRN_WF=1.576  GTCRN-SS=1.651  
+    5dB: Noisy=1.109  GTCRN=1.975  GTCRN_WF=1.956  GTCRN-SS=2.025  
+    10dB: Noisy=1.282  GTCRN=2.261  GTCRN_WF=2.178  GTCRN-SS=2.291  
+    15dB: Noisy=1.584  GTCRN=2.581  GTCRN_WF=2.553  GTCRN-SS=2.630  
+  SI_SDR:
+    -5dB: Noisy=-4.987  GTCRN=11.161  GTCRN_WF=11.177  GTCRN-SS=11.088  
+    0dB: Noisy=-0.012  GTCRN=14.238  GTCRN_WF=14.198  GTCRN-SS=13.966  
+    5dB: Noisy=5.000  GTCRN=16.630  GTCRN_WF=16.380  GTCRN-SS=16.087  
+    10dB: Noisy=9.998  GTCRN=18.168  GTCRN_WF=17.766  GTCRN-SS=17.288  
+    15dB: Noisy=15.001  GTCRN=20.179  GTCRN_WF=18.882  GTCRN-SS=18.793  
+  STOI:
+    -5dB: Noisy=0.668  GTCRN=0.667  GTCRN_WF=0.657  GTCRN-SS=0.664  
+    0dB: Noisy=0.715  GTCRN=0.691  GTCRN_WF=0.684  GTCRN-SS=0.691  
+    5dB: Noisy=0.736  GTCRN=0.729  GTCRN_WF=0.717  GTCRN-SS=0.729  
+    10dB: Noisy=0.775  GTCRN=0.757  GTCRN_WF=0.749  GTCRN-SS=0.756  
+    15dB: Noisy=0.781  GTCRN=0.777  GTCRN_WF=0.763  GTCRN-SS=0.776  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.823  GTCRN=2.660  GTCRN_WF=2.751  GTCRN-SS=2.848  
+    0dB: Noisy=2.679  GTCRN=3.021  GTCRN_WF=2.882  GTCRN-SS=3.079  
+    5dB: Noisy=2.810  GTCRN=3.197  GTCRN_WF=3.566  GTCRN-SS=3.351  
+    10dB: Noisy=2.850  GTCRN=3.691  GTCRN_WF=3.719  GTCRN-SS=4.026  
+    15dB: Noisy=2.769  GTCRN=3.085  GTCRN_WF=3.460  GTCRN-SS=3.316  
+
+>>> SSN IEEE <<<
+  PESQ:
+    -5dB: Noisy=1.032  GTCRN=1.149  GTCRN_WF=1.130  GTCRN-SS=1.152  
+    0dB: Noisy=1.044  GTCRN=1.270  GTCRN_WF=1.204  GTCRN-SS=1.272  
+    5dB: Noisy=1.090  GTCRN=1.495  GTCRN_WF=1.423  GTCRN-SS=1.504  
+    10dB: Noisy=1.215  GTCRN=1.776  GTCRN_WF=1.681  GTCRN-SS=1.786  
+    15dB: Noisy=1.459  GTCRN=2.083  GTCRN_WF=1.993  GTCRN-SS=2.101  
+  SI_SDR:
+    -5dB: Noisy=-5.013  GTCRN=4.689  GTCRN_WF=4.594  GTCRN-SS=4.661  
+    0dB: Noisy=-0.006  GTCRN=7.575  GTCRN_WF=7.338  GTCRN-SS=7.439  
+    5dB: Noisy=5.002  GTCRN=10.634  GTCRN_WF=10.260  GTCRN-SS=10.418  
+    10dB: Noisy=10.014  GTCRN=14.694  GTCRN_WF=13.744  GTCRN-SS=14.354  
+    15dB: Noisy=14.999  GTCRN=17.818  GTCRN_WF=15.857  GTCRN-SS=17.195  
+  STOI:
+    -5dB: Noisy=0.530  GTCRN=0.553  GTCRN_WF=0.524  GTCRN-SS=0.552  
+    0dB: Noisy=0.615  GTCRN=0.653  GTCRN_WF=0.633  GTCRN-SS=0.654  
+    5dB: Noisy=0.703  GTCRN=0.737  GTCRN_WF=0.728  GTCRN-SS=0.737  
+    10dB: Noisy=0.784  GTCRN=0.817  GTCRN_WF=0.811  GTCRN-SS=0.816  
+    15dB: Noisy=0.847  GTCRN=0.875  GTCRN_WF=0.871  GTCRN-SS=0.874  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.777  GTCRN=1.815  GTCRN_WF=1.914  GTCRN-SS=2.033  
+    0dB: Noisy=1.930  GTCRN=1.796  GTCRN_WF=1.816  GTCRN-SS=1.888  
+    5dB: Noisy=2.418  GTCRN=2.539  GTCRN_WF=2.526  GTCRN-SS=2.619  
+    10dB: Noisy=2.738  GTCRN=2.705  GTCRN_WF=2.886  GTCRN-SS=2.776  
+    15dB: Noisy=2.773  GTCRN=3.295  GTCRN_WF=3.250  GTCRN-SS=3.425  
+
+>>> Street Noise <<<
+  PESQ:
+    -5dB: Noisy=1.072  GTCRN=1.238  GTCRN_WF=1.179  GTCRN-SS=1.247  
+    0dB: Noisy=1.100  GTCRN=1.461  GTCRN_WF=1.309  GTCRN-SS=1.460  
+    5dB: Noisy=1.208  GTCRN=1.701  GTCRN_WF=1.529  GTCRN-SS=1.707  
+    10dB: Noisy=1.388  GTCRN=2.046  GTCRN_WF=1.837  GTCRN-SS=2.063  
+    15dB: Noisy=1.691  GTCRN=2.405  GTCRN_WF=2.154  GTCRN-SS=2.405  
+  SI_SDR:
+    -5dB: Noisy=-5.074  GTCRN=4.868  GTCRN_WF=4.429  GTCRN-SS=4.900  
+    0dB: Noisy=-0.067  GTCRN=8.025  GTCRN_WF=7.155  GTCRN-SS=7.886  
+    5dB: Noisy=4.997  GTCRN=11.850  GTCRN_WF=10.301  GTCRN-SS=11.654  
+    10dB: Noisy=10.014  GTCRN=15.105  GTCRN_WF=12.285  GTCRN-SS=14.724  
+    15dB: Noisy=15.002  GTCRN=18.643  GTCRN_WF=14.037  GTCRN-SS=17.835  
+  STOI:
+    -5dB: Noisy=0.552  GTCRN=0.595  GTCRN_WF=0.568  GTCRN-SS=0.595  
+    0dB: Noisy=0.616  GTCRN=0.673  GTCRN_WF=0.658  GTCRN-SS=0.672  
+    5dB: Noisy=0.681  GTCRN=0.735  GTCRN_WF=0.714  GTCRN-SS=0.734  
+    10dB: Noisy=0.754  GTCRN=0.785  GTCRN_WF=0.768  GTCRN-SS=0.784  
+    15dB: Noisy=0.804  GTCRN=0.826  GTCRN_WF=0.813  GTCRN-SS=0.825  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.199  GTCRN=1.930  GTCRN_WF=1.811  GTCRN-SS=2.132  
+    0dB: Noisy=2.381  GTCRN=2.525  GTCRN_WF=2.511  GTCRN-SS=2.667  
+    5dB: Noisy=2.508  GTCRN=2.843  GTCRN_WF=2.843  GTCRN-SS=2.798  
+    10dB: Noisy=2.603  GTCRN=3.043  GTCRN_WF=3.071  GTCRN-SS=2.982  
+    15dB: Noisy=2.878  GTCRN=3.306  GTCRN_WF=3.318  GTCRN-SS=3.129  
+
+>>> Street Noise Downtown <<<
+  PESQ:
+    -5dB: Noisy=1.139  GTCRN=1.221  GTCRN_WF=1.177  GTCRN-SS=1.217  
+    0dB: Noisy=1.132  GTCRN=1.331  GTCRN_WF=1.293  GTCRN-SS=1.324  
+    5dB: Noisy=1.226  GTCRN=1.656  GTCRN_WF=1.599  GTCRN-SS=1.668  
+    10dB: Noisy=1.410  GTCRN=1.979  GTCRN_WF=1.871  GTCRN-SS=1.983  
+    15dB: Noisy=1.709  GTCRN=2.280  GTCRN_WF=2.129  GTCRN-SS=2.305  
+  SI_SDR:
+    -5dB: Noisy=-5.014  GTCRN=3.681  GTCRN_WF=3.577  GTCRN-SS=3.698  
+    0dB: Noisy=-0.016  GTCRN=6.667  GTCRN_WF=6.439  GTCRN-SS=6.647  
+    5dB: Noisy=5.009  GTCRN=11.539  GTCRN_WF=11.165  GTCRN-SS=11.431  
+    10dB: Noisy=10.000  GTCRN=14.346  GTCRN_WF=13.617  GTCRN-SS=14.121  
+    15dB: Noisy=15.000  GTCRN=16.803  GTCRN_WF=15.490  GTCRN-SS=16.365  
+  STOI:
+    -5dB: Noisy=0.553  GTCRN=0.597  GTCRN_WF=0.564  GTCRN-SS=0.596  
+    0dB: Noisy=0.662  GTCRN=0.684  GTCRN_WF=0.677  GTCRN-SS=0.682  
+    5dB: Noisy=0.737  GTCRN=0.774  GTCRN_WF=0.763  GTCRN-SS=0.773  
+    10dB: Noisy=0.811  GTCRN=0.839  GTCRN_WF=0.832  GTCRN-SS=0.839  
+    15dB: Noisy=0.861  GTCRN=0.860  GTCRN_WF=0.849  GTCRN-SS=0.859  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.722  GTCRN=1.907  GTCRN_WF=2.126  GTCRN-SS=1.947  
+    0dB: Noisy=2.403  GTCRN=2.379  GTCRN_WF=2.250  GTCRN-SS=2.405  
+    5dB: Noisy=2.476  GTCRN=3.169  GTCRN_WF=3.347  GTCRN-SS=3.204  
+    10dB: Noisy=2.782  GTCRN=3.387  GTCRN_WF=3.542  GTCRN-SS=3.587  
+    15dB: Noisy=3.183  GTCRN=3.654  GTCRN_WF=3.758  GTCRN-SS=3.648  
+
+>>> Train 1 <<<
+  PESQ:
+    -5dB: Noisy=1.084  GTCRN=1.223  GTCRN_WF=1.216  GTCRN-SS=1.225  
+    0dB: Noisy=1.082  GTCRN=1.401  GTCRN_WF=1.396  GTCRN-SS=1.422  
+    5dB: Noisy=1.163  GTCRN=1.308  GTCRN_WF=1.232  GTCRN-SS=1.305  
+    10dB: Noisy=1.317  GTCRN=1.580  GTCRN_WF=1.479  GTCRN-SS=1.618  
+    15dB: Noisy=1.681  GTCRN=2.276  GTCRN_WF=1.957  GTCRN-SS=2.252  
+  SI_SDR:
+    -5dB: Noisy=-4.999  GTCRN=6.297  GTCRN_WF=5.903  GTCRN-SS=6.232  
+    0dB: Noisy=-0.095  GTCRN=9.791  GTCRN_WF=8.908  GTCRN-SS=9.629  
+    5dB: Noisy=4.997  GTCRN=11.516  GTCRN_WF=10.158  GTCRN-SS=11.237  
+    10dB: Noisy=10.003  GTCRN=15.525  GTCRN_WF=13.015  GTCRN-SS=14.923  
+    15dB: Noisy=15.004  GTCRN=20.781  GTCRN_WF=15.512  GTCRN-SS=19.115  
+  STOI:
+    -5dB: Noisy=0.583  GTCRN=0.635  GTCRN_WF=0.630  GTCRN-SS=0.634  
+    0dB: Noisy=0.636  GTCRN=0.706  GTCRN_WF=0.697  GTCRN-SS=0.706  
+    5dB: Noisy=0.690  GTCRN=0.719  GTCRN_WF=0.713  GTCRN-SS=0.717  
+    10dB: Noisy=0.731  GTCRN=0.757  GTCRN_WF=0.751  GTCRN-SS=0.756  
+    15dB: Noisy=0.779  GTCRN=0.791  GTCRN_WF=0.779  GTCRN-SS=0.790  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.235  GTCRN=3.390  GTCRN_WF=3.414  GTCRN-SS=3.311  
+    0dB: Noisy=2.609  GTCRN=3.815  GTCRN_WF=3.725  GTCRN-SS=3.884  
+    5dB: Noisy=2.510  GTCRN=3.895  GTCRN_WF=4.025  GTCRN-SS=3.914  
+    10dB: Noisy=3.026  GTCRN=4.084  GTCRN_WF=3.908  GTCRN-SS=4.054  
+    15dB: Noisy=3.160  GTCRN=4.195  GTCRN_WF=4.100  GTCRN-SS=4.133  
+
+>>> Train 2 <<<
+  PESQ:
+    -5dB: Noisy=1.054  GTCRN=1.223  GTCRN_WF=1.164  GTCRN-SS=1.227  
+    0dB: Noisy=1.078  GTCRN=1.488  GTCRN_WF=1.497  GTCRN-SS=1.503  
+    5dB: Noisy=1.214  GTCRN=1.525  GTCRN_WF=1.413  GTCRN-SS=1.529  
+    10dB: Noisy=1.486  GTCRN=1.731  GTCRN_WF=1.620  GTCRN-SS=1.738  
+    15dB: Noisy=1.514  GTCRN=2.423  GTCRN_WF=2.254  GTCRN-SS=2.439  
+  SI_SDR:
+    -5dB: Noisy=-4.979  GTCRN=4.840  GTCRN_WF=4.959  GTCRN-SS=4.833  
+    0dB: Noisy=-0.009  GTCRN=8.081  GTCRN_WF=8.040  GTCRN-SS=7.976  
+    5dB: Noisy=4.983  GTCRN=11.539  GTCRN_WF=11.440  GTCRN-SS=11.334  
+    10dB: Noisy=10.006  GTCRN=13.619  GTCRN_WF=13.406  GTCRN-SS=13.302  
+    15dB: Noisy=15.003  GTCRN=17.567  GTCRN_WF=17.031  GTCRN-SS=16.730  
+  STOI:
+    -5dB: Noisy=0.644  GTCRN=0.682  GTCRN_WF=0.661  GTCRN-SS=0.681  
+    0dB: Noisy=0.742  GTCRN=0.796  GTCRN_WF=0.794  GTCRN-SS=0.793  
+    5dB: Noisy=0.783  GTCRN=0.833  GTCRN_WF=0.826  GTCRN-SS=0.831  
+    10dB: Noisy=0.865  GTCRN=0.885  GTCRN_WF=0.872  GTCRN-SS=0.884  
+    15dB: Noisy=0.901  GTCRN=0.918  GTCRN_WF=0.912  GTCRN-SS=0.917  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.635  GTCRN=2.364  GTCRN_WF=2.479  GTCRN-SS=2.379  
+    0dB: Noisy=2.027  GTCRN=2.539  GTCRN_WF=2.576  GTCRN-SS=2.602  
+    5dB: Noisy=2.204  GTCRN=2.452  GTCRN_WF=2.483  GTCRN-SS=2.462  
+    10dB: Noisy=2.413  GTCRN=3.203  GTCRN_WF=3.235  GTCRN-SS=3.254  
+    15dB: Noisy=2.312  GTCRN=3.605  GTCRN_WF=3.695  GTCRN-SS=3.767  
+
+>>> Water Cooler <<<
+  PESQ:
+    -5dB: Noisy=1.144  GTCRN=1.516  GTCRN_WF=1.407  GTCRN-SS=1.511  
+    0dB: Noisy=1.243  GTCRN=1.887  GTCRN_WF=1.562  GTCRN-SS=1.897  
+    5dB: Noisy=1.468  GTCRN=2.229  GTCRN_WF=2.053  GTCRN-SS=2.267  
+    10dB: Noisy=1.810  GTCRN=2.616  GTCRN_WF=2.514  GTCRN-SS=2.638  
+    15dB: Noisy=2.254  GTCRN=2.934  GTCRN_WF=2.914  GTCRN-SS=2.977  
+  SI_SDR:
+    -5dB: Noisy=-5.049  GTCRN=5.995  GTCRN_WF=5.718  GTCRN-SS=5.886  
+    0dB: Noisy=-0.034  GTCRN=9.676  GTCRN_WF=9.101  GTCRN-SS=9.458  
+    5dB: Noisy=5.030  GTCRN=12.697  GTCRN_WF=11.754  GTCRN-SS=12.458  
+    10dB: Noisy=9.993  GTCRN=15.610  GTCRN_WF=13.874  GTCRN-SS=15.236  
+    15dB: Noisy=14.997  GTCRN=19.231  GTCRN_WF=15.861  GTCRN-SS=18.157  
+  STOI:
+    -5dB: Noisy=0.608  GTCRN=0.654  GTCRN_WF=0.639  GTCRN-SS=0.654  
+    0dB: Noisy=0.652  GTCRN=0.710  GTCRN_WF=0.693  GTCRN-SS=0.709  
+    5dB: Noisy=0.706  GTCRN=0.767  GTCRN_WF=0.742  GTCRN-SS=0.767  
+    10dB: Noisy=0.756  GTCRN=0.804  GTCRN_WF=0.800  GTCRN-SS=0.803  
+    15dB: Noisy=0.785  GTCRN=0.833  GTCRN_WF=0.830  GTCRN-SS=0.832  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.272  GTCRN=2.660  GTCRN_WF=2.636  GTCRN-SS=2.771  
+    0dB: Noisy=2.677  GTCRN=3.168  GTCRN_WF=3.327  GTCRN-SS=3.209  
+    5dB: Noisy=3.077  GTCRN=2.846  GTCRN_WF=3.074  GTCRN-SS=2.948  
+    10dB: Noisy=2.863  GTCRN=3.439  GTCRN_WF=3.578  GTCRN-SS=3.640  
+    15dB: Noisy=3.172  GTCRN=3.704  GTCRN_WF=4.020  GTCRN-SS=3.806  
+
+========================================================================================================================

@@ -33,9 +33,9 @@ print("="*100)
 print("\nLoading CSV file...")
 try:
     df = pd.read_csv(CSV_FILE)
-    print(f"✓ Loaded {len(df)} rows successfully")
+    print(f" Loaded {len(df)} rows successfully")
 except Exception as e:
-    print(f"✗ Error loading CSV: {e}")
+    print(f" Error loading CSV: {e}")
     exit(1)
 
 # ====================================
