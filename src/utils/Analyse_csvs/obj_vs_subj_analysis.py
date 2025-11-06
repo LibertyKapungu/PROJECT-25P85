@@ -245,9 +245,9 @@ for snr in sorted(df_success['SNR_dB'].unique()):
         print(f"    Best Objective: {best_obj_val} (Score: {param_obj[best_obj_val]:.4f})")
         print(f"    Best Subjective: {best_subj_val} (Score: {param_subj[best_subj_val]:.4f})")
         if best_obj_val == best_subj_val:
-            print(f"    ✅ Agreement")
+            print(f"     Agreement")
         else:
-            print(f"    ⚠️  Disagreement")
+            print(f"      Disagreement")
         
         snr_results.append({
             'SNR_dB': snr,
@@ -285,7 +285,7 @@ for snr in sorted(df_success['SNR_dB'].unique()):
     best_obj_idx = snr_config_avg['Objective_Score'].idxmax()
     snr_best_obj = snr_config_avg.loc[best_obj_idx]
     
-    print(f"\n🎯 Best OBJECTIVE:")
+    print(f"\n Best OBJECTIVE:")
     print(f"  {snr_best_obj['Freq_spacing']} | Nband={int(snr_best_obj['Nband'])} | FRMSZ={int(snr_best_obj['FRMSZ_ms'])}ms | OVLP={int(snr_best_obj['OVLP'])}% | Floor={snr_best_obj['Floor']:.4f}")
     print(f"  Obj={snr_best_obj['Objective_Score']:.4f} | PESQ={snr_best_obj['PESQ']:.4f} | STOI={snr_best_obj['STOI']:.4f} | SI-SDR={snr_best_obj['SI_SDR']:.2f}")
     print(f"  Subj={snr_best_obj['Subjective_Score']:.4f} | DNSMOS={snr_best_obj['DNSMOS_mos_ovr']:.4f}")
@@ -294,7 +294,7 @@ for snr in sorted(df_success['SNR_dB'].unique()):
     best_subj_idx = snr_config_avg['Subjective_Score'].idxmax()
     snr_best_subj = snr_config_avg.loc[best_subj_idx]
     
-    print(f"\n🎯 Best SUBJECTIVE:")
+    print(f"\n Best SUBJECTIVE:")
     print(f"  {snr_best_subj['Freq_spacing']} | Nband={int(snr_best_subj['Nband'])} | FRMSZ={int(snr_best_subj['FRMSZ_ms'])}ms | OVLP={int(snr_best_subj['OVLP'])}% | Floor={snr_best_subj['Floor']:.4f}")
     print(f"  Subj={snr_best_subj['Subjective_Score']:.4f} | DNSMOS={snr_best_subj['DNSMOS_mos_ovr']:.4f}")
     print(f"  Obj={snr_best_subj['Objective_Score']:.4f} | PESQ={snr_best_subj['PESQ']:.4f} | STOI={snr_best_subj['STOI']:.4f} | SI-SDR={snr_best_subj['SI_SDR']:.2f}")
@@ -303,12 +303,12 @@ for snr in sorted(df_success['SNR_dB'].unique()):
     best_balanced_idx = snr_config_avg['Balanced_Score'].idxmax()
     snr_best_balanced = snr_config_avg.loc[best_balanced_idx]
     
-    print(f"\n🎯 Best BALANCED:")
+    print(f"\n Best BALANCED:")
     print(f"  {snr_best_balanced['Freq_spacing']} | Nband={int(snr_best_balanced['Nband'])} | FRMSZ={int(snr_best_balanced['FRMSZ_ms'])}ms | OVLP={int(snr_best_balanced['OVLP'])}% | Floor={snr_best_balanced['Floor']:.4f}")
     print(f"  Balanced={snr_best_balanced['Balanced_Score']:.4f} | Obj={snr_best_balanced['Objective_Score']:.4f} | Subj={snr_best_balanced['Subjective_Score']:.4f}")
     
     if snr_best_obj['Config_ID'] == snr_best_subj['Config_ID']:
-        print(f"\n✅ Same configuration optimal for both!")
+        print(f"\n Same configuration optimal for both!")
     
     # Store for comparison
     snr_best_configs.append({
@@ -609,7 +609,7 @@ print("ANALYSIS COMPLETE!")
 print(f"Results saved to: {OUTPUT_DIR.absolute()}")
 print("="*100)
 
-print(f"\n📁 Generated files:")
+print(f"\n Generated files:")
 print(f"  ✓ parameter_objective_vs_subjective_all_snrs.csv")
 print(f"  ✓ config_averaged_objective_vs_subjective.csv")
 print(f"  ✓ snr_param_objective_vs_subjective.csv")

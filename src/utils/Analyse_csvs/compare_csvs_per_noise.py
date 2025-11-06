@@ -173,39 +173,49 @@ class MultiSNRAudioEnhancementComparator:
             return
         
         def categorize_noise(filename):
-            """Categorize based on NOIZEUS noise dataset."""
+            """Categorize each NOIZEUS noise file explicitly."""
             filename_lower = str(filename).lower()
-            
-            # Babble/Speech
-            if any(x in filename_lower for x in ['babble', 'cafeteria']):
-                return 'Babble'
-            
-            # Train noises
-            elif any(x in filename_lower for x in ['train', 'inside_train']):
-                return 'Train'
-            
-            # Street/Traffic
-            elif 'street' in filename_lower:
-                return 'Street'
-            
-            # Car noises
-            elif 'car' in filename_lower:
-                return 'Car'
-            
-            # Construction
-            elif any(x in filename_lower for x in ['construction', 'crane', 'drilling', 
-                                                    'jackhammer', 'trucks_unloading']):
-                return 'Construction'
-            
-            # Stationary/White noise
-            elif any(x in filename_lower for x in ['fan', 'cooler', 'ssn', 'white', 'pc_fan']):
-                return 'Stationary'
-            
-            # Flight
-            elif 'flight' in filename_lower:
-                return 'Flight'
-            
-            # Other
+
+            if 'cafeteria_babble' in filename_lower:
+                return 'Cafeteria Babble'
+            elif 'car noise_60mph' in filename_lower:
+                return 'Car Noise 60mph'
+            elif 'car noise_idle noise_40mph' in filename_lower:
+                return 'Car Noise Idle 40mph'
+            elif 'car noise_idle noise_60mph' in filename_lower:
+                return 'Car Noise Idle 60mph'
+            elif 'construction_crane_moving' in filename_lower:
+                return 'Construction Crane Moving'
+            elif 'construction_drilling' in filename_lower:
+                return 'Construction Drilling'
+            elif 'construction_jackhammer1' in filename_lower:
+                return 'Construction Jackhammer 1'
+            elif 'construction_jackhammer2' in filename_lower:
+                return 'Construction Jackhammer 2'
+            elif 'construction_trucks_unloading' in filename_lower:
+                return 'Construction Trucks Unloading'
+            elif 'inside flight' in filename_lower:
+                return 'Inside Flight'
+            elif 'inside train_1' in filename_lower:
+                return 'Inside Train 1'
+            elif 'inside train_2' in filename_lower:
+                return 'Inside Train 2'
+            elif 'inside train_3' in filename_lower:
+                return 'Inside Train 3'
+            elif 'pc fan noise' in filename_lower:
+                return 'PC Fan Noise'
+            elif 'ssn_ieee' in filename_lower:
+                return 'SSN IEEE'
+            elif 'street noise_downtown' in filename_lower:
+                return 'Street Noise Downtown'
+            elif 'street noise' in filename_lower:
+                return 'Street Noise'
+            elif 'train1' in filename_lower:
+                return 'Train 1'
+            elif 'train2' in filename_lower:
+                return 'Train 2'
+            elif 'water cooler' in filename_lower:
+                return 'Water Cooler'
             else:
                 return 'Other'
         
@@ -514,11 +524,16 @@ class MultiSNRAudioEnhancementComparator:
         plt.tight_layout()
         
         return fig
-    
-    def plot_snr_noise_category_heatmap(self, metric='PESQ', figsize=(16, 10)):
+
+    def plot_snr_noise_category_heatmap(self, metric='PESQ', figsize=(16, 10), highlight_best=True):
         """
         Create heatmap showing performance by SNR and noise category.
-        Separate heatmap for each method.
+        Separate heatmap for each method with best performer highlighted.
+        
+        Parameters:
+        -----------
+        highlight_best : bool
+            If True, circles the best performing method for each (category, SNR) combination
         """
         categories = set()
         for snr in self.snr_levels:
@@ -540,6 +555,9 @@ class MultiSNRAudioEnhancementComparator:
         # Get appropriate vmin/vmax for the metric
         vmin, vmax = self.metric_ranges.get(metric, (0, 5))
         
+        # Collect all data matrices to find best performers
+        all_data_matrices = {}
+        
         for idx, method_name in enumerate(self.method_names):
             ax = axes[idx]
             
@@ -560,6 +578,8 @@ class MultiSNRAudioEnhancementComparator:
                             data_matrix[i, j] = np.nan
                     else:
                         data_matrix[i, j] = np.nan
+            
+            all_data_matrices[method_name] = data_matrix
             
             # Plot heatmap with metric-appropriate range
             im = ax.imshow(data_matrix, cmap='RdYlGn', aspect='auto', vmin=vmin, vmax=vmax)
@@ -587,7 +607,28 @@ class MultiSNRAudioEnhancementComparator:
             # Add colorbar
             plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
         
-        plt.suptitle(f'{metric} Performance: SNR vs Noise Category', 
+        # Highlight best performers if requested
+        if highlight_best:
+            for i in range(len(categories)):
+                for j in range(len(self.snr_levels)):
+                    # Collect values from all methods for this cell
+                    values = []
+                    for method_name in self.method_names:
+                        val = all_data_matrices[method_name][i, j]
+                        if not np.isnan(val):
+                            values.append((val, method_name))
+                    
+                    if values:
+                        # Find best value (higher is better for all metrics)
+                        best_val, best_method = max(values, key=lambda x: x[0])
+                        best_idx = self.method_names.index(best_method)
+                        
+                        # Draw circle around best performer
+                        circle = plt.Circle((j, i), 0.50, color='blue', fill=False, 
+                                          linewidth=0.7, transform=axes[best_idx].transData)
+                        axes[best_idx].add_patch(circle)
+        
+        plt.suptitle(f'{metric} Performance: SNR vs Noise Category (Best Performers Circled)', 
                      fontsize=20, fontweight='bold', y=0.98)
         plt.tight_layout()
         
@@ -668,6 +709,624 @@ class MultiSNRAudioEnhancementComparator:
         ax.legend(loc='upper left', fontsize=16, ncol=2 if num_methods > 3 else 1)
         ax.grid(axis='y', alpha=0.3, linestyle='--')
         ax.set_axisbelow(True)
+
+    def analyze_best_performers(self):
+        """
+        Comprehensive analysis of which algorithm performs best under different conditions.
+        Returns detailed statistics about best performers.
+        """
+        analysis = {
+            'overall': {},
+            'by_metric': {},
+            'by_snr': {},
+            'by_noise': {},
+            'win_matrix': {}
+        }
+        
+        # For each metric, count wins per method
+        for metric in self.metrics:
+            win_counts = {method: 0 for method in self.method_names}
+            total_comparisons = 0
+            
+            for snr in self.snr_levels:
+                df = self.df_merged[snr]
+                if len(df) == 0:
+                    continue
+                
+                # Check each file
+                for idx, row in df.iterrows():
+                    values = []
+                    for method in self.method_names:
+                        col = f'{metric}_{method}'
+                        if col in df.columns and not pd.isna(row[col]):
+                            values.append((row[col], method))
+                    
+                    if values:
+                        best_val, best_method = max(values, key=lambda x: x[0])
+                        win_counts[best_method] += 1
+                        total_comparisons += 1
+            
+            analysis['by_metric'][metric] = {
+                'win_counts': win_counts,
+                'win_percentages': {m: (c/total_comparisons*100 if total_comparisons > 0 else 0) 
+                                for m, c in win_counts.items()},
+                'total_comparisons': total_comparisons
+            }
+        
+        # Win counts by SNR level
+        for snr in self.snr_levels:
+            df = self.df_merged[snr]
+            if len(df) == 0:
+                continue
+            
+            snr_wins = {method: 0 for method in self.method_names}
+            snr_total = 0
+            
+            for metric in self.metrics:
+                for idx, row in df.iterrows():
+                    values = []
+                    for method in self.method_names:
+                        col = f'{metric}_{method}'
+                        if col in df.columns and not pd.isna(row[col]):
+                            values.append((row[col], method))
+                    
+                    if values:
+                        best_val, best_method = max(values, key=lambda x: x[0])
+                        snr_wins[best_method] += 1
+                        snr_total += 1
+            
+            analysis['by_snr'][snr] = {
+                'win_counts': snr_wins,
+                'win_percentages': {m: (c/snr_total*100 if snr_total > 0 else 0) 
+                                for m, c in snr_wins.items()}
+            }
+        
+        # Win counts by noise category
+        all_categories = set()
+        for snr in self.snr_levels:
+            if 'noise_category' in self.df_merged[snr].columns:
+                all_categories.update(self.df_merged[snr]['noise_category'].unique())
+        
+        for category in all_categories:
+            cat_wins = {method: 0 for method in self.method_names}
+            cat_total = 0
+            
+            for snr in self.snr_levels:
+                df = self.df_merged[snr]
+                if len(df) == 0 or 'noise_category' not in df.columns:
+                    continue
+                
+                cat_df = df[df['noise_category'] == category]
+                
+                for metric in self.metrics:
+                    for idx, row in cat_df.iterrows():
+                        values = []
+                        for method in self.method_names:
+                            col = f'{metric}_{method}'
+                            if col in cat_df.columns and not pd.isna(row[col]):
+                                values.append((row[col], method))
+                        
+                        if values:
+                            best_val, best_method = max(values, key=lambda x: x[0])
+                            cat_wins[best_method] += 1
+                            cat_total += 1
+            
+            if cat_total > 0:
+                analysis['by_noise'][category] = {
+                    'win_counts': cat_wins,
+                    'win_percentages': {m: (c/cat_total*100) for m, c in cat_wins.items()},
+                    'total_comparisons': cat_total
+                }
+        
+        # Overall win counts
+        overall_wins = {method: 0 for method in self.method_names}
+        overall_total = 0
+        
+        for snr in self.snr_levels:
+            df = self.df_merged[snr]
+            if len(df) == 0:
+                continue
+            
+            for metric in self.metrics:
+                for idx, row in df.iterrows():
+                    values = []
+                    for method in self.method_names:
+                        col = f'{metric}_{method}'
+                        if col in df.columns and not pd.isna(row[col]):
+                            values.append((row[col], method))
+                    
+                    if values:
+                        best_val, best_method = max(values, key=lambda x: x[0])
+                        overall_wins[best_method] += 1
+                        overall_total += 1
+        
+        analysis['overall'] = {
+            'win_counts': overall_wins,
+            'win_percentages': {m: (c/overall_total*100 if overall_total > 0 else 0) 
+                            for m, c in overall_wins.items()},
+            'total_comparisons': overall_total
+        }
+        
+        return analysis
+
+    def generate_critical_analysis_report(self):
+        """
+        Generate a critical analysis report identifying best performers and patterns.
+        """
+        analysis = self.analyze_best_performers()
+        
+        report_lines = []
+        report_lines.append("\n" + "="*120)
+        report_lines.append("CRITICAL ANALYSIS: BEST PERFORMER IDENTIFICATION")
+        report_lines.append("="*120)
+        
+        # Overall winner
+        report_lines.append("\n>>> OVERALL PERFORMANCE <<<")
+        overall = analysis['overall']
+        sorted_overall = sorted(overall['win_counts'].items(), key=lambda x: x[1], reverse=True)
+        
+        report_lines.append(f"\nTotal comparisons: {overall['total_comparisons']}")
+        report_lines.append("\nRanking (by number of wins across all metrics, SNRs, and files):")
+        for rank, (method, wins) in enumerate(sorted_overall, 1):
+            pct = overall['win_percentages'][method]
+            report_lines.append(f"  {rank}. {method:20s}: {wins:5d} wins ({pct:5.1f}%)")
+        
+        # Best by metric
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> BEST PERFORMER BY METRIC <<<")
+        
+        for metric in self.metrics:
+            metric_data = analysis['by_metric'][metric]
+            best_method = max(metric_data['win_counts'].items(), key=lambda x: x[1])[0]
+            best_pct = metric_data['win_percentages'][best_method]
+            
+            report_lines.append(f"\n{metric}:")
+            report_lines.append(f"  Winner: {best_method} ({best_pct:.1f}% of {metric_data['total_comparisons']} comparisons)")
+            
+            sorted_methods = sorted(metric_data['win_counts'].items(), key=lambda x: x[1], reverse=True)
+            for method, wins in sorted_methods:
+                pct = metric_data['win_percentages'][method]
+                report_lines.append(f"    {method:20s}: {wins:4d} wins ({pct:5.1f}%)")
+        
+        # Best by SNR level
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> BEST PERFORMER BY SNR LEVEL <<<")
+        
+        for snr in sorted(analysis['by_snr'].keys()):
+            snr_data = analysis['by_snr'][snr]
+            best_method = max(snr_data['win_counts'].items(), key=lambda x: x[1])[0]
+            best_pct = snr_data['win_percentages'][best_method]
+            
+            report_lines.append(f"\nSNR {snr}dB:")
+            report_lines.append(f"  Winner: {best_method} ({best_pct:.1f}%)")
+            
+            sorted_methods = sorted(snr_data['win_counts'].items(), key=lambda x: x[1], reverse=True)
+            for method, wins in sorted_methods:
+                pct = snr_data['win_percentages'][method]
+                report_lines.append(f"    {method:20s}: {wins:4d} wins ({pct:5.1f}%)")
+        
+        # Best by noise category
+        if analysis['by_noise']:
+            report_lines.append("\n" + "-"*120)
+            report_lines.append("\n>>> BEST PERFORMER BY NOISE CATEGORY <<<")
+            
+            for category in sorted(analysis['by_noise'].keys()):
+                cat_data = analysis['by_noise'][category]
+                best_method = max(cat_data['win_counts'].items(), key=lambda x: x[1])[0]
+                best_pct = cat_data['win_percentages'][best_method]
+                
+                report_lines.append(f"\n{category}:")
+                report_lines.append(f"  Winner: {best_method} ({best_pct:.1f}% of {cat_data['total_comparisons']} comparisons)")
+                
+                sorted_methods = sorted(cat_data['win_counts'].items(), key=lambda x: x[1], reverse=True)
+                for method, wins in sorted_methods[:3]:  # Show top 3
+                    pct = cat_data['win_percentages'][method]
+                    report_lines.append(f"    {method:20s}: {wins:4d} wins ({pct:5.1f}%)")
+        
+        # Key insights
+        report_lines.append("\n" + "="*120)
+        report_lines.append("\n>>> KEY INSIGHTS <<<")
+        
+        # Which method is most consistent (wins across different conditions)?
+        consistency_scores = {}
+        for method in self.method_names:
+            wins_by_metric = sum(1 for m in analysis['by_metric'].values() 
+                            if max(m['win_counts'].items(), key=lambda x: x[1])[0] == method)
+            wins_by_snr = sum(1 for s in analysis['by_snr'].values() 
+                            if max(s['win_counts'].items(), key=lambda x: x[1])[0] == method)
+            consistency_scores[method] = wins_by_metric + wins_by_snr
+        
+        most_consistent = max(consistency_scores.items(), key=lambda x: x[1])
+        report_lines.append(f"\nMost Consistent Performer: {most_consistent[0]}")
+        report_lines.append(f"  (Best performer in {most_consistent[1]} different metric/SNR combinations)")
+        
+        # Identify strengths and weaknesses
+        report_lines.append("\n\nAlgorithm Specializations:")
+        for method in self.method_names:
+            strengths = []
+            
+            # Check metric strengths
+            for metric, data in analysis['by_metric'].items():
+                if max(data['win_counts'].items(), key=lambda x: x[1])[0] == method:
+                    strengths.append(f"Best at {metric}")
+            
+            # Check SNR strengths
+            strong_snrs = [snr for snr, data in analysis['by_snr'].items() 
+                        if max(data['win_counts'].items(), key=lambda x: x[1])[0] == method]
+            if strong_snrs:
+                strengths.append(f"Dominates at {', '.join(map(str, strong_snrs))}dB")
+            
+            if strengths:
+                report_lines.append(f"\n{method}:")
+                for strength in strengths:
+                    report_lines.append(f"  • {strength}")
+        
+        report_lines.append("\n" + "="*120)
+        
+        return "\n".join(report_lines)
+
+    def analyze_hybrid_improvements(self, baseline_method='GTCRN'):
+        """
+        Analyze how hybrid methods (GTCRN-SS, GTCRN-WF) improve over baseline GTCRN.
+        Identifies best use cases for each hybrid approach.
+        
+        Parameters:
+        -----------
+        baseline_method : str
+            The baseline method to compare against (default: 'GTCRN')
+        """
+        if baseline_method not in self.method_names:
+            print(f"ERROR: Baseline method '{baseline_method}' not found in methods")
+            return None
+        
+        # Identify hybrid methods (methods containing the baseline name but different)
+        hybrid_methods = [m for m in self.method_names 
+                        if baseline_method in m and m != baseline_method]
+        
+        if not hybrid_methods:
+            print(f"No hybrid methods found containing '{baseline_method}'")
+            return None
+        
+        analysis = {
+            'overall': {},
+            'by_metric': {},
+            'by_snr': {},
+            'by_noise': {},
+            'degradation_analysis': {}
+        }
+        
+        # For each hybrid method
+        for hybrid in hybrid_methods:
+            analysis['overall'][hybrid] = {}
+            analysis['by_metric'][hybrid] = {}
+            analysis['by_snr'][hybrid] = {}
+            analysis['by_noise'][hybrid] = {}
+            analysis['degradation_analysis'][hybrid] = {}
+            
+            # Overall improvement statistics
+            total_improvements = 0
+            total_degradations = 0
+            total_comparisons = 0
+            improvement_sum = 0
+            
+            for snr in self.snr_levels:
+                df = self.df_merged[snr]
+                if len(df) == 0:
+                    continue
+                
+                for metric in self.metrics:
+                    baseline_col = f'{metric}_{baseline_method}'
+                    hybrid_col = f'{metric}_{hybrid}'
+                    
+                    if baseline_col not in df.columns or hybrid_col not in df.columns:
+                        continue
+                    
+                    differences = df[hybrid_col] - df[baseline_col]
+                    improvements = (differences > 0).sum()
+                    degradations = (differences < 0).sum()
+                    
+                    total_improvements += improvements
+                    total_degradations += degradations
+                    total_comparisons += len(differences)
+                    improvement_sum += differences.sum()
+            
+            analysis['overall'][hybrid] = {
+                'improvements': total_improvements,
+                'degradations': total_degradations,
+                'unchanged': total_comparisons - total_improvements - total_degradations,
+                'total': total_comparisons,
+                'improvement_rate': (total_improvements / total_comparisons * 100) if total_comparisons > 0 else 0,
+                'degradation_rate': (total_degradations / total_comparisons * 100) if total_comparisons > 0 else 0,
+                'avg_improvement': (improvement_sum / total_comparisons) if total_comparisons > 0 else 0
+            }
+            
+            # Improvement by metric
+            for metric in self.metrics:
+                metric_improvements = 0
+                metric_degradations = 0
+                metric_total = 0
+                metric_improvement_sum = 0
+                
+                for snr in self.snr_levels:
+                    df = self.df_merged[snr]
+                    if len(df) == 0:
+                        continue
+                    
+                    baseline_col = f'{metric}_{baseline_method}'
+                    hybrid_col = f'{metric}_{hybrid}'
+                    
+                    if baseline_col not in df.columns or hybrid_col not in df.columns:
+                        continue
+                    
+                    differences = df[hybrid_col] - df[baseline_col]
+                    metric_improvements += (differences > 0).sum()
+                    metric_degradations += (differences < 0).sum()
+                    metric_total += len(differences)
+                    metric_improvement_sum += differences.sum()
+                
+                if metric_total > 0:
+                    analysis['by_metric'][hybrid][metric] = {
+                        'improvements': metric_improvements,
+                        'degradations': metric_degradations,
+                        'improvement_rate': (metric_improvements / metric_total * 100),
+                        'degradation_rate': (metric_degradations / metric_total * 100),
+                        'avg_improvement': (metric_improvement_sum / metric_total)
+                    }
+            
+            # Improvement by SNR
+            for snr in self.snr_levels:
+                df = self.df_merged[snr]
+                if len(df) == 0:
+                    continue
+                
+                snr_improvements = 0
+                snr_degradations = 0
+                snr_total = 0
+                snr_improvement_sum = 0
+                
+                for metric in self.metrics:
+                    baseline_col = f'{metric}_{baseline_method}'
+                    hybrid_col = f'{metric}_{hybrid}'
+                    
+                    if baseline_col not in df.columns or hybrid_col not in df.columns:
+                        continue
+                    
+                    differences = df[hybrid_col] - df[baseline_col]
+                    snr_improvements += (differences > 0).sum()
+                    snr_degradations += (differences < 0).sum()
+                    snr_total += len(differences)
+                    snr_improvement_sum += differences.sum()
+                
+                if snr_total > 0:
+                    analysis['by_snr'][hybrid][snr] = {
+                        'improvements': snr_improvements,
+                        'degradations': snr_degradations,
+                        'improvement_rate': (snr_improvements / snr_total * 100),
+                        'avg_improvement': (snr_improvement_sum / snr_total)
+                    }
+            
+            # Improvement by noise category
+            all_categories = set()
+            for snr in self.snr_levels:
+                if 'noise_category' in self.df_merged[snr].columns:
+                    all_categories.update(self.df_merged[snr]['noise_category'].unique())
+            
+            for category in all_categories:
+                cat_improvements = 0
+                cat_degradations = 0
+                cat_total = 0
+                cat_improvement_sum = 0
+                
+                for snr in self.snr_levels:
+                    df = self.df_merged[snr]
+                    if len(df) == 0 or 'noise_category' not in df.columns:
+                        continue
+                    
+                    cat_df = df[df['noise_category'] == category]
+                    
+                    for metric in self.metrics:
+                        baseline_col = f'{metric}_{baseline_method}'
+                        hybrid_col = f'{metric}_{hybrid}'
+                        
+                        if baseline_col not in cat_df.columns or hybrid_col not in cat_df.columns:
+                            continue
+                        
+                        differences = cat_df[hybrid_col] - cat_df[baseline_col]
+                        cat_improvements += (differences > 0).sum()
+                        cat_degradations += (differences < 0).sum()
+                        cat_total += len(differences)
+                        cat_improvement_sum += differences.sum()
+                
+                if cat_total > 0:
+                    analysis['by_noise'][hybrid][category] = {
+                        'improvements': cat_improvements,
+                        'degradations': cat_degradations,
+                        'improvement_rate': (cat_improvements / cat_total * 100),
+                        'avg_improvement': (cat_improvement_sum / cat_total)
+                    }
+        
+        return analysis
+
+    def generate_hybrid_analysis_report(self, baseline_method='GTCRN'):
+        """
+        Generate comprehensive report on hybrid method improvements.
+        """
+        analysis = self.analyze_hybrid_improvements(baseline_method)
+        
+        if analysis is None:
+            return "Unable to generate hybrid analysis report."
+        
+        report_lines = []
+        report_lines.append("\n" + "="*120)
+        report_lines.append(f"HYBRID METHOD ANALYSIS: Improvements over {baseline_method}")
+        report_lines.append("="*120)
+        
+        hybrid_methods = list(analysis['overall'].keys())
+        
+        # Overall comparison
+        report_lines.append("\n>>> OVERALL IMPROVEMENT SUMMARY <<<\n")
+        for hybrid in hybrid_methods:
+            data = analysis['overall'][hybrid]
+            report_lines.append(f"{hybrid}:")
+            report_lines.append(f"  Total Comparisons:   {data['total']:5d}")
+            report_lines.append(f"  Improvements:        {data['improvements']:5d} ({data['improvement_rate']:5.1f}%)")
+            report_lines.append(f"  Degradations:        {data['degradations']:5d} ({data['degradation_rate']:5.1f}%)")
+            report_lines.append(f"  Unchanged:           {data['unchanged']:5d}")
+            report_lines.append(f"  Average Improvement: {data['avg_improvement']:+.4f}")
+            report_lines.append("")
+        
+        # Best hybrid method overall
+        best_hybrid = max(hybrid_methods, 
+                        key=lambda h: analysis['overall'][h]['improvement_rate'])
+        report_lines.append(f"🏆 WINNER: {best_hybrid} has highest improvement rate "
+                        f"({analysis['overall'][best_hybrid]['improvement_rate']:.1f}%)\n")
+        
+        # Improvement by metric
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> IMPROVEMENT BY METRIC <<<\n")
+        
+        for metric in self.metrics:
+            report_lines.append(f"{metric}:")
+            for hybrid in hybrid_methods:
+                if metric in analysis['by_metric'][hybrid]:
+                    data = analysis['by_metric'][hybrid][metric]
+                    report_lines.append(f"  {hybrid}:")
+                    report_lines.append(f"    Improvement Rate: {data['improvement_rate']:5.1f}%")
+                    report_lines.append(f"    Avg Improvement:  {data['avg_improvement']:+.4f}")
+            
+            # Best for this metric
+            best_for_metric = max(hybrid_methods,
+                                key=lambda h: analysis['by_metric'][h].get(metric, {}).get('improvement_rate', 0))
+            best_rate = analysis['by_metric'][best_for_metric].get(metric, {}).get('improvement_rate', 0)
+            report_lines.append(f"  → Best: {best_for_metric} ({best_rate:.1f}% improvement rate)\n")
+        
+        # Improvement by SNR
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> IMPROVEMENT BY SNR LEVEL <<<\n")
+        
+        for snr in sorted(self.snr_levels):
+            report_lines.append(f"SNR {snr}dB:")
+            for hybrid in hybrid_methods:
+                if snr in analysis['by_snr'][hybrid]:
+                    data = analysis['by_snr'][hybrid][snr]
+                    report_lines.append(f"  {hybrid}:")
+                    report_lines.append(f"    Improvement Rate: {data['improvement_rate']:5.1f}%")
+                    report_lines.append(f"    Avg Improvement:  {data['avg_improvement']:+.4f}")
+            
+            # Best for this SNR
+            best_for_snr = max(hybrid_methods,
+                            key=lambda h: analysis['by_snr'][h].get(snr, {}).get('improvement_rate', 0))
+            best_rate = analysis['by_snr'][best_for_snr].get(snr, {}).get('improvement_rate', 0)
+            report_lines.append(f"  → Best: {best_for_snr} ({best_rate:.1f}% improvement rate)\n")
+        
+        # Improvement by noise category
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> IMPROVEMENT BY NOISE CATEGORY <<<")
+        report_lines.append("(Top improvement rates shown)\n")
+        
+        all_categories = set()
+        for hybrid in hybrid_methods:
+            all_categories.update(analysis['by_noise'][hybrid].keys())
+        
+        for category in sorted(all_categories):
+            report_lines.append(f"\n{category}:")
+            
+            category_results = []
+            for hybrid in hybrid_methods:
+                if category in analysis['by_noise'][hybrid]:
+                    data = analysis['by_noise'][hybrid][category]
+                    category_results.append((hybrid, data['improvement_rate'], data['avg_improvement']))
+            
+            # Sort by improvement rate
+            category_results.sort(key=lambda x: x[1], reverse=True)
+            
+            for hybrid, imp_rate, avg_imp in category_results:
+                report_lines.append(f"  {hybrid:20s}: {imp_rate:5.1f}% improvement rate, "
+                                f"avg {avg_imp:+.4f}")
+            
+            if category_results:
+                report_lines.append(f"  → Best: {category_results[0][0]}")
+        
+        # KEY RECOMMENDATIONS
+        report_lines.append("\n" + "="*120)
+        report_lines.append("\n>>> KEY RECOMMENDATIONS <<<\n")
+        
+        # Find where each hybrid excels
+        for hybrid in hybrid_methods:
+            report_lines.append(f"{hybrid} EXCELS AT:")
+            
+            # Best metrics
+            best_metrics = []
+            for metric in self.metrics:
+                if metric in analysis['by_metric'][hybrid]:
+                    imp_rate = analysis['by_metric'][hybrid][metric]['improvement_rate']
+                    if imp_rate > 50:  # Threshold for "excels"
+                        best_metrics.append((metric, imp_rate))
+            
+            if best_metrics:
+                best_metrics.sort(key=lambda x: x[1], reverse=True)
+                for metric, rate in best_metrics[:3]:  # Top 3
+                    report_lines.append(f"  ✓ {metric}: {rate:.1f}% improvement rate")
+            
+            # Best SNR ranges
+            best_snrs = []
+            for snr in self.snr_levels:
+                if snr in analysis['by_snr'][hybrid]:
+                    imp_rate = analysis['by_snr'][hybrid][snr]['improvement_rate']
+                    if imp_rate > 50:
+                        best_snrs.append((snr, imp_rate))
+            
+            if best_snrs:
+                best_snrs.sort(key=lambda x: x[1], reverse=True)
+                snr_list = [f"{snr}dB" for snr, _ in best_snrs]
+                report_lines.append(f"  ✓ SNR levels: {', '.join(snr_list)}")
+            
+            # Best noise types
+            best_noises = []
+            for category, data in analysis['by_noise'][hybrid].items():
+                if data['improvement_rate'] > 60:
+                    best_noises.append((category, data['improvement_rate']))
+            
+            if best_noises:
+                best_noises.sort(key=lambda x: x[1], reverse=True)
+                report_lines.append(f"  ✓ Noise types:")
+                for noise, rate in best_noises[:5]:  # Top 5
+                    report_lines.append(f"      • {noise}: {rate:.1f}%")
+            
+            report_lines.append("")
+        
+        # When to use each
+        report_lines.append("\n" + "-"*120)
+        report_lines.append("\n>>> USAGE GUIDELINES <<<\n")
+        
+        # Compare hybrids directly
+        if len(hybrid_methods) >= 2:
+            h1, h2 = hybrid_methods[0], hybrid_methods[1]
+            
+            h1_better_metrics = []
+            h2_better_metrics = []
+            
+            for metric in self.metrics:
+                if metric in analysis['by_metric'][h1] and metric in analysis['by_metric'][h2]:
+                    rate1 = analysis['by_metric'][h1][metric]['improvement_rate']
+                    rate2 = analysis['by_metric'][h2][metric]['improvement_rate']
+                    
+                    if rate1 > rate2:
+                        h1_better_metrics.append(metric)
+                    else:
+                        h2_better_metrics.append(metric)
+            
+            report_lines.append(f"Choose {h1} when prioritizing:")
+            for metric in h1_better_metrics:
+                report_lines.append(f"  • {metric}")
+            
+            report_lines.append(f"\nChoose {h2} when prioritizing:")
+            for metric in h2_better_metrics:
+                report_lines.append(f"  • {metric}")
+        
+        report_lines.append("\n" + "="*120)
+        
+        return "\n".join(report_lines)
     
     def export_all_results(self):
         """Export all results including per-SNR and amalgamated visualizations."""
@@ -703,7 +1362,7 @@ class MultiSNRAudioEnhancementComparator:
         print(f"✓ Amalgamated SNR plot (bar): {bar_amalg_plot_path}")
         
         # 5. Heatmaps for key metrics
-        for metric in ['PESQ', 'SI_SDR', 'STOI']:
+        for metric in ['PESQ', 'SI_SDR', 'STOI', 'DNSMOS_p808_mos', 'DNSMOS_mos_sig', 'DNSMOS_mos_bak', 'DNSMOS_mos_ovr']:
             fig_heat = self.plot_snr_noise_category_heatmap(metric=metric)
             if fig_heat is not None:
                 heat_path = self.output_folder / f"{self.experiment_name}_heatmap_{metric}.png"
@@ -728,11 +1387,26 @@ class MultiSNRAudioEnhancementComparator:
                 detail_path = self.output_folder / f"{self.experiment_name}_detailed_{snr}dB.csv"
                 self.df_merged[snr].to_csv(detail_path, index=False)
                 print(f"    ✓ Detailed data: {detail_path}")
-        
+
+        # analyze best performers
+        critical_report = self.generate_critical_analysis_report()
+        critical_path = self.output_folder / f"{self.experiment_name}_CRITICAL_ANALYSIS.txt"
+        with open(critical_path, 'w') as f:
+            f.write(critical_report)
+        print(f"\n✓ Critical analysis report: {critical_path}")
+
+        # analyze hybrid improvements
+        hybrid_report = self.generate_hybrid_analysis_report(baseline_method='GTCRN')
+        hybrid_path = self.output_folder / f"{self.experiment_name}_HYBRID_ANALYSIS.txt"
+        # 'charmap' codec can't encode character '\U0001f3c6' in position 702: character maps to <undefined>
+        with open(hybrid_path, 'w', encoding='utf-8') as f:
+            f.write(hybrid_report)
+        print(f"\n✓ Hybrid analysis report: {hybrid_path}")
+
+
         print("\n" + "="*80)
         print(f"All results saved to: {self.output_folder}")
         print("="*80)
-
 
 # Example usage
 if __name__ == "__main__":
@@ -752,136 +1426,6 @@ if __name__ == "__main__":
         'GTCRN_WF': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRNWF_EXP3p2a_25ms_quality\GTCRNWF_EXP3p2a_25ms_quality_merged_[{snr}]dB.csv",
 
 
-        # Python transalation mband
-        # ------------ mband_non_causal_translation.py -----------------
-        #'mband_py_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_lin_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_lin_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR0_8\mband_py_N6_log_AVR0_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR0_8\mband_py_N6_mel_AVR0_8_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
-
-
-        # Python mband causal AVRGING
-        #'mband_py_lin_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_AVRGING_causal\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
-
-        # Python mband causal AVRGING OG weights but ---XMAG----
-        #'mband_py_lin_causal_ogw_avr1_xmag': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\AVRGING\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_ogw_avr1_xmag': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\AVRGING\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_ogw_avr1_xmag': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\AVRGING\SS_EXP1p1b_AVRGING_causal_ogweights\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
-
-        # AVRGING CAUSAL AGAIN XMAGSM 
-        # ---------- mband_AVG_causal.py -------------
-        # AVRGING =1 
-        #'mband_py_lin_causal_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        #AVRGING =0 
-        #'mband_py_lin_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        # Conservative Weights  Wn2, Wn1, Wn0 = 0.12, 0.30, 0.58 
-        # AVRGING = 1 
-        #'mband_py_lin_conservative_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_and_weight_change\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        ## IIR only 
-        # AVRGING = 1 
-        # 'mband_py_lin_IIR_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\IIR_only\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # VAD 2 move for adaptive weights in avrging 
-        #'mband_py_lin_VAD_adpt_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\VAD2_move\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # Noiseupdt_stream  
-        # 'mband_py_lin_noiseupdt_stream_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\VAD_stream\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # Noiseupdt_stream with vad integrated before weighted smoothing   
-        #'mband_py_lin_noiseupdt_b4_wtd_avg_stream_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\VAD_stream\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # # Noiseupdt further stream with vad integration   
-        # 'mband_py_lin_stream_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\VAD_stream_more\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # Noiseupdt further stream with vad integration   
-        #'mband_py_lin_stream_adpt_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\VAD_stream_adapt_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING CAUSAL AGAIN XMAGSM but in stream py file so can check for differences Conservative weights Wn2, Wn1, Wn0 = 0.12, 0.30, 0.58 
-        # -----------mband_stream.py-----------------
-        # AVRGING =1 
-        #'mband_py_lin_stream_avr1_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        # 'mband_py_log_stream_avr1_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_stream_avr1_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING =0 
-        # 'mband_py_lin_stream_avr0_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        # 'mband_py_log_stream_avr0_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        # 'mband_py_mel_stream_avr0_cons_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream1\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        # XMAGSM in stream with OG weights Wn2, Wn1, Wn0 = 0.09, 0.25, 0.66
-        # Not actually streaming but testing results, in mband_stream.py
-        # AVRGING =1 
-        #'mband_py_lin_in_stream_avr1_og_wts_xmagsm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_in_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_in_stream_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING =0 
-        #'mband_py_lin_xmagsm_avr0_og_wts': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_stream_avr0_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_stream_avr0_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_og_wts\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        # XMAGSM in stream with circular buffer and adaptive weights mband_stream.py below -3dB
-        # AVRGING =1 
-        #'mband_py_lin_circular_stream_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_circular_stream_adapt_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_circular_stream_adapt_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING =0 
-        #'mband_py_lin_circular_stream_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_circular_stream_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_circular_stream_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-
-        # Testing full stream with original weights
-        # ----------- mband_full_stream_og_wts.py ----------------
-        # Note full and circular stream are the same
-        # AVRGING =1 
-        #'mband_py_lin_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_full_stream_og_wts_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING =0 
-        #'mband_py_lin_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_full_stream_og_wts_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_og_wts\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        # Moved VAD below AVRGING so accepts a smoother frames for noise updates
-        # ----------------mband_full_stream_VAD_below.py---------------- 
-        # AVRGING =1 
-        #'mband_py_lin_full_stream_VAD_below_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_full_stream_VAD_below_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_full_stream_VAD_below_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING =0 
-        #'mband_py_lin_full_stream_VAD_below_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_full_stream_VAD_below_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_full_stream_VAD_below_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\stream\stream_circ_buffer_vad_below\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        # Hanning with VAD in btwn IIR and 3 tap 
-        # --------mband_full_stream_hanning.py---------------
-        # AVRGING = 1 
-        #'mband_py_lin_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_hanning_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        # AVRGING = 0 
-        #'mband_py_lin_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_hanning_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\hanning\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-
         # Optimized ss_standalone 
         # Log, 20ms, 50% ovlp, floor 0.001, noisefr 1, Nband = 8  
         # --------mband_full_stream_hanning.py---------------
@@ -895,7 +1439,9 @@ if __name__ == "__main__":
         # --------mband_full_stream_hanning.py---------------
         # AVRGING = 1 
         #'mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\objective\GTCRN_SS_TEST2_[{snr}]dB.csv",
-        'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        'GTCRN-SS': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+
         #'mband_py_log_hybrid_20ms_ov50_fl0p87_v0_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov50_fl07_N4_av0\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'mband_py_mel_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\mel_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
         #'mband_py_lin_hybrid_20ms_ov50_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\lin_20ms_ov50_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
@@ -910,7 +1456,7 @@ if __name__ == "__main__":
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\new_GTCRN"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\noise_check"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(
@@ -929,46 +1475,3 @@ if __name__ == "__main__":
     print("  - Heatmaps showing SNR vs Noise Category performance")
     print("  - Detailed CSV files for further analysis")
 
-
-#### Past Files #####
-
-#===========================================================
-##### MATLAB ######
-
-
-        #'specsub': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\specsub\specsub_[{snr}]dB_MERGED.csv",
-        #'ss_rdc': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\ss_rdc\ss_rdc_[{snr}]dB_MERGED.csv",
-        #'ss_rdc_og': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\ss_rdc_og\ss_rdc_og_[{snr}]dB_MERGED.csv",
-        
-        # 'mband_lin_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR0\mband_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        # 'mband_lin_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_lin_AVR1\mband_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_log_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR0\mband_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_log_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_log_AVR1\mband_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_mel_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR0\mband_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_mel_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP_MATLAB_COMPARE\mband_N6_mel_AVR1\mband_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-#===========================================================
-        # DELTAS
-        # AVRGING = 1
-        #'mband_py_lin_deltas_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_lin\mband_py_N6_lin_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_deltas_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_log\mband_py_N6_log_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_deltas': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_mel\mband_py_N6_mel_[{snr}]dB_MERGED.csv",
-
-        # AVRGING = 0
-        #'mband_py_lin_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_deltas_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b_deltas\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",
-
-        #===========================================================
-
-        
-        # AVRGING CAUSAL AGAIN XMAGSM
-        # AVRGING =1 
-        #'mband_py_lin_causal_avr1_og_wts_xmgasm': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_lin_AVR1\mband_py_N6_lin_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_log_AVR1\mband_py_N6_log_AVR1_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_avr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_mel_AVR1\mband_py_N6_mel_AVR1_[{snr}]dB_MERGED.csv",
-
-        #AVRGING =0 
-        #'mband_py_lin_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_lin_AVR0\mband_py_N6_lin_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_log_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_log_AVR0\mband_py_N6_log_AVR0_[{snr}]dB_MERGED.csv",
-        #'mband_py_mel_causal_avr0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1b\AVRGING\xmagsm_change\mband_py_N6_mel_AVR0\mband_py_N6_mel_AVR0_[{snr}]dB_MERGED.csv",

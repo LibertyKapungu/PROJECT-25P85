@@ -1,0 +1,289 @@
+
+========================================================================================================================
+HYBRID METHOD ANALYSIS: Improvements over GTCRN
+========================================================================================================================
+
+>>> OVERALL IMPROVEMENT SUMMARY <<<
+
+GTCRN_WF:
+  Total Comparisons:     700
+  Improvements:          291 ( 41.6%)
+  Degradations:          409 ( 58.4%)
+  Unchanged:               0
+  Average Improvement: -0.1028
+
+GTCRN-SS:
+  Total Comparisons:     700
+  Improvements:          411 ( 58.7%)
+  Degradations:          289 ( 41.3%)
+  Unchanged:               0
+  Average Improvement: -0.0083
+
+🏆 WINNER: GTCRN-SS has highest improvement rate (58.7%)
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+>>> IMPROVEMENT BY METRIC <<<
+
+PESQ:
+  GTCRN_WF:
+    Improvement Rate:  15.0%
+    Avg Improvement:  -0.0625
+  GTCRN-SS:
+    Improvement Rate:  88.0%
+    Avg Improvement:  +0.0163
+  → Best: GTCRN-SS (88.0% improvement rate)
+
+SI_SDR:
+  GTCRN_WF:
+    Improvement Rate:   9.0%
+    Avg Improvement:  -0.8885
+  GTCRN-SS:
+    Improvement Rate:  10.0%
+    Avg Improvement:  -0.3122
+  → Best: GTCRN-SS (10.0% improvement rate)
+
+STOI:
+  GTCRN_WF:
+    Improvement Rate:   3.0%
+    Avg Improvement:  -0.0130
+  GTCRN-SS:
+    Improvement Rate:  10.0%
+    Avg Improvement:  -0.0011
+  → Best: GTCRN-SS (10.0% improvement rate)
+
+DNSMOS_p808_mos:
+  GTCRN_WF:
+    Improvement Rate:  75.0%
+    Avg Improvement:  +0.0511
+  GTCRN-SS:
+    Improvement Rate:  68.0%
+    Avg Improvement:  +0.0168
+  → Best: GTCRN_WF (75.0% improvement rate)
+
+DNSMOS_mos_sig:
+  GTCRN_WF:
+    Improvement Rate:  57.0%
+    Avg Improvement:  +0.0425
+  GTCRN-SS:
+    Improvement Rate:  81.0%
+    Avg Improvement:  +0.0853
+  → Best: GTCRN-SS (81.0% improvement rate)
+
+DNSMOS_mos_bak:
+  GTCRN_WF:
+    Improvement Rate:  66.0%
+    Avg Improvement:  +0.0860
+  GTCRN-SS:
+    Improvement Rate:  71.0%
+    Avg Improvement:  +0.0565
+  → Best: GTCRN-SS (71.0% improvement rate)
+
+DNSMOS_mos_ovr:
+  GTCRN_WF:
+    Improvement Rate:  66.0%
+    Avg Improvement:  +0.0651
+  GTCRN-SS:
+    Improvement Rate:  83.0%
+    Avg Improvement:  +0.0799
+  → Best: GTCRN-SS (83.0% improvement rate)
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+>>> IMPROVEMENT BY SNR LEVEL <<<
+
+SNR -5dB:
+  GTCRN_WF:
+    Improvement Rate:  47.9%
+    Avg Improvement:  +0.0281
+  GTCRN-SS:
+    Improvement Rate:  65.0%
+    Avg Improvement:  +0.0341
+  → Best: GTCRN-SS (65.0% improvement rate)
+
+SNR 0dB:
+  GTCRN_WF:
+    Improvement Rate:  40.7%
+    Avg Improvement:  -0.0226
+  GTCRN-SS:
+    Improvement Rate:  64.3%
+    Avg Improvement:  +0.0251
+  → Best: GTCRN-SS (64.3% improvement rate)
+
+SNR 5dB:
+  GTCRN_WF:
+    Improvement Rate:  41.4%
+    Avg Improvement:  -0.0573
+  GTCRN-SS:
+    Improvement Rate:  57.9%
+    Avg Improvement:  -0.0020
+  → Best: GTCRN-SS (57.9% improvement rate)
+
+SNR 10dB:
+  GTCRN_WF:
+    Improvement Rate:  38.6%
+    Avg Improvement:  -0.1590
+  GTCRN-SS:
+    Improvement Rate:  53.6%
+    Avg Improvement:  -0.0178
+  → Best: GTCRN-SS (53.6% improvement rate)
+
+SNR 15dB:
+  GTCRN_WF:
+    Improvement Rate:  39.3%
+    Avg Improvement:  -0.3031
+  GTCRN-SS:
+    Improvement Rate:  52.9%
+    Avg Improvement:  -0.0810
+  → Best: GTCRN-SS (52.9% improvement rate)
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+>>> IMPROVEMENT BY NOISE CATEGORY <<<
+(Top improvement rates shown)
+
+
+Cafeteria Babble:
+  GTCRN-SS            :  60.0% improvement rate, avg -0.0033
+  GTCRN_WF            :  37.1% improvement rate, avg -0.1139
+  → Best: GTCRN-SS
+
+Car Noise 60mph:
+  GTCRN-SS            :  71.4% improvement rate, avg -0.0131
+  GTCRN_WF            :  14.3% improvement rate, avg -0.3540
+  → Best: GTCRN-SS
+
+Car Noise Idle 40mph:
+  GTCRN_WF            :  65.7% improvement rate, avg +0.0433
+  GTCRN-SS            :  65.7% improvement rate, avg -0.0389
+  → Best: GTCRN_WF
+
+Car Noise Idle 60mph:
+  GTCRN_WF            :  54.3% improvement rate, avg +0.0088
+  GTCRN-SS            :  54.3% improvement rate, avg -0.0195
+  → Best: GTCRN_WF
+
+Construction Crane Moving:
+  GTCRN-SS            :  57.1% improvement rate, avg +0.0134
+  GTCRN_WF            :  31.4% improvement rate, avg +0.0302
+  → Best: GTCRN-SS
+
+Construction Drilling:
+  GTCRN-SS            :  68.6% improvement rate, avg +0.0026
+  GTCRN_WF            :  54.3% improvement rate, avg +0.0416
+  → Best: GTCRN-SS
+
+Construction Jackhammer 1:
+  GTCRN-SS            :  60.0% improvement rate, avg +0.0128
+  GTCRN_WF            :  51.4% improvement rate, avg +0.0220
+  → Best: GTCRN-SS
+
+Construction Jackhammer 2:
+  GTCRN-SS            :  68.6% improvement rate, avg +0.0645
+  GTCRN_WF            :  28.6% improvement rate, avg -0.0094
+  → Best: GTCRN-SS
+
+Construction Trucks Unloading:
+  GTCRN-SS            :  62.9% improvement rate, avg +0.0125
+  GTCRN_WF            :  28.6% improvement rate, avg -0.1342
+  → Best: GTCRN-SS
+
+Inside Flight:
+  GTCRN_WF            :  65.7% improvement rate, avg -0.1171
+  GTCRN-SS            :  65.7% improvement rate, avg -0.0093
+  → Best: GTCRN_WF
+
+Inside Train 1:
+  GTCRN-SS            :  51.4% improvement rate, avg -0.0419
+  GTCRN_WF            :  25.7% improvement rate, avg -0.3905
+  → Best: GTCRN-SS
+
+Inside Train 2:
+  GTCRN-SS            :  60.0% improvement rate, avg -0.0101
+  GTCRN_WF            :  42.9% improvement rate, avg -0.2165
+  → Best: GTCRN-SS
+
+Inside Train 3:
+  GTCRN_WF            :  57.1% improvement rate, avg +0.0467
+  GTCRN-SS            :  54.3% improvement rate, avg +0.0005
+  → Best: GTCRN_WF
+
+PC Fan Noise:
+  GTCRN-SS            :  57.1% improvement rate, avg -0.0142
+  GTCRN_WF            :  42.9% improvement rate, avg -0.0119
+  → Best: GTCRN-SS
+
+SSN IEEE:
+  GTCRN-SS            :  68.6% improvement rate, avg +0.0111
+  GTCRN_WF            :  28.6% improvement rate, avg -0.0940
+  → Best: GTCRN-SS
+
+Street Noise:
+  GTCRN-SS            :  42.9% improvement rate, avg -0.0350
+  GTCRN_WF            :  31.4% improvement rate, avg -0.3177
+  → Best: GTCRN-SS
+
+Street Noise Downtown:
+  GTCRN-SS            :  45.7% improvement rate, avg +0.0042
+  GTCRN_WF            :  40.0% improvement rate, avg -0.0496
+  → Best: GTCRN-SS
+
+Train 1:
+  GTCRN_WF            :  34.3% improvement rate, avg -0.3026
+  GTCRN-SS            :  34.3% improvement rate, avg -0.0845
+  → Best: GTCRN_WF
+
+Train 2:
+  GTCRN-SS            :  60.0% improvement rate, avg -0.0092
+  GTCRN_WF            :  51.4% improvement rate, avg -0.0040
+  → Best: GTCRN-SS
+
+Water Cooler:
+  GTCRN-SS            :  65.7% improvement rate, avg -0.0095
+  GTCRN_WF            :  45.7% improvement rate, avg -0.1325
+  → Best: GTCRN-SS
+
+========================================================================================================================
+
+>>> KEY RECOMMENDATIONS <<<
+
+GTCRN_WF EXCELS AT:
+  ✓ DNSMOS_p808_mos: 75.0% improvement rate
+  ✓ DNSMOS_mos_bak: 66.0% improvement rate
+  ✓ DNSMOS_mos_ovr: 66.0% improvement rate
+  ✓ Noise types:
+      • Car Noise Idle 40mph: 65.7%
+      • Inside Flight: 65.7%
+
+GTCRN-SS EXCELS AT:
+  ✓ PESQ: 88.0% improvement rate
+  ✓ DNSMOS_mos_ovr: 83.0% improvement rate
+  ✓ DNSMOS_mos_sig: 81.0% improvement rate
+  ✓ SNR levels: -5dB, 0dB, 5dB, 10dB, 15dB
+  ✓ Noise types:
+      • Car Noise 60mph: 71.4%
+      • SSN IEEE: 68.6%
+      • Construction Drilling: 68.6%
+      • Construction Jackhammer 2: 68.6%
+      • Car Noise Idle 40mph: 65.7%
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+>>> USAGE GUIDELINES <<<
+
+Choose GTCRN_WF when prioritizing:
+  • DNSMOS_p808_mos
+
+Choose GTCRN-SS when prioritizing:
+  • PESQ
+  • SI_SDR
+  • STOI
+  • DNSMOS_mos_sig
+  • DNSMOS_mos_bak
+  • DNSMOS_mos_ovr
+
+========================================================================================================================
