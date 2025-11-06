@@ -14,11 +14,11 @@ from pathlib import Path
 # ====================================
 # CONFIGURATION
 # ====================================
-MODE = "standalone"
+MODE = "hybrid"
 # CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/COLLATED_ALL_RESULTS_{MODE}.csv"
 # OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/frequency_space_analysis_{MODE}")
-CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/frequency_space_analysis_{MODE}")
+CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/COLLATED_ALL_RESULTS_{MODE}.csv"
+OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/frequency_space_analysis_{MODE}")
 OUTPUT_DIR.mkdir(exist_ok=True, parents = True)
 
 sns.set_style("whitegrid")
