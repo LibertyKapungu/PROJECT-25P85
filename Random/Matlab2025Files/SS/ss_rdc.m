@@ -160,7 +160,7 @@ for j= 1: nframes
 end
 
 %audiowrite( enhanced_speech, fs, nbits, outfile);
-
+% audiowrite(outfile, -1 * enhanced_speech, fs, 'BitsPerSample', nbits);
 audiowrite(outfile, enhanced_speech, fs, 'BitsPerSample', nbits);
 
 

@@ -1,0 +1,51 @@
+
+PARAMETER SWEEP ANALYSIS SUMMARY
+====================================================================================================
+
+Dataset Statistics:
+  Total configurations: 405
+  Total tests: 10125
+  Successful tests: 10125 (100.0%)
+  Noise categories: Street, Stationary, Construction, Babble, Train
+
+Overall Performance (mean ± std):
+  PESQ: 1.790 ± 0.481
+  STOI: 0.741 ± 0.092
+  SI-SDR: 10.42 ± 4.75 dB
+  DNSMOS: 3.306 ± 0.755
+
+BEST OVERALL CONFIGURATION:
+  Frequency Spacing: log
+  Number of Bands: 16
+  Frame Size: 20 ms
+  Overlap: 75%
+  
+  Performance:
+    PESQ: 3.1828
+    STOI: 0.8821
+    SI-SDR: 17.72 dB
+    DNSMOS: 3.9954
+    Weighted Score: 0.8093
+
+PARAMETER INSIGHTS:
+
+  Best Freq_spacing: log (avg weighted score: 0.5994)
+  Best Nband: 16 (avg weighted score: 0.5994)
+  Best FRMSZ_ms: 20 (avg weighted score: 0.6010)
+  Best OVLP: 75 (avg weighted score: 0.6093)
+
+PERFORMANCE BY NOISE CATEGORY (avg PESQ):
+  Street: 1.741
+  Stationary: 2.207
+  Construction: 1.647
+  Babble: 1.598
+  Train: 1.756
+
+RECOMMENDED FLOOR BY NOISE TYPE:
+  Street: Floor=0.7 (score: 0.5978)
+  Stationary: Floor=0.7 (score: 0.6791)
+  Construction: Floor=0.7 (score: 0.5798)
+  Babble: Floor=0.8 (score: 0.5558)
+  Train: Floor=0.8 (score: 0.6012)
+
+All results saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/parameter_sweep_analysis_hybrid

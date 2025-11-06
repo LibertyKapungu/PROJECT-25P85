@@ -38,16 +38,6 @@ if nargin<4
     return;
 end
 
-% Set default values if not provided
-if nargin < 3
-    Nband = 4; % Default number of bands
-end
-if nargin < 4
-    Freq_spacing = 'log'; % Default frequency spacing
-end
-
-
-
 [in,fs]=audioread(infile);
 
 
@@ -67,10 +57,38 @@ case {'linear','LINEAR'}
         hibin(i)=lobin(i)+bandsz(1)-1;
         bandsz(i)=bandsz(1);        
     end
+% case {'log','LOG'}
+%     [lof,midf,hif]=estfilt1(Nband,fs);
+%     lobin = round(lof*fftl/fs)+1;
+%     hibin = round(hif*fftl/fs)+1;
+%     bandsz = hibin-lobin+1;
 case {'log','LOG'}
     [lof,midf,hif]=estfilt1(Nband,fs);
     lobin = round(lof*fftl/fs)+1;
     hibin = round(hif*fftl/fs)+1;
+    
+    % --- NEW ROBUST FIX ---
+    % 1. Define the absolute maximum valid bin
+    max_bin = fftl/2+1; 
+
+    % 2. Clamp ALL bins to be within the valid range [1, max_bin]
+    % This catches any stray Inf or NaN values
+    lobin(lobin < 1) = 1;
+    lobin(lobin > max_bin) = max_bin;
+    hibin(hibin < 1) = 1;
+    hibin(hibin > max_bin) = max_bin;
+
+    % 3. Find any bins where start > stop and fix them
+    idx = find(hibin < lobin);
+    if ~isempty(idx)
+        hibin(idx) = lobin(idx); % Set stop = start
+    end
+    
+    % 4. Force the absolute endpoints
+    lobin(1)=1;
+    hibin(end)=max_bin;
+    % --- END OF FIX ---
+
     bandsz = hibin-lobin+1;
 case {'mel','MEL'}
     [lof,midf,hif]=mel(Nband,0,fs/2);

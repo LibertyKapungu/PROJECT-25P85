@@ -1,0 +1,947 @@
+========================================================================================================================
+EXPERIMENT: MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, mband_py_mel_avr0_8, mband_py_mel_avr1, mband_py_mel_causal_ogw_avr1, mband_py_mel_stream_avr1_og_wts_xmgasm, mband_py_mel_stream_avr0_og_wts_xmgasm
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 20
+Number of files at 0dB: 20
+Number of files at 5dB: 20
+Number of files at 10dB: 20
+Number of files at 15dB: 20
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\EXP1p1b\AVRGING\stream_xmgasm_check\mband_mel\Multi_SNR_20251028_011803
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0658  mband_py_mel_avr0_8=1.1077  mband_py_mel_avr1=1.1163  mband_py_mel_stream_avr1_og_wts_xmgasm=1.1142  mband_py_mel_stream_avr0_og_wts_xmgasm=1.1077  
+                SI_SDR:  Noisy=-4.9899  mband_py_mel_avr0_8=-0.9882  mband_py_mel_avr1=-0.2594  mband_py_mel_stream_avr1_og_wts_xmgasm=-0.4270  mband_py_mel_stream_avr0_og_wts_xmgasm=-0.9882  
+                  STOI:  Noisy=0.5866  mband_py_mel_avr0_8=0.5723  mband_py_mel_avr1=0.5926  mband_py_mel_stream_avr1_og_wts_xmgasm=0.5815  mband_py_mel_stream_avr0_og_wts_xmgasm=0.5723  
+       DNSMOS_p808_mos:  Noisy=2.4363  mband_py_mel_avr0_8=2.5808  mband_py_mel_avr1=2.5741  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6092  mband_py_mel_stream_avr0_og_wts_xmgasm=2.5808  
+        DNSMOS_mos_sig:  Noisy=3.5517  mband_py_mel_avr0_8=2.9188  mband_py_mel_avr1=3.5972  mband_py_mel_stream_avr1_og_wts_xmgasm=3.1545  mband_py_mel_stream_avr0_og_wts_xmgasm=2.9188  
+        DNSMOS_mos_bak:  Noisy=1.6733  mband_py_mel_avr0_8=1.9430  mband_py_mel_avr1=2.1649  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0108  mband_py_mel_stream_avr0_og_wts_xmgasm=1.9430  
+        DNSMOS_mos_ovr:  Noisy=1.9706  mband_py_mel_avr0_8=1.8627  mband_py_mel_avr1=2.3211  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0157  mband_py_mel_stream_avr0_og_wts_xmgasm=1.8627  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.0937  mband_py_mel_avr0_8=1.1902  mband_py_mel_avr1=1.2204  mband_py_mel_stream_avr1_og_wts_xmgasm=1.2071  mband_py_mel_stream_avr0_og_wts_xmgasm=1.1902  
+                SI_SDR:  Noisy=-0.0263  mband_py_mel_avr0_8=3.9766  mband_py_mel_avr1=4.4282  mband_py_mel_stream_avr1_og_wts_xmgasm=4.3112  mband_py_mel_stream_avr0_og_wts_xmgasm=3.9766  
+                  STOI:  Noisy=0.6549  mband_py_mel_avr0_8=0.6497  mband_py_mel_avr1=0.6572  mband_py_mel_stream_avr1_og_wts_xmgasm=0.6493  mband_py_mel_stream_avr0_og_wts_xmgasm=0.6497  
+       DNSMOS_p808_mos:  Noisy=2.5694  mband_py_mel_avr0_8=2.6368  mband_py_mel_avr1=2.6794  mband_py_mel_stream_avr1_og_wts_xmgasm=2.7101  mband_py_mel_stream_avr0_og_wts_xmgasm=2.6368  
+        DNSMOS_mos_sig:  Noisy=3.8877  mband_py_mel_avr0_8=2.9212  mband_py_mel_avr1=3.7062  mband_py_mel_stream_avr1_og_wts_xmgasm=3.3604  mband_py_mel_stream_avr0_og_wts_xmgasm=2.9212  
+        DNSMOS_mos_bak:  Noisy=1.9030  mband_py_mel_avr0_8=2.1146  mband_py_mel_avr1=2.3117  mband_py_mel_stream_avr1_og_wts_xmgasm=2.1904  mband_py_mel_stream_avr0_og_wts_xmgasm=2.1146  
+        DNSMOS_mos_ovr:  Noisy=2.2631  mband_py_mel_avr0_8=1.9311  mband_py_mel_avr1=2.4435  mband_py_mel_stream_avr1_og_wts_xmgasm=2.1978  mband_py_mel_stream_avr0_og_wts_xmgasm=1.9311  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.1733  mband_py_mel_avr0_8=1.3706  mband_py_mel_avr1=1.4296  mband_py_mel_stream_avr1_og_wts_xmgasm=1.4113  mband_py_mel_stream_avr0_og_wts_xmgasm=1.3706  
+                SI_SDR:  Noisy=4.9955  mband_py_mel_avr0_8=8.5245  mband_py_mel_avr1=8.2819  mband_py_mel_stream_avr1_og_wts_xmgasm=8.4059  mband_py_mel_stream_avr0_og_wts_xmgasm=8.5245  
+                  STOI:  Noisy=0.7153  mband_py_mel_avr0_8=0.7218  mband_py_mel_avr1=0.7247  mband_py_mel_stream_avr1_og_wts_xmgasm=0.7189  mband_py_mel_stream_avr0_og_wts_xmgasm=0.7218  
+       DNSMOS_p808_mos:  Noisy=2.7331  mband_py_mel_avr0_8=2.7347  mband_py_mel_avr1=2.8011  mband_py_mel_stream_avr1_og_wts_xmgasm=2.7562  mband_py_mel_stream_avr0_og_wts_xmgasm=2.7347  
+        DNSMOS_mos_sig:  Noisy=3.9827  mband_py_mel_avr0_8=3.1544  mband_py_mel_avr1=3.6596  mband_py_mel_stream_avr1_og_wts_xmgasm=3.4210  mband_py_mel_stream_avr0_og_wts_xmgasm=3.1544  
+        DNSMOS_mos_bak:  Noisy=2.1026  mband_py_mel_avr0_8=2.2326  mband_py_mel_avr1=2.3996  mband_py_mel_stream_avr1_og_wts_xmgasm=2.3282  mband_py_mel_stream_avr0_og_wts_xmgasm=2.2326  
+        DNSMOS_mos_ovr:  Noisy=2.4361  mband_py_mel_avr0_8=2.1030  mband_py_mel_avr1=2.4612  mband_py_mel_stream_avr1_og_wts_xmgasm=2.2950  mband_py_mel_stream_avr0_og_wts_xmgasm=2.1030  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3446  mband_py_mel_avr0_8=1.6390  mband_py_mel_avr1=1.7291  mband_py_mel_stream_avr1_og_wts_xmgasm=1.7041  mband_py_mel_stream_avr0_og_wts_xmgasm=1.6390  
+                SI_SDR:  Noisy=9.9991  mband_py_mel_avr0_8=12.4020  mband_py_mel_avr1=11.5820  mband_py_mel_stream_avr1_og_wts_xmgasm=11.8503  mband_py_mel_stream_avr0_og_wts_xmgasm=12.4020  
+                  STOI:  Noisy=0.7740  mband_py_mel_avr0_8=0.7758  mband_py_mel_avr1=0.7766  mband_py_mel_stream_avr1_og_wts_xmgasm=0.7740  mband_py_mel_stream_avr0_og_wts_xmgasm=0.7758  
+       DNSMOS_p808_mos:  Noisy=2.9111  mband_py_mel_avr0_8=2.8660  mband_py_mel_avr1=2.9229  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9292  mband_py_mel_stream_avr0_og_wts_xmgasm=2.8660  
+        DNSMOS_mos_sig:  Noisy=4.0784  mband_py_mel_avr0_8=3.5468  mband_py_mel_avr1=3.7991  mband_py_mel_stream_avr1_og_wts_xmgasm=3.7028  mband_py_mel_stream_avr0_og_wts_xmgasm=3.5468  
+        DNSMOS_mos_bak:  Noisy=2.3277  mband_py_mel_avr0_8=2.5478  mband_py_mel_avr1=2.6486  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6510  mband_py_mel_stream_avr0_og_wts_xmgasm=2.5478  
+        DNSMOS_mos_ovr:  Noisy=2.6382  mband_py_mel_avr0_8=2.4884  mband_py_mel_avr1=2.6694  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6397  mband_py_mel_stream_avr0_og_wts_xmgasm=2.4884  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.6468  mband_py_mel_avr0_8=2.0489  mband_py_mel_avr1=2.0836  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0703  mband_py_mel_stream_avr0_og_wts_xmgasm=2.0489  
+                SI_SDR:  Noisy=14.9989  mband_py_mel_avr0_8=16.0156  mband_py_mel_avr1=13.7094  mband_py_mel_stream_avr1_og_wts_xmgasm=14.2527  mband_py_mel_stream_avr0_og_wts_xmgasm=16.0156  
+                  STOI:  Noisy=0.8137  mband_py_mel_avr0_8=0.8195  mband_py_mel_avr1=0.8172  mband_py_mel_stream_avr1_og_wts_xmgasm=0.8160  mband_py_mel_stream_avr0_og_wts_xmgasm=0.8195  
+       DNSMOS_p808_mos:  Noisy=3.0481  mband_py_mel_avr0_8=3.0771  mband_py_mel_avr1=3.0679  mband_py_mel_stream_avr1_og_wts_xmgasm=3.1367  mband_py_mel_stream_avr0_og_wts_xmgasm=3.0771  
+        DNSMOS_mos_sig:  Noisy=4.0454  mband_py_mel_avr0_8=3.6917  mband_py_mel_avr1=3.9186  mband_py_mel_stream_avr1_og_wts_xmgasm=3.9356  mband_py_mel_stream_avr0_og_wts_xmgasm=3.6917  
+        DNSMOS_mos_bak:  Noisy=2.5180  mband_py_mel_avr0_8=2.8133  mband_py_mel_avr1=3.0503  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9682  mband_py_mel_stream_avr0_og_wts_xmgasm=2.8133  
+        DNSMOS_mos_ovr:  Noisy=2.7482  mband_py_mel_avr0_8=2.7252  mband_py_mel_avr1=2.9578  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9510  mband_py_mel_stream_avr0_og_wts_xmgasm=2.7252  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0658  |  mband_py_mel_avr0_8=1.1077 (+0.0419, +3.93%)  |  mband_py_mel_avr1=1.1163 (+0.0506, +4.75%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=1.1142 (+0.0485, +4.55%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.1077 (+0.0419, +3.93%)
+                SI_SDR: Noisy=-4.9899  |  mband_py_mel_avr0_8=-0.9882 (+4.0017, +80.20%)  |  mband_py_mel_avr1=-0.2594 (+4.7305, +94.80%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=-0.4270 (+4.5629, +91.44%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=-0.9882 (+4.0017, +80.20%)
+                  STOI: Noisy=0.5866  |  mband_py_mel_avr0_8=0.5723 (-0.0142, -2.43%)  |  mband_py_mel_avr1=0.5926 (+0.0061, +1.03%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=0.5815 (-0.0051, -0.87%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=0.5723 (-0.0142, -2.43%)
+       DNSMOS_p808_mos: Noisy=2.4363  |  mband_py_mel_avr0_8=2.5808 (+0.1445, +5.93%)  |  mband_py_mel_avr1=2.5741 (+0.1379, +5.66%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6092 (+0.1730, +7.10%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.5808 (+0.1445, +5.93%)
+        DNSMOS_mos_sig: Noisy=3.5517  |  mband_py_mel_avr0_8=2.9188 (-0.6329, -17.82%)  |  mband_py_mel_avr1=3.5972 (+0.0455, +1.28%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.1545 (-0.3972, -11.18%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.9188 (-0.6329, -17.82%)
+        DNSMOS_mos_bak: Noisy=1.6733  |  mband_py_mel_avr0_8=1.9430 (+0.2696, +16.11%)  |  mband_py_mel_avr1=2.1649 (+0.4916, +29.38%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0108 (+0.3375, +20.17%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.9430 (+0.2696, +16.11%)
+        DNSMOS_mos_ovr: Noisy=1.9706  |  mband_py_mel_avr0_8=1.8627 (-0.1079, -5.48%)  |  mband_py_mel_avr1=2.3211 (+0.3505, +17.79%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0157 (+0.0451, +2.29%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.8627 (-0.1079, -5.48%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.0937  |  mband_py_mel_avr0_8=1.1902 (+0.0965, +8.82%)  |  mband_py_mel_avr1=1.2204 (+0.1267, +11.58%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=1.2071 (+0.1134, +10.37%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.1902 (+0.0965, +8.82%)
+                SI_SDR: Noisy=-0.0263  |  mband_py_mel_avr0_8=3.9766 (+4.0028, +15243.65%)  |  mband_py_mel_avr1=4.4282 (+4.4545, +16963.64%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=4.3112 (+4.3374, +16517.81%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=3.9766 (+4.0028, +15243.65%)
+                  STOI: Noisy=0.6549  |  mband_py_mel_avr0_8=0.6497 (-0.0052, -0.79%)  |  mband_py_mel_avr1=0.6572 (+0.0023, +0.35%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=0.6493 (-0.0056, -0.86%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=0.6497 (-0.0052, -0.79%)
+       DNSMOS_p808_mos: Noisy=2.5694  |  mband_py_mel_avr0_8=2.6368 (+0.0674, +2.63%)  |  mband_py_mel_avr1=2.6794 (+0.1100, +4.28%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.7101 (+0.1407, +5.48%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.6368 (+0.0674, +2.63%)
+        DNSMOS_mos_sig: Noisy=3.8877  |  mband_py_mel_avr0_8=2.9212 (-0.9665, -24.86%)  |  mband_py_mel_avr1=3.7062 (-0.1815, -4.67%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.3604 (-0.5273, -13.56%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.9212 (-0.9665, -24.86%)
+        DNSMOS_mos_bak: Noisy=1.9030  |  mband_py_mel_avr0_8=2.1146 (+0.2116, +11.12%)  |  mband_py_mel_avr1=2.3117 (+0.4087, +21.48%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.1904 (+0.2874, +15.10%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.1146 (+0.2116, +11.12%)
+        DNSMOS_mos_ovr: Noisy=2.2631  |  mband_py_mel_avr0_8=1.9311 (-0.3320, -14.67%)  |  mband_py_mel_avr1=2.4435 (+0.1805, +7.98%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.1978 (-0.0652, -2.88%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.9311 (-0.3320, -14.67%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.1733  |  mband_py_mel_avr0_8=1.3706 (+0.1973, +16.82%)  |  mband_py_mel_avr1=1.4296 (+0.2563, +21.84%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=1.4113 (+0.2380, +20.28%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.3706 (+0.1973, +16.82%)
+                SI_SDR: Noisy=4.9955  |  mband_py_mel_avr0_8=8.5245 (+3.5290, +70.64%)  |  mband_py_mel_avr1=8.2819 (+3.2863, +65.79%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=8.4059 (+3.4104, +68.27%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=8.5245 (+3.5290, +70.64%)
+                  STOI: Noisy=0.7153  |  mband_py_mel_avr0_8=0.7218 (+0.0065, +0.91%)  |  mband_py_mel_avr1=0.7247 (+0.0094, +1.32%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=0.7189 (+0.0037, +0.51%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=0.7218 (+0.0065, +0.91%)
+       DNSMOS_p808_mos: Noisy=2.7331  |  mband_py_mel_avr0_8=2.7347 (+0.0016, +0.06%)  |  mband_py_mel_avr1=2.8011 (+0.0680, +2.49%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.7562 (+0.0231, +0.85%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.7347 (+0.0016, +0.06%)
+        DNSMOS_mos_sig: Noisy=3.9827  |  mband_py_mel_avr0_8=3.1544 (-0.8283, -20.80%)  |  mband_py_mel_avr1=3.6596 (-0.3231, -8.11%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.4210 (-0.5617, -14.10%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=3.1544 (-0.8283, -20.80%)
+        DNSMOS_mos_bak: Noisy=2.1026  |  mband_py_mel_avr0_8=2.2326 (+0.1300, +6.18%)  |  mband_py_mel_avr1=2.3996 (+0.2970, +14.12%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.3282 (+0.2255, +10.73%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.2326 (+0.1300, +6.18%)
+        DNSMOS_mos_ovr: Noisy=2.4361  |  mband_py_mel_avr0_8=2.1030 (-0.3331, -13.68%)  |  mband_py_mel_avr1=2.4612 (+0.0250, +1.03%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.2950 (-0.1411, -5.79%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.1030 (-0.3331, -13.68%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3446  |  mband_py_mel_avr0_8=1.6390 (+0.2943, +21.89%)  |  mband_py_mel_avr1=1.7291 (+0.3844, +28.59%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=1.7041 (+0.3595, +26.73%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=1.6390 (+0.2943, +21.89%)
+                SI_SDR: Noisy=9.9991  |  mband_py_mel_avr0_8=12.4020 (+2.4029, +24.03%)  |  mband_py_mel_avr1=11.5820 (+1.5829, +15.83%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=11.8503 (+1.8512, +18.51%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=12.4020 (+2.4029, +24.03%)
+                  STOI: Noisy=0.7740  |  mband_py_mel_avr0_8=0.7758 (+0.0018, +0.23%)  |  mband_py_mel_avr1=0.7766 (+0.0026, +0.34%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=0.7740 (+0.0000, +0.00%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=0.7758 (+0.0018, +0.23%)
+       DNSMOS_p808_mos: Noisy=2.9111  |  mband_py_mel_avr0_8=2.8660 (-0.0451, -1.55%)  |  mband_py_mel_avr1=2.9229 (+0.0119, +0.41%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9292 (+0.0181, +0.62%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.8660 (-0.0451, -1.55%)
+        DNSMOS_mos_sig: Noisy=4.0784  |  mband_py_mel_avr0_8=3.5468 (-0.5316, -13.04%)  |  mband_py_mel_avr1=3.7991 (-0.2794, -6.85%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.7028 (-0.3756, -9.21%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=3.5468 (-0.5316, -13.04%)
+        DNSMOS_mos_bak: Noisy=2.3277  |  mband_py_mel_avr0_8=2.5478 (+0.2201, +9.45%)  |  mband_py_mel_avr1=2.6486 (+0.3209, +13.79%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6510 (+0.3233, +13.89%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.5478 (+0.2201, +9.45%)
+        DNSMOS_mos_ovr: Noisy=2.6382  |  mband_py_mel_avr0_8=2.4884 (-0.1498, -5.68%)  |  mband_py_mel_avr1=2.6694 (+0.0312, +1.18%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.6397 (+0.0015, +0.06%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.4884 (-0.1498, -5.68%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.6468  |  mband_py_mel_avr0_8=2.0489 (+0.4020, +24.41%)  |  mband_py_mel_avr1=2.0836 (+0.4368, +26.52%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.0703 (+0.4234, +25.71%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.0489 (+0.4020, +24.41%)
+                SI_SDR: Noisy=14.9989  |  mband_py_mel_avr0_8=16.0156 (+1.0167, +6.78%)  |  mband_py_mel_avr1=13.7094 (-1.2895, -8.60%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=14.2527 (-0.7462, -4.98%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=16.0156 (+1.0167, +6.78%)
+                  STOI: Noisy=0.8137  |  mband_py_mel_avr0_8=0.8195 (+0.0057, +0.70%)  |  mband_py_mel_avr1=0.8172 (+0.0034, +0.42%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=0.8160 (+0.0023, +0.28%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=0.8195 (+0.0057, +0.70%)
+       DNSMOS_p808_mos: Noisy=3.0481  |  mband_py_mel_avr0_8=3.0771 (+0.0289, +0.95%)  |  mband_py_mel_avr1=3.0679 (+0.0198, +0.65%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.1367 (+0.0886, +2.91%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=3.0771 (+0.0289, +0.95%)
+        DNSMOS_mos_sig: Noisy=4.0454  |  mband_py_mel_avr0_8=3.6917 (-0.3536, -8.74%)  |  mband_py_mel_avr1=3.9186 (-0.1267, -3.13%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=3.9356 (-0.1098, -2.71%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=3.6917 (-0.3536, -8.74%)
+        DNSMOS_mos_bak: Noisy=2.5180  |  mband_py_mel_avr0_8=2.8133 (+0.2953, +11.73%)  |  mband_py_mel_avr1=3.0503 (+0.5324, +21.14%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9682 (+0.4502, +17.88%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.8133 (+0.2953, +11.73%)
+        DNSMOS_mos_ovr: Noisy=2.7482  |  mband_py_mel_avr0_8=2.7252 (-0.0230, -0.84%)  |  mband_py_mel_avr1=2.9578 (+0.2096, +7.63%)  |  mband_py_mel_stream_avr1_og_wts_xmgasm=2.9510 (+0.2028, +7.38%)  |  mband_py_mel_stream_avr0_og_wts_xmgasm=2.7252 (-0.0230, -0.84%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_mel_avr0_8:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_mel_avr0_8:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_mel_avr0_8:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  2/20 files (10.0%)
+    Degraded:  18/20 files (90.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  6/20 files (30.0%)
+    Degraded:  14/20 files (70.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_mel_avr0_8:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_mel_avr0_8:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  14/20 files (70.0%)
+    Degraded:  6/20 files (30.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  9/20 files (45.0%)
+    Degraded:  11/20 files (55.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  3/20 files (15.0%)
+    Degraded:  17/20 files (85.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  0/20 files (0.0%)
+    Degraded:  20/20 files (100.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_mel_avr0_8:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_mel_avr0_8:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  7/20 files (35.0%)
+    Degraded:  13/20 files (65.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  1/20 files (5.0%)
+    Degraded:  19/20 files (95.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  16/20 files (80.0%)
+    Degraded:  4/20 files (20.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  5/20 files (25.0%)
+    Degraded:  15/20 files (75.0%)
+    Unchanged: 0/20 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  mband_py_mel_avr0_8:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  20/20 files (100.0%)
+    Degraded:  0/20 files (0.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  19/20 files (95.0%)
+    Degraded:  1/20 files (5.0%)
+    Unchanged: 0/20 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  mband_py_mel_avr0_8:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+
+STOI (Range: 0 to 1):
+  mband_py_mel_avr0_8:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  11/20 files (55.0%)
+    Degraded:  9/20 files (45.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  12/20 files (60.0%)
+    Degraded:  8/20 files (40.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  8/20 files (40.0%)
+    Degraded:  12/20 files (60.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  4/20 files (20.0%)
+    Degraded:  16/20 files (80.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  18/20 files (90.0%)
+    Degraded:  2/20 files (10.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  17/20 files (85.0%)
+    Degraded:  3/20 files (15.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  mband_py_mel_avr0_8:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_avr1:
+    Improved:  13/20 files (65.0%)
+    Degraded:  7/20 files (35.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr1_og_wts_xmgasm:
+    Improved:  15/20 files (75.0%)
+    Degraded:  5/20 files (25.0%)
+    Unchanged: 0/20 files (0.0%)
+  mband_py_mel_stream_avr0_og_wts_xmgasm:
+    Improved:  10/20 files (50.0%)
+    Degraded:  10/20 files (50.0%)
+    Unchanged: 0/20 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Babble <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_py_mel_avr0_8=1.086  mband_py_mel_avr1=1.079  mband_py_mel_stream_avr1_og_wts_xmgasm=1.077  mband_py_mel_stream_avr0_og_wts_xmgasm=1.086  
+    0dB: Noisy=1.067  mband_py_mel_avr0_8=1.112  mband_py_mel_avr1=1.153  mband_py_mel_stream_avr1_og_wts_xmgasm=1.148  mband_py_mel_stream_avr0_og_wts_xmgasm=1.112  
+    5dB: Noisy=1.118  mband_py_mel_avr0_8=1.266  mband_py_mel_avr1=1.317  mband_py_mel_stream_avr1_og_wts_xmgasm=1.312  mband_py_mel_stream_avr0_og_wts_xmgasm=1.266  
+    10dB: Noisy=1.257  mband_py_mel_avr0_8=1.512  mband_py_mel_avr1=1.598  mband_py_mel_stream_avr1_og_wts_xmgasm=1.593  mband_py_mel_stream_avr0_og_wts_xmgasm=1.512  
+    15dB: Noisy=1.563  mband_py_mel_avr0_8=2.001  mband_py_mel_avr1=2.014  mband_py_mel_stream_avr1_og_wts_xmgasm=2.037  mband_py_mel_stream_avr0_og_wts_xmgasm=2.001  
+  SI_SDR:
+    -5dB: Noisy=-4.823  mband_py_mel_avr0_8=-3.848  mband_py_mel_avr1=-1.999  mband_py_mel_stream_avr1_og_wts_xmgasm=-2.986  mband_py_mel_stream_avr0_og_wts_xmgasm=-3.848  
+    0dB: Noisy=-0.062  mband_py_mel_avr0_8=2.511  mband_py_mel_avr1=2.474  mband_py_mel_stream_avr1_og_wts_xmgasm=2.342  mband_py_mel_stream_avr0_og_wts_xmgasm=2.511  
+    5dB: Noisy=4.983  mband_py_mel_avr0_8=7.364  mband_py_mel_avr1=7.111  mband_py_mel_stream_avr1_og_wts_xmgasm=7.057  mband_py_mel_stream_avr0_og_wts_xmgasm=7.364  
+    10dB: Noisy=10.006  mband_py_mel_avr0_8=11.489  mband_py_mel_avr1=9.343  mband_py_mel_stream_avr1_og_wts_xmgasm=10.361  mband_py_mel_stream_avr0_og_wts_xmgasm=11.489  
+    15dB: Noisy=15.011  mband_py_mel_avr0_8=15.204  mband_py_mel_avr1=13.872  mband_py_mel_stream_avr1_og_wts_xmgasm=14.110  mband_py_mel_stream_avr0_og_wts_xmgasm=15.204  
+  STOI:
+    -5dB: Noisy=0.578  mband_py_mel_avr0_8=0.516  mband_py_mel_avr1=0.578  mband_py_mel_stream_avr1_og_wts_xmgasm=0.550  mband_py_mel_stream_avr0_og_wts_xmgasm=0.516  
+    0dB: Noisy=0.666  mband_py_mel_avr0_8=0.645  mband_py_mel_avr1=0.668  mband_py_mel_stream_avr1_og_wts_xmgasm=0.655  mband_py_mel_stream_avr0_og_wts_xmgasm=0.645  
+    5dB: Noisy=0.747  mband_py_mel_avr0_8=0.741  mband_py_mel_avr1=0.754  mband_py_mel_stream_avr1_og_wts_xmgasm=0.743  mband_py_mel_stream_avr0_og_wts_xmgasm=0.741  
+    10dB: Noisy=0.818  mband_py_mel_avr0_8=0.821  mband_py_mel_avr1=0.819  mband_py_mel_stream_avr1_og_wts_xmgasm=0.817  mband_py_mel_stream_avr0_og_wts_xmgasm=0.821  
+    15dB: Noisy=0.871  mband_py_mel_avr0_8=0.877  mband_py_mel_avr1=0.874  mband_py_mel_stream_avr1_og_wts_xmgasm=0.872  mband_py_mel_stream_avr0_og_wts_xmgasm=0.877  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.787  mband_py_mel_avr0_8=1.558  mband_py_mel_avr1=2.282  mband_py_mel_stream_avr1_og_wts_xmgasm=2.011  mband_py_mel_stream_avr0_og_wts_xmgasm=1.558  
+    0dB: Noisy=2.516  mband_py_mel_avr0_8=1.602  mband_py_mel_avr1=2.580  mband_py_mel_stream_avr1_og_wts_xmgasm=1.775  mband_py_mel_stream_avr0_og_wts_xmgasm=1.602  
+    5dB: Noisy=2.776  mband_py_mel_avr0_8=1.708  mband_py_mel_avr1=2.143  mband_py_mel_stream_avr1_og_wts_xmgasm=1.968  mband_py_mel_stream_avr0_og_wts_xmgasm=1.708  
+    10dB: Noisy=2.872  mband_py_mel_avr0_8=2.181  mband_py_mel_avr1=2.063  mband_py_mel_stream_avr1_og_wts_xmgasm=2.190  mband_py_mel_stream_avr0_og_wts_xmgasm=2.181  
+    15dB: Noisy=2.879  mband_py_mel_avr0_8=2.715  mband_py_mel_avr1=2.841  mband_py_mel_stream_avr1_og_wts_xmgasm=3.051  mband_py_mel_stream_avr0_og_wts_xmgasm=2.715  
+
+>>> Car <<<
+  PESQ:
+    -5dB: Noisy=1.053  mband_py_mel_avr0_8=1.108  mband_py_mel_avr1=1.129  mband_py_mel_stream_avr1_og_wts_xmgasm=1.115  mband_py_mel_stream_avr0_og_wts_xmgasm=1.108  
+    0dB: Noisy=1.077  mband_py_mel_avr0_8=1.178  mband_py_mel_avr1=1.266  mband_py_mel_stream_avr1_og_wts_xmgasm=1.235  mband_py_mel_stream_avr0_og_wts_xmgasm=1.178  
+    5dB: Noisy=1.152  mband_py_mel_avr0_8=1.389  mband_py_mel_avr1=1.499  mband_py_mel_stream_avr1_og_wts_xmgasm=1.443  mband_py_mel_stream_avr0_og_wts_xmgasm=1.389  
+    10dB: Noisy=1.324  mband_py_mel_avr0_8=1.678  mband_py_mel_avr1=1.844  mband_py_mel_stream_avr1_og_wts_xmgasm=1.794  mband_py_mel_stream_avr0_og_wts_xmgasm=1.678  
+    15dB: Noisy=1.635  mband_py_mel_avr0_8=2.099  mband_py_mel_avr1=2.162  mband_py_mel_stream_avr1_og_wts_xmgasm=2.118  mband_py_mel_stream_avr0_og_wts_xmgasm=2.099  
+  SI_SDR:
+    -5dB: Noisy=-4.980  mband_py_mel_avr0_8=1.937  mband_py_mel_avr1=3.209  mband_py_mel_stream_avr1_og_wts_xmgasm=2.575  mband_py_mel_stream_avr0_og_wts_xmgasm=1.937  
+    0dB: Noisy=0.013  mband_py_mel_avr0_8=5.596  mband_py_mel_avr1=7.040  mband_py_mel_stream_avr1_og_wts_xmgasm=6.679  mband_py_mel_stream_avr0_og_wts_xmgasm=5.596  
+    5dB: Noisy=4.994  mband_py_mel_avr0_8=9.901  mband_py_mel_avr1=10.209  mband_py_mel_stream_avr1_og_wts_xmgasm=10.050  mband_py_mel_stream_avr0_og_wts_xmgasm=9.901  
+    10dB: Noisy=10.002  mband_py_mel_avr0_8=13.357  mband_py_mel_avr1=12.884  mband_py_mel_stream_avr1_og_wts_xmgasm=13.017  mband_py_mel_stream_avr0_og_wts_xmgasm=13.357  
+    15dB: Noisy=14.997  mband_py_mel_avr0_8=16.706  mband_py_mel_avr1=14.503  mband_py_mel_stream_avr1_og_wts_xmgasm=14.982  mband_py_mel_stream_avr0_og_wts_xmgasm=16.706  
+  STOI:
+    -5dB: Noisy=0.654  mband_py_mel_avr0_8=0.635  mband_py_mel_avr1=0.655  mband_py_mel_stream_avr1_og_wts_xmgasm=0.646  mband_py_mel_stream_avr0_og_wts_xmgasm=0.635  
+    0dB: Noisy=0.705  mband_py_mel_avr0_8=0.704  mband_py_mel_avr1=0.704  mband_py_mel_stream_avr1_og_wts_xmgasm=0.694  mband_py_mel_stream_avr0_og_wts_xmgasm=0.704  
+    5dB: Noisy=0.750  mband_py_mel_avr0_8=0.753  mband_py_mel_avr1=0.760  mband_py_mel_stream_avr1_og_wts_xmgasm=0.753  mband_py_mel_stream_avr0_og_wts_xmgasm=0.753  
+    10dB: Noisy=0.797  mband_py_mel_avr0_8=0.801  mband_py_mel_avr1=0.798  mband_py_mel_stream_avr1_og_wts_xmgasm=0.793  mband_py_mel_stream_avr0_og_wts_xmgasm=0.801  
+    15dB: Noisy=0.830  mband_py_mel_avr0_8=0.836  mband_py_mel_avr1=0.836  mband_py_mel_stream_avr1_og_wts_xmgasm=0.835  mband_py_mel_stream_avr0_og_wts_xmgasm=0.836  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.276  mband_py_mel_avr0_8=1.836  mband_py_mel_avr1=2.551  mband_py_mel_stream_avr1_og_wts_xmgasm=2.129  mband_py_mel_stream_avr0_og_wts_xmgasm=1.836  
+    0dB: Noisy=2.507  mband_py_mel_avr0_8=1.820  mband_py_mel_avr1=2.551  mband_py_mel_stream_avr1_og_wts_xmgasm=2.164  mband_py_mel_stream_avr0_og_wts_xmgasm=1.820  
+    5dB: Noisy=2.471  mband_py_mel_avr0_8=2.088  mband_py_mel_avr1=2.609  mband_py_mel_stream_avr1_og_wts_xmgasm=2.391  mband_py_mel_stream_avr0_og_wts_xmgasm=2.088  
+    10dB: Noisy=2.755  mband_py_mel_avr0_8=2.696  mband_py_mel_avr1=2.878  mband_py_mel_stream_avr1_og_wts_xmgasm=2.768  mband_py_mel_stream_avr0_og_wts_xmgasm=2.696  
+    15dB: Noisy=2.913  mband_py_mel_avr0_8=3.033  mband_py_mel_avr1=3.314  mband_py_mel_stream_avr1_og_wts_xmgasm=3.337  mband_py_mel_stream_avr0_og_wts_xmgasm=3.033  
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.043  mband_py_mel_avr0_8=1.054  mband_py_mel_avr1=1.068  mband_py_mel_stream_avr1_og_wts_xmgasm=1.067  mband_py_mel_stream_avr0_og_wts_xmgasm=1.054  
+    0dB: Noisy=1.062  mband_py_mel_avr0_8=1.112  mband_py_mel_avr1=1.131  mband_py_mel_stream_avr1_og_wts_xmgasm=1.122  mband_py_mel_stream_avr0_og_wts_xmgasm=1.112  
+    5dB: Noisy=1.116  mband_py_mel_avr0_8=1.211  mband_py_mel_avr1=1.293  mband_py_mel_stream_avr1_og_wts_xmgasm=1.264  mband_py_mel_stream_avr0_og_wts_xmgasm=1.211  
+    10dB: Noisy=1.233  mband_py_mel_avr0_8=1.462  mband_py_mel_avr1=1.568  mband_py_mel_stream_avr1_og_wts_xmgasm=1.517  mband_py_mel_stream_avr0_og_wts_xmgasm=1.462  
+    15dB: Noisy=1.491  mband_py_mel_avr0_8=1.840  mband_py_mel_avr1=1.898  mband_py_mel_stream_avr1_og_wts_xmgasm=1.846  mband_py_mel_stream_avr0_og_wts_xmgasm=1.840  
+  SI_SDR:
+    -5dB: Noisy=-4.988  mband_py_mel_avr0_8=-2.291  mband_py_mel_avr1=-1.979  mband_py_mel_stream_avr1_og_wts_xmgasm=-2.056  mband_py_mel_stream_avr0_og_wts_xmgasm=-2.291  
+    0dB: Noisy=-0.023  mband_py_mel_avr0_8=2.957  mband_py_mel_avr1=2.777  mband_py_mel_stream_avr1_og_wts_xmgasm=3.021  mband_py_mel_stream_avr0_og_wts_xmgasm=2.957  
+    5dB: Noisy=4.999  mband_py_mel_avr0_8=7.689  mband_py_mel_avr1=7.202  mband_py_mel_stream_avr1_og_wts_xmgasm=7.611  mband_py_mel_stream_avr0_og_wts_xmgasm=7.689  
+    10dB: Noisy=9.995  mband_py_mel_avr0_8=12.131  mband_py_mel_avr1=11.354  mband_py_mel_stream_avr1_og_wts_xmgasm=11.658  mband_py_mel_stream_avr0_og_wts_xmgasm=12.131  
+    15dB: Noisy=14.999  mband_py_mel_avr0_8=16.268  mband_py_mel_avr1=13.405  mband_py_mel_stream_avr1_og_wts_xmgasm=14.162  mband_py_mel_stream_avr0_og_wts_xmgasm=16.268  
+  STOI:
+    -5dB: Noisy=0.565  mband_py_mel_avr0_8=0.540  mband_py_mel_avr1=0.582  mband_py_mel_stream_avr1_og_wts_xmgasm=0.561  mband_py_mel_stream_avr0_og_wts_xmgasm=0.540  
+    0dB: Noisy=0.645  mband_py_mel_avr0_8=0.636  mband_py_mel_avr1=0.658  mband_py_mel_stream_avr1_og_wts_xmgasm=0.643  mband_py_mel_stream_avr0_og_wts_xmgasm=0.636  
+    5dB: Noisy=0.726  mband_py_mel_avr0_8=0.725  mband_py_mel_avr1=0.737  mband_py_mel_stream_avr1_og_wts_xmgasm=0.731  mband_py_mel_stream_avr0_og_wts_xmgasm=0.725  
+    10dB: Noisy=0.795  mband_py_mel_avr0_8=0.790  mband_py_mel_avr1=0.800  mband_py_mel_stream_avr1_og_wts_xmgasm=0.796  mband_py_mel_stream_avr0_og_wts_xmgasm=0.790  
+    15dB: Noisy=0.842  mband_py_mel_avr0_8=0.847  mband_py_mel_avr1=0.845  mband_py_mel_stream_avr1_og_wts_xmgasm=0.841  mband_py_mel_stream_avr0_og_wts_xmgasm=0.847  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.706  mband_py_mel_avr0_8=1.659  mband_py_mel_avr1=1.894  mband_py_mel_stream_avr1_og_wts_xmgasm=1.729  mband_py_mel_stream_avr0_og_wts_xmgasm=1.659  
+    0dB: Noisy=1.800  mband_py_mel_avr0_8=1.684  mband_py_mel_avr1=2.070  mband_py_mel_stream_avr1_og_wts_xmgasm=1.874  mband_py_mel_stream_avr0_og_wts_xmgasm=1.684  
+    5dB: Noisy=2.079  mband_py_mel_avr0_8=1.786  mband_py_mel_avr1=2.014  mband_py_mel_stream_avr1_og_wts_xmgasm=1.899  mband_py_mel_stream_avr0_og_wts_xmgasm=1.786  
+    10dB: Noisy=2.408  mband_py_mel_avr0_8=2.171  mband_py_mel_avr1=2.206  mband_py_mel_stream_avr1_og_wts_xmgasm=2.211  mband_py_mel_stream_avr0_og_wts_xmgasm=2.171  
+    15dB: Noisy=2.496  mband_py_mel_avr0_8=2.299  mband_py_mel_avr1=2.515  mband_py_mel_stream_avr1_og_wts_xmgasm=2.442  mband_py_mel_stream_avr0_og_wts_xmgasm=2.299  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  mband_py_mel_avr0_8=1.248  mband_py_mel_avr1=1.237  mband_py_mel_stream_avr1_og_wts_xmgasm=1.244  mband_py_mel_stream_avr0_og_wts_xmgasm=1.248  
+    0dB: Noisy=1.265  mband_py_mel_avr0_8=1.399  mband_py_mel_avr1=1.458  mband_py_mel_stream_avr1_og_wts_xmgasm=1.428  mband_py_mel_stream_avr0_og_wts_xmgasm=1.399  
+    5dB: Noisy=1.348  mband_py_mel_avr0_8=1.562  mband_py_mel_avr1=1.580  mband_py_mel_stream_avr1_og_wts_xmgasm=1.576  mband_py_mel_stream_avr0_og_wts_xmgasm=1.562  
+    10dB: Noisy=1.567  mband_py_mel_avr0_8=1.719  mband_py_mel_avr1=1.809  mband_py_mel_stream_avr1_og_wts_xmgasm=1.810  mband_py_mel_stream_avr0_og_wts_xmgasm=1.719  
+    15dB: Noisy=2.167  mband_py_mel_avr0_8=2.146  mband_py_mel_avr1=2.226  mband_py_mel_stream_avr1_og_wts_xmgasm=2.206  mband_py_mel_stream_avr0_og_wts_xmgasm=2.146  
+  SI_SDR:
+    -5dB: Noisy=-5.047  mband_py_mel_avr0_8=-1.962  mband_py_mel_avr1=0.750  mband_py_mel_stream_avr1_og_wts_xmgasm=-0.062  mband_py_mel_stream_avr0_og_wts_xmgasm=-1.962  
+    0dB: Noisy=-0.018  mband_py_mel_avr0_8=2.958  mband_py_mel_avr1=5.598  mband_py_mel_stream_avr1_og_wts_xmgasm=4.971  mband_py_mel_stream_avr0_og_wts_xmgasm=2.958  
+    5dB: Noisy=4.987  mband_py_mel_avr0_8=8.163  mband_py_mel_avr1=9.803  mband_py_mel_stream_avr1_og_wts_xmgasm=9.821  mband_py_mel_stream_avr0_og_wts_xmgasm=8.163  
+    10dB: Noisy=9.999  mband_py_mel_avr0_8=12.354  mband_py_mel_avr1=12.404  mband_py_mel_stream_avr1_og_wts_xmgasm=12.740  mband_py_mel_stream_avr0_og_wts_xmgasm=12.354  
+    15dB: Noisy=14.995  mband_py_mel_avr0_8=16.941  mband_py_mel_avr1=14.245  mband_py_mel_stream_avr1_og_wts_xmgasm=15.057  mband_py_mel_stream_avr0_og_wts_xmgasm=16.941  
+  STOI:
+    -5dB: Noisy=0.429  mband_py_mel_avr0_8=0.429  mband_py_mel_avr1=0.430  mband_py_mel_stream_avr1_og_wts_xmgasm=0.427  mband_py_mel_stream_avr0_og_wts_xmgasm=0.429  
+    0dB: Noisy=0.465  mband_py_mel_avr0_8=0.454  mband_py_mel_avr1=0.496  mband_py_mel_stream_avr1_og_wts_xmgasm=0.489  mband_py_mel_stream_avr0_og_wts_xmgasm=0.454  
+    5dB: Noisy=0.501  mband_py_mel_avr0_8=0.539  mband_py_mel_avr1=0.508  mband_py_mel_stream_avr1_og_wts_xmgasm=0.503  mband_py_mel_stream_avr0_og_wts_xmgasm=0.539  
+    10dB: Noisy=0.534  mband_py_mel_avr0_8=0.536  mband_py_mel_avr1=0.541  mband_py_mel_stream_avr1_og_wts_xmgasm=0.542  mband_py_mel_stream_avr0_og_wts_xmgasm=0.536  
+    15dB: Noisy=0.555  mband_py_mel_avr0_8=0.566  mband_py_mel_avr1=0.582  mband_py_mel_stream_avr1_og_wts_xmgasm=0.581  mband_py_mel_stream_avr0_og_wts_xmgasm=0.566  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  mband_py_mel_avr0_8=2.448  mband_py_mel_avr1=2.781  mband_py_mel_stream_avr1_og_wts_xmgasm=2.700  mband_py_mel_stream_avr0_og_wts_xmgasm=2.448  
+    0dB: Noisy=2.325  mband_py_mel_avr0_8=2.437  mband_py_mel_avr1=3.015  mband_py_mel_stream_avr1_og_wts_xmgasm=2.919  mband_py_mel_stream_avr0_og_wts_xmgasm=2.437  
+    5dB: Noisy=2.657  mband_py_mel_avr0_8=2.652  mband_py_mel_avr1=3.046  mband_py_mel_stream_avr1_og_wts_xmgasm=2.842  mband_py_mel_stream_avr0_og_wts_xmgasm=2.652  
+    10dB: Noisy=2.808  mband_py_mel_avr0_8=2.935  mband_py_mel_avr1=3.401  mband_py_mel_stream_avr1_og_wts_xmgasm=3.311  mband_py_mel_stream_avr0_og_wts_xmgasm=2.935  
+    15dB: Noisy=2.839  mband_py_mel_avr0_8=2.940  mband_py_mel_avr1=3.787  mband_py_mel_stream_avr1_og_wts_xmgasm=3.501  mband_py_mel_stream_avr0_og_wts_xmgasm=2.940  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  mband_py_mel_avr0_8=1.176  mband_py_mel_avr1=1.170  mband_py_mel_stream_avr1_og_wts_xmgasm=1.173  mband_py_mel_stream_avr0_og_wts_xmgasm=1.176  
+    0dB: Noisy=1.114  mband_py_mel_avr0_8=1.335  mband_py_mel_avr1=1.319  mband_py_mel_stream_avr1_og_wts_xmgasm=1.308  mband_py_mel_stream_avr0_og_wts_xmgasm=1.335  
+    5dB: Noisy=1.222  mband_py_mel_avr0_8=1.587  mband_py_mel_avr1=1.623  mband_py_mel_stream_avr1_og_wts_xmgasm=1.622  mband_py_mel_stream_avr0_og_wts_xmgasm=1.587  
+    10dB: Noisy=1.436  mband_py_mel_avr0_8=1.922  mband_py_mel_avr1=1.970  mband_py_mel_stream_avr1_og_wts_xmgasm=1.946  mband_py_mel_stream_avr0_og_wts_xmgasm=1.922  
+    15dB: Noisy=1.765  mband_py_mel_avr0_8=2.387  mband_py_mel_avr1=2.378  mband_py_mel_stream_avr1_og_wts_xmgasm=2.386  mband_py_mel_stream_avr0_og_wts_xmgasm=2.387  
+  SI_SDR:
+    -5dB: Noisy=-5.016  mband_py_mel_avr0_8=3.489  mband_py_mel_avr1=2.822  mband_py_mel_stream_avr1_og_wts_xmgasm=3.343  mband_py_mel_stream_avr0_og_wts_xmgasm=3.489  
+    0dB: Noisy=-0.017  mband_py_mel_avr0_8=7.547  mband_py_mel_avr1=7.094  mband_py_mel_stream_avr1_og_wts_xmgasm=7.089  mband_py_mel_stream_avr0_og_wts_xmgasm=7.547  
+    5dB: Noisy=5.011  mband_py_mel_avr0_8=11.229  mband_py_mel_avr1=9.993  mband_py_mel_stream_avr1_og_wts_xmgasm=10.320  mband_py_mel_stream_avr0_og_wts_xmgasm=11.229  
+    10dB: Noisy=10.002  mband_py_mel_avr0_8=13.910  mband_py_mel_avr1=12.114  mband_py_mel_stream_avr1_og_wts_xmgasm=12.439  mband_py_mel_stream_avr0_og_wts_xmgasm=13.910  
+    15dB: Noisy=14.999  mband_py_mel_avr0_8=16.761  mband_py_mel_avr1=13.800  mband_py_mel_stream_avr1_og_wts_xmgasm=14.523  mband_py_mel_stream_avr0_og_wts_xmgasm=16.761  
+  STOI:
+    -5dB: Noisy=0.602  mband_py_mel_avr0_8=0.618  mband_py_mel_avr1=0.619  mband_py_mel_stream_avr1_og_wts_xmgasm=0.617  mband_py_mel_stream_avr0_og_wts_xmgasm=0.618  
+    0dB: Noisy=0.661  mband_py_mel_avr0_8=0.674  mband_py_mel_avr1=0.672  mband_py_mel_stream_avr1_og_wts_xmgasm=0.667  mband_py_mel_stream_avr0_og_wts_xmgasm=0.674  
+    5dB: Noisy=0.715  mband_py_mel_avr0_8=0.729  mband_py_mel_avr1=0.727  mband_py_mel_stream_avr1_og_wts_xmgasm=0.726  mband_py_mel_stream_avr0_og_wts_xmgasm=0.729  
+    10dB: Noisy=0.771  mband_py_mel_avr0_8=0.775  mband_py_mel_avr1=0.764  mband_py_mel_stream_avr1_og_wts_xmgasm=0.765  mband_py_mel_stream_avr0_og_wts_xmgasm=0.775  
+    15dB: Noisy=0.805  mband_py_mel_avr0_8=0.815  mband_py_mel_avr1=0.804  mband_py_mel_stream_avr1_og_wts_xmgasm=0.806  mband_py_mel_stream_avr0_og_wts_xmgasm=0.815  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  mband_py_mel_avr0_8=2.406  mband_py_mel_avr1=2.692  mband_py_mel_stream_avr1_og_wts_xmgasm=2.404  mband_py_mel_stream_avr0_og_wts_xmgasm=2.406  
+    0dB: Noisy=2.429  mband_py_mel_avr0_8=2.412  mband_py_mel_avr1=2.743  mband_py_mel_stream_avr1_og_wts_xmgasm=2.616  mband_py_mel_stream_avr0_og_wts_xmgasm=2.412  
+    5dB: Noisy=2.769  mband_py_mel_avr0_8=2.276  mband_py_mel_avr1=2.876  mband_py_mel_stream_avr1_og_wts_xmgasm=2.603  mband_py_mel_stream_avr0_og_wts_xmgasm=2.276  
+    10dB: Noisy=2.817  mband_py_mel_avr0_8=2.549  mband_py_mel_avr1=2.822  mband_py_mel_stream_avr1_og_wts_xmgasm=2.709  mband_py_mel_stream_avr0_og_wts_xmgasm=2.549  
+    15dB: Noisy=2.904  mband_py_mel_avr0_8=2.838  mband_py_mel_avr1=3.046  mband_py_mel_stream_avr1_og_wts_xmgasm=3.122  mband_py_mel_stream_avr0_og_wts_xmgasm=2.838  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  mband_py_mel_avr0_8=1.123  mband_py_mel_avr1=1.121  mband_py_mel_stream_avr1_og_wts_xmgasm=1.129  mband_py_mel_stream_avr0_og_wts_xmgasm=1.123  
+    0dB: Noisy=1.116  mband_py_mel_avr0_8=1.235  mband_py_mel_avr1=1.252  mband_py_mel_stream_avr1_og_wts_xmgasm=1.252  mband_py_mel_stream_avr0_og_wts_xmgasm=1.235  
+    5dB: Noisy=1.217  mband_py_mel_avr0_8=1.458  mband_py_mel_avr1=1.524  mband_py_mel_stream_avr1_og_wts_xmgasm=1.518  mband_py_mel_stream_avr0_og_wts_xmgasm=1.458  
+    10dB: Noisy=1.399  mband_py_mel_avr0_8=1.786  mband_py_mel_avr1=1.858  mband_py_mel_stream_avr1_og_wts_xmgasm=1.869  mband_py_mel_stream_avr0_og_wts_xmgasm=1.786  
+    15dB: Noisy=1.700  mband_py_mel_avr0_8=2.239  mband_py_mel_avr1=2.299  mband_py_mel_stream_avr1_og_wts_xmgasm=2.328  mband_py_mel_stream_avr0_og_wts_xmgasm=2.239  
+  SI_SDR:
+    -5dB: Noisy=-5.044  mband_py_mel_avr0_8=0.127  mband_py_mel_avr1=-0.165  mband_py_mel_stream_avr1_og_wts_xmgasm=-0.416  mband_py_mel_stream_avr0_og_wts_xmgasm=0.127  
+    0dB: Noisy=-0.041  mband_py_mel_avr0_8=4.624  mband_py_mel_avr1=4.380  mband_py_mel_stream_avr1_og_wts_xmgasm=4.442  mband_py_mel_stream_avr0_og_wts_xmgasm=4.624  
+    5dB: Noisy=5.003  mband_py_mel_avr0_8=8.805  mband_py_mel_avr1=8.787  mband_py_mel_stream_avr1_og_wts_xmgasm=8.704  mband_py_mel_stream_avr0_og_wts_xmgasm=8.805  
+    10dB: Noisy=10.007  mband_py_mel_avr0_8=12.434  mband_py_mel_avr1=11.532  mband_py_mel_stream_avr1_og_wts_xmgasm=11.619  mband_py_mel_stream_avr0_og_wts_xmgasm=12.434  
+    15dB: Noisy=15.001  mband_py_mel_avr0_8=14.813  mband_py_mel_avr1=13.641  mband_py_mel_stream_avr1_og_wts_xmgasm=13.766  mband_py_mel_stream_avr0_og_wts_xmgasm=14.813  
+  STOI:
+    -5dB: Noisy=0.552  mband_py_mel_avr0_8=0.544  mband_py_mel_avr1=0.556  mband_py_mel_stream_avr1_og_wts_xmgasm=0.544  mband_py_mel_stream_avr0_og_wts_xmgasm=0.544  
+    0dB: Noisy=0.639  mband_py_mel_avr0_8=0.636  mband_py_mel_avr1=0.640  mband_py_mel_stream_avr1_og_wts_xmgasm=0.633  mband_py_mel_stream_avr0_og_wts_xmgasm=0.636  
+    5dB: Noisy=0.709  mband_py_mel_avr0_8=0.725  mband_py_mel_avr1=0.734  mband_py_mel_stream_avr1_og_wts_xmgasm=0.727  mband_py_mel_stream_avr0_og_wts_xmgasm=0.725  
+    10dB: Noisy=0.783  mband_py_mel_avr0_8=0.796  mband_py_mel_avr1=0.789  mband_py_mel_stream_avr1_og_wts_xmgasm=0.785  mband_py_mel_stream_avr0_og_wts_xmgasm=0.796  
+    15dB: Noisy=0.832  mband_py_mel_avr0_8=0.838  mband_py_mel_avr1=0.842  mband_py_mel_stream_avr1_og_wts_xmgasm=0.839  mband_py_mel_stream_avr0_og_wts_xmgasm=0.838  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  mband_py_mel_avr0_8=1.604  mband_py_mel_avr1=2.523  mband_py_mel_stream_avr1_og_wts_xmgasm=1.893  mband_py_mel_stream_avr0_og_wts_xmgasm=1.604  
+    0dB: Noisy=2.392  mband_py_mel_avr0_8=1.613  mband_py_mel_avr1=2.503  mband_py_mel_stream_avr1_og_wts_xmgasm=2.293  mband_py_mel_stream_avr0_og_wts_xmgasm=1.613  
+    5dB: Noisy=2.492  mband_py_mel_avr0_8=2.323  mband_py_mel_avr1=2.700  mband_py_mel_stream_avr1_og_wts_xmgasm=2.530  mband_py_mel_stream_avr0_og_wts_xmgasm=2.323  
+    10dB: Noisy=2.693  mband_py_mel_avr0_8=2.695  mband_py_mel_avr1=2.864  mband_py_mel_stream_avr1_og_wts_xmgasm=2.967  mband_py_mel_stream_avr0_og_wts_xmgasm=2.695  
+    15dB: Noisy=3.030  mband_py_mel_avr0_8=3.082  mband_py_mel_avr1=3.396  mband_py_mel_stream_avr1_og_wts_xmgasm=3.373  mband_py_mel_stream_avr0_og_wts_xmgasm=3.082  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  mband_py_mel_avr0_8=1.091  mband_py_mel_avr1=1.106  mband_py_mel_stream_avr1_og_wts_xmgasm=1.101  mband_py_mel_stream_avr0_og_wts_xmgasm=1.091  
+    0dB: Noisy=1.086  mband_py_mel_avr0_8=1.145  mband_py_mel_avr1=1.177  mband_py_mel_stream_avr1_og_wts_xmgasm=1.165  mband_py_mel_stream_avr0_og_wts_xmgasm=1.145  
+    5dB: Noisy=1.172  mband_py_mel_avr0_8=1.338  mband_py_mel_avr1=1.363  mband_py_mel_stream_avr1_og_wts_xmgasm=1.357  mband_py_mel_stream_avr0_og_wts_xmgasm=1.338  
+    10dB: Noisy=1.365  mband_py_mel_avr0_8=1.573  mband_py_mel_avr1=1.635  mband_py_mel_stream_avr1_og_wts_xmgasm=1.627  mband_py_mel_stream_avr0_og_wts_xmgasm=1.573  
+    15dB: Noisy=1.630  mband_py_mel_avr0_8=1.939  mband_py_mel_avr1=1.944  mband_py_mel_stream_avr1_og_wts_xmgasm=1.953  mband_py_mel_stream_avr0_og_wts_xmgasm=1.939  
+  SI_SDR:
+    -5dB: Noisy=-4.982  mband_py_mel_avr0_8=-3.806  mband_py_mel_avr1=-2.362  mband_py_mel_stream_avr1_og_wts_xmgasm=-2.427  mband_py_mel_stream_avr0_og_wts_xmgasm=-3.806  
+    0dB: Noisy=-0.047  mband_py_mel_avr0_8=2.120  mband_py_mel_avr1=3.090  mband_py_mel_stream_avr1_og_wts_xmgasm=2.723  mband_py_mel_stream_avr0_og_wts_xmgasm=2.120  
+    5dB: Noisy=4.985  mband_py_mel_avr0_8=7.104  mband_py_mel_avr1=6.907  mband_py_mel_stream_avr1_og_wts_xmgasm=6.934  mband_py_mel_stream_avr0_og_wts_xmgasm=7.104  
+    10dB: Noisy=9.995  mband_py_mel_avr0_8=11.375  mband_py_mel_avr1=11.014  mband_py_mel_stream_avr1_og_wts_xmgasm=11.202  mband_py_mel_stream_avr0_og_wts_xmgasm=11.375  
+    15dB: Noisy=14.998  mband_py_mel_avr0_8=15.360  mband_py_mel_avr1=13.371  mband_py_mel_stream_avr1_og_wts_xmgasm=13.806  mband_py_mel_stream_avr0_og_wts_xmgasm=15.360  
+  STOI:
+    -5dB: Noisy=0.605  mband_py_mel_avr0_8=0.592  mband_py_mel_avr1=0.600  mband_py_mel_stream_avr1_og_wts_xmgasm=0.594  mband_py_mel_stream_avr0_og_wts_xmgasm=0.592  
+    0dB: Noisy=0.673  mband_py_mel_avr0_8=0.662  mband_py_mel_avr1=0.656  mband_py_mel_stream_avr1_og_wts_xmgasm=0.655  mband_py_mel_stream_avr0_og_wts_xmgasm=0.662  
+    5dB: Noisy=0.723  mband_py_mel_avr0_8=0.728  mband_py_mel_avr1=0.723  mband_py_mel_stream_avr1_og_wts_xmgasm=0.718  mband_py_mel_stream_avr0_og_wts_xmgasm=0.728  
+    10dB: Noisy=0.776  mband_py_mel_avr0_8=0.777  mband_py_mel_avr1=0.782  mband_py_mel_stream_avr1_og_wts_xmgasm=0.779  mband_py_mel_stream_avr0_og_wts_xmgasm=0.777  
+    15dB: Noisy=0.814  mband_py_mel_avr0_8=0.816  mband_py_mel_avr1=0.812  mband_py_mel_stream_avr1_og_wts_xmgasm=0.812  mband_py_mel_stream_avr0_og_wts_xmgasm=0.816  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  mband_py_mel_avr0_8=1.804  mband_py_mel_avr1=2.223  mband_py_mel_stream_avr1_og_wts_xmgasm=1.914  mband_py_mel_stream_avr0_og_wts_xmgasm=1.804  
+    0dB: Noisy=2.366  mband_py_mel_avr0_8=2.048  mband_py_mel_avr1=2.407  mband_py_mel_stream_avr1_og_wts_xmgasm=2.193  mband_py_mel_stream_avr0_og_wts_xmgasm=2.048  
+    5dB: Noisy=2.439  mband_py_mel_avr0_8=2.207  mband_py_mel_avr1=2.422  mband_py_mel_stream_avr1_og_wts_xmgasm=2.310  mband_py_mel_stream_avr0_og_wts_xmgasm=2.207  
+    10dB: Noisy=2.589  mband_py_mel_avr0_8=2.535  mband_py_mel_avr1=2.813  mband_py_mel_stream_avr1_og_wts_xmgasm=2.774  mband_py_mel_stream_avr0_og_wts_xmgasm=2.535  
+    15dB: Noisy=2.651  mband_py_mel_avr0_8=2.715  mband_py_mel_avr1=2.816  mband_py_mel_stream_avr1_og_wts_xmgasm=2.828  mband_py_mel_stream_avr0_og_wts_xmgasm=2.715  
+
+========================================================================================================================

@@ -1,0 +1,6 @@
+,PESQ,PESQ,STOI,STOI,SI_SDR,SI_SDR,DNSMOS_mos_ovr,DNSMOS_mos_ovr
+,mean,std,mean,std,mean,std,mean,std
+Freq_spacing,,,,,,,,
+linear,2.113,0.629,0.784,0.082,12.459,4.205,3.582,0.602
+log,2.132,0.631,0.781,0.085,12.262,4.411,3.495,0.677
+mel,2.102,0.63,0.774,0.087,12.375,4.371,3.363,0.743

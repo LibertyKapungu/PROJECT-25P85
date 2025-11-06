@@ -1,0 +1,2 @@
+clean_file,enhanced_file,sampling_rate,PESQ,SI_SDR,STOI,DNSMOS_p808_mos,DNSMOS_mos_sig,DNSMOS_mos_bak,DNSMOS_mos_ovr,source_file
+Mband_tests,SS_Mband_tests_C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\Random\Matlab2025Files\SS\Processed_sounds\mband_causal_standard_mode_BANDS6_SPACINGLINEAR_FRAME20ms.wav.wav,8000,2.059623003005981,4.579659461975098,0.826082706451416,2.788758993148804,4.159816624059146,1.9612665099282487,2.5181516944583318,mband_5db_EXP1_data_ENH-mband_causal_standard_mode_BANDS6_SPACINGLINEAR_FRAME20ms.wav_CLN-Mband_tests.csv

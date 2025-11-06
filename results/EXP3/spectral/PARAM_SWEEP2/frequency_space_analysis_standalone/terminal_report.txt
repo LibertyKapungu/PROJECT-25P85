@@ -1,0 +1,177 @@
+FREQUENCY SPACING PERFORMANCE BY SNR
+====================================================================================================
+
+====================================================================================================
+SNR = -5 dB
+====================================================================================================
+
+MEL:
+  PESQ:  1.128 ± 0.036
+  STOI:  0.602 ± 0.079
+  SI-SDR: -1.09 ± 2.65 dB
+  DNSMOS: 2.168 ± 0.570
+
+LOG:
+  PESQ:  1.131 ± 0.041
+  STOI:  0.603 ± 0.076
+  SI-SDR: -1.21 ± 2.73 dB
+  DNSMOS: 2.218 ± 0.554
+
+LINEAR:
+  PESQ:  1.127 ± 0.037
+  STOI:  0.603 ± 0.078
+  SI-SDR: -1.01 ± 2.69 dB
+  DNSMOS: 2.168 ± 0.553
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): LINEAR
+  💡 Low SNR: LINEAR shows better stability
+
+====================================================================================================
+SNR = 0 dB
+====================================================================================================
+
+MEL:
+  PESQ:  1.221 ± 0.070
+  STOI:  0.671 ± 0.061
+  SI-SDR: 4.16 ± 2.07 dB
+  DNSMOS: 2.418 ± 0.503
+
+LOG:
+  PESQ:  1.230 ± 0.074
+  STOI:  0.667 ± 0.061
+  SI-SDR: 3.94 ± 2.09 dB
+  DNSMOS: 2.424 ± 0.513
+
+LINEAR:
+  PESQ:  1.220 ± 0.069
+  STOI:  0.672 ± 0.062
+  SI-SDR: 4.14 ± 2.09 dB
+  DNSMOS: 2.403 ± 0.509
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): LINEAR
+  💡 Low SNR: LINEAR shows better stability
+
+====================================================================================================
+SNR = 5 dB
+====================================================================================================
+
+MEL:
+  PESQ:  1.434 ± 0.129
+  STOI:  0.734 ± 0.044
+  SI-SDR: 8.50 ± 1.58 dB
+  DNSMOS: 2.696 ± 0.423
+
+LOG:
+  PESQ:  1.444 ± 0.140
+  STOI:  0.730 ± 0.043
+  SI-SDR: 8.36 ± 1.53 dB
+  DNSMOS: 2.691 ± 0.442
+
+LINEAR:
+  PESQ:  1.431 ± 0.130
+  STOI:  0.735 ± 0.044
+  SI-SDR: 8.54 ± 1.59 dB
+  DNSMOS: 2.747 ± 0.406
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): LINEAR
+
+====================================================================================================
+SNR = 10 dB
+====================================================================================================
+
+MEL:
+  PESQ:  1.776 ± 0.167
+  STOI:  0.781 ± 0.031
+  SI-SDR: 11.82 ± 1.31 dB
+  DNSMOS: 3.026 ± 0.335
+
+LOG:
+  PESQ:  1.796 ± 0.183
+  STOI:  0.778 ± 0.032
+  SI-SDR: 11.63 ± 1.28 dB
+  DNSMOS: 3.003 ± 0.360
+
+LINEAR:
+  PESQ:  1.770 ± 0.166
+  STOI:  0.783 ± 0.031
+  SI-SDR: 11.84 ± 1.34 dB
+  DNSMOS: 3.037 ± 0.359
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): LINEAR
+
+====================================================================================================
+SNR = 15 dB
+====================================================================================================
+
+MEL:
+  PESQ:  2.191 ± 0.204
+  STOI:  0.814 ± 0.025
+  SI-SDR: 14.09 ± 1.66 dB
+  DNSMOS: 3.310 ± 0.338
+
+LOG:
+  PESQ:  2.201 ± 0.230
+  STOI:  0.812 ± 0.026
+  SI-SDR: 13.77 ± 1.60 dB
+  DNSMOS: 3.305 ± 0.338
+
+LINEAR:
+  PESQ:  2.174 ± 0.203
+  STOI:  0.815 ± 0.024
+  SI-SDR: 14.09 ± 1.67 dB
+  DNSMOS: 3.305 ± 0.360
+
+  → Winner (PESQ): LOG
+  → Winner (STOI): LINEAR
+
+====================================================================================================
+GENERATING VISUALIZATIONS
+====================================================================================================
+✓ Saved: freq_spacing_across_snr_lines.png
+✓ Saved: freq_spacing_bars_by_snr.png
+ Saved: freq_spacing_heatmap.png
+
+====================================================================================================
+WINNER SUMMARY TABLE
+====================================================================================================
+
+ SNR_dB PESQ_Winner  PESQ_Score STOI_Winner  STOI_Score SI_SDR_Winner  SI_SDR_Score
+     -5         LOG    1.131034      LINEAR    0.603049        LINEAR     -1.008577
+      0         LOG    1.230132      LINEAR    0.671969           MEL      4.158950
+      5         LOG    1.443722      LINEAR    0.735219        LINEAR      8.544452
+     10         LOG    1.795805      LINEAR    0.782736        LINEAR     11.839512
+     15         LOG    2.200955      LINEAR    0.815496        LINEAR     14.088810
+
+✓ Saved: freq_spacing_winners_by_snr.csv
+
+====================================================================================================
+KEY RECOMMENDATIONS
+====================================================================================================
+
+1. OVERALL BEST (averaged across all SNR levels):
+   PESQ: LOG (1.560)
+   STOI: LINEAR (0.722)
+
+2. LOW SNR (≤ 0 dB):
+   PESQ: LOG (1.181)
+   STOI: LINEAR (0.638)
+    Recommendation: Use LINEAR for better intelligibility at low SNR
+
+3. HIGH SNR (≥ 10 dB):
+   PESQ: LOG (1.998)
+   STOI: LINEAR (0.799)
+    Recommendation: Use LOG for best quality at high SNR
+
+4. CONSISTENCY ACROSS SNR:
+   PESQ winners: {'LOG': np.int64(5)}
+   STOI winners: {'LINEAR': np.int64(5)}
+     Different winners at different SNR levels
+    Recommendation: Consider SNR-adaptive frequency spacing
+
+====================================================================================================
+ANALYSIS COMPLETE!
+Results saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/frequency_space_analysis_standalone

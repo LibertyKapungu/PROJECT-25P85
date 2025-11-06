@@ -1,0 +1,656 @@
+====================================================================================================
+SNR-SPECIFIC OBJECTIVE vs SUBJECTIVE ANALYSIS
+====================================================================================================
+
+Loading data...
+✓ Loaded 10125 successful tests
+  SNR levels: [np.int64(-5), np.int64(0), np.int64(5), np.int64(10), np.int64(15)]
+  Noise categories: ['Babble', 'Construction', 'Stationary', 'Street', 'Train']
+
+====================================================================================================
+PARAMETER ANALYSIS: OBJECTIVE vs SUBJECTIVE (AVERAGED ACROSS ALL SNRs)
+====================================================================================================
+
+====================================================================================================
+PARAMETER: Freq_spacing
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+              Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+Freq_spacing
+log                         0.5087               0.0998     1.7922     0.7403      10.3745
+linear                      0.5084               0.0996     1.7887     0.7406      10.4485
+mel                         0.5084               0.0996     1.7885     0.7407      10.4453
+
+📊 SUBJECTIVE SCORE RANKING:
+              Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+Freq_spacing
+log                          0.6623                0.1511               3.3117
+mel                          0.6606                0.1510               3.3028
+linear                       0.6605                0.1509               3.3026
+
+🎯 BEST Freq_spacing:
+  Objective: log (Score: 0.5087)
+  Subjective: log (Score: 0.6623)
+  ✅ AGREEMENT: Same value optimal for both!
+
+====================================================================================================
+PARAMETER: Nband
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+       Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+Nband
+4                    0.5087               0.0997     1.7912     0.7402      10.4284
+8                    0.5084               0.1000     1.7893     0.7403      10.4165
+16                   0.5084               0.0993     1.7888     0.7411      10.4234
+
+📊 SUBJECTIVE SCORE RANKING:
+       Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+Nband
+4                     0.6616                0.1511               3.3080
+16                    0.6613                0.1507               3.3066
+8                     0.6605                0.1511               3.3026
+
+🎯 BEST Nband:
+  Objective: 4 (Score: 0.5087)
+  Subjective: 4 (Score: 0.6616)
+  ✅ AGREEMENT: Same value optimal for both!
+
+====================================================================================================
+PARAMETER: FRMSZ_ms
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+          Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+FRMSZ_ms
+8                       0.5128               0.1015     1.8014     0.7410      11.1451
+20                      0.5101               0.1004     1.8019     0.7417      10.2763
+25                      0.5026               0.0968     1.7660     0.7390       9.8469
+
+📊 SUBJECTIVE SCORE RANKING:
+          Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+FRMSZ_ms
+25                       0.6774                0.1505               3.3871
+20                       0.6716                0.1501               3.3578
+8                        0.6345                0.1487               3.1723
+
+🎯 BEST FRMSZ_ms:
+  Objective: 8 (Score: 0.5128)
+  Subjective: 25 (Score: 0.6774)
+  ⚠️  DISAGREEMENT: Different optimal values
+
+====================================================================================================
+PARAMETER: OVLP
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+      Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+OVLP
+75                  0.5253               0.1109     1.8702     0.7445      11.4799
+50                  0.5146               0.1023     1.8238     0.7415      10.6022
+25                  0.4856               0.0787     1.6754     0.7357       9.1862
+
+📊 SUBJECTIVE SCORE RANKING:
+      Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+OVLP
+25                   0.6740                0.1468               3.3699
+50                   0.6701                0.1515               3.3503
+75                   0.6394                0.1521               3.1970
+
+🎯 BEST OVLP:
+  Objective: 75 (Score: 0.5253)
+  Subjective: 25 (Score: 0.6740)
+  ⚠️  DISAGREEMENT: Different optimal values
+
+====================================================================================================
+PARAMETER: Floor
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+       Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+Floor
+0.800                0.5122               0.1000     1.8059     0.7439      10.6487
+0.700                0.5118               0.1005     1.8052     0.7428      10.5973
+0.500                0.5104               0.1005     1.7989     0.7419      10.5154
+0.300                0.5086               0.1000     1.7910     0.7407      10.3941
+0.001                0.4995               0.0968     1.7479     0.7334       9.9583
+
+📊 SUBJECTIVE SCORE RANKING:
+       Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+Floor
+0.500                 0.6626                0.1507               3.3132
+0.300                 0.6624                0.1519               3.3121
+0.800                 0.6607                0.1479               3.3033
+0.700                 0.6605                0.1486               3.3025
+0.001                 0.6595                0.1557               3.2974
+
+🎯 BEST Floor:
+  Objective: 0.8 (Score: 0.5122)
+  Subjective: 0.5 (Score: 0.6626)
+  ⚠️  DISAGREEMENT: Different optimal values
+
+====================================================================================================
+PARAMETER: Noisefr
+====================================================================================================
+
+📊 OBJECTIVE SCORE RANKING:
+         Objective_Score_mean  Objective_Score_std  PESQ_mean  STOI_mean  SI_SDR_mean
+Noisefr
+1                      0.5085               0.0997     1.7898     0.7405      10.4228
+
+📊 SUBJECTIVE SCORE RANKING:
+         Subjective_Score_mean  Subjective_Score_std  DNSMOS_mos_ovr_mean
+Noisefr
+1                       0.6611                 0.151               3.3057
+
+🎯 BEST Noisefr:
+  Objective: 1 (Score: 0.5085)
+  Subjective: 1 (Score: 0.6611)
+  ✅ AGREEMENT: Same value optimal for both!
+
+✓ Saved: parameter_objective_vs_subjective_all_snrs.csv
+
+====================================================================================================
+BEST OVERALL CONFIGURATIONS (ACROSS ALL SNRs)
+====================================================================================================
+
+🏆 BEST OBJECTIVE CONFIGURATION:
+  Config: mband_log_N4_F20_O75_FL0p7
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000 | Noisefr=1
+
+  Objective Score: 0.5326
+  PESQ: 1.9056 | STOI: 0.7534 | SI-SDR: 11.72 dB
+  Subjective Score: 0.6567 | DNSMOS: 3.2837
+
+🏆 BEST SUBJECTIVE CONFIGURATION:
+  Config: mband_log_N16_F25_O50_FL0p5
+  log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000 | Noisefr=1
+
+  Subjective Score: 0.7119 | DNSMOS: 3.5595
+  Objective Score: 0.5139
+  PESQ: 1.8271 | STOI: 0.7456 | SI-SDR: 10.10 dB
+
+🏆 BEST BALANCED CONFIGURATION (50% Obj + 50% Subj):
+  Config: mband_log_N16_F25_O50_FL0p5
+  log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000 | Noisefr=1
+
+  Balanced Score: 0.6129
+  Objective: 0.5139 | Subjective: 0.7119
+  PESQ: 1.8271 | STOI: 0.7456 | SI-SDR: 10.10 dB | DNSMOS: 3.5595
+
+📊 TOP 10 CONFIGURATIONS BY OBJECTIVE SCORE:
+                              Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor  Objective_Score    PESQ    STOI   SI_SDR
+Config_ID
+mband_log_N4_F20_O75_FL0p7             log      4        20    75    0.7           0.5326  1.9056  0.7534  11.7155
+mband_linear_N4_F20_O75_FL0p7       linear      4        20    75    0.7           0.5325  1.9028  0.7485  11.9557
+mband_log_N8_F20_O75_FL0p7             log      8        20    75    0.7           0.5325  1.9065  0.7484  11.7905
+mband_mel_N4_F20_O75_FL0p7             mel      4        20    75    0.7           0.5325  1.9032  0.7484  11.9553
+mband_linear_N8_F20_O75_FL0p7       linear      8        20    75    0.7           0.5317  1.9012  0.7510  11.7240
+mband_mel_N8_F20_O75_FL0p7             mel      8        20    75    0.7           0.5317  1.9012  0.7511  11.7234
+mband_log_N4_F20_O75_FL0p5             log      4        20    75    0.5           0.5313  1.9009  0.7536  11.5512
+mband_linear_N4_F20_O75_FL0p8       linear      4        20    75    0.8           0.5311  1.8981  0.7505  11.6947
+mband_mel_N16_F25_O75_FL0p7            mel     16        25    75    0.7           0.5311  1.8979  0.7488  11.7804
+mband_mel_N4_F20_O75_FL0p8             mel      4        20    75    0.8           0.5311  1.8985  0.7505  11.6941
+
+📊 TOP 10 CONFIGURATIONS BY SUBJECTIVE SCORE:
+                                Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor  Subjective_Score  DNSMOS_mos_ovr
+Config_ID
+mband_log_N16_F25_O50_FL0p5              log     16        25    50  0.500            0.7119          3.5595
+mband_log_N8_F20_O25_FL0p3               log      8        20    25  0.300            0.7117          3.5583
+mband_mel_N4_F20_O25_FL0p3               mel      4        20    25  0.300            0.7109          3.5546
+mband_linear_N4_F20_O25_FL0p3         linear      4        20    25  0.300            0.7104          3.5520
+mband_log_N16_F25_O50_FL0p001            log     16        25    50  0.001            0.7103          3.5514
+mband_linear_N4_F20_O25_FL0p5         linear      4        20    25  0.500            0.7088          3.5441
+mband_mel_N4_F20_O25_FL0p5               mel      4        20    25  0.500            0.7081          3.5407
+mband_mel_N8_F25_O25_FL0p001             mel      8        25    25  0.001            0.7081          3.5404
+mband_linear_N8_F25_O25_FL0p001       linear      8        25    25  0.001            0.7069          3.5343
+mband_mel_N16_F20_O25_FL0p5              mel     16        20    25  0.500            0.7066          3.5328
+
+✓ Saved: config_averaged_objective_vs_subjective.csv
+
+====================================================================================================
+SNR-SPECIFIC OBJECTIVE vs SUBJECTIVE ANALYSIS
+====================================================================================================
+
+====================================================================================================
+SNR = -5 dB
+====================================================================================================
+
+📊 PARAMETER ANALYSIS AT -5 dB:
+
+  Freq_spacing:
+    Best Objective: log (Score: 0.3916)
+    Best Subjective: log (Score: 0.4577)
+    ✅ Agreement
+
+  Nband:
+    Best Objective: 16 (Score: 0.3918)
+    Best Subjective: 16 (Score: 0.4573)
+    ✅ Agreement
+
+  FRMSZ_ms:
+    Best Objective: 8 (Score: 0.3921)
+    Best Subjective: 25 (Score: 0.4701)
+    ⚠️  Disagreement
+
+  OVLP:
+    Best Objective: 75 (Score: 0.3938)
+    Best Subjective: 25 (Score: 0.4753)
+    ⚠️  Disagreement
+
+  Floor:
+    Best Objective: 0.8 (Score: 0.3932)
+    Best Subjective: 0.7 (Score: 0.4587)
+    ⚠️  Disagreement
+
+  Noisefr:
+    Best Objective: 1 (Score: 0.3913)
+    Best Subjective: 1 (Score: 0.4554)
+    ✅ Agreement
+
+====================================================================================================
+BEST CONFIGS AT -5 dB:
+====================================================================================================
+
+🎯 Best OBJECTIVE:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=50% | Floor=0.7000
+  Obj=0.4048 | PESQ=1.3358 | STOI=0.6354 | SI-SDR=4.26
+  Subj=0.4792 | DNSMOS=2.3962
+
+🎯 Best SUBJECTIVE:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  Subj=0.5380 | DNSMOS=2.6898
+  Obj=0.3927 | PESQ=1.2778 | STOI=0.6208 | SI-SDR=3.84
+
+🎯 Best BALANCED:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  Balanced=0.4653 | Obj=0.3927 | Subj=0.5380
+
+====================================================================================================
+SNR = 0 dB
+====================================================================================================
+
+📊 PARAMETER ANALYSIS AT 0 dB:
+
+  Freq_spacing:
+    Best Objective: linear (Score: 0.4438)
+    Best Subjective: log (Score: 0.5897)
+    ⚠️  Disagreement
+
+  Nband:
+    Best Objective: 4 (Score: 0.4445)
+    Best Subjective: 4 (Score: 0.5900)
+    ✅ Agreement
+
+  FRMSZ_ms:
+    Best Objective: 8 (Score: 0.4463)
+    Best Subjective: 25 (Score: 0.6056)
+    ⚠️  Disagreement
+
+  OVLP:
+    Best Objective: 75 (Score: 0.4493)
+    Best Subjective: 25 (Score: 0.6089)
+    ⚠️  Disagreement
+
+  Floor:
+    Best Objective: 0.8 (Score: 0.4464)
+    Best Subjective: 0.7 (Score: 0.5905)
+    ⚠️  Disagreement
+
+  Noisefr:
+    Best Objective: 1 (Score: 0.4437)
+    Best Subjective: 1 (Score: 0.5891)
+    ✅ Agreement
+
+====================================================================================================
+BEST CONFIGS AT 0 dB:
+====================================================================================================
+
+🎯 Best OBJECTIVE:
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  Obj=0.4636 | PESQ=1.5560 | STOI=0.7152 | SI-SDR=8.95
+  Subj=0.6190 | DNSMOS=3.0949
+
+🎯 Best SUBJECTIVE:
+  log | Nband=8 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  Subj=0.6736 | DNSMOS=3.3681
+  Obj=0.4402 | PESQ=1.4520 | STOI=0.7035 | SI-SDR=7.25
+
+🎯 Best BALANCED:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.8000
+  Balanced=0.5574 | Obj=0.4434 | Subj=0.6715
+
+====================================================================================================
+SNR = 5 dB
+====================================================================================================
+
+📊 PARAMETER ANALYSIS AT 5 dB:
+
+  Freq_spacing:
+    Best Objective: log (Score: 0.5059)
+    Best Subjective: log (Score: 0.7036)
+    ✅ Agreement
+
+  Nband:
+    Best Objective: 4 (Score: 0.5056)
+    Best Subjective: 8 (Score: 0.7048)
+    ⚠️  Disagreement
+
+  FRMSZ_ms:
+    Best Objective: 8 (Score: 0.5102)
+    Best Subjective: 25 (Score: 0.7197)
+    ⚠️  Disagreement
+
+  OVLP:
+    Best Objective: 75 (Score: 0.5181)
+    Best Subjective: 25 (Score: 0.7164)
+    ⚠️  Disagreement
+
+  Floor:
+    Best Objective: 0.7 (Score: 0.5095)
+    Best Subjective: 0.3 (Score: 0.7082)
+    ⚠️  Disagreement
+
+  Noisefr:
+    Best Objective: 1 (Score: 0.5053)
+    Best Subjective: 1 (Score: 0.7033)
+    ✅ Agreement
+
+====================================================================================================
+BEST CONFIGS AT 5 dB:
+====================================================================================================
+
+🎯 Best OBJECTIVE:
+  log | Nband=16 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  Obj=0.5287 | PESQ=1.8631 | STOI=0.7637 | SI-SDR=12.27
+  Subj=0.6937 | DNSMOS=3.4687
+
+🎯 Best SUBJECTIVE:
+  log | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.0010
+  Subj=0.7934 | DNSMOS=3.9669
+  Obj=0.4718 | PESQ=1.5819 | STOI=0.7455 | SI-SDR=9.25
+
+🎯 Best BALANCED:
+  log | Nband=16 | FRMSZ=20ms | OVLP=50% | Floor=0.7000
+  Balanced=0.6414 | Obj=0.5136 | Subj=0.7691
+
+====================================================================================================
+SNR = 10 dB
+====================================================================================================
+
+📊 PARAMETER ANALYSIS AT 10 dB:
+
+  Freq_spacing:
+    Best Objective: linear (Score: 0.5691)
+    Best Subjective: mel (Score: 0.7650)
+    ⚠️  Disagreement
+
+  Nband:
+    Best Objective: 8 (Score: 0.5694)
+    Best Subjective: 16 (Score: 0.7650)
+    ⚠️  Disagreement
+
+  FRMSZ_ms:
+    Best Objective: 8 (Score: 0.5758)
+    Best Subjective: 25 (Score: 0.7809)
+    ⚠️  Disagreement
+
+  OVLP:
+    Best Objective: 75 (Score: 0.5931)
+    Best Subjective: 25 (Score: 0.7735)
+    ⚠️  Disagreement
+
+  Floor:
+    Best Objective: 0.8 (Score: 0.5744)
+    Best Subjective: 0.5 (Score: 0.7672)
+    ⚠️  Disagreement
+
+  Noisefr:
+    Best Objective: 1 (Score: 0.5691)
+    Best Subjective: 1 (Score: 0.7645)
+    ✅ Agreement
+
+====================================================================================================
+BEST CONFIGS AT 10 dB:
+====================================================================================================
+
+🎯 Best OBJECTIVE:
+  mel | Nband=4 | FRMSZ=8ms | OVLP=75% | Floor=0.7000
+  Obj=0.6073 | PESQ=2.2495 | STOI=0.8102 | SI-SDR=15.92
+  Subj=0.7415 | DNSMOS=3.7076
+
+🎯 Best SUBJECTIVE:
+  log | Nband=16 | FRMSZ=25ms | OVLP=25% | Floor=0.0010
+  Subj=0.8323 | DNSMOS=4.1615
+  Obj=0.5091 | PESQ=1.7752 | STOI=0.7823 | SI-SDR=10.06
+
+🎯 Best BALANCED:
+  log | Nband=16 | FRMSZ=20ms | OVLP=50% | Floor=0.7000
+  Balanced=0.6987 | Obj=0.5927 | Subj=0.8046
+
+====================================================================================================
+SNR = 15 dB
+====================================================================================================
+
+📊 PARAMETER ANALYSIS AT 15 dB:
+
+  Freq_spacing:
+    Best Objective: log (Score: 0.6333)
+    Best Subjective: log (Score: 0.7970)
+    ✅ Agreement
+
+  Nband:
+    Best Objective: 8 (Score: 0.6334)
+    Best Subjective: 4 (Score: 0.7941)
+    ⚠️  Disagreement
+
+  FRMSZ_ms:
+    Best Objective: 8 (Score: 0.6397)
+    Best Subjective: 25 (Score: 0.8108)
+    ⚠️  Disagreement
+
+  OVLP:
+    Best Objective: 75 (Score: 0.6721)
+    Best Subjective: 50 (Score: 0.8043)
+    ⚠️  Disagreement
+
+  Floor:
+    Best Objective: 0.8 (Score: 0.6378)
+    Best Subjective: 0.001 (Score: 0.7980)
+    ⚠️  Disagreement
+
+  Noisefr:
+    Best Objective: 1 (Score: 0.6330)
+    Best Subjective: 1 (Score: 0.7934)
+    ✅ Agreement
+
+====================================================================================================
+BEST CONFIGS AT 15 dB:
+====================================================================================================
+
+🎯 Best OBJECTIVE:
+  mel | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.5000
+  Obj=0.6876 | PESQ=2.6815 | STOI=0.8437 | SI-SDR=18.27
+  Subj=0.7767 | DNSMOS=3.8836
+
+🎯 Best SUBJECTIVE:
+  mel | Nband=8 | FRMSZ=25ms | OVLP=50% | Floor=0.5000
+  Subj=0.8482 | DNSMOS=4.2411
+  Obj=0.6421 | PESQ=2.4641 | STOI=0.8331 | SI-SDR=15.34
+
+🎯 Best BALANCED:
+  log | Nband=4 | FRMSZ=20ms | OVLP=50% | Floor=0.5000
+  Balanced=0.7461 | Obj=0.6610 | Subj=0.8312
+
+✓ Saved: snr_param_objective_vs_subjective.csv
+
+✓ Saved: snr_best_configs_objective_vs_subjective.csv
+
+====================================================================================================
+PARAMETER CONSISTENCY ACROSS SNR LEVELS
+====================================================================================================
+
+Freq_spacing:
+  Objective: 'log' wins 60% of SNR levels
+             Distribution: {'log': np.int64(3), 'linear': np.int64(2)}
+  Subjective: 'log' wins 80% of SNR levels
+              Distribution: {'log': np.int64(4), 'mel': np.int64(1)}
+  Agreement: 60% of SNR levels have same optimal value
+
+Nband:
+  Objective: '4' wins 40% of SNR levels
+             Distribution: {np.int64(4): np.int64(2), np.int64(8): np.int64(2), np.int64(16): np.int64(1)}
+  Subjective: '16' wins 40% of SNR levels
+              Distribution: {np.int64(16): np.int64(2), np.int64(4): np.int64(2), np.int64(8): np.int64(1)}
+  Agreement: 40% of SNR levels have same optimal value
+
+FRMSZ_ms:
+  Objective: '8' wins 100% of SNR levels
+             Distribution: {np.int64(8): np.int64(5)}
+  Subjective: '25' wins 100% of SNR levels
+              Distribution: {np.int64(25): np.int64(5)}
+  Agreement: 0% of SNR levels have same optimal value
+
+OVLP:
+  Objective: '75' wins 100% of SNR levels
+             Distribution: {np.int64(75): np.int64(5)}
+  Subjective: '25' wins 80% of SNR levels
+              Distribution: {np.int64(25): np.int64(4), np.int64(50): np.int64(1)}
+  Agreement: 0% of SNR levels have same optimal value
+
+Floor:
+  Objective: '0.8' wins 80% of SNR levels
+             Distribution: {np.float64(0.8): np.int64(4), np.float64(0.7): np.int64(1)}
+  Subjective: '0.7' wins 40% of SNR levels
+              Distribution: {np.float64(0.7): np.int64(2), np.float64(0.3): np.int64(1), np.float64(0.5): np.int64(1), np.float64(0.001): np.int64(1)}
+  Agreement: 0% of SNR levels have same optimal value
+
+Noisefr:
+  Objective: '1' wins 100% of SNR levels
+             Distribution: {np.int64(1): np.int64(5)}
+  Subjective: '1' wins 100% of SNR levels
+              Distribution: {np.int64(1): np.int64(5)}
+  Agreement: 100% of SNR levels have same optimal value
+
+✓ Saved: parameter_consistency_obj_vs_subj.csv
+
+====================================================================================================
+GENERATING OBJECTIVE vs SUBJECTIVE VISUALIZATIONS
+====================================================================================================
+✓ Saved: objective_vs_subjective_scatter.png
+✓ Saved: obj_vs_subj_by_Freq_spacing.png
+✓ Saved: obj_vs_subj_by_Nband.png
+✓ Saved: obj_vs_subj_by_OVLP.png
+✓ Saved: heatmap_obj_vs_subj_freq_spacing.png
+
+====================================================================================================
+🎯 SUMMARY RECOMMENDATIONS
+====================================================================================================
+
+1. PARAMETER-LEVEL RECOMMENDATIONS (All SNRs):
+====================================================================================================
+  ✅ Freq_spacing: log (AGREES for both)
+  ✅ Nband: 4 (AGREES for both)
+  ⚠️  FRMSZ_ms: Objective=8, Subjective=25
+  ⚠️  OVLP: Objective=75, Subjective=25
+  ⚠️  Floor: Objective=0.8, Subjective=0.5
+  ✅ Noisefr: 1 (AGREES for both)
+
+2. OVERALL BEST CONFIGURATIONS (Averaged across all SNRs):
+====================================================================================================
+
+  🏆 For OBJECTIVE metrics (PESQ, STOI, SI-SDR):
+     Config: mband_log_N4_F20_O75_FL0p7
+     log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+     Score: 0.5326
+
+  🏆 For SUBJECTIVE metrics (DNSMOS):
+     Config: mband_log_N16_F25_O50_FL0p5
+     log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000
+     Score: 0.7119
+
+  🏆 For BALANCED (50/50):
+     Config: mband_log_N16_F25_O50_FL0p5
+     log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000
+     Score: 0.6129
+
+3. PARAMETER CONSISTENCY ACROSS SNRs:
+====================================================================================================
+
+  Freq_spacing:
+    Objective:  'log' (consistent 60% of SNRs)
+    Subjective: 'log' (consistent 80% of SNRs)
+    Agreement:  60% of SNRs have same optimal value
+
+  Nband:
+    Objective:  '4' (consistent 40% of SNRs)
+    Subjective: '16' (consistent 40% of SNRs)
+    Agreement:  40% of SNRs have same optimal value
+    ⚠️  SNR-DEPENDENT - Consider adaptive selection
+
+  FRMSZ_ms:
+    Objective:  '8' (consistent 100% of SNRs)
+    Subjective: '25' (consistent 100% of SNRs)
+    Agreement:  0% of SNRs have same optimal value
+    ⚠️  SNR-DEPENDENT - Consider adaptive selection
+
+  OVLP:
+    Objective:  '75' (consistent 100% of SNRs)
+    Subjective: '25' (consistent 80% of SNRs)
+    Agreement:  0% of SNRs have same optimal value
+    ⚠️  SNR-DEPENDENT - Consider adaptive selection
+
+  Floor:
+    Objective:  '0.8' (consistent 80% of SNRs)
+    Subjective: '0.7' (consistent 40% of SNRs)
+    Agreement:  0% of SNRs have same optimal value
+    ⚠️  SNR-DEPENDENT - Consider adaptive selection
+
+  Noisefr:
+    Objective:  '1' (consistent 100% of SNRs)
+    Subjective: '1' (consistent 100% of SNRs)
+    Agreement:  100% of SNRs have same optimal value
+    ✅ HIGHLY CONSISTENT - Can use fixed value
+
+4. LOW SNR RECOMMENDATIONS (SNR ≤ 0 dB):
+====================================================================================================
+
+  Freq_spacing:
+    Objective: log (score: 0.4176)
+    Subjective: log (score: 0.5237)
+
+  Nband:
+    Objective: 4 (score: 0.4179)
+    Subjective: 16 (score: 0.5235)
+
+  OVLP:
+    Objective: 75 (score: 0.4216)
+    Subjective: 25 (score: 0.5421)
+
+5. HIGH SNR RECOMMENDATIONS (SNR ≥ 10 dB):
+====================================================================================================
+
+  Freq_spacing:
+    Objective: log (score: 0.6012)
+    Subjective: log (score: 0.7804)
+
+  Nband:
+    Objective: 8 (score: 0.6014)
+    Subjective: 4 (score: 0.7793)
+
+  OVLP:
+    Objective: 75 (score: 0.6326)
+    Subjective: 50 (score: 0.7885)
+
+6. CONFIG AGREEMENT ACROSS SNRs:
+====================================================================================================
+  Objective and Subjective agree on best config: 0/5 SNR levels (0%)
+  ⚠️  DIVERGENT - Objective and subjective prefer different configurations
+
+  SNRs where best Objective ≠ best Subjective: [-5, 0, 5, 10, 15]
+
+====================================================================================================
+ANALYSIS COMPLETE!
+Results saved to: c:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\PARAM_SWEEP3\snr_specific_analysis_hybrid_2_subj_vs_obj_weighted_pesq
+====================================================================================================

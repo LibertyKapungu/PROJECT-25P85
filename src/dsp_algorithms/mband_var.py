@@ -264,7 +264,7 @@ def mband(
         x_magsm[:, 0] = scipy.signal.lfilter(filtb, [1], x_mag[:, 0])
 
         for i in range(1, n_frames):
-            x_tmp1 = np.concatenate([x_mag[frame_samples - overla_samples :, i - 1], x_mag[:, i]])
+            x_tmp1 = np.concatenate([x_mag[frame_samples - overla_samples :, i - 1], x_mag[:, i]])  # Spelling error overlap
             x_tmp2 = scipy.signal.lfilter(filtb, [1], x_tmp1)
             x_magsm[:, i] = x_tmp2[-x_mag.shape[0]:]
 
@@ -420,7 +420,8 @@ if __name__ == "__main__":
 
     clean_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\EARS_DATASET\\p092\\emo_adoration_freeform.wav")
     #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\sound_data\\raw\\NOIZEUS_NOISE_DATASET\\Noise Recordings\\cafeteria_babble.wav")
-    noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\noisy_input.wav")
+    #noise_path = Path(r"C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\src\\deep_learning\\gtcrn_model\\test_wavs\\noisy_input.wav")
+    noise_path = enhanced_speech = 'C:\\Users\\gabi\\Documents\\University\\Uni2025\\Investigation\\PROJECT-25P85\\Random\\Matlab2025Files\\SS\\noisy_speech\\sp21_station_sn5.wav'
 
     noisy_tensor, noisy_fs = torchaudio.load(noise_path)
 
@@ -434,14 +435,14 @@ if __name__ == "__main__":
         noisy_audio=noisy_tensor,
         fs=noisy_fs,
         output_dir=OUTPUT_DIR,
-        output_file="mband_wo_VAD.wav",
+        output_file="mband_causal.wav",
         input_name="standard_mode",
-        Nband=4,
+        Nband=6,
         Freq_spacing='linear',
-        FRMSZ=8,
-        OVLP=75,
+        FRMSZ=20,
+        OVLP=50,
         AVRGING=1,
-        Noisefr=1,
-        FLOOR=0.01,
-        VAD=0,
+        Noisefr=6,
+        FLOOR=0.002,
+        VAD=1,
     )
