@@ -1,0 +1,53 @@
+
+PARAMETER SWEEP ANALYSIS SUMMARY (SNR: 0 dB)
+====================================================================================================
+
+Dataset Statistics:
+  Total configurations: 405
+  Total tests: 2025
+  Successful tests: 2025 (100.0% of this SNR subset)
+  Noise categories: Street, Stationary, Construction, Babble, Train
+
+Overall Performance (mean ± std) for SNR 0 dB:
+  PESQ: 1.464 ± 0.224
+  STOI: 0.699 ± 0.056
+  SI-SDR: 7.88 ± 2.07 dB
+  DNSMOS: 2.945 ± 0.537
+
+BEST OVERALL CONFIGURATION (for SNR 0 dB):
+  Frequency Spacing: mel
+  Number of Bands: 4
+  Frame Size: 25 ms
+  Overlap: 75%
+  
+  Performance:
+    PESQ: 2.0695
+    STOI: 0.8163
+    SI-SDR: 11.66 dB
+    DNSMOS: 3.3618
+    Weighted Score: 0.6651
+
+PARAMETER INSIGHTS (for SNR 0 dB):
+
+  Best Freq_spacing: mel (avg weighted score: 0.5461)
+  Best Nband: 16 (avg weighted score: 0.5462)
+  Best FRMSZ_ms: 8 (avg weighted score: 0.5470)
+  Best OVLP: 75 (avg weighted score: 0.5491)
+  Best Floor: 0.8 (avg weighted score: 0.5489)
+  Best Noisefr: 1 (avg weighted score: 0.5459)
+
+PERFORMANCE BY NOISE CATEGORY (avg PESQ for SNR 0 dB):
+  Street: 1.397
+  Stationary: 1.885
+  Construction: 1.370
+  Babble: 1.267
+  Train: 1.401
+
+RECOMMENDED FLOOR BY NOISE TYPE (for SNR 0 dB):
+  Street: Floor=0.8 (score: 0.5444)
+  Stationary: Floor=0.7 (score: 0.6358)
+  Construction: Floor=0.7 (score: 0.5316)
+  Babble: Floor=0.7 (score: 0.4890)
+  Train: Floor=0.8 (score: 0.5468)
+
+All results for SNR 0 saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/parameter_sweep_analysis_per_snr_hybrid/SNR_0
