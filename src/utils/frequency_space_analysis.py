@@ -20,6 +20,13 @@ MODE = "hybrid"
 CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/COLLATED_ALL_RESULTS_{MODE}.csv"
 OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/frequency_space_analysis_{MODE}")
 OUTPUT_DIR.mkdir(exist_ok=True, parents = True)
+#CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/COLLATED_ALL_RESULTS_{MODE}.csv"
+#OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/frequency_space_analysis_{MODE}")
+
+CSV_FILE = "C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/hybrid/COLLATED_ALL_RESULTS_hybrid.csv"
+OUTPUT_DIR = "C:/Users/gabi/Documents/University/Uni2025/Investigation/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/hybrid/frequency_space_analysis_{MODE}"
+
+# OUTPUT_DIR.mkdir(exist_ok=True, parents = True)
 
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (16, 5)

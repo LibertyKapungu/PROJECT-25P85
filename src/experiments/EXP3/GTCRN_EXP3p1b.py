@@ -41,7 +41,7 @@ sys.path.insert(0, str(repo_root / "src"))
 gtcrn_path = repo_root / "src" / "deep_learning" / "gtcrn_model" 
 sys.path.insert(0, str(gtcrn_path))
 
-results_dir = repo_root / 'results' / 'EXP3' / 'EXP3p1b'/'EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1'
+results_dir = repo_root / 'results' / 'EXP3' / 'spectral'/ 'GTCRN_SS'/'Optimal_hybrid'  /'log_20ms_ov50_fl07_N4_av0'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -52,7 +52,7 @@ from utils.audio_dataset_loader import (
 from utils.compute_and_save_speech_metrics import compute_and_save_speech_metrics
 from utils.parse_and_merge_csvs import merge_csvs
 from utils.delete_csvs import delete_csvs_in_directory as delete_csvs
-from dsp_algorithms.mband_var import mband
+from dsp_algorithms.spectral.mband_full_stream_hanning import mband
 from deep_learning.gtcrn_model.gtcrn import GTCRN
 
 def enhance_with_gtcrn(noisy_waveform, model, device, target_sr=16000):
@@ -143,7 +143,6 @@ paired_files = create_audio_pairs(noizeus_files, ears_files)
 print(f"Created {len(paired_files)} audio pairs for processing")
 
 snr_dB_range = [-5, 0, 5, 10, 15]
-# snr_dB_range = [5]
 
 for snr_dB in snr_dB_range:
 
@@ -194,13 +193,13 @@ for snr_dB in snr_dB_range:
             noisy_audio=gtcrn_enhanced,
             fs=processing_sr,
             Nband=4,
-            Freq_spacing='linear',
-            FRMSZ=8,
-            OVLP=75,
+            Freq_spacing='log',
+            FRMSZ=20,
+            OVLP=50,
             AVRGING=1,
             Noisefr=1,
-            FLOOR=0.8,
-            VAD=1,
+            FLOOR=0.7,
+            VAD=0,
         )
 
         # Step 5: Compute and save metrics

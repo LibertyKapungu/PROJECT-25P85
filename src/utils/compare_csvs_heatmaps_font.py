@@ -44,7 +44,7 @@ class MultiSNRAudioEnhancementComparator:
         
         if len(self.method_names) < 2:
             raise ValueError("Must provide at least 2 methods for comparison")
-        if len(self.method_names) > 14:
+        if len(self.method_names) > 8:
             raise ValueError("Maximum 8 methods can be compared")
         
         # Setup output folder
@@ -150,7 +150,7 @@ class MultiSNRAudioEnhancementComparator:
                 how='inner'
             )
         
-        print(f"  Merged dataset for {snr}dB: {len(df_merged)} common files")
+        # print(f"  Merged dataset for {snr}dB: {len(df_merged)} common files")
         return df_merged
     
     def _extract_noise_types(self, snr):
@@ -742,8 +742,10 @@ if __name__ == "__main__":
     # Define CSV file templates with {snr} placeholder
     csv_files_template = {
         'Noisy': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\BASELINE\NOIZEUS_EARS_BASELINE\BASELINE_NOIZEUS_EARS_[{snr}]dB.csv",
-        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
-        # 'GTCRN_SS': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'GTCRN_old': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1a\GTCRN_NOIZEUS_EARS_[{snr}]dB.csv",
+        'GTCRN': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\GTCRN\GTCRN_EXP3p2a\GTCRN_EXP3p2a_merged_[{snr}]dB.csv",
+        #'GTCRN_that_hybrid_uses': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\test_gtcrn_alone\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'GTCRN_SS_old': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_SS_pp_8ms_V0_f08\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_vad1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'GTCRN_SS_delta': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b\EXP3p1b_GTCRN_SS_delta15_N4_lin_8ms_ov75_av1_nf1_f08_v1\GTCRN_SS_TEST2_[{snr}]dB.csv",
         # 'WF_GTCRN_fr25_mu0.98_a_dd0.98_eta0.15': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\EXP3p1b_GTCRN_WF_ss\GTCRN_MWF_merged_[{snr}]dB.csv",
@@ -756,7 +758,7 @@ if __name__ == "__main__":
         #'mband_py_lin_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR0_8\mband_py_N6_lin_AVR0_8_[{snr}]dB_MERGED.csv",
         #'mband_py_lin_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_lin_AVR1_8\mband_py_N6_lin_AVR1_8_[{snr}]dB_MERGED.csv",
         #'mband_py_log_avr0_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR0_8\mband_py_N6_log_AVR0_8_[{snr}]dB_MERGED.csv",
-        'mband_py_log_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_log_AVR1_8\mband_py_N6_log_AVR1_8_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_avr0_8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR0_8\mband_py_N6_mel_AVR0_8_[{snr}]dB_MERGED.csv",
         #'mband_py_mel_avr1_future_frames': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\SS_EXP1p1a_Python_mband_Test\mband_py_N6_mel_AVR1_8\mband_py_N6_mel_AVR1_8_[{snr}]dB_MERGED.csv",
 
@@ -884,14 +886,31 @@ if __name__ == "__main__":
         # Log, 20ms, 50% ovlp, floor 0.001, noisefr 1, Nband = 8  
         # --------mband_full_stream_hanning.py---------------
         # AVRGING = 1 
-        'mband_py_log_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_log_AVR1\mband_py_N8_log_AVR1_[{snr}]dB_MERGED.csv",
-        'mband_py_lin_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_lin_AVR1\mband_py_N8_lin_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_log_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_log_AVR1\mband_py_N8_log_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_lin_optimized_N8_20ms_ov50_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\mband_py_N8_lin_AVR1\mband_py_N8_lin_AVR1_[{snr}]dB_MERGED.csv",
+        #'mband_py_lin_optimized_N16_25ms_ov75_fl0p001_noisefr1': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP1\spectral\optimal_SS_standalone\lin_N16_25ms_ov75\mband_py_N16_lin_AVR1\mband_py_N16_lin_AVR1_[{snr}]dB_MERGED.csv",
 
+        # Optimized hybrid
+        # Log, 20ms, 75% ovlp, floor 0.7, noisefr 1, Nband = 4  
+        # --------mband_full_stream_hanning.py---------------
+        # AVRGING = 1 
+        #'mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\objective\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_log_hybrid_20ms_ov50_fl0p87_v0_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov50_fl07_N4_av0\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_mel_hybrid_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\mel_20ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_lin_hybrid_20ms_ov50_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\lin_20ms_ov50_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'lin_hybrid_v0_20ms_ov50_fl0p7_nf1_N4_av0': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\lin_20ms_ov50_fl07_N4_v0_av0\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_log_hybrid_V0_20ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_25ms_ov75_fl08_N4_v0\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_log_hybrid_25ms_ov75_fl0p8_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_25ms_ov75_fl08_N4\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_log_hybrid_20ms_ov75_fl0p8_nf1_N8': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\log_20ms_ov75_fl08_N8\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_lin_hybrid_20ms_ov75_fl0p7_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\objective\linear\GTCRN_SS_TEST2_[{snr}]dB.csv",
+        #'mband_py_mel_hybrid_20ms_ov75_fl0p7_nf1_N4': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\objective\mel\GTCRN_SS_TEST2_[{snr}]dB.csv",
 
+        #'mband_py_mel_hybrid_20ms_ov50_fl0p3_nf1_N6': r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\EXP3\spectral\GTCRN_SS\Optimal_hybrid\subjective\log\GTCRN_SS_TEST2_[{snr}]dB.csv",
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP1\spectral\optimal_SS\lin"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\new_GTCRN"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(

@@ -1,0 +1,751 @@
+========================================================================================================================
+EXPERIMENT: MULTI_SNR
+MULTI-SNR AUDIO ENHANCEMENT COMPARISON REPORT
+========================================================================================================================
+Methods compared: Noisy, GTCRN, mband_py_log_avr1_future_frames, mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4
+SNR levels analyzed: -5dB, 0dB, 5dB, 10dB, 15dB
+Number of files at -5dB: 13
+Number of files at 0dB: 13
+Number of files at 5dB: 12
+Number of files at 10dB: 13
+Number of files at 15dB: 11
+Output folder: C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\optimal_hybrid\objective\Multi_SNR_20251030_212704
+========================================================================================================================
+
+AVERAGE METRIC VALUES BY SNR LEVEL:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ:  Noisy=1.0751  GTCRN=1.2394  mband_py_log_avr1_future_frames=1.1203  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.2677  
+                SI_SDR:  Noisy=-5.0132  GTCRN=3.8175  mband_py_log_avr1_future_frames=-1.1507  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=4.6404  
+                  STOI:  Noisy=0.5692  GTCRN=0.5839  mband_py_log_avr1_future_frames=0.5721  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.5938  
+       DNSMOS_p808_mos:  Noisy=2.4054  GTCRN=2.7985  mband_py_log_avr1_future_frames=2.5360  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.8202  
+        DNSMOS_mos_sig:  Noisy=3.5547  GTCRN=2.2821  mband_py_log_avr1_future_frames=3.7068  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.6035  
+        DNSMOS_mos_bak:  Noisy=1.6786  GTCRN=3.2563  mband_py_log_avr1_future_frames=2.1668  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3683  
+        DNSMOS_mos_ovr:  Noisy=1.9776  GTCRN=1.9900  mband_py_log_avr1_future_frames=2.3609  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.2433  
+
+>>> SNR = 0dB <<<
+                  PESQ:  Noisy=1.1086  GTCRN=1.4197  mband_py_log_avr1_future_frames=1.2461  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.4854  
+                SI_SDR:  Noisy=-0.0328  GTCRN=7.5701  mband_py_log_avr1_future_frames=4.4069  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=7.6850  
+                  STOI:  Noisy=0.6387  GTCRN=0.6607  mband_py_log_avr1_future_frames=0.6444  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.6640  
+       DNSMOS_p808_mos:  Noisy=2.5219  GTCRN=2.9849  mband_py_log_avr1_future_frames=2.6756  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.0466  
+        DNSMOS_mos_sig:  Noisy=3.8728  GTCRN=2.9035  mband_py_log_avr1_future_frames=3.8661  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.2422  
+        DNSMOS_mos_bak:  Noisy=1.9375  GTCRN=3.4157  mband_py_log_avr1_future_frames=2.4080  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.5438  
+        DNSMOS_mos_ovr:  Noisy=2.3044  GTCRN=2.4802  mband_py_log_avr1_future_frames=2.5854  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.7395  
+
+>>> SNR = 5dB <<<
+                  PESQ:  Noisy=1.2038  GTCRN=1.7413  mband_py_log_avr1_future_frames=1.4849  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.7286  
+                SI_SDR:  Noisy=4.9972  GTCRN=11.4720  mband_py_log_avr1_future_frames=8.6194  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=11.3856  
+                  STOI:  Noisy=0.6961  GTCRN=0.7258  mband_py_log_avr1_future_frames=0.7048  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.7269  
+       DNSMOS_p808_mos:  Noisy=2.6909  GTCRN=3.2097  mband_py_log_avr1_future_frames=2.7976  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.2113  
+        DNSMOS_mos_sig:  Noisy=4.0610  GTCRN=3.5316  mband_py_log_avr1_future_frames=3.9359  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.6471  
+        DNSMOS_mos_bak:  Noisy=2.2032  GTCRN=3.5685  mband_py_log_avr1_future_frames=2.6482  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.6983  
+        DNSMOS_mos_ovr:  Noisy=2.5446  GTCRN=2.9533  mband_py_log_avr1_future_frames=2.7444  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.0930  
+
+>>> SNR = 10dB <<<
+                  PESQ:  Noisy=1.3882  GTCRN=2.0438  mband_py_log_avr1_future_frames=1.7869  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.0576  
+                SI_SDR:  Noisy=9.9995  GTCRN=14.5717  mband_py_log_avr1_future_frames=11.2301  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=14.2745  
+                  STOI:  Noisy=0.7539  GTCRN=0.7754  mband_py_log_avr1_future_frames=0.7538  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.7741  
+       DNSMOS_p808_mos:  Noisy=2.8637  GTCRN=3.3136  mband_py_log_avr1_future_frames=2.9239  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3502  
+        DNSMOS_mos_sig:  Noisy=4.0771  GTCRN=3.8657  mband_py_log_avr1_future_frames=3.9342  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.9693  
+        DNSMOS_mos_bak:  Noisy=2.3650  GTCRN=3.7111  mband_py_log_avr1_future_frames=2.8419  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.8169  
+        DNSMOS_mos_ovr:  Noisy=2.6548  GTCRN=3.2509  mband_py_log_avr1_future_frames=2.8430  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3975  
+
+>>> SNR = 15dB <<<
+                  PESQ:  Noisy=1.7284  GTCRN=2.3784  mband_py_log_avr1_future_frames=2.2015  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.4816  
+                SI_SDR:  Noisy=14.9983  GTCRN=18.4455  mband_py_log_avr1_future_frames=13.3745  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=17.5632  
+                  STOI:  Noisy=0.7911  GTCRN=0.8091  mband_py_log_avr1_future_frames=0.7913  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.8075  
+       DNSMOS_p808_mos:  Noisy=2.9952  GTCRN=3.4446  mband_py_log_avr1_future_frames=3.0055  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.4638  
+        DNSMOS_mos_sig:  Noisy=4.0568  GTCRN=4.0531  mband_py_log_avr1_future_frames=4.0769  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=4.0846  
+        DNSMOS_mos_bak:  Noisy=2.6250  GTCRN=3.8715  mband_py_log_avr1_future_frames=3.2127  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.9430  
+        DNSMOS_mos_ovr:  Noisy=2.8061  GTCRN=3.4574  mband_py_log_avr1_future_frames=3.1200  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.5185  
+
+========================================================================================================================
+
+IMPROVEMENT OVER BASELINE:
+Baseline method: Noisy
+Format: Value | (Absolute Change) | % (Percentage Change)
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+                  PESQ: Noisy=1.0751  |  GTCRN=1.2394 (+0.1642, +15.27%)  |  mband_py_log_avr1_future_frames=1.1203 (+0.0452, +4.20%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.2677 (+0.1926, +17.91%)
+                SI_SDR: Noisy=-5.0132  |  GTCRN=3.8175 (+8.8307, +176.15%)  |  mband_py_log_avr1_future_frames=-1.1507 (+3.8625, +77.05%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=4.6404 (+9.6536, +192.56%)
+                  STOI: Noisy=0.5692  |  GTCRN=0.5839 (+0.0147, +2.58%)  |  mband_py_log_avr1_future_frames=0.5721 (+0.0029, +0.51%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.5938 (+0.0246, +4.33%)
+       DNSMOS_p808_mos: Noisy=2.4054  |  GTCRN=2.7985 (+0.3931, +16.34%)  |  mband_py_log_avr1_future_frames=2.5360 (+0.1306, +5.43%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.8202 (+0.4148, +17.25%)
+        DNSMOS_mos_sig: Noisy=3.5547  |  GTCRN=2.2821 (-1.2725, -35.80%)  |  mband_py_log_avr1_future_frames=3.7068 (+0.1521, +4.28%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.6035 (-0.9511, -26.76%)
+        DNSMOS_mos_bak: Noisy=1.6786  |  GTCRN=3.2563 (+1.5777, +93.99%)  |  mband_py_log_avr1_future_frames=2.1668 (+0.4881, +29.08%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3683 (+1.6897, +100.66%)
+        DNSMOS_mos_ovr: Noisy=1.9776  |  GTCRN=1.9900 (+0.0124, +0.63%)  |  mband_py_log_avr1_future_frames=2.3609 (+0.3833, +19.38%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.2433 (+0.2657, +13.44%)
+
+>>> SNR = 0dB <<<
+                  PESQ: Noisy=1.1086  |  GTCRN=1.4197 (+0.3111, +28.06%)  |  mband_py_log_avr1_future_frames=1.2461 (+0.1375, +12.40%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.4854 (+0.3767, +33.98%)
+                SI_SDR: Noisy=-0.0328  |  GTCRN=7.5701 (+7.6029, +23194.20%)  |  mband_py_log_avr1_future_frames=4.4069 (+4.4396, +13544.11%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=7.6850 (+7.7177, +23544.66%)
+                  STOI: Noisy=0.6387  |  GTCRN=0.6607 (+0.0220, +3.45%)  |  mband_py_log_avr1_future_frames=0.6444 (+0.0057, +0.90%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.6640 (+0.0253, +3.96%)
+       DNSMOS_p808_mos: Noisy=2.5219  |  GTCRN=2.9849 (+0.4631, +18.36%)  |  mband_py_log_avr1_future_frames=2.6756 (+0.1538, +6.10%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.0466 (+0.5247, +20.81%)
+        DNSMOS_mos_sig: Noisy=3.8728  |  GTCRN=2.9035 (-0.9693, -25.03%)  |  mband_py_log_avr1_future_frames=3.8661 (-0.0067, -0.17%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.2422 (-0.6306, -16.28%)
+        DNSMOS_mos_bak: Noisy=1.9375  |  GTCRN=3.4157 (+1.4782, +76.29%)  |  mband_py_log_avr1_future_frames=2.4080 (+0.4705, +24.28%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.5438 (+1.6063, +82.91%)
+        DNSMOS_mos_ovr: Noisy=2.3044  |  GTCRN=2.4802 (+0.1758, +7.63%)  |  mband_py_log_avr1_future_frames=2.5854 (+0.2809, +12.19%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.7395 (+0.4351, +18.88%)
+
+>>> SNR = 5dB <<<
+                  PESQ: Noisy=1.2038  |  GTCRN=1.7413 (+0.5375, +44.65%)  |  mband_py_log_avr1_future_frames=1.4849 (+0.2811, +23.35%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.7286 (+0.5248, +43.59%)
+                SI_SDR: Noisy=4.9972  |  GTCRN=11.4720 (+6.4748, +129.57%)  |  mband_py_log_avr1_future_frames=8.6194 (+3.6222, +72.49%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=11.3856 (+6.3884, +127.84%)
+                  STOI: Noisy=0.6961  |  GTCRN=0.7258 (+0.0297, +4.27%)  |  mband_py_log_avr1_future_frames=0.7048 (+0.0088, +1.26%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.7269 (+0.0309, +4.43%)
+       DNSMOS_p808_mos: Noisy=2.6909  |  GTCRN=3.2097 (+0.5188, +19.28%)  |  mband_py_log_avr1_future_frames=2.7976 (+0.1067, +3.96%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.2113 (+0.5204, +19.34%)
+        DNSMOS_mos_sig: Noisy=4.0610  |  GTCRN=3.5316 (-0.5294, -13.04%)  |  mband_py_log_avr1_future_frames=3.9359 (-0.1252, -3.08%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.6471 (-0.4139, -10.19%)
+        DNSMOS_mos_bak: Noisy=2.2032  |  GTCRN=3.5685 (+1.3653, +61.97%)  |  mband_py_log_avr1_future_frames=2.6482 (+0.4450, +20.20%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.6983 (+1.4951, +67.86%)
+        DNSMOS_mos_ovr: Noisy=2.5446  |  GTCRN=2.9533 (+0.4087, +16.06%)  |  mband_py_log_avr1_future_frames=2.7444 (+0.1998, +7.85%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.0930 (+0.5484, +21.55%)
+
+>>> SNR = 10dB <<<
+                  PESQ: Noisy=1.3882  |  GTCRN=2.0438 (+0.6556, +47.22%)  |  mband_py_log_avr1_future_frames=1.7869 (+0.3986, +28.72%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.0576 (+0.6694, +48.22%)
+                SI_SDR: Noisy=9.9995  |  GTCRN=14.5717 (+4.5722, +45.72%)  |  mband_py_log_avr1_future_frames=11.2301 (+1.2306, +12.31%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=14.2745 (+4.2750, +42.75%)
+                  STOI: Noisy=0.7539  |  GTCRN=0.7754 (+0.0216, +2.86%)  |  mband_py_log_avr1_future_frames=0.7538 (-0.0001, -0.02%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.7741 (+0.0203, +2.69%)
+       DNSMOS_p808_mos: Noisy=2.8637  |  GTCRN=3.3136 (+0.4499, +15.71%)  |  mband_py_log_avr1_future_frames=2.9239 (+0.0602, +2.10%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3502 (+0.4865, +16.99%)
+        DNSMOS_mos_sig: Noisy=4.0771  |  GTCRN=3.8657 (-0.2115, -5.19%)  |  mband_py_log_avr1_future_frames=3.9342 (-0.1430, -3.51%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.9693 (-0.1078, -2.64%)
+        DNSMOS_mos_bak: Noisy=2.3650  |  GTCRN=3.7111 (+1.3461, +56.92%)  |  mband_py_log_avr1_future_frames=2.8419 (+0.4769, +20.16%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.8169 (+1.4519, +61.39%)
+        DNSMOS_mos_ovr: Noisy=2.6548  |  GTCRN=3.2509 (+0.5961, +22.45%)  |  mband_py_log_avr1_future_frames=2.8430 (+0.1882, +7.09%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.3975 (+0.7427, +27.98%)
+
+>>> SNR = 15dB <<<
+                  PESQ: Noisy=1.7284  |  GTCRN=2.3784 (+0.6500, +37.61%)  |  mband_py_log_avr1_future_frames=2.2015 (+0.4731, +27.37%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.4816 (+0.7532, +43.58%)
+                SI_SDR: Noisy=14.9983  |  GTCRN=18.4455 (+3.4472, +22.98%)  |  mband_py_log_avr1_future_frames=13.3745 (-1.6238, -10.83%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=17.5632 (+2.5649, +17.10%)
+                  STOI: Noisy=0.7911  |  GTCRN=0.8091 (+0.0180, +2.28%)  |  mband_py_log_avr1_future_frames=0.7913 (+0.0002, +0.02%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.8075 (+0.0164, +2.07%)
+       DNSMOS_p808_mos: Noisy=2.9952  |  GTCRN=3.4446 (+0.4494, +15.00%)  |  mband_py_log_avr1_future_frames=3.0055 (+0.0103, +0.34%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.4638 (+0.4686, +15.64%)
+        DNSMOS_mos_sig: Noisy=4.0568  |  GTCRN=4.0531 (-0.0037, -0.09%)  |  mband_py_log_avr1_future_frames=4.0769 (+0.0201, +0.49%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=4.0846 (+0.0278, +0.69%)
+        DNSMOS_mos_bak: Noisy=2.6250  |  GTCRN=3.8715 (+1.2466, +47.49%)  |  mband_py_log_avr1_future_frames=3.2127 (+0.5878, +22.39%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.9430 (+1.3181, +50.21%)
+        DNSMOS_mos_ovr: Noisy=2.8061  |  GTCRN=3.4574 (+0.6513, +23.21%)  |  mband_py_log_avr1_future_frames=3.1200 (+0.3139, +11.19%)  |  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.5185 (+0.7124, +25.39%)
+
+========================================================================================================================
+
+FILE-LEVEL IMPROVEMENT STATISTICS:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> SNR = -5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  10/13 files (76.9%)
+    Degraded:  3/13 files (23.1%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  10/13 files (76.9%)
+    Degraded:  3/13 files (23.1%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  6/13 files (46.2%)
+    Degraded:  7/13 files (53.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  0/13 files (0.0%)
+    Degraded:  13/13 files (100.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  6/13 files (46.2%)
+    Degraded:  7/13 files (53.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  10/13 files (76.9%)
+    Degraded:  3/13 files (23.1%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 0dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  8/13 files (61.5%)
+    Degraded:  5/13 files (38.5%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  1/13 files (7.7%)
+    Degraded:  12/13 files (92.3%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  5/13 files (38.5%)
+    Degraded:  8/13 files (61.5%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  1/13 files (7.7%)
+    Degraded:  12/13 files (92.3%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  7/13 files (53.8%)
+    Degraded:  6/13 files (46.2%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  10/13 files (76.9%)
+    Degraded:  3/13 files (23.1%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 5dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  2/12 files (16.7%)
+    Degraded:  10/12 files (83.3%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  4/12 files (33.3%)
+    Degraded:  8/12 files (66.7%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  3/12 files (25.0%)
+    Degraded:  9/12 files (75.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  11/12 files (91.7%)
+    Degraded:  1/12 files (8.3%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/12 files (100.0%)
+    Degraded:  0/12 files (0.0%)
+    Unchanged: 0/12 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  9/12 files (75.0%)
+    Degraded:  3/12 files (25.0%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  8/12 files (66.7%)
+    Degraded:  4/12 files (33.3%)
+    Unchanged: 0/12 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  10/12 files (83.3%)
+    Degraded:  2/12 files (16.7%)
+    Unchanged: 0/12 files (0.0%)
+
+>>> SNR = 10dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  7/13 files (53.8%)
+    Degraded:  6/13 files (46.2%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  6/13 files (46.2%)
+    Degraded:  7/13 files (53.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/13 files (84.6%)
+    Degraded:  2/13 files (15.4%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  3/13 files (23.1%)
+    Degraded:  10/13 files (76.9%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  4/13 files (30.8%)
+    Degraded:  9/13 files (69.2%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  13/13 files (100.0%)
+    Degraded:  0/13 files (0.0%)
+    Unchanged: 0/13 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  9/13 files (69.2%)
+    Degraded:  4/13 files (30.8%)
+    Unchanged: 0/13 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  12/13 files (92.3%)
+    Degraded:  1/13 files (7.7%)
+    Unchanged: 0/13 files (0.0%)
+
+>>> SNR = 15dB <<<
+
+PESQ (Range: -0.5 to 4.5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+SI_SDR (Range: -10 to 30):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  1/11 files (9.1%)
+    Degraded:  10/11 files (90.9%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+
+STOI (Range: 0 to 1):
+  GTCRN:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  5/11 files (45.5%)
+    Degraded:  6/11 files (54.5%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  8/11 files (72.7%)
+    Degraded:  3/11 files (27.3%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_p808_mos (Range: 1 to 5):
+  GTCRN:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  4/11 files (36.4%)
+    Degraded:  7/11 files (63.6%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_sig (Range: 1 to 5):
+  GTCRN:
+    Improved:  6/11 files (54.5%)
+    Degraded:  5/11 files (45.5%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  6/11 files (54.5%)
+    Degraded:  5/11 files (45.5%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  5/11 files (45.5%)
+    Degraded:  6/11 files (54.5%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_bak (Range: 1 to 5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+DNSMOS_mos_ovr (Range: 1 to 5):
+  GTCRN:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_avr1_future_frames:
+    Improved:  10/11 files (90.9%)
+    Degraded:  1/11 files (9.1%)
+    Unchanged: 0/11 files (0.0%)
+  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4:
+    Improved:  11/11 files (100.0%)
+    Degraded:  0/11 files (0.0%)
+    Unchanged: 0/11 files (0.0%)
+
+========================================================================================================================
+
+PERFORMANCE BY NOISE CATEGORY:
+------------------------------------------------------------------------------------------------------------------------
+
+>>> Construction <<<
+  PESQ:
+    -5dB: Noisy=1.050  GTCRN=1.202  mband_py_log_avr1_future_frames=1.082  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.184  
+    0dB: Noisy=1.073  GTCRN=1.400  mband_py_log_avr1_future_frames=1.139  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.301  
+    5dB: Noisy=1.136  GTCRN=1.919  mband_py_log_avr1_future_frames=1.538  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.588  
+    10dB: Noisy=1.275  GTCRN=1.964  mband_py_log_avr1_future_frames=1.686  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.856  
+  SI_SDR:
+    -5dB: Noisy=-5.038  GTCRN=2.698  mband_py_log_avr1_future_frames=-1.811  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.352  
+    0dB: Noisy=-0.020  GTCRN=6.110  mband_py_log_avr1_future_frames=2.253  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=5.304  
+    5dB: Noisy=5.014  GTCRN=12.423  mband_py_log_avr1_future_frames=9.166  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=10.880  
+    10dB: Noisy=10.001  GTCRN=11.924  mband_py_log_avr1_future_frames=11.477  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=12.125  
+  STOI:
+    -5dB: Noisy=0.517  GTCRN=0.559  mband_py_log_avr1_future_frames=0.520  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.554  
+    0dB: Noisy=0.606  GTCRN=0.664  mband_py_log_avr1_future_frames=0.616  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.639  
+    5dB: Noisy=0.673  GTCRN=0.722  mband_py_log_avr1_future_frames=0.665  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.691  
+    10dB: Noisy=0.753  GTCRN=0.799  mband_py_log_avr1_future_frames=0.754  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.773  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.721  GTCRN=1.819  mband_py_log_avr1_future_frames=2.035  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.678  
+    0dB: Noisy=1.866  GTCRN=2.577  mband_py_log_avr1_future_frames=2.237  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.622  
+    5dB: Noisy=2.395  GTCRN=3.561  mband_py_log_avr1_future_frames=2.808  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.365  
+    10dB: Noisy=2.462  GTCRN=3.315  mband_py_log_avr1_future_frames=2.392  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.459  
+
+>>> Flight <<<
+  PESQ:
+    -5dB: Noisy=1.139  GTCRN=1.479  mband_py_log_avr1_future_frames=1.261  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.636  
+    0dB: Noisy=1.265  GTCRN=1.715  mband_py_log_avr1_future_frames=1.490  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.041  
+    5dB: Noisy=1.348  GTCRN=2.020  mband_py_log_avr1_future_frames=1.678  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.234  
+    10dB: Noisy=1.567  GTCRN=2.448  mband_py_log_avr1_future_frames=2.299  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.970  
+    15dB: Noisy=2.167  GTCRN=2.830  mband_py_log_avr1_future_frames=2.738  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.122  
+  SI_SDR:
+    -5dB: Noisy=-5.047  GTCRN=4.870  mband_py_log_avr1_future_frames=-0.104  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=7.719  
+    0dB: Noisy=-0.018  GTCRN=8.683  mband_py_log_avr1_future_frames=5.347  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=10.673  
+    5dB: Noisy=4.987  GTCRN=13.903  mband_py_log_avr1_future_frames=9.131  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=13.498  
+    10dB: Noisy=9.999  GTCRN=17.266  mband_py_log_avr1_future_frames=12.515  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=16.240  
+    15dB: Noisy=14.995  GTCRN=20.250  mband_py_log_avr1_future_frames=14.517  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=18.809  
+  STOI:
+    -5dB: Noisy=0.429  GTCRN=0.426  mband_py_log_avr1_future_frames=0.461  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.494  
+    0dB: Noisy=0.465  GTCRN=0.487  mband_py_log_avr1_future_frames=0.470  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.543  
+    5dB: Noisy=0.501  GTCRN=0.533  mband_py_log_avr1_future_frames=0.519  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.584  
+    10dB: Noisy=0.534  GTCRN=0.588  mband_py_log_avr1_future_frames=0.540  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.593  
+    15dB: Noisy=0.555  GTCRN=0.612  mband_py_log_avr1_future_frames=0.589  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.621  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.354  GTCRN=2.097  mband_py_log_avr1_future_frames=2.884  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.297  
+    0dB: Noisy=2.325  GTCRN=1.996  mband_py_log_avr1_future_frames=2.900  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.356  
+    5dB: Noisy=2.657  GTCRN=2.983  mband_py_log_avr1_future_frames=3.099  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.568  
+    10dB: Noisy=2.808  GTCRN=3.255  mband_py_log_avr1_future_frames=3.372  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.429  
+    15dB: Noisy=2.839  GTCRN=3.142  mband_py_log_avr1_future_frames=3.856  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.356  
+
+>>> Stationary <<<
+  PESQ:
+    -5dB: Noisy=1.073  GTCRN=1.171  mband_py_log_avr1_future_frames=1.146  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.341  
+    0dB: Noisy=1.114  GTCRN=1.291  mband_py_log_avr1_future_frames=1.293  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.611  
+    5dB: Noisy=1.222  GTCRN=1.577  mband_py_log_avr1_future_frames=1.583  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.942  
+    10dB: Noisy=1.436  GTCRN=1.933  mband_py_log_avr1_future_frames=1.931  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.243  
+    15dB: Noisy=1.765  GTCRN=2.286  mband_py_log_avr1_future_frames=2.324  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.581  
+  SI_SDR:
+    -5dB: Noisy=-5.016  GTCRN=2.500  mband_py_log_avr1_future_frames=1.863  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=7.209  
+    0dB: Noisy=-0.017  GTCRN=6.217  mband_py_log_avr1_future_frames=6.863  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=10.234  
+    5dB: Noisy=5.011  GTCRN=9.762  mband_py_log_avr1_future_frames=9.721  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=12.940  
+    10dB: Noisy=10.002  GTCRN=14.098  mband_py_log_avr1_future_frames=11.595  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=15.595  
+    15dB: Noisy=14.999  GTCRN=17.953  mband_py_log_avr1_future_frames=13.065  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=17.965  
+  STOI:
+    -5dB: Noisy=0.602  GTCRN=0.530  mband_py_log_avr1_future_frames=0.614  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.623  
+    0dB: Noisy=0.661  GTCRN=0.614  mband_py_log_avr1_future_frames=0.672  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.684  
+    5dB: Noisy=0.715  GTCRN=0.700  mband_py_log_avr1_future_frames=0.719  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.744  
+    10dB: Noisy=0.771  GTCRN=0.758  mband_py_log_avr1_future_frames=0.764  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.791  
+    15dB: Noisy=0.805  GTCRN=0.804  mband_py_log_avr1_future_frames=0.798  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.827  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.957  GTCRN=1.740  mband_py_log_avr1_future_frames=2.663  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.556  
+    0dB: Noisy=2.429  GTCRN=1.987  mband_py_log_avr1_future_frames=2.794  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.739  
+    5dB: Noisy=2.769  GTCRN=2.586  mband_py_log_avr1_future_frames=2.789  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.979  
+    10dB: Noisy=2.817  GTCRN=3.075  mband_py_log_avr1_future_frames=2.891  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.466  
+    15dB: Noisy=2.904  GTCRN=3.312  mband_py_log_avr1_future_frames=3.035  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.513  
+
+>>> Street <<<
+  PESQ:
+    -5dB: Noisy=1.105  GTCRN=1.209  mband_py_log_avr1_future_frames=1.113  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.229  
+    0dB: Noisy=1.116  GTCRN=1.385  mband_py_log_avr1_future_frames=1.257  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.388  
+    5dB: Noisy=1.217  GTCRN=1.566  mband_py_log_avr1_future_frames=1.523  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.683  
+    10dB: Noisy=1.399  GTCRN=1.994  mband_py_log_avr1_future_frames=1.858  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.015  
+    15dB: Noisy=1.700  GTCRN=2.343  mband_py_log_avr1_future_frames=2.235  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.348  
+  SI_SDR:
+    -5dB: Noisy=-5.044  GTCRN=3.855  mband_py_log_avr1_future_frames=-0.161  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=4.309  
+    0dB: Noisy=-0.041  GTCRN=8.732  mband_py_log_avr1_future_frames=4.452  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=7.237  
+    5dB: Noisy=5.003  GTCRN=10.892  mband_py_log_avr1_future_frames=8.352  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=11.517  
+    10dB: Noisy=10.007  GTCRN=14.490  mband_py_log_avr1_future_frames=11.476  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=14.401  
+    15dB: Noisy=15.001  GTCRN=17.976  mband_py_log_avr1_future_frames=13.466  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=17.083  
+  STOI:
+    -5dB: Noisy=0.552  GTCRN=0.597  mband_py_log_avr1_future_frames=0.559  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.595  
+    0dB: Noisy=0.639  GTCRN=0.702  mband_py_log_avr1_future_frames=0.642  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.677  
+    5dB: Noisy=0.709  GTCRN=0.752  mband_py_log_avr1_future_frames=0.723  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.753  
+    10dB: Noisy=0.783  GTCRN=0.812  mband_py_log_avr1_future_frames=0.790  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.811  
+    15dB: Noisy=0.832  GTCRN=0.853  mband_py_log_avr1_future_frames=0.832  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.842  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=1.961  GTCRN=1.921  mband_py_log_avr1_future_frames=2.558  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.054  
+    0dB: Noisy=2.392  GTCRN=2.827  mband_py_log_avr1_future_frames=2.532  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.546  
+    5dB: Noisy=2.492  GTCRN=2.835  mband_py_log_avr1_future_frames=2.698  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.992  
+    10dB: Noisy=2.693  GTCRN=3.273  mband_py_log_avr1_future_frames=2.702  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.259  
+    15dB: Noisy=3.030  GTCRN=3.609  mband_py_log_avr1_future_frames=3.137  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.403  
+
+>>> Train <<<
+  PESQ:
+    -5dB: Noisy=1.062  GTCRN=1.260  mband_py_log_avr1_future_frames=1.095  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.199  
+    0dB: Noisy=1.086  GTCRN=1.460  mband_py_log_avr1_future_frames=1.208  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.411  
+    5dB: Noisy=1.172  GTCRN=1.819  mband_py_log_avr1_future_frames=1.361  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.546  
+    10dB: Noisy=1.365  GTCRN=2.081  mband_py_log_avr1_future_frames=1.610  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=1.861  
+    15dB: Noisy=1.630  GTCRN=2.358  mband_py_log_avr1_future_frames=2.007  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.347  
+  SI_SDR:
+    -5dB: Noisy=-4.982  GTCRN=4.830  mband_py_log_avr1_future_frames=-3.300  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.532  
+    0dB: Noisy=-0.047  GTCRN=8.278  mband_py_log_avr1_future_frames=3.588  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=6.689  
+    5dB: Noisy=4.985  GTCRN=12.054  mband_py_log_avr1_future_frames=7.854  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=10.079  
+    10dB: Noisy=9.995  GTCRN=15.409  mband_py_log_avr1_future_frames=10.557  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=13.898  
+    15dB: Noisy=14.998  GTCRN=18.568  mband_py_log_avr1_future_frames=13.295  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=17.265  
+  STOI:
+    -5dB: Noisy=0.605  GTCRN=0.653  mband_py_log_avr1_future_frames=0.595  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.612  
+    0dB: Noisy=0.673  GTCRN=0.705  mband_py_log_avr1_future_frames=0.675  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.681  
+    5dB: Noisy=0.723  GTCRN=0.770  mband_py_log_avr1_future_frames=0.734  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.742  
+    10dB: Noisy=0.776  GTCRN=0.799  mband_py_log_avr1_future_frames=0.776  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.786  
+    15dB: Noisy=0.814  GTCRN=0.834  mband_py_log_avr1_future_frames=0.811  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=0.819  
+  DNSMOS_mos_ovr:
+    -5dB: Noisy=2.024  GTCRN=2.215  mband_py_log_avr1_future_frames=2.127  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.347  
+    0dB: Noisy=2.366  GTCRN=2.696  mband_py_log_avr1_future_frames=2.558  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=2.741  
+    5dB: Noisy=2.439  GTCRN=3.094  mband_py_log_avr1_future_frames=2.652  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.053  
+    10dB: Noisy=2.589  GTCRN=3.321  mband_py_log_avr1_future_frames=2.945  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.381  
+    15dB: Noisy=2.651  GTCRN=3.547  mband_py_log_avr1_future_frames=3.017  mband_py_log_hybrid_20ms_ov75_fl0p7_nf1_N4=3.601  
+
+========================================================================================================================
