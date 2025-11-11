@@ -21,7 +21,7 @@ plt.rcParams['font.size'] = 10
 # ====================================
 MODE = "hybrid"
 CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/snr_specific_analysis_2{MODE}")
+OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/snr_specific_analysis_3{MODE}")
 OUTPUT_DIR.mkdir(exist_ok=True, parents = True)
 
 print("="*100)
@@ -265,6 +265,76 @@ for idx, (param, ax) in enumerate(zip(params_to_plot, axes.flat)):
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'heatmap_pesq_by_snr_and_param.png', dpi=300, bbox_inches='tight')
 print(f"✓ Saved: heatmap_pesq_by_snr_and_param.png")
+plt.close()
+
+# 3. Heatmap: Best parameter value at each SNR STOI
+fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+fig.suptitle('Best Parameter Values Across SNR Levels (STOI)', fontsize=16, fontweight='bold')
+
+for idx, (param, ax) in enumerate(zip(params_to_plot, axes.flat)):
+    # Create matrix: SNR x Parameter_Value
+    param_values = sorted(df_success[param].unique())
+    snr_levels = sorted(df_success['SNR_dB'].unique())
+    
+    matrix = []
+    for snr in snr_levels:
+        row = []
+        for val in param_values:
+            subset = df_success[(df_success['SNR_dB'] == snr) & (df_success[param] == val)]
+            if len(subset) > 0:
+                row.append(subset['STOI'].mean())
+            else:
+                row.append(np.nan)
+        matrix.append(row)
+    
+    matrix = np.array(matrix)
+    
+    sns.heatmap(matrix, annot=True, fmt='.3f', cmap='RdYlGn', ax=ax,
+                xticklabels=[str(v) for v in param_values],
+                yticklabels=[f'{s}dB' for s in snr_levels],
+                cbar_kws={'label': 'STOI'})
+    ax.set_title(f'{param}', fontsize=12, fontweight='bold')
+    ax.set_xlabel('Parameter Value', fontsize=10)
+    ax.set_ylabel('SNR Level', fontsize=10)
+
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'heatmap_stoi_by_snr_and_param.png', dpi=300, bbox_inches='tight')
+print(f"✓ Saved: heatmap_stoi_by_snr_and_param.png")
+plt.close()
+
+# 3. Heatmap: Best parameter value at each SNR DNSMOS
+fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+fig.suptitle('Best Parameter Values Across SNR Levels (DNSMOS_p808_mos)', fontsize=16, fontweight='bold')
+
+for idx, (param, ax) in enumerate(zip(params_to_plot, axes.flat)):
+    # Create matrix: SNR x Parameter_Value
+    param_values = sorted(df_success[param].unique())
+    snr_levels = sorted(df_success['SNR_dB'].unique())
+    
+    matrix = []
+    for snr in snr_levels:
+        row = []
+        for val in param_values:
+            subset = df_success[(df_success['SNR_dB'] == snr) & (df_success[param] == val)]
+            if len(subset) > 0:
+                row.append(subset['DNSMOS_p808_mos'].mean())
+            else:
+                row.append(np.nan)
+        matrix.append(row)
+    
+    matrix = np.array(matrix)
+    
+    sns.heatmap(matrix, annot=True, fmt='.3f', cmap='RdYlGn', ax=ax,
+                xticklabels=[str(v) for v in param_values],
+                yticklabels=[f'{s}dB' for s in snr_levels],
+                cbar_kws={'label': 'DNSMOS_p808_mos'})
+    ax.set_title(f'{param}', fontsize=12, fontweight='bold')
+    ax.set_xlabel('Parameter Value', fontsize=10)
+    ax.set_ylabel('SNR Level', fontsize=10)
+
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'heatmap_dnsmos_p808_mos_by_snr_and_param.png', dpi=300, bbox_inches='tight')
+print(f"✓ Saved: heatmap_dnsmos_p808_mos_by_snr_and_param.png")
 plt.close()
 
 # 4. Summary table: Winner consistency
