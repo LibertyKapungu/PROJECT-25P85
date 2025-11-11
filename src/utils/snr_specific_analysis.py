@@ -20,8 +20,8 @@ plt.rcParams['font.size'] = 10
 # CONFIGURATION
 # ====================================
 MODE = "hybrid"
-CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/hybrid/COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP2/snr_specific_analysis_{MODE}")
+CSV_FILE = rf"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/COLLATED_ALL_RESULTS_{MODE}.csv"
+OUTPUT_DIR = Path(f"/home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/snr_specific_analysis_2{MODE}")
 OUTPUT_DIR.mkdir(exist_ok=True, parents = True)
 
 print("="*100)
