@@ -1,0 +1,53 @@
+
+PARAMETER SWEEP ANALYSIS SUMMARY (SNR: 15 dB)
+====================================================================================================
+
+Dataset Statistics:
+  Total configurations: 405
+  Total tests: 2025
+  Successful tests: 2025 (100.0% of this SNR subset)
+  Noise categories: Train, Street, Construction, Babble, Stationary
+
+Overall Performance (mean ± std) for SNR 15 dB:
+  PESQ: 2.403 ± 0.305
+  STOI: 0.829 ± 0.025
+  SI-SDR: 15.67 ± 2.34 dB
+  DNSMOS: 3.967 ± 0.208
+
+BEST OVERALL CONFIGURATION (for SNR 15 dB):
+  Frequency Spacing: log
+  Number of Bands: 16
+  Frame Size: 20 ms
+  Overlap: 75%
+  
+  Performance:
+    PESQ: 3.1828
+    STOI: 0.8821
+    SI-SDR: 17.72 dB
+    DNSMOS: 3.9954
+    Weighted Score: 0.8093
+
+PARAMETER INSIGHTS (for SNR 15 dB):
+
+  Best Freq_spacing: log (avg weighted score: 0.7052)
+  Best Nband: 8 (avg weighted score: 0.7051)
+  Best FRMSZ_ms: 20 (avg weighted score: 0.7083)
+  Best OVLP: 75 (avg weighted score: 0.7282)
+  Best Floor: 0.8 (avg weighted score: 0.7079)
+  Best Noisefr: 1 (avg weighted score: 0.7048)
+
+PERFORMANCE BY NOISE CATEGORY (avg PESQ for SNR 15 dB):
+  Train: 2.400
+  Street: 2.376
+  Construction: 2.202
+  Babble: 2.231
+  Stationary: 2.809
+
+RECOMMENDED FLOOR BY NOISE TYPE (for SNR 15 dB):
+  Train: Floor=0.8 (score: 0.7079)
+  Street: Floor=0.7 (score: 0.7055)
+  Construction: Floor=0.8 (score: 0.6820)
+  Babble: Floor=0.8 (score: 0.6810)
+  Stationary: Floor=0.3 (score: 0.7679)
+
+All results for SNR 15 saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/parameter_sweep_analysis_per_snr_hybrid/SNR_15

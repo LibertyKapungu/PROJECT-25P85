@@ -1,0 +1,198 @@
+360780 11.857953
+mband_linear_N8_F8_O75_FL0p8     Stationary       linear      8         8    75 2.021004 0.809490 11.836299        3.685645 11.836299
+   mband_mel_N8_F8_O75_FL0p8     Stationary          mel      8         8    75 2.021205 0.809477 11.836130        3.687568 11.836130
+mband_linear_N4_F8_O75_FL0p7     Stationary       linear      4         8    75 1.952074 0.792132 11.826755        3.146512 11.826755
+   mband_mel_N4_F8_O75_FL0p7     Stationary          mel      4         8    75 1.952254 0.792097 11.826424        3.148538 11.826424
+   mband_log_N4_F8_O75_FL0p5     Stationary          log      4         8    75 2.001797 0.801895 11.814219        3.567018 11.814219
+  mband_log_N16_F8_O75_FL0p3     Stationary          log     16         8    75 1.957317 0.794602 11.807463        3.660066 11.807463
+   mband_log_N8_F8_O75_FL0p8     Stationary          log      8         8    75 1.969454 0.780254 11.790153        3.318919 11.790153
+   mband_log_N4_F8_O75_FL0p3     Stationary          log      4         8    75 1.933259 0.792051 11.784559        3.658865 11.784559
+
+--- Top 10 by DNSMOS_mos_ovr (SNR: 0) ---
+                       Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr  DNSMOS_mos_ovr
+    mband_mel_N8_F20_O25_FL0p001     Stationary          mel      8        20    25 1.678161 0.776852  9.655406        4.214664        4.214664
+ mband_linear_N8_F20_O25_FL0p001     Stationary       linear      8        20    25 1.680447 0.776822  9.657541        4.189954        4.189954
+   mband_linear_N4_F20_O25_FL0p5     Stationary       linear      4        20    25 1.773182 0.782669  9.755650        4.158154        4.158154
+      mband_mel_N4_F20_O25_FL0p5     Stationary          mel      4        20    25 1.773248 0.782714  9.755484        4.157071        4.157071
+   mband_mel_N16_F25_O25_FL0p001     Stationary          mel     16        25    25 1.756440 0.782881  8.944877        4.141801        4.141801
+   mband_log_N16_F25_O50_FL0p001     Stationary          log     16        25    50 1.872279 0.785318 10.690970        4.117242        4.117242
+      mband_mel_N8_F20_O50_FL0p8     Stationary          mel      8        20    50 1.956950 0.791987 11.099537        4.116820        4.116820
+mband_linear_N16_F25_O25_FL0p001     Stationary       linear     16        25    25 1.758272 0.782395  8.945552        4.111650        4.111650
+      mband_log_N8_F20_O25_FL0p3     Stationary          log      8        20    25 1.842275 0.787814  9.622509        4.108512        4.108512
+   mband_linear_N4_F25_O25_FL0p5     Stationary       linear      4        25    25 1.741474 0.778117  8.991320        4.107097        4.107097
+
+--- Top 10 by Weighted_Score (SNR: 0) ---
+                    Config_ID Noise_Category Freq_spacing  Nband  FRMSZ_ms  OVLP     PESQ     STOI    SI_SDR  DNSMOS_mos_ovr  Weighted_Score
+   mband_mel_N4_F25_O75_FL0p7     Stationary          mel      4        25    75 2.069489 0.816281 11.663410        3.361850        0.665089
+mband_linear_N4_F25_O75_FL0p7     Stationary       linear      4        25    75 2.069057 0.816299 11.663695        3.356353        0.665055
+    mband_mel_N4_F8_O50_FL0p5     Stationary          mel      4         8    50 2.088086 0.802035 11.657186        3.451515        0.659826
+ mband_linear_N4_F8_O50_FL0p5     Stationary       linear      4         8    50 2.087938 0.802026 11.657544        3.454681        0.659807
+   mband_log_N8_F25_O75_FL0p7     Stationary          log      8        25    75 2.081886 0.800057 11.580498        3.694921        0.658217
+    mband_mel_N8_F8_O75_FL0p8     Stationary          mel      8         8    75 2.021205 0.809477 11.836130        3.687568        0.656859
+ mband_linear_N8_F8_O75_FL0p8     Stationary       linear      8         8    75 2.021004 0.809490 11.836299        3.685645        0.656845
+   mband_log_N8_F20_O50_FL0p8     Stationary          log      8        20    50 1.994776 0.812009 11.262202        3.850828        0.655482
+mband_linear_N8_F25_O75_FL0p3     Stationary       linear      8        25    75 2.054311 0.794330 11.520199        3.490432        0.652596
+   mband_mel_N8_F25_O75_FL0p3     Stationary          mel      8        25    75 2.053557 0.794430 11.520056        3.482552        0.652570
+
+====================================================================================================
+BEST CONFIGURATIONS BY NOISE CATEGORY (SNR: 0 dB)
+====================================================================================================
+
+====================================================================================================
+Category: Street (SNR: 0)
+====================================================================================================
+
+Best PESQ: 1.5067
+  Config: Freq=log, Nband=8, Frame=25ms, Overlap=75%
+
+Best STOI: 0.7453
+  Config: Freq=linear, Nband=4, Frame=25ms, Overlap=75%
+
+Best SI_SDR: 9.8369
+  Config: Freq=linear, Nband=8, Frame=8ms, Overlap=75%
+
+Best Weighted_Score: 0.5670
+  Config: Freq=log, Nband=8, Frame=20ms, Overlap=50%
+
+====================================================================================================
+Category: Stationary (SNR: 0)
+====================================================================================================
+
+Best PESQ: 2.0881
+  Config: Freq=mel, Nband=4, Frame=8ms, Overlap=50%
+
+Best STOI: 0.8163
+  Config: Freq=linear, Nband=4, Frame=25ms, Overlap=75%
+
+Best SI_SDR: 11.8582
+  Config: Freq=linear, Nband=8, Frame=8ms, Overlap=75%
+
+Best Weighted_Score: 0.6651
+  Config: Freq=mel, Nband=4, Frame=25ms, Overlap=75%
+
+====================================================================================================
+Category: Construction (SNR: 0)
+====================================================================================================
+
+Best PESQ: 1.5904
+  Config: Freq=mel, Nband=16, Frame=20ms, Overlap=75%
+
+Best STOI: 0.7259
+  Config: Freq=log, Nband=4, Frame=20ms, Overlap=75%
+
+Best SI_SDR: 9.1643
+  Config: Freq=linear, Nband=4, Frame=20ms, Overlap=75%
+
+Best Weighted_Score: 0.5595
+  Config: Freq=log, Nband=4, Frame=20ms, Overlap=75%
+
+====================================================================================================
+Category: Babble (SNR: 0)
+====================================================================================================
+
+Best PESQ: 1.4685
+  Config: Freq=mel, Nband=16, Frame=8ms, Overlap=25%
+
+Best STOI: 0.6839
+  Config: Freq=linear, Nband=16, Frame=20ms, Overlap=25%
+
+Best SI_SDR: 6.3414
+  Config: Freq=log, Nband=4, Frame=8ms, Overlap=75%
+
+Best Weighted_Score: 0.5233
+  Config: Freq=log, Nband=16, Frame=25ms, Overlap=75%
+
+====================================================================================================
+Category: Train (SNR: 0)
+====================================================================================================
+
+Best PESQ: 1.5607
+  Config: Freq=mel, Nband=16, Frame=25ms, Overlap=75%
+
+Best STOI: 0.7542
+  Config: Freq=mel, Nband=16, Frame=25ms, Overlap=75%
+
+Best SI_SDR: 9.2234
+  Config: Freq=log, Nband=16, Frame=8ms, Overlap=75%
+
+Best Weighted_Score: 0.5832
+  Config: Freq=mel, Nband=16, Frame=25ms, Overlap=75%
+
+====================================================================================================
+AVERAGE METRICS BY PARAMETER VALUE (SNR: 0 dB)
+====================================================================================================
+
+================================================================================
+Parameter: Freq_spacing (SNR: 0)
+================================================================================
+                PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+                mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+Freq_spacing                                                  ...                                                              
+linear        1.4638  0.2231  1.1993  2.0879  0.6994  0.0564  ...         1.7018  4.1900         0.5461  0.0491  0.4507  0.6651
+log           1.4642  0.2259  1.1824  2.0819  0.6979  0.0566  ...         1.5932  4.1172         0.5454  0.0496  0.4599  0.6582
+mel           1.4638  0.2232  1.2007  2.0881  0.6995  0.0564  ...         1.7144  4.2147         0.5461  0.0491  0.4507  0.6651
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: Nband (SNR: 0)
+================================================================================
+         PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+         mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+Nband                                                  ...                                                              
+4      1.4681  0.2228  1.2070  2.0881  0.6987  0.0575  ...         1.7912  4.1582         0.5462  0.0496  0.4507  0.6651
+8      1.4610  0.2271  1.1874  2.0819  0.6982  0.0563  ...         1.5932  4.2147         0.5452  0.0496  0.4599  0.6582
+16     1.4627  0.2222  1.1824  2.0810  0.6999  0.0556  ...         1.7018  4.1418         0.5462  0.0487  0.4607  0.6524
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: FRMSZ_ms (SNR: 0)
+================================================================================
+            PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+            mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+FRMSZ_ms                                                  ...                                                              
+8         1.4704  0.2338  1.2094  2.0881  0.7000  0.0557  ...         1.5932  4.0323         0.5470  0.0499  0.4656  0.6598
+20        1.4685  0.2206  1.1972  2.0622  0.7002  0.0560  ...         1.7533  4.2147         0.5470  0.0488  0.4599  0.6555
+25        1.4529  0.2171  1.1824  2.0819  0.6966  0.0576  ...         1.7947  4.1418         0.5436  0.0491  0.4507  0.6651
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: OVLP (SNR: 0)
+================================================================================
+        PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+        mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+OVLP                                                  ...                                                              
+25    1.4292  0.1939  1.1824  1.9396  0.6971  0.0557  ...         1.5932  4.2147         0.5415  0.0460  0.4507  0.6438
+50    1.4747  0.2306  1.2070  2.0881  0.6992  0.0569  ...         1.7912  4.1172         0.5471  0.0502  0.4635  0.6598
+75    1.4879  0.2407  1.2094  2.0819  0.7006  0.0568  ...         1.7533  3.9342         0.5491  0.0512  0.4660  0.6651
+
+[3 rows x 20 columns]
+
+================================================================================
+Parameter: Floor (SNR: 0)
+================================================================================
+         PESQ                            STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+         mean     std     min     max    mean     std  ...            min     max           mean     std     min     max
+Floor                                                  ...                                                              
+0.001  1.4363  0.2194  1.1824  2.0320  0.6926  0.0575  ...         1.8384  4.2147         0.5399  0.0494  0.4507  0.6506
+0.300  1.4623  0.2232  1.2070  2.0543  0.6992  0.0564  ...         1.8059  4.1085         0.5458  0.0491  0.4607  0.6526
+0.500  1.4700  0.2266  1.2166  2.0881  0.6994  0.0561  ...         1.9213  4.1582         0.5467  0.0493  0.4605  0.6598
+0.700  1.4746  0.2262  1.2137  2.0819  0.7010  0.0564  ...         1.5932  4.0912         0.5480  0.0494  0.4623  0.6651
+0.800  1.4764  0.2230  1.2075  2.0365  0.7025  0.0556  ...         1.7912  4.1168         0.5489  0.0489  0.4662  0.6569
+
+[5 rows x 20 columns]
+
+================================================================================
+Parameter: Noisefr (SNR: 0)
+================================================================================
+           PESQ                           STOI          ... DNSMOS_mos_ovr         Weighted_Score                        
+           mean    std     min     max    mean     std  ...            min     max           mean     std     min     max
+Noisefr                                                 ...                                                              
+1        1.4639  0.224  1.1824  2.0881  0.6989  0.0565  ...         1.5932  4.2147         0.5459  0.0493  0.4507  0.6651
+
+[1 rows x 20 columns]
+
+====================================================================================================
+GENERATING VISUALIZATIONS (SNR: 0 dB)

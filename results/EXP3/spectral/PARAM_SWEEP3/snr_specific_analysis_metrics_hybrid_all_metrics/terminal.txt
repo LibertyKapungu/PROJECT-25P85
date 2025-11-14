@@ -1,0 +1,957 @@
+Objective=0.5891 | PESQ=1.8566 | STOI=0.7738 | SI-SDR=12.25
+
+====================================================================================================    
+SNR = 10 dB | Objective
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  Objective=0.6601 | PESQ=2.2532 | STOI=0.8179 | SI-SDR=15.30
+
+====================================================================================================    
+SNR = 15 dB | Objective
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  mel | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.5000
+  Objective=0.7291 | PESQ=2.6815 | STOI=0.8437 | SI-SDR=18.27
+
+✓ Saved: snr_param_analysis_Objective.csv
+
+✓ Saved: snr_best_configs_Objective.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR Objective
+====================================================================================================    
+
+Freq_spacing:
+  'log' wins 80% of SNR levels
+  Distribution: {'log': np.int64(4), 'mel': np.int64(1)}
+
+Nband:
+  '16' wins 40% of SNR levels
+  Distribution: {np.int64(16): np.int64(2), np.int64(8): np.int64(2), np.int64(4): np.int64(1)}
+
+FRMSZ_ms:
+  '8' wins 80% of SNR levels
+  Distribution: {np.int64(8): np.int64(4), np.int64(20): np.int64(1)}
+
+OVLP:
+  '75' wins 100% of SNR levels
+  Distribution: {np.int64(75): np.int64(5)}
+
+Floor:
+  '0.8' wins 80% of SNR levels
+  Distribution: {np.float64(0.8): np.int64(4), np.float64(0.7): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_Objective.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR Objective
+====================================================================================================    
+✓ Saved: Objective_by_Freq_spacing.png
+✓ Saved: Objective_by_Nband.png
+✓ Saved: Objective_by_OVLP.png
+✓ Saved: heatmap_Objective_freq_spacing.png
+
+====================================================================================================    
+ANALYZING METRIC: Subjective
+====================================================================================================    
+
+====================================================================================================    
+PARAMETER ANALYSIS FOR Subjective (AVERAGED ACROSS ALL SNRs)
+====================================================================================================    
+
+📊 Freq_spacing RANKING BY Subjective:
+              Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+Freq_spacing
+log                          0.6623                0.1511                    3375
+mel                          0.6606                0.1510                    3375
+linear                       0.6605                0.1509                    3375
+
+🎯 BEST Freq_spacing: log (Score: 0.6623)
+
+📊 Nband RANKING BY Subjective:
+       Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+Nband
+4                     0.6616                0.1511                    3375
+16                    0.6613                0.1507                    3375
+8                     0.6605                0.1511                    3375
+
+🎯 BEST Nband: 4 (Score: 0.6616)
+
+📊 FRMSZ_ms RANKING BY Subjective:
+          Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+FRMSZ_ms
+25                       0.6774                0.1505                    3375
+20                       0.6716                0.1501                    3375
+8                        0.6345                0.1487                    3375
+
+🎯 BEST FRMSZ_ms: 25 (Score: 0.6774)
+
+📊 OVLP RANKING BY Subjective:
+      Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+OVLP
+25                   0.6740                0.1468                    3375
+50                   0.6701                0.1515                    3375
+75                   0.6394                0.1521                    3375
+
+🎯 BEST OVLP: 25 (Score: 0.6740)
+
+📊 Floor RANKING BY Subjective:
+       Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+Floor
+0.500                 0.6626                0.1507                    2025
+0.300                 0.6624                0.1519                    2025
+0.800                 0.6607                0.1479                    2025
+0.700                 0.6605                0.1486                    2025
+0.001                 0.6595                0.1557                    2025
+
+🎯 BEST Floor: 0.5 (Score: 0.6626)
+
+📊 Noisefr RANKING BY Subjective:
+         Subjective_Score_mean  Subjective_Score_std  Subjective_Score_count
+Noisefr
+1                       0.6611                 0.151                   10125
+
+🎯 BEST Noisefr: 1 (Score: 0.6611)
+
+✓ Saved: parameter_analysis_Subjective_all_snrs.csv
+
+====================================================================================================    
+BEST OVERALL CONFIGURATION FOR Subjective (ACROSS ALL SNRs)
+====================================================================================================    
+
+🏆 BEST CONFIGURATION FOR Subjective:
+  Config: mband_log_N16_F25_O50_FL0p5
+  log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000 | Noisefr=1
+
+  Subjective: 0.7119
+  PESQ: 1.8271 | STOI: 0.7456 | SI-SDR: 10.10 dB | DNSMOS: 3.5595
+
+📊 TOP 10 CONFIGURATIONS BY Subjective:
+                                Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor  Subjective_Score    PESQ    STOI   SI_SDR  DNSMOS_mos_ovr
+Config_ID                                                                                               
+
+mband_log_N16_F25_O50_FL0p5              log     16        25    50  0.500            0.7119  1.8271  0.7456  10.1034          3.5595
+mband_log_N8_F20_O25_FL0p3               log      8        20    25  0.300            0.7117  1.6941  0.7381   8.8547          3.5583
+mband_mel_N4_F20_O25_FL0p3               mel      4        20    25  0.300            0.7109  1.6871  0.7384   8.9314          3.5546
+mband_linear_N4_F20_O25_FL0p3         linear      4        20    25  0.300            0.7104  1.6871  0.7384   8.9320          3.5520
+mband_log_N16_F25_O50_FL0p001            log     16        25    50  0.001            0.7103  1.7728  0.7325   9.3818          3.5514
+mband_linear_N4_F20_O25_FL0p5         linear      4        20    25  0.500            0.7088  1.6898  0.7340   9.0016          3.5441
+mband_mel_N4_F20_O25_FL0p5               mel      4        20    25  0.500            0.7081  1.6899  0.7340   9.0007          3.5407
+mband_mel_N8_F25_O25_FL0p001             mel      8        25    25  0.001            0.7081  1.5844  0.7247   8.0280          3.5404
+mband_linear_N8_F25_O25_FL0p001       linear      8        25    25  0.001            0.7069  1.5867  0.7242   8.0323          3.5343
+mband_mel_N16_F20_O25_FL0p5              mel     16        20    25  0.500            0.7066  1.6870  0.7410   8.9782          3.5328
+
+✓ Saved: config_averaged_Subjective.csv
+
+====================================================================================================    
+SNR-SPECIFIC ANALYSIS FOR Subjective
+====================================================================================================    
+
+====================================================================================================    
+SNR = -5 dB | Subjective
+====================================================================================================    
+
+🏆 Best at -5 dB:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  Subjective=0.5380 | PESQ=1.2778 | STOI=0.6208 | SI-SDR=3.84
+
+====================================================================================================    
+SNR = 0 dB | Subjective
+====================================================================================================    
+
+🏆 Best at 0 dB:
+  log | Nband=8 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  Subjective=0.6736 | PESQ=1.4520 | STOI=0.7035 | SI-SDR=7.25
+
+====================================================================================================    
+SNR = 5 dB | Subjective
+====================================================================================================    
+
+🏆 Best at 5 dB:
+  log | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.0010
+  Subjective=0.7934 | PESQ=1.5819 | STOI=0.7455 | SI-SDR=9.25
+
+====================================================================================================    
+SNR = 10 dB | Subjective
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  log | Nband=16 | FRMSZ=25ms | OVLP=25% | Floor=0.0010
+  Subjective=0.8323 | PESQ=1.7752 | STOI=0.7823 | SI-SDR=10.06
+
+====================================================================================================    
+SNR = 15 dB | Subjective
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  mel | Nband=8 | FRMSZ=25ms | OVLP=50% | Floor=0.5000
+  Subjective=0.8482 | PESQ=2.4641 | STOI=0.8331 | SI-SDR=15.34
+
+✓ Saved: snr_param_analysis_Subjective.csv
+
+✓ Saved: snr_best_configs_Subjective.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR Subjective
+====================================================================================================    
+
+Freq_spacing:
+  'log' wins 80% of SNR levels
+  Distribution: {'log': np.int64(4), 'mel': np.int64(1)}
+
+Nband:
+  '16' wins 40% of SNR levels
+  Distribution: {np.int64(16): np.int64(2), np.int64(4): np.int64(2), np.int64(8): np.int64(1)}
+
+FRMSZ_ms:
+  '25' wins 100% of SNR levels
+  Distribution: {np.int64(25): np.int64(5)}
+
+OVLP:
+  '25' wins 80% of SNR levels
+  Distribution: {np.int64(25): np.int64(4), np.int64(50): np.int64(1)}
+
+Floor:
+  '0.7' wins 40% of SNR levels
+  Distribution: {np.float64(0.7): np.int64(2), np.float64(0.3): np.int64(1), np.float64(0.5): np.int64(1), np.float64(0.001): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_Subjective.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR Subjective
+====================================================================================================    
+✓ Saved: Subjective_by_Freq_spacing.png
+✓ Saved: Subjective_by_Nband.png
+✓ Saved: Subjective_by_OVLP.png
+✓ Saved: heatmap_Subjective_freq_spacing.png
+
+====================================================================================================    
+ANALYZING METRIC: PESQ
+====================================================================================================    
+
+====================================================================================================    
+PARAMETER ANALYSIS FOR PESQ (AVERAGED ACROSS ALL SNRs)
+====================================================================================================    
+
+📊 Freq_spacing RANKING BY PESQ:
+              PESQ_mean  PESQ_std  PESQ_count
+Freq_spacing
+log              1.7922    0.4830        3375
+linear           1.7887    0.4807        3375
+mel              1.7885    0.4807        3375
+
+🎯 BEST Freq_spacing: log (Score: 1.7922)
+
+📊 Nband RANKING BY PESQ:
+       PESQ_mean  PESQ_std  PESQ_count
+Nband
+4         1.7912    0.4809        3375
+8         1.7893    0.4836        3375
+16        1.7888    0.4799        3375
+
+🎯 BEST Nband: 4 (Score: 1.7912)
+
+📊 FRMSZ_ms RANKING BY PESQ:
+          PESQ_mean  PESQ_std  PESQ_count
+FRMSZ_ms
+20           1.8019    0.4883        3375
+8            1.8014    0.4874        3375
+25           1.7660    0.4676        3375
+
+🎯 BEST FRMSZ_ms: 20 (Score: 1.8019)
+
+📊 OVLP RANKING BY PESQ:
+      PESQ_mean  PESQ_std  PESQ_count
+OVLP
+75       1.8702    0.5399        3375
+50       1.8238    0.4982        3375
+25       1.6754    0.3674        3375
+
+🎯 BEST OVLP: 75 (Score: 1.8702)
+
+📊 Floor RANKING BY PESQ:
+       PESQ_mean  PESQ_std  PESQ_count
+Floor
+0.800     1.8059    0.4805        2025
+0.700     1.8052    0.4830        2025
+0.500     1.7989    0.4855        2025
+0.300     1.7910    0.4851        2025
+0.001     1.7479    0.4709        2025
+
+🎯 BEST Floor: 0.8 (Score: 1.8059)
+
+📊 Noisefr RANKING BY PESQ:
+         PESQ_mean  PESQ_std  PESQ_count
+Noisefr
+1           1.7898    0.4814       10125
+
+🎯 BEST Noisefr: 1 (Score: 1.7898)
+
+✓ Saved: parameter_analysis_PESQ_all_snrs.csv
+
+====================================================================================================    
+BEST OVERALL CONFIGURATION FOR PESQ (ACROSS ALL SNRs)
+====================================================================================================    
+
+🏆 BEST CONFIGURATION FOR PESQ:
+  Config: mband_log_N8_F20_O75_FL0p7
+  log | Nband=8 | FRMSZ=20ms | OVLP=75% | Floor=0.7000 | Noisefr=1
+
+  PESQ: 1.9065
+  PESQ: 1.9065 | STOI: 0.7484 | SI-SDR: 11.79 dB | DNSMOS: 3.1737
+
+📊 TOP 10 CONFIGURATIONS BY PESQ:
+                              Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor    PESQ    PESQ    STOI   SI_SDR  DNSMOS_mos_ovr
+Config_ID                                                                                               
+
+mband_log_N8_F20_O75_FL0p7             log      8        20    75    0.7  1.9065  1.9065  0.7484  11.7905          3.1737
+mband_log_N4_F20_O75_FL0p7             log      4        20    75    0.7  1.9056  1.9056  0.7534  11.7155          3.2837
+mband_mel_N4_F20_O75_FL0p7             mel      4        20    75    0.7  1.9032  1.9032  0.7484  11.9553          3.2556
+mband_linear_N4_F20_O75_FL0p7       linear      4        20    75    0.7  1.9028  1.9028  0.7485  11.9557          3.2562
+mband_linear_N8_F20_O75_FL0p7       linear      8        20    75    0.7  1.9012  1.9012  0.7510  11.7240          3.2125
+mband_mel_N8_F20_O75_FL0p7             mel      8        20    75    0.7  1.9012  1.9012  0.7511  11.7234          3.2124
+mband_log_N4_F20_O75_FL0p5             log      4        20    75    0.5  1.9009  1.9009  0.7536  11.5512          3.1903
+mband_mel_N8_F20_O75_FL0p8             mel      8        20    75    0.8  1.8994  1.8994  0.7471  11.7227          3.1689
+mband_linear_N8_F20_O75_FL0p8       linear      8        20    75    0.8  1.8991  1.8991  0.7471  11.7232          3.1688
+mband_mel_N4_F20_O75_FL0p8             mel      4        20    75    0.8  1.8985  1.8985  0.7505  11.6941          3.2241
+
+✓ Saved: config_averaged_PESQ.csv
+
+====================================================================================================    
+SNR-SPECIFIC ANALYSIS FOR PESQ
+====================================================================================================    
+
+====================================================================================================    
+SNR = -5 dB | PESQ
+====================================================================================================    
+
+🏆 Best at -5 dB:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=50% | Floor=0.7000
+  PESQ=1.3358 | PESQ=1.3358 | STOI=0.6354 | SI-SDR=4.26
+
+====================================================================================================    
+SNR = 0 dB | PESQ
+====================================================================================================    
+
+🏆 Best at 0 dB:
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  PESQ=1.5560 | PESQ=1.5560 | STOI=0.7152 | SI-SDR=8.95
+
+====================================================================================================    
+SNR = 5 dB | PESQ
+====================================================================================================    
+
+🏆 Best at 5 dB:
+  log | Nband=16 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  PESQ=1.8631 | PESQ=1.8631 | STOI=0.7637 | SI-SDR=12.27
+
+====================================================================================================    
+SNR = 10 dB | PESQ
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  PESQ=2.2532 | PESQ=2.2532 | STOI=0.8179 | SI-SDR=15.30
+
+====================================================================================================    
+SNR = 15 dB | PESQ
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  mel | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.5000
+  PESQ=2.6815 | PESQ=2.6815 | STOI=0.8437 | SI-SDR=18.27
+
+✓ Saved: snr_param_analysis_PESQ.csv
+
+✓ Saved: snr_best_configs_PESQ.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR PESQ
+====================================================================================================    
+
+Freq_spacing:
+  'log' wins 100% of SNR levels
+  Distribution: {'log': np.int64(5)}
+
+Nband:
+  '4' wins 40% of SNR levels
+  Distribution: {np.int64(4): np.int64(2), np.int64(8): np.int64(2), np.int64(16): np.int64(1)}
+
+FRMSZ_ms:
+  '8' wins 60% of SNR levels
+  Distribution: {np.int64(8): np.int64(3), np.int64(20): np.int64(2)}
+
+OVLP:
+  '75' wins 100% of SNR levels
+  Distribution: {np.int64(75): np.int64(5)}
+
+Floor:
+  '0.8' wins 60% of SNR levels
+  Distribution: {np.float64(0.8): np.int64(3), np.float64(0.7): np.int64(1), np.float64(0.5): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_PESQ.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR PESQ
+====================================================================================================    
+✓ Saved: PESQ_by_Freq_spacing.png
+✓ Saved: PESQ_by_Nband.png
+✓ Saved: PESQ_by_OVLP.png
+✓ Saved: heatmap_PESQ_freq_spacing.png
+
+====================================================================================================    
+ANALYZING METRIC: STOI
+====================================================================================================    
+
+====================================================================================================    
+PARAMETER ANALYSIS FOR STOI (AVERAGED ACROSS ALL SNRs)
+====================================================================================================    
+
+📊 Freq_spacing RANKING BY STOI:
+              STOI_mean  STOI_std  STOI_count
+Freq_spacing
+mel              0.7407    0.0915        3375
+linear           0.7406    0.0914        3375
+log              0.7403    0.0920        3375
+
+🎯 BEST Freq_spacing: mel (Score: 0.7407)
+
+📊 Nband RANKING BY STOI:
+       STOI_mean  STOI_std  STOI_count
+Nband
+16        0.7411    0.0911        3375
+8         0.7403    0.0915        3375
+4         0.7402    0.0922        3375
+
+🎯 BEST Nband: 16 (Score: 0.7411)
+
+📊 FRMSZ_ms RANKING BY STOI:
+          STOI_mean  STOI_std  STOI_count
+FRMSZ_ms
+20           0.7417    0.0913        3375
+8            0.7410    0.0919        3375
+25           0.7390    0.0917        3375
+
+🎯 BEST FRMSZ_ms: 20 (Score: 0.7417)
+
+📊 OVLP RANKING BY STOI:
+      STOI_mean  STOI_std  STOI_count
+OVLP
+75       0.7445    0.0935        3375
+50       0.7415    0.0925        3375
+25       0.7357    0.0886        3375
+
+🎯 BEST OVLP: 75 (Score: 0.7445)
+
+📊 Floor RANKING BY STOI:
+       STOI_mean  STOI_std  STOI_count
+Floor
+0.800     0.7439    0.0904        2025
+0.700     0.7428    0.0912        2025
+0.500     0.7419    0.0917        2025
+0.300     0.7407    0.0917        2025
+0.001     0.7334    0.0929        2025
+
+🎯 BEST Floor: 0.8 (Score: 0.7439)
+
+📊 Noisefr RANKING BY STOI:
+         STOI_mean  STOI_std  STOI_count
+Noisefr
+1           0.7405    0.0916       10125
+
+🎯 BEST Noisefr: 1 (Score: 0.7405)
+
+✓ Saved: parameter_analysis_STOI_all_snrs.csv
+
+====================================================================================================    
+BEST OVERALL CONFIGURATION FOR STOI (ACROSS ALL SNRs)
+====================================================================================================    
+
+🏆 BEST CONFIGURATION FOR STOI:
+  Config: mband_log_N4_F20_O75_FL0p5
+  log | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.5000 | Noisefr=1
+
+  STOI: 0.7536
+  PESQ: 1.9009 | STOI: 0.7536 | SI-SDR: 11.55 dB | DNSMOS: 3.1903
+
+📊 TOP 10 CONFIGURATIONS BY STOI:
+                               Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor    STOI    PESQ    STOI   SI_SDR  DNSMOS_mos_ovr
+Config_ID                                                                                               
+
+mband_log_N4_F20_O75_FL0p5              log      4        20    75    0.5  0.7536  1.9009  0.7536  11.5512          3.1903
+mband_log_N4_F20_O75_FL0p7              log      4        20    75    0.7  0.7534  1.9056  0.7534  11.7155          3.2837
+mband_linear_N16_F25_O50_FL0p8       linear     16        25    50    0.8  0.7521  1.8162  0.7521  10.4739          3.4768
+mband_mel_N16_F25_O50_FL0p8             mel     16        25    50    0.8  0.7521  1.8173  0.7521  10.4738          3.4771
+mband_mel_N4_F20_O75_FL0p5              mel      4        20    75    0.5  0.7520  1.8984  0.7520  11.6276          3.2346
+mband_linear_N4_F20_O75_FL0p5        linear      4        20    75    0.5  0.7519  1.8981  0.7519  11.6282          3.2361
+mband_log_N4_F8_O75_FL0p8               log      4         8    75    0.8  0.7518  1.8708  0.7518  11.9815          3.1445
+mband_mel_N8_F20_O75_FL0p7              mel      8        20    75    0.7  0.7511  1.9012  0.7511  11.7234          3.2124
+mband_linear_N8_F20_O75_FL0p7        linear      8        20    75    0.7  0.7510  1.9012  0.7510  11.7240          3.2125
+mband_mel_N16_F25_O75_FL0p8             mel     16        25    75    0.8  0.7506  1.8820  0.7506  11.5602          3.2848
+
+✓ Saved: config_averaged_STOI.csv
+
+====================================================================================================    
+SNR-SPECIFIC ANALYSIS FOR STOI
+====================================================================================================    
+
+====================================================================================================    
+SNR = -5 dB | STOI
+====================================================================================================    
+
+🏆 Best at -5 dB:
+  mel | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.8000
+  STOI=0.6448 | PESQ=1.2898 | STOI=0.6448 | SI-SDR=3.98
+
+====================================================================================================    
+SNR = 0 dB | STOI
+====================================================================================================    
+
+🏆 Best at 0 dB:
+  mel | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.0010
+  STOI=0.7243 | PESQ=1.4872 | STOI=0.7243 | SI-SDR=8.22
+
+====================================================================================================    
+SNR = 5 dB | STOI
+====================================================================================================    
+
+🏆 Best at 5 dB:
+  log | Nband=4 | FRMSZ=25ms | OVLP=75% | Floor=0.8000
+  STOI=0.7778 | PESQ=1.8129 | STOI=0.7778 | SI-SDR=11.91
+
+====================================================================================================    
+SNR = 10 dB | STOI
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  log | Nband=8 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  STOI=0.8192 | PESQ=2.2372 | STOI=0.8192 | SI-SDR=15.46
+
+====================================================================================================    
+SNR = 15 dB | STOI
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  log | Nband=8 | FRMSZ=25ms | OVLP=75% | Floor=0.7000
+  STOI=0.8470 | PESQ=2.6038 | STOI=0.8470 | SI-SDR=18.20
+
+✓ Saved: snr_param_analysis_STOI.csv
+
+✓ Saved: snr_best_configs_STOI.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR STOI
+====================================================================================================    
+
+Freq_spacing:
+  'mel' wins 60% of SNR levels
+  Distribution: {'mel': np.int64(3), 'linear': np.int64(1), 'log': np.int64(1)}
+
+Nband:
+  '16' wins 80% of SNR levels
+  Distribution: {np.int64(16): np.int64(4), np.int64(8): np.int64(1)}
+
+FRMSZ_ms:
+  '20' wins 80% of SNR levels
+  Distribution: {np.int64(20): np.int64(4), np.int64(8): np.int64(1)}
+
+OVLP:
+  '75' wins 100% of SNR levels
+  Distribution: {np.int64(75): np.int64(5)}
+
+Floor:
+  '0.8' wins 80% of SNR levels
+  Distribution: {np.float64(0.8): np.int64(4), np.float64(0.7): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_STOI.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR STOI
+====================================================================================================    
+✓ Saved: STOI_by_Freq_spacing.png
+✓ Saved: STOI_by_Nband.png
+✓ Saved: STOI_by_OVLP.png
+✓ Saved: heatmap_STOI_freq_spacing.png
+
+====================================================================================================    
+ANALYZING METRIC: SI-SDR
+====================================================================================================    
+
+====================================================================================================    
+PARAMETER ANALYSIS FOR SI-SDR (AVERAGED ACROSS ALL SNRs)
+====================================================================================================
+
+📊 Freq_spacing RANKING BY SI-SDR:
+              SI_SDR_mean  SI_SDR_std  SI_SDR_count
+Freq_spacing
+linear            10.4485      4.7688          3375
+mel               10.4453      4.7675          3375
+log               10.3745      4.7246          3375
+
+🎯 BEST Freq_spacing: linear (Score: 10.4485)
+
+📊 Nband RANKING BY SI-SDR:
+       SI_SDR_mean  SI_SDR_std  SI_SDR_count
+Nband
+4          10.4284      4.7626          3375
+16         10.4234      4.7415          3375
+8          10.4165      4.7573          3375
+
+🎯 BEST Nband: 4 (Score: 10.4284)
+
+📊 FRMSZ_ms RANKING BY SI-SDR:
+          SI_SDR_mean  SI_SDR_std  SI_SDR_count
+FRMSZ_ms
+8             11.1451      4.9954          3375
+20            10.2763      4.6336          3375
+25             9.8469      4.5273          3375
+
+🎯 BEST FRMSZ_ms: 8 (Score: 11.1451)
+
+📊 OVLP RANKING BY SI-SDR:
+      SI_SDR_mean  SI_SDR_std  SI_SDR_count
+OVLP
+75        11.4799      5.2293          3375
+50        10.6022      4.7032          3375
+25         9.1862      3.9561          3375
+
+🎯 BEST OVLP: 75 (Score: 11.4799)
+
+📊 Floor RANKING BY SI-SDR:
+       SI_SDR_mean  SI_SDR_std  SI_SDR_count
+Floor
+0.800      10.6487      4.9047          2025
+0.700      10.5973      4.9082          2025
+0.500      10.5154      4.8019          2025
+0.300      10.3941      4.6945          2025
+0.001       9.9583      4.4120          2025
+
+🎯 BEST Floor: 0.8 (Score: 10.6487)
+
+📊 Noisefr RANKING BY SI-SDR:
+         SI_SDR_mean  SI_SDR_std  SI_SDR_count
+Noisefr
+1            10.4228      4.7533         10125
+
+🎯 BEST Noisefr: 1 (Score: 10.4228)
+
+✓ Saved: parameter_analysis_SI-SDR_all_snrs.csv
+
+====================================================================================================    
+BEST OVERALL CONFIGURATION FOR SI-SDR (ACROSS ALL SNRs)
+====================================================================================================    
+
+🏆 BEST CONFIGURATION FOR SI-SDR:
+  Config: mband_log_N16_F8_O75_FL0p7
+  log | Nband=16 | FRMSZ=8ms | OVLP=75% | Floor=0.7000 | Noisefr=1
+
+  SI-SDR: 12.0466
+  PESQ: 1.8758 | STOI: 0.7461 | SI-SDR: 12.05 dB | DNSMOS: 3.1512
+
+📊 TOP 10 CONFIGURATIONS BY SI-SDR:
+                              Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor   SI_SDR    PESQ    STOI   SI_SDR  DNSMOS_mos_ovr
+Config_ID                                                                                               
+
+mband_log_N16_F8_O75_FL0p7             log     16         8    75    0.7  12.0466  1.8758  0.7461  12.0466          3.1512
+mband_log_N4_F8_O75_FL0p8              log      4         8    75    0.8  11.9815  1.8708  0.7518  11.9815          3.1445
+mband_linear_N4_F8_O75_FL0p7        linear      4         8    75    0.7  11.9622  1.8738  0.7470  11.9622          3.1816
+mband_mel_N4_F8_O75_FL0p7              mel      4         8    75    0.7  11.9613  1.8739  0.7470  11.9613          3.1800
+mband_linear_N4_F20_O75_FL0p7       linear      4        20    75    0.7  11.9557  1.9028  0.7485  11.9557          3.2562
+mband_mel_N4_F20_O75_FL0p7             mel      4        20    75    0.7  11.9553  1.9032  0.7484  11.9553          3.2556
+mband_log_N16_F8_O75_FL0p8             log     16         8    75    0.8  11.9450  1.8818  0.7495  11.9450          3.1951
+mband_linear_N16_F8_O75_FL0p8       linear     16         8    75    0.8  11.9433  1.8620  0.7469  11.9433          3.1665
+mband_mel_N16_F8_O75_FL0p8             mel     16         8    75    0.8  11.9423  1.8624  0.7470  11.9423          3.1649
+mband_log_N8_F8_O75_FL0p8              log      8         8    75    0.8  11.9336  1.8724  0.7486  11.9336          3.1294
+
+✓ Saved: config_averaged_SI-SDR.csv
+
+====================================================================================================    
+SNR-SPECIFIC ANALYSIS FOR SI-SDR
+====================================================================================================    
+
+====================================================================================================    
+SNR = -5 dB | SI-SDR
+====================================================================================================    
+
+🏆 Best at -5 dB:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.3000
+  SI-SDR=4.8766 | PESQ=1.3249 | STOI=0.6265 | SI-SDR=4.88
+
+====================================================================================================    
+SNR = 0 dB | SI-SDR
+====================================================================================================    
+
+🏆 Best at 0 dB:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=75% | Floor=0.7000
+  SI-SDR=9.0319 | PESQ=1.5113 | STOI=0.7033 | SI-SDR=9.03
+
+====================================================================================================    
+SNR = 5 dB | SI-SDR
+====================================================================================================    
+
+🏆 Best at 5 dB:
+  log | Nband=16 | FRMSZ=8ms | OVLP=75% | Floor=0.7000
+  SI-SDR=12.6441 | PESQ=1.8333 | STOI=0.7638 | SI-SDR=12.64
+
+====================================================================================================    
+SNR = 10 dB | SI-SDR
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  linear | Nband=4 | FRMSZ=8ms | OVLP=75% | Floor=0.7000
+  SI-SDR=15.9239 | PESQ=2.2494 | STOI=0.8102 | SI-SDR=15.92
+
+====================================================================================================    
+SNR = 15 dB | SI-SDR
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  linear | Nband=4 | FRMSZ=8ms | OVLP=75% | Floor=0.7000
+  SI-SDR=19.1727 | PESQ=2.5511 | STOI=0.8396 | SI-SDR=19.17
+
+✓ Saved: snr_param_analysis_SI-SDR.csv
+
+✓ Saved: snr_best_configs_SI-SDR.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR SI-SDR
+====================================================================================================    
+
+Freq_spacing:
+  'linear' wins 80% of SNR levels
+  Distribution: {'linear': np.int64(4), 'log': np.int64(1)}
+
+Nband:
+  '4' wins 60% of SNR levels
+  Distribution: {np.int64(4): np.int64(3), np.int64(16): np.int64(1), np.int64(8): np.int64(1)}
+
+FRMSZ_ms:
+  '8' wins 100% of SNR levels
+  Distribution: {np.int64(8): np.int64(5)}
+
+OVLP:
+  '75' wins 100% of SNR levels
+  Distribution: {np.int64(75): np.int64(5)}
+
+Floor:
+  '0.8' wins 80% of SNR levels
+  Distribution: {np.float64(0.8): np.int64(4), np.float64(0.5): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_SI-SDR.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR SI-SDR
+====================================================================================================    
+✓ Saved: SI-SDR_by_Freq_spacing.png
+✓ Saved: SI-SDR_by_Nband.png
+✓ Saved: SI-SDR_by_OVLP.png
+✓ Saved: heatmap_SI-SDR_freq_spacing.png
+
+====================================================================================================    
+ANALYZING METRIC: DNSMOS
+====================================================================================================    
+
+====================================================================================================    
+PARAMETER ANALYSIS FOR DNSMOS (AVERAGED ACROSS ALL SNRs)
+====================================================================================================    
+
+📊 Freq_spacing RANKING BY DNSMOS:
+              DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+Freq_spacing
+log                        3.3117              0.7553                  3375
+mel                        3.3028              0.7548                  3375
+linear                     3.3026              0.7545                  3375
+
+🎯 BEST Freq_spacing: log (Score: 3.3117)
+
+📊 Nband RANKING BY DNSMOS:
+       DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+Nband
+4                   3.3080              0.7556                  3375
+16                  3.3066              0.7535                  3375
+8                   3.3026              0.7555                  3375
+
+🎯 BEST Nband: 4 (Score: 3.3080)
+
+📊 FRMSZ_ms RANKING BY DNSMOS:
+          DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+FRMSZ_ms
+25                     3.3871              0.7525                  3375
+20                     3.3578              0.7506                  3375
+8                      3.1723              0.7434                  3375
+
+🎯 BEST FRMSZ_ms: 25 (Score: 3.3871)
+
+📊 OVLP RANKING BY DNSMOS:
+      DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+OVLP
+25                 3.3699              0.7342                  3375
+50                 3.3503              0.7577                  3375
+75                 3.1970              0.7605                  3375
+
+🎯 BEST OVLP: 25 (Score: 3.3699)
+
+📊 Floor RANKING BY DNSMOS:
+       DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+Floor
+0.500               3.3132              0.7537                  2025
+0.300               3.3121              0.7593                  2025
+0.800               3.3033              0.7395                  2025
+0.700               3.3025              0.7429                  2025
+0.001               3.2974              0.7787                  2025
+
+🎯 BEST Floor: 0.5 (Score: 3.3132)
+
+📊 Noisefr RANKING BY DNSMOS:
+         DNSMOS_mos_ovr_mean  DNSMOS_mos_ovr_std  DNSMOS_mos_ovr_count
+Noisefr
+1                     3.3057              0.7548                 10125
+
+🎯 BEST Noisefr: 1 (Score: 3.3057)
+
+✓ Saved: parameter_analysis_DNSMOS_all_snrs.csv
+
+====================================================================================================    
+BEST OVERALL CONFIGURATION FOR DNSMOS (ACROSS ALL SNRs)
+====================================================================================================    
+
+🏆 BEST CONFIGURATION FOR DNSMOS:
+  Config: mband_log_N16_F25_O50_FL0p5
+  log | Nband=16 | FRMSZ=25ms | OVLP=50% | Floor=0.5000 | Noisefr=1
+
+  DNSMOS: 3.5595
+  PESQ: 1.8271 | STOI: 0.7456 | SI-SDR: 10.10 dB | DNSMOS: 3.5595
+
+📊 TOP 10 CONFIGURATIONS BY DNSMOS:
+                                Freq_spacing  Nband  FRMSZ_ms  OVLP  Floor  DNSMOS_mos_ovr    PESQ    STOI   SI_SDR  DNSMOS_mos_ovr
+Config_ID                                                                                               
+
+mband_log_N16_F25_O50_FL0p5              log     16        25    50  0.500          3.5595  1.8271  0.7456  10.1034          3.5595
+mband_log_N8_F20_O25_FL0p3               log      8        20    25  0.300          3.5583  1.6941  0.7381   8.8547          3.5583
+mband_mel_N4_F20_O25_FL0p3               mel      4        20    25  0.300          3.5546  1.6871  0.7384   8.9314          3.5546
+mband_linear_N4_F20_O25_FL0p3         linear      4        20    25  0.300          3.5520  1.6871  0.7384   8.9320          3.5520
+mband_log_N16_F25_O50_FL0p001            log     16        25    50  0.001          3.5514  1.7728  0.7325   9.3818          3.5514
+mband_linear_N4_F20_O25_FL0p5         linear      4        20    25  0.500          3.5441  1.6898  0.7340   9.0016          3.5441
+mband_mel_N4_F20_O25_FL0p5               mel      4        20    25  0.500          3.5407  1.6899  0.7340   9.0007          3.5407
+mband_mel_N8_F25_O25_FL0p001             mel      8        25    25  0.001          3.5404  1.5844  0.7247   8.0280          3.5404
+mband_linear_N8_F25_O25_FL0p001       linear      8        25    25  0.001          3.5343  1.5867  0.7242   8.0323          3.5343
+mband_mel_N16_F20_O25_FL0p5              mel     16        20    25  0.500          3.5328  1.6870  0.7410   8.9782          3.5328
+
+✓ Saved: config_averaged_DNSMOS.csv
+
+====================================================================================================    
+SNR-SPECIFIC ANALYSIS FOR DNSMOS
+====================================================================================================    
+
+====================================================================================================    
+SNR = -5 dB | DNSMOS
+====================================================================================================    
+
+🏆 Best at -5 dB:
+  linear | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  DNSMOS=2.6898 | PESQ=1.2778 | STOI=0.6208 | SI-SDR=3.84
+
+====================================================================================================    
+SNR = 0 dB | DNSMOS
+====================================================================================================    
+
+🏆 Best at 0 dB:
+  log | Nband=8 | FRMSZ=20ms | OVLP=25% | Floor=0.3000
+  DNSMOS=3.3681 | PESQ=1.4520 | STOI=0.7035 | SI-SDR=7.25
+
+====================================================================================================    
+SNR = 5 dB | DNSMOS
+====================================================================================================    
+
+🏆 Best at 5 dB:
+  log | Nband=4 | FRMSZ=20ms | OVLP=25% | Floor=0.0010
+  DNSMOS=3.9669 | PESQ=1.5819 | STOI=0.7455 | SI-SDR=9.25
+
+====================================================================================================    
+SNR = 10 dB | DNSMOS
+====================================================================================================    
+
+🏆 Best at 10 dB:
+  log | Nband=16 | FRMSZ=25ms | OVLP=25% | Floor=0.0010
+  DNSMOS=4.1615 | PESQ=1.7752 | STOI=0.7823 | SI-SDR=10.06
+
+====================================================================================================    
+SNR = 15 dB | DNSMOS
+====================================================================================================    
+
+🏆 Best at 15 dB:
+  mel | Nband=8 | FRMSZ=25ms | OVLP=50% | Floor=0.5000
+  DNSMOS=4.2411 | PESQ=2.4641 | STOI=0.8331 | SI-SDR=15.34
+
+✓ Saved: snr_param_analysis_DNSMOS.csv
+
+✓ Saved: snr_best_configs_DNSMOS.csv
+
+====================================================================================================    
+PARAMETER CONSISTENCY ACROSS SNR LEVELS FOR DNSMOS
+====================================================================================================    
+
+Freq_spacing:
+  'log' wins 80% of SNR levels
+  Distribution: {'log': np.int64(4), 'mel': np.int64(1)}
+
+Nband:
+  '16' wins 40% of SNR levels
+  Distribution: {np.int64(16): np.int64(2), np.int64(4): np.int64(2), np.int64(8): np.int64(1)}
+
+FRMSZ_ms:
+  '25' wins 100% of SNR levels
+  Distribution: {np.int64(25): np.int64(5)}
+
+OVLP:
+  '25' wins 80% of SNR levels
+  Distribution: {np.int64(25): np.int64(4), np.int64(50): np.int64(1)}
+
+Floor:
+  '0.7' wins 40% of SNR levels
+  Distribution: {np.float64(0.7): np.int64(2), np.float64(0.3): np.int64(1), np.float64(0.5): np.int64(1), np.float64(0.001): np.int64(1)}
+
+Noisefr:
+  '1' wins 100% of SNR levels
+  Distribution: {np.int64(1): np.int64(5)}
+
+✓ Saved: parameter_consistency_DNSMOS.csv
+
+====================================================================================================    
+GENERATING VISUALIZATIONS FOR DNSMOS
+====================================================================================================    
+✓ Saved: DNSMOS_by_Freq_spacing.png
+✓ Saved: DNSMOS_by_Nband.png
+✓ Saved: DNSMOS_by_OVLP.png
+✓ Saved: heatmap_DNSMOS_freq_spacing.png
+
+====================================================================================================    
+OBJECTIVE vs SUBJECTIVE COMPARISON
+====================================================================================================    
+✓ Saved: objective_vs_subjective_scatter.png
+
+====================================================================================================    
+ANALYSIS COMPLETE!

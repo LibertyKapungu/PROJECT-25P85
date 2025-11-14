@@ -513,36 +513,36 @@ plt.close()
 # SUMMARY RECOMMENDATIONS
 # ====================================
 print("\n" + "="*100)
-print("🎯 SUMMARY RECOMMENDATIONS")
+print(" SUMMARY RECOMMENDATIONS")
 print("="*100)
 
 print(f"\n1. PARAMETER-LEVEL RECOMMENDATIONS (All SNRs):")
 print(f"{'='*100}")
 for result in param_obj_subj_results:
     if result['Agrees']:
-        print(f"  ✅ {result['Parameter']}: {result['Best_Objective']} (AGREES for both)")
+        print(f"   {result['Parameter']}: {result['Best_Objective']} (AGREES for both)")
     else:
-        print(f"  ⚠️  {result['Parameter']}: Objective={result['Best_Objective']}, Subjective={result['Best_Subjective']}")
+        print(f"    {result['Parameter']}: Objective={result['Best_Objective']}, Subjective={result['Best_Subjective']}")
 
 print(f"\n2. OVERALL BEST CONFIGURATIONS (Averaged across all SNRs):")
 print(f"{'='*100}")
-print(f"\n  🏆 For OBJECTIVE metrics (PESQ, STOI, SI-SDR):")
+print(f"\n   For OBJECTIVE metrics (PESQ, STOI, SI-SDR):")
 print(f"     Config: {best_obj_config_id}")
 print(f"     {best_obj['Freq_spacing']} | Nband={int(best_obj['Nband'])} | FRMSZ={int(best_obj['FRMSZ_ms'])}ms | OVLP={int(best_obj['OVLP'])}% | Floor={best_obj['Floor']:.4f}")
 print(f"     Score: {best_obj['Objective_Score']:.4f}")
 
-print(f"\n  🏆 For SUBJECTIVE metrics (DNSMOS):")
+print(f"\n   For SUBJECTIVE metrics (DNSMOS):")
 print(f"     Config: {best_subj_config_id}")
 print(f"     {best_subj['Freq_spacing']} | Nband={int(best_subj['Nband'])} | FRMSZ={int(best_subj['FRMSZ_ms'])}ms | OVLP={int(best_subj['OVLP'])}% | Floor={best_subj['Floor']:.4f}")
 print(f"     Score: {best_subj['Subjective_Score']:.4f}")
 
-print(f"\n  🏆 For BALANCED (50/50):")
+print(f"\n   For BALANCED (50/50):")
 print(f"     Config: {best_balanced_config_id}")
 print(f"     {best_balanced['Freq_spacing']} | Nband={int(best_balanced['Nband'])} | FRMSZ={int(best_balanced['FRMSZ_ms'])}ms | OVLP={int(best_balanced['OVLP'])}% | Floor={best_balanced['Floor']:.4f}")
 print(f"     Score: {best_balanced['Balanced_Score']:.4f}")
 
 if best_obj_config_id == best_subj_config_id:
-    print(f"\n  ✅ EXCELLENT: Same configuration excels at both!")
+    print(f"\n   EXCELLENT: Same configuration excels at both!")
 
 print(f"\n3. PARAMETER CONSISTENCY ACROSS SNRs:")
 print(f"{'='*100}")
@@ -553,9 +553,9 @@ for result in consistency_analysis:
     print(f"    Agreement:  {result['Agreement_%']:.0f}% of SNRs have same optimal value")
     
     if result['Agreement_%'] >= 80:
-        print(f"    ✅ HIGHLY CONSISTENT - Can use fixed value")
+        print(f"     HIGHLY CONSISTENT - Can use fixed value")
     elif result['Agreement_%'] < 50:
-        print(f"    ⚠️  SNR-DEPENDENT - Consider adaptive selection")
+        print(f"      SNR-DEPENDENT - Consider adaptive selection")
 
 print(f"\n4. LOW SNR RECOMMENDATIONS (SNR ≤ 0 dB):")
 print(f"{'='*100}")
@@ -595,9 +595,9 @@ agreement_pct = (agreement_count / total_snrs) * 100
 print(f"  Objective and Subjective agree on best config: {agreement_count}/{total_snrs} SNR levels ({agreement_pct:.0f}%)")
 
 if agreement_pct >= 80:
-    print(f"  ✅ HIGHLY CONSISTENT - Objective and subjective metrics align well")
+    print(f"   HIGHLY CONSISTENT - Objective and subjective metrics align well")
 elif agreement_pct < 50:
-    print(f"  ⚠️  DIVERGENT - Objective and subjective prefer different configurations")
+    print(f"    DIVERGENT - Objective and subjective prefer different configurations")
 
 # Show SNRs where they differ
 disagreement_snrs = snr_best_configs_df[~snr_best_configs_df['Same_Config']]['SNR_dB'].tolist()

@@ -439,14 +439,14 @@ class MultiSNRAudioEnhancementComparator:
                            marker='o', linewidth=3, markersize=10,
                            label=method_name, color=self.colors[color_idx], alpha=0.8)
                     
-                    # Add value labels
-                    for snr, val in zip(snr_values, metric_values):
-                        ax.annotate(f'{val:.3f}', 
-                                   xy=(snr, val), 
-                                   xytext=(0, 8),
-                                   textcoords='offset points',
-                                   ha='center', va='bottom',
-                                   fontsize=14, fontweight='bold')
+                    # # Add value labels
+                    # for snr, val in zip(snr_values, metric_values):
+                    #     ax.annotate(f'{val:.3f}', 
+                    #                xy=(snr, val), 
+                    #                xytext=(0, 8),
+                    #                textcoords='offset points',
+                    #                ha='center', va='bottom',
+                    #                fontsize=14, fontweight='bold')
             
             ax.set_xlabel('SNR (dB)', fontsize=18, fontweight='bold')
             ax.set_ylabel(f'{metric} Score', fontsize=18, fontweight='bold')
@@ -1456,7 +1456,7 @@ if __name__ == "__main__":
     }
     
     # Set output folder
-    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\noise_check"
+    output_folder = r"C:\Users\gabi\Documents\University\Uni2025\Investigation\PROJECT-25P85\results\compare_csvs\EXP3\spectral\noise_check_no_numbers"
     
     # Create comparator
     comparator = MultiSNRAudioEnhancementComparator(

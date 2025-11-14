@@ -1,0 +1,7 @@
+Parameter,Most_Common_Value,Consistency_%
+Freq_spacing,linear,80.0
+Nband,4,60.0
+FRMSZ_ms,8,100.0
+OVLP,75,100.0
+Floor,0.8,80.0
+Noisefr,1,100.0

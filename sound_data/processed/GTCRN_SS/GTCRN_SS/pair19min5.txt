@@ -1,0 +1,66 @@
+GTCRN 
+PESQ: 1.592
+STOI: 0.664
+SI-SDR: 6.42 dB
+DNSMOS Overall: 2.939
+
+
+MEl 
+Metrics:
+  PESQ: 1.583
+  STOI: 0.665
+  SI-SDR: 5.96 dB
+  DNSMOS Overall: 3.193
+
+LIN 
+  PESQ: 1.592
+  STOI: 0.664
+  SI-SDR: 6.41 dB
+  DNSMOS Overall: 3.026
+
+  Log 
+    PESQ: 1.594
+  STOI: 0.664
+  SI-SDR: 6.40 dB
+  DNSMOS Overall: 3.025
+
+# No deltas 
+
+LOG 
+PESQ: 1.594
+STOI: 0.664
+SI-SDR: 6.41 dB
+DNSMOS Overall: 3.026
+
+MEl
+Metrics:
+  PESQ: 1.583
+  STOI: 0.665
+  SI-SDR: 5.97 dB
+  DNSMOS Overall: 3.226
+
+LIN 
+  PESQ: 1.593
+  STOI: 0.664
+  SI-SDR: 6.41 dB
+  DNSMOS Overall: 3.023
+
+# Textbook deltas
+
+LIN
+  PESQ: 1.593
+  STOI: 0.664
+  SI-SDR: 6.41 dB
+  DNSMOS Overall: 3.025
+
+LOG
+  PESQ: 1.593
+  STOI: 0.664
+  SI-SDR: 6.41 dB
+  DNSMOS Overall: 3.029
+
+MEL
+  PESQ: 1.583
+  STOI: 0.665
+  SI-SDR: 5.97 dB
+  DNSMOS Overall: 3.214

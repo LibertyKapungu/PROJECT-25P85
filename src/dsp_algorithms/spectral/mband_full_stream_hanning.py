@@ -68,23 +68,23 @@ def mband(
         FRMSZ: int = 20, 
         OVLP: int = 50, 
         AVRGING: int = 1,
-        Noisefr: int = 6,
+        Noisefr: int = 1,
         FLOOR: float = 0.002,
         VAD: int = 1
 ) -> Tuple[torch.Tensor, int]:
     """
     Implements the multi-band spectral subtraction algorithm [1]. 
-    Usage:  mband(noisy_audio, outputfile,Nband,Freq_spacing)
+    Usage:  mband(noisy_audio, fs, output_dir, output_file, input_name, Nband, Freq_spacing, FRMSZ, OVLP, AVRGING, Noisefr, FLOOR, VAD)
            
          noisy_audio - noisy speech file in .wav format
-         outputFile - enhanced output file in .wav format
+         output_file - enhanced output file in .wav format
          Nband - Number of frequency bands (recommended 4-8)
          Freq_spacing - Type of frequency spacing for the bands, choices:
                         'linear', 'log' and 'mel'
          AVRGING - Do pre-processing (smoothing & averaging), choice: 1 -for pre-processing and 0 -otherwise, default=1
          FRMSZ - Frame length in milli-seconds, default=20. hop size of 16ms * (1 - 0.50) = 8ms 
          OVLP - Window overlap in percent of frame size, default=50
-         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=6 .Matlab recommends 6 but doing 1 so less latency  
+         Noisefr - Number of noise frames at beginning of file for noise spectrum estimate, default=1 
          FLOOR - Spectral floor, default=0.002
          VAD - Use voice activity detector, choices: 1 -to use VAD and 0 -otherwise
 

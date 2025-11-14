@@ -1,0 +1,53 @@
+
+PARAMETER SWEEP ANALYSIS SUMMARY (SNR: 10 dB)
+====================================================================================================
+
+Dataset Statistics:
+  Total configurations: 405
+  Total tests: 2025
+  Successful tests: 2025 (100.0% of this SNR subset)
+  Noise categories: Construction, Babble, Train, Stationary, Street
+
+Overall Performance (mean ± std) for SNR 10 dB:
+  PESQ: 2.064 ± 0.299
+  STOI: 0.801 ± 0.028
+  SI-SDR: 13.65 ± 1.69 dB
+  DNSMOS: 3.823 ± 0.298
+
+BEST OVERALL CONFIGURATION (for SNR 10 dB):
+  Frequency Spacing: mel
+  Number of Bands: 4
+  Frame Size: 8 ms
+  Overlap: 75%
+  
+  Performance:
+    PESQ: 2.8241
+    STOI: 0.8591
+    SI-SDR: 15.49 dB
+    DNSMOS: 4.1003
+    Weighted Score: 0.7620
+
+PARAMETER INSIGHTS (for SNR 10 dB):
+
+  Best Freq_spacing: log (avg weighted score: 0.6571)
+  Best Nband: 8 (avg weighted score: 0.6572)
+  Best FRMSZ_ms: 8 (avg weighted score: 0.6592)
+  Best OVLP: 75 (avg weighted score: 0.6711)
+  Best Floor: 0.8 (avg weighted score: 0.6609)
+  Best Noisefr: 1 (avg weighted score: 0.6568)
+
+PERFORMANCE BY NOISE CATEGORY (avg PESQ for SNR 10 dB):
+  Construction: 1.853
+  Babble: 1.830
+  Train: 2.053
+  Stationary: 2.556
+  Street: 2.025
+
+RECOMMENDED FLOOR BY NOISE TYPE (for SNR 10 dB):
+  Construction: Floor=0.8 (score: 0.6299)
+  Babble: Floor=0.8 (score: 0.6237)
+  Train: Floor=0.8 (score: 0.6633)
+  Stationary: Floor=0.5 (score: 0.7296)
+  Street: Floor=0.7 (score: 0.6607)
+
+All results for SNR 10 saved to: /home/25p85/Gabi/PROJECT-25P85/results/EXP3/spectral/PARAM_SWEEP3/parameter_sweep_analysis_per_snr_hybrid/SNR_10
