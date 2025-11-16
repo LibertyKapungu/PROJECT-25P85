@@ -26,8 +26,10 @@ MODE = "hybrid"
 current_dir = Path(__file__).parent.absolute()
 repo_root = current_dir.parent.parent.parent
 sys.path.insert(0, str(repo_root / "src"))
-CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"COLLATED_ALL_RESULTS_{MODE}.csv"
-OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"snr_specific_analysis_metrics_{MODE}_all_metrics"
+# CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"COLLATED_ALL_RESULTS_{MODE}.csv"
+# OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP3" / f"snr_specific_analysis_metrics_{MODE}_all_metrics"
+CSV_FILE = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP4_car_0db" / f"COLLATED_ALL_RESULTS_{MODE}.csv"
+OUTPUT_DIR = repo_root / "results" / "EXP3" / "spectral" / "PARAM_SWEEP4_car_0db" / f"snr_specific_analysis_metrics_{MODE}_all_metrics"
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 
 print("="*100)

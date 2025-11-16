@@ -1,0 +1,7 @@
+Parameter,Best_Value,Best_Score
+Freq_spacing,log,1.4648
+Nband,4,1.4686
+FRMSZ_ms,20,1.4767
+OVLP,75,1.4816
+Floor,0.5,1.4797
+Noisefr,1,1.4628
