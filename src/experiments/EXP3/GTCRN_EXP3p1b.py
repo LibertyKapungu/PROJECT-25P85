@@ -41,7 +41,8 @@ sys.path.insert(0, str(repo_root / "src"))
 gtcrn_path = repo_root / "src" / "deep_learning" / "gtcrn_model" 
 sys.path.insert(0, str(gtcrn_path))
 
-results_dir = repo_root / 'results' / 'EXP3' / 'spectral'/ 'GTCRN_SS'/'Optimal_hybrid'  /'log_20ms_ov50_fl07_N4_av0'
+# results_dir = repo_root / 'results' / 'EXP3' / 'spectral'/'Optimal_hybrid_car' / 'SI_SDR'/'log_20ms_ov75_fl07_N4'
+results_dir = repo_root / 'results' / 'EXP3' / 'spectral'/'Optimal_hybrid_car' / 'BASELINE'
 
 from utils.audio_dataset_loader import (
     load_ears_dataset,
@@ -134,6 +135,14 @@ print("\nLoading EARS test dataset...")
 ears_files = load_ears_dataset(repo_root, mode="test")
 print(f"Loaded {len(ears_files)} EARS files for test mode")
 
+# Use only 1 clean speech 
+clean_path_relative = "sound_data/raw/EARS_DATASET/p092/emo_contentment_sentences.wav"
+clean_path = repo_root / clean_path_relative
+ears_files = [clean_path]
+
+ears_files = [{"file": path} for path in ears_files]
+
+
 print("Loading NOIZEUS test dataset...")
 noizeus_files = load_noizeus_dataset(repo_root)
 print(f"Loaded {len(noizeus_files)} NOIZEUS files for test mode")
@@ -189,18 +198,22 @@ for snr_dB in snr_dB_range:
         # Step 4: Post-process with spectral subtraction
         print("4. Applying multi-band spectral subtraction post-processing...")
 
-        final_enhanced_speech, final_fs = mband(
-            noisy_audio=gtcrn_enhanced,
-            fs=processing_sr,
-            Nband=4,
-            Freq_spacing='log',
-            FRMSZ=20,
-            OVLP=50,
-            AVRGING=1,
-            Noisefr=1,
-            FLOOR=0.7,
-            VAD=0,
-        )
+        # final_enhanced_speech, final_fs = mband(
+        #     noisy_audio=gtcrn_enhanced,
+        #     fs=processing_sr,
+        #     Nband=4,
+        #     Freq_spacing='log',
+        #     FRMSZ=20,
+        #     OVLP=75,
+        #     AVRGING=1,
+        #     Noisefr=1,
+        #     FLOOR=0.7,
+        #     VAD=1,
+        # )
+
+        # final_enhanced_speech, final_fs = gtcrn_enhanced, processing_sr
+
+        final_enhanced_speech, final_fs = noisy_speech_16k, processing_sr
 
         # Step 5: Compute and save metrics
         clean_filename = f"{clean_path.parent.name}_{clean_path.stem}"
